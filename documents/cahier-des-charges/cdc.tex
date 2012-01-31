@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{ifpdf}
+\usepackage{graphicx}
+\usepackage{geometry}
+\renewcommand{\familydefault}{\sfdefault}
+
+\geometry{hmargin=50pt, vmargin=50pt}
+
+\title{Rapport de projet : Tableau virtuel interactif}
+\author{Baptiste Saleil \and Geoffrey Mélia \and Julien Pagès \and Kevin Bollini}
+\date{\today}
+\ifpdf
+	\pdfinfo 
+	{
+		/Author (bsaleil,gmelia,jpages,kbollini)
+		/Title (Rapport de projet)
+		/Subject (Tableau virtuel interactif)
+		/Keywords ()
+		/CreationDate (\today)
+	}
+\fi
+
+% Commentaires de début de fichiers destinés au autre.
+% Je propose d'intégrer le cahier des charges au rapport final, en virant la conclusion, en ajoutant une partie développement etc... ?
+% bl
+
+\begin{document}
+	% Page de titre
+	\maketitle
+	\thispagestyle{empty}
+	\newpage
+	
+	% Sommaire
+	\tableofcontents
+	\newpage
+	
+	\section{Introduction}
+		\subsection{Fonctionnement général}
+			Présentation brève qq paragraphes du projet.
+		\subsection{Finalités}
+			Buts finaux. Apppli fonctionnelle, richie, blablabla sans rentrer dans le détail des fonctionnalités.
+		\subsection{Choix stratégiques}
+			Découpage en 2 sous projets, plusieurs étapes avant appli finale...
+	\section{Contexte}
+		\subsection{Faisabilité}
+			Choix d'un projet en fonction de nos spécialités, de notre formation, expérience, ce qu'on sait faire.
+		\subsection{Existant}
+			Etude de ce qui existe.
+		\subsection{Ressources}
+			Documents de supports (thèses, articles etc...)
+	\section{Analyse et conception}
+		\subsection{Organisation}
+			Détail des étapes, répartition du travail...
+		\subsection{Planning}
+			Rétro planning gantt commenté.
+		\subsection{UML}
+			Analyse avec diagramme de classe, use case, séquence, etat?
+	\section{Librairie}
+		\subsection{Fonctionnalités}
+			Détail des fonctionnalités finales, envisagées
+		\subsection{Architecture}
+			Architecture de la librairie
+		\subsection{Outils}
+			Outils utilisés, langages librairies, etc.. pourquoi ? comment ?
+		\subsection{Étapes}
+			Détail des étapes avec fonctionnalités pour chaqune d'elle.
+	\section{Application}
+		\subsection{Fonctionnalités}
+			Détail des fonctionnalités finales, envisagées
+		\subsection{Architecture}
+			Architecture de l'application
+		\subsection{Outils}
+			Outils utilisés, langages librairies, etc.. pourquoi ? comment ?
+		\subsection{Étapes}
+			Détail des étapes avec fonctionnalités pour chaqune d'elle.
+	\section{Conclusion}	
+		Conclusion (1 ou 2 paragraphe ?)
+	
+\end{document}
+
