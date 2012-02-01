@@ -10,7 +10,7 @@
 
 \geometry{hmargin=50pt, vmargin=50pt}
 
-\title{Rapport de projet : Tableau virtuel interactif}
+\title{Cahier des charges : Tableau virtuel interactif}
 \author{Baptiste Saleil \and Geoffrey Mélia \and Julien Pagès \and Kevin Bollini}
 \date{\today}
 \ifpdf
@@ -24,9 +24,9 @@
 	}
 \fi
 
-% Commentaires de début de fichiers destinés au autre.
+% Commentaires de début de fichiers destinés aux autres.
 % Je propose d'intégrer le cahier des charges au rapport final, en virant la conclusion, en ajoutant une partie développement etc... ?
-% bl
+% (julien : ou alors le mettre carrément tel quel en annexe, et s'en servir pour le rapport final)
 
 \begin{document}
 	% Page de titre
@@ -40,11 +40,33 @@
 	
 	\section{Introduction}
 		\subsection{Fonctionnement général}
-			Présentation brève qq paragraphes du projet.
+			Le but de l'application est de simuler une écriture ou un dessin sur un tableau virtuel. Ceci en se basant 
+		sur une reconnaissance de mouvements via une webcam.
 		\subsection{Finalités}
-			Buts finaux. Apppli fonctionnelle, richie, blablabla sans rentrer dans le détail des fonctionnalités.
-		\subsection{Choix stratégiques}
-			Découpage en 2 sous projets, plusieurs étapes avant appli finale...
+			Pour ce projet universitaire, l'objectif est d'obtenir un produit fini qui soit réellement utilisable.
+La finalité est donc d'avoir la possibilité de pouvoir utiliser rapidement l'application avec un étalonnage simple et rapide.\\
+De plus l'interêt est également d'avoir une application utile qui peut par exemple être utilisée dans le cadre d'un cours,
+pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
+\subsection{Choix stratégiques}
+			Pour mener à bien ce projet, nous avons choisi de le découper.
+			Ce découpage nous permettra de mieux nous organiser, de mieux répartir les tâches, et donc de fournir un travail plus efficace, même sur le long terme.
+			\subsubsection{Librairie - Application}
+			Notre premier choix consiste à découper notre projet en deux projets bien distincts, la librairie de suivi de mouvements, et l'application graphique. \\ \\
+			Ce choix représente plusieurs interêts : \\
+			\begin{itemize}
+				\item{Premièrement, ce découpage permet de bien différencier les tâches, le développement de la librairie requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc... ce qui correspond parfaitement à la formation de deux membres du groupe. (Formation IMAGINA Université Montpellier 2). Le développement de l'application, lui, requiert des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE Université Montpellier 2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
+				\item{Deuxièmement, l'interêt de ce découpage est d'avoir deux projets complètement indépendants. En effet, la librairie sera développée d'un côté et permettra d'offrir un bon nombre de fonctionnalité de suivi ou manipulation d'image. L'application, elle, se chargera d'utiliser les fonctionnalités de traitement d'image de la librairie en ajoutant une interface, une couche réseau, une connexion aux webcam, la récupération du flux, etc...
+				La librairie et l'application sont donc deux projets développés en parrallèles et très modulaires, notre application peut très bien utiliser une autre librairie de traitement d'image, et la librairie peut très bien être utilisée par d'autres application qui offriraient des fonctionnalités totalement différentes de la notre.}
+			\end{itemize}
+				\subsubsection{Différentes étapes}
+				Notre deuxième choix à été de découper le projet en plusieurs étapes. Arrivés en Master 1, nous avons maintenant quelques projets à nos actifs et savons maintenant comment éviter certaines erreurs. L'objectif final du projet est assez haut, ce choix d'étapes nous permet donc d'avoir un premier objectif accessible, puis d'ajouter des fonctionnalités à la librairie, et à l'application petit à petit pour franchir les étapes et s'approcher au maximum de nos objectifs. On pourrait par exemple se fixer les étapes qui suivent : \\
+				\begin{itemize}
+					\item{Prototype fonctionnel avec côté librairie une reconnaisance basique de forme ou mouvement, et côté application une interface basique permettant d'accéder à la webcam, d'appeller la librairie, de dessiner sans personnalisation, ainsi qu'une ébauche du module réseau. Ce prototype permettra de poser les bases de l'architecture de l'application et de la librairie.}
+					\item{Ajout d'algorithmes de reconnaissance et de nouvelles méthodes de reconnaissance pour la librairie, et amélioration du module réseau (définition du protocole, application serveur fonctionnelle, gestion des paquets, etc...)}
+					\item{Optimisation des algorithmes de trace et optimisation des méthodes. Ajout de l'interface gestuelle et personnalisation du dessin.}
+					\item{Finalisation du code, préparation d'une utilisation en production. Compilation dynamique de la librairie, création de paquets linux (.deb,...) compilation sur plusieurs systèmes d'exploitation.}
+				% TODO : Liste organisée
+				\end{itemize}
 	\section{Contexte}
 		\subsection{Faisabilité}
 			Choix d'un projet en fonction de nos spécialités, de notre formation, expérience, ce qu'on sait faire.
@@ -54,7 +76,7 @@
 			Documents de supports (thèses, articles etc...)
 	\section{Analyse et conception}
 		\subsection{Organisation}
-			Détail des étapes, répartition du travail...
+			Détail des étapes, répartition du travail, outils de synchronisations/communications ...
 		\subsection{Planning}
 			Rétro planning gantt commenté.
 		\subsection{UML}
@@ -70,11 +92,39 @@
 			Détail des étapes avec fonctionnalités pour chaqune d'elle.
 	\section{Application}
 		\subsection{Fonctionnalités}
-			Détail des fonctionnalités finales, envisagées
+		L'application doit permettre en premier lieu de faire rapidement un schéma ou écrire quelques phrases
+et de le sauvegarder : ce qui n'est pas possible avec un tableau conventionnel. \\ 			
+		Dans l'optique d'obtenir une application réellement fonctionnelle, permettra de dessiner 
+et d'écrire sur le tableau virtuel avec une interface Homme-Machine naturelle. \\
+
+		\begin{itemize}
+		\item L'exportation du dessin ou de l'écriture vers un format pdf, ou image
+		\item Une gomme permettant d'effacer	
+		\item Un module réseau pour faire un travail collaboratif avec l'application
+		\item Plusieurs formes de pinceaux avec plusieurs couleurs
+		\end{itemize}
+
 		\subsection{Architecture}
 			Architecture de l'application
 		\subsection{Outils}
-			Outils utilisés, langages librairies, etc.. pourquoi ? comment ?
+			Nous utiliserons des librairies pour accélérer le développement de l'application, et donc d'obtenir plus 
+rapidement un résultat abouti.
+		L'application contient une interface graphique, il nous faut donc une librairie pour cela :
+		notre choix s'est porté sur Qt, pour plusieurs raisons : 
+		\begin{itemize}
+		\item La librairie est très puissante et complète, avec une bonne documentation
+		\item Elle est multi-plateformes
+		\item C'est une librairie que nous connaissons déjà un peu, cela réduit donc le temps passer à se former dessus
+		\item C'est une librairie essentiellement C++, ce qui s'adapte au langage choisi pour l'application, et pour la librairie
+		\end{itemize} \ \\
+Nous utiliserons également QtDesigner pour nous assister dans la création de l'interface graphique (placement des élements...). \\
+		
+OpenCV nous servira également pour accéder à la webcam (ou aux webcams). De plus cette librairie capturera des 
+images et à les enverra à la librairie pour le traitement. Cette partie sera bien sûr recouverte par une partie écrite en C++ avec Qt pour lister les webcams disponibles par exemple. \\
+
+		Le développement se ferra complètement sous Linux, avec à terme des essais sur d'autres systèmes d'exploitation pour
+porter l'application sous ces systèmes. \\ 
+
 		\subsection{Étapes}
 			Détail des étapes avec fonctionnalités pour chaqune d'elle.
 	\section{Conclusion}	
