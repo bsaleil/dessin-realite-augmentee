@@ -45,23 +45,23 @@
 		\subsection{Finalités}
 			Pour ce projet universitaire, l'objectif est d'obtenir un produit fini qui soit réellement utilisable.
 La finalité est donc d'avoir la possibilité de pouvoir utiliser rapidement l'application avec un étalonnage simple et rapide.\\
-De plus l'interêt est également d'avoir une application utile qui peut par exemple être utilisée dans le cadre d'un cours,
+De plus l'intérêt est également d'avoir une application utile qui peut par exemple être utilisée dans le cadre d'un cours,
 pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 \subsection{Choix stratégiques}
 			Pour mener à bien ce projet, nous avons choisi de le découper.
 			Ce découpage nous permettra de mieux nous organiser, de mieux répartir les tâches, et donc de fournir un travail plus efficace, même sur le long terme.
 			\subsubsection{Librairie - Application}
 			Notre premier choix consiste à découper notre projet en deux projets bien distincts, la librairie de suivi de mouvements, et l'application graphique. \\ \\
-			Ce choix représente plusieurs interêts : \\
+			Ce choix représente plusieurs intérêts : \\
 			\begin{itemize}
 				\item{Premièrement, ce découpage permet de bien différencier les tâches, le développement de la librairie requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc... ce qui correspond parfaitement à la formation de deux membres du groupe. (Formation IMAGINA Université Montpellier 2). Le développement de l'application, lui, requiert des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE Université Montpellier 2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
-				\item{Deuxièmement, l'interêt de ce découpage est d'avoir deux projets complètement indépendants. En effet, la librairie sera développée d'un côté et permettra d'offrir un bon nombre de fonctionnalité de suivi ou manipulation d'image. L'application, elle, se chargera d'utiliser les fonctionnalités de traitement d'image de la librairie en ajoutant une interface, une couche réseau, une connexion aux webcam, la récupération du flux, etc...
+				\item{Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets complètement indépendants. En effet, la librairie sera développée d'un côté et permettra d'offrir un bon nombre de fonctionnalités de suivi ou manipulation d'image. L'application, elle, se chargera d'utiliser les fonctionnalités de traitement d'image de la librairie en ajoutant une interface, une couche réseau, une connexion aux webcam, la récupération du flux, etc...
 				La librairie et l'application sont donc deux projets développés en parrallèles et très modulaires, notre application peut très bien utiliser une autre librairie de traitement d'image, et la librairie peut très bien être utilisée par d'autres application qui offriraient des fonctionnalités totalement différentes de la notre.}
 			\end{itemize}
 				\subsubsection{Différentes étapes}
 				Notre deuxième choix à été de découper le projet en plusieurs étapes. Arrivés en Master 1, nous avons maintenant quelques projets à nos actifs et savons maintenant comment éviter certaines erreurs. L'objectif final du projet est assez haut, ce choix d'étapes nous permet donc d'avoir un premier objectif accessible, puis d'ajouter des fonctionnalités à la librairie, et à l'application petit à petit pour franchir les étapes et s'approcher au maximum de nos objectifs. On pourrait par exemple se fixer les étapes qui suivent : \\
 				\begin{itemize}
-					\item{Prototype fonctionnel avec côté librairie une reconnaisance basique de forme ou mouvement, et côté application une interface basique permettant d'accéder à la webcam, d'appeller la librairie, de dessiner sans personnalisation, ainsi qu'une ébauche du module réseau. Ce prototype permettra de poser les bases de l'architecture de l'application et de la librairie.}
+					\item{Prototype fonctionnel avec côté librairie une reconnaisance basique de forme ou mouvement, et côté application une interface basique permettant d'accéder à la webcam, d'appeler la librairie, de dessiner sans personnalisation, ainsi qu'une ébauche du module réseau. Ce prototype permettra de poser les bases de l'architecture de l'application et de la librairie.}
 					\item{Ajout d'algorithmes de reconnaissance et de nouvelles méthodes de reconnaissance pour la librairie, et amélioration du module réseau (définition du protocole, application serveur fonctionnelle, gestion des paquets, etc...)}
 					\item{Optimisation des algorithmes de trace et optimisation des méthodes. Ajout de l'interface gestuelle et personnalisation du dessin.}
 					\item{Finalisation du code, préparation d'une utilisation en production. Compilation dynamique de la librairie, création de paquets linux (.deb,...) compilation sur plusieurs systèmes d'exploitation.}
@@ -89,7 +89,7 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 		\subsection{Outils}
 			Outils utilisés, langages librairies, etc.. pourquoi ? comment ?
 		\subsection{Étapes}
-			Détail des étapes avec fonctionnalités pour chaqune d'elle.
+			Détail des étapes avec fonctionnalités pour chacune d'elle.
 	\section{Application}
 		\subsection{Fonctionnalités}
 		L'application doit permettre en premier lieu de faire rapidement un schéma ou écrire quelques phrases
@@ -117,16 +117,15 @@ rapidement un résultat abouti.
 		\item C'est une librairie que nous connaissons déjà un peu, cela réduit donc le temps passer à se former dessus
 		\item C'est une librairie essentiellement C++, ce qui s'adapte au langage choisi pour l'application, et pour la librairie
 		\end{itemize} \ \\
-Nous utiliserons également QtDesigner pour nous assister dans la création de l'interface graphique (placement des élements...). \\
+Nous utiliserons également QtDesigner pour nous assister dans la création de l'interface graphique (placement des éléments...). \\
 		
-OpenCV nous servira également pour accéder à la webcam (ou aux webcams). De plus cette librairie capturera des 
-images et à les enverra à la librairie pour le traitement. Cette partie sera bien sûr recouverte par une partie écrite en C++ avec Qt pour lister les webcams disponibles par exemple. \\
+OpenCV nous servira également pour accéder à la webcam (ou aux webcams). De plus cette librairie capturera des images et les enverra à la librairie pour le traitement. Cette partie sera bien sûr recouverte par une partie écrite en C++ avec Qt pour lister les webcams disponibles par exemple. \\
 
-		Le développement se ferra complètement sous Linux, avec à terme des essais sur d'autres systèmes d'exploitation pour
+		Le développement se fera complètement sous Linux, avec à terme des essais sur d'autres systèmes d'exploitation pour
 porter l'application sous ces systèmes. \\ 
 
 		\subsection{Étapes}
-			Détail des étapes avec fonctionnalités pour chaqune d'elle.
+			Détail des étapes avec fonctionnalités pour chacune d'elle.
 	\section{Conclusion}	
 		Conclusion (1 ou 2 paragraphe ?)
 	
