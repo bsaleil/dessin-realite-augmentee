@@ -71,7 +71,10 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 		\subsection{Faisabilité}
 			Choix d'un projet en fonction de nos spécialités, de notre formation, expérience, ce qu'on sait faire.
 		\subsection{Existant}
-			Etude de ce qui existe.
+			\begin{itemize}
+			\item Exemples dans le jeux vidéo: Kinect, Eye-toy, CamSpace. (Techniques pour l'IHM, par exemeple, mouvements continus ou immobilité sur une zone)
+			\item Exemples sur les thèses et projets de Recherche (Techniques de programmations)
+			\end{itemize}
 		\subsection{Ressources}
 			Documents de supports (thèses, articles etc...)
 	\section{Analyse et conception}
@@ -95,6 +98,7 @@ Dans un premier temps, nous implémenterons une fonction de suivi par couleur, r
 			\item Fonctions de Tracking (par couleur, par forme)
 			\item Fonctions de detections d'actions? (Mouvement/transformation signifiant une action par exemple main qui se ferme pour clic)
 			\end{itemize}
+			L'objectif final serait de fournir cette librairie sous forme de bibliothèque dynamique d'abord au format UNIX .so et éventuellement en .dll pour windows. 
 		\subsection{Outils}
 			Nous utiliserons le langage C/C++ et la librarie OpenCV pour le développement de la librairie, qui sera elle-même destinée à C.
 Notre choix s'est porté sur ce langage pour différentes raisons :
