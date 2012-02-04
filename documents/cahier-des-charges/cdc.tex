@@ -26,7 +26,7 @@
 
 % Commentaires de début de fichiers destinés aux autres.
 % Je propose d'intégrer le cahier des charges au rapport final, en virant la conclusion, en ajoutant une partie développement etc... ?
-% (julien : ou alors le mettre carrément tel quel en annexe, et s'en servir pour le rapport final)
+% (julien : ou alors le mettre carrément tel quel en annexe, et s'en servir pour le rapport final <---- Kevin agree.)
 
 \begin{document}
 	% Page de titre
@@ -81,13 +81,29 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 			Rétro planning gantt commenté.
 		\subsection{UML}
 			Analyse avec diagramme de classe, use case, séquence, etat?
+\newpage
 	\section{Librairie}
 		\subsection{Fonctionnalités}
-			Détail des fonctionnalités finales, envisagées
+			Le but de cette librairie serait de permettre le repérage et le suivi d'un objet en particulier à partir d'images. \\
+			Le repérage devra permettre à partir d'une image et d'une position polaire de reconnaître et d'isoler un objet. Cette étape permettra de récuperer un certain nombre de caractéristiques sur l'objet qui permettront ensuite de le suivre, comme par exemple sa couleur, sa taille etc. \\
+			Les fonctions de "tracking" exploiteront ensuite les informations récoltées grâce au repérage, pour permettre le suivi de l'objet dans le plan selon différentes méthodes.
+Dans un premier temps, nous implémenterons une fonction de suivi par couleur, retournant la position polaire de l'objet sur l'image. \\ 
 		\subsection{Architecture}
-			Architecture de la librairie
+			Architecture de la librairie 
+			\begin{itemize}
+			\item Fonctions de détections, isolements repérage...
+			\item Fonctions de Tracking (par couleur, par forme)
+			\item Fonctions de detections d'actions? (Mouvement/transformation signifiant une action par exemple main qui se ferme pour clic)
+			\end{itemize}
 		\subsection{Outils}
-			Outils utilisés, langages librairies, etc.. pourquoi ? comment ?
+			Nous utiliserons le langage C/C++ et la librarie OpenCV pour le développement de la librairie, qui sera elle-même destinée à C.
+Notre choix s'est porté sur ce langage pour différentes raisons :
+		\begin{itemize}
+		\item Nous souhaitons utiliser la librairie OpenCV qui à été initialement créée pour le langage C.
+		\item L'application sera elle aussi faite en C++.
+		\item C'est le langage que nous connaissons et affectionnons le plus.
+		\end{itemize}
+			Nous avons décidé d'utiliser OpenCV car c'est une librairie puissante, très bien documentée et fortement orientée sur la vision par ordinateur. \\
 		\subsection{Étapes}
 			Détail des étapes avec fonctionnalités pour chacune d'elle.
 	\section{Application}
