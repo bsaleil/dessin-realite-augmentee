@@ -27,6 +27,7 @@
 % Commentaires de début de fichiers destinés aux autres.
 % Je propose d'intégrer le cahier des charges au rapport final, en virant la conclusion, en ajoutant une partie développement etc... ?
 % (julien : ou alors le mettre carrément tel quel en annexe, et s'en servir pour le rapport final <---- Kevin agree.)
+% (geo : ouais, assez d'accord avec julien)
 
 \begin{document}
 	% Page de titre
@@ -69,7 +70,11 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 				\end{itemize}
 	\section{Contexte}
 		\subsection{Faisabilité}
-		Choix d'un projet en fonction de nos spécialités, de notre formation, expérience, ce qu'on sait faire.
+		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.
+La vision par ordinateur et particulièrement le traçage virtuel d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux, comme nous le verrons dans l'analyse de l'existant.
+Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la librairie d'OpenCV.
+
+==> listing des besoins, chose à faire et de quelle manière nous pouvons y répondre/les satisfaires.
 		\subsection{Existant}
 			\begin{itemize}
 			\item Exemples dans le jeux vidéo: Kinect, Eye-toy, CamSpace. (Techniques pour l'IHM, par exemeple, mouvements continus ou immobilité sur une zone)
@@ -95,18 +100,18 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 \newpage
 	\section{Librairie}
 		\subsection{Fonctionnalités}
-			Le but de cette librairie serait de fournir des fonctions permettant le repérage et le suivi d'un objet en particulier à partir d'images. 
-			L'idée serait donc d'avoir dans la librairie un maximum de fonctions de traçage différentes, de la plus lente et précise à la plus rapide et permissive, de manière à adapter la complexité en fonction du degrés de précision requis pour notre traitement. \\
-			On peut alors imaginer deux classes de fonctions, des la plus basiques réalisant un tracking intuitif, sans mémoriser d'information sur l'objet suivi, jusqu'à des fonctions plus perfectionnés, effectuant un repérage préliminaire pour connaitre l'objet.
-			Le repérage devra permettre à partir d'une image et d'une position polaire de reconnaître et d'isoler un objet. Cette étape permettra de récuperer un certain nombre de caractéristiques sur l'objet qui permettront ensuite de le suivre, comme par exemple sa couleur, sa taille etc. \\
+			Le but de cette librairie est de fournir des fonctions permettant le repérage et le suivi d'un objet en particulier à partir d'images. 
+			L'idée serait donc d'avoir dans la librairie un maximum de fonctions de traçage différentes, de la plus lente et précise à la plus rapide et permissive, de manière à adapter la complexité en fonction du degré de précision requis pour notre traitement. \\
+			On peut alors imaginer deux classes de fonctions, des plus basiques réalisant un tracking intuitif (sans mémoriser d'informations sur l'objet suivi par ex.) aux plus perfectionnées effectuant un repérage préliminaire pour connaitre l'objet.
+			Le repérage devra permettre à partir d'une image et d'une position de reconnaître et d'isoler un objet. Cette étape permettra de récupérer un certain nombre de caractéristiques sur l'objet qui permettront ensuite de le suivre, comme par exemple sa couleur ou sa taille. \\
 Dans un premier temps, nous implémenterons une fonction basique de suivi par couleur, retournant la position polaire de l'objet sur l'image. \\
-D'autre part, nous essayerons d'inclure a la librairie des fonctions de détections d'actions permettant par exemple de signaler que l'on écrit par exemple. 
+Dans un second temps, nous essayerons d'inclure à la librairie des fonctions de détection d'actions permettant par exemple de signaler que l'on écrit. 
 		\subsection{Architecture}
 			Architecture de la librairie 
 			\begin{itemize}
 			\item Fonctions simples : On trace une forme ou une couleur, sans apprentissage, à partir de deux images et d'une position.
 			\item Fonctions "intelligente" : On commence par recueillir des informations (forme, taille, ancienne localisation ou couleur par exemple) sur l'objet tracé que l'on conserve ensuite    
-			\item Fonctions de detections d'actions (Mouvement/transformation signifiant une action par exemple main qui se ferme pour clic)
+			\item Fonctions de détection d'actions (Mouvement/transformation signifiant une action. Par exemple, main qui se ferme pour clic)
 			\end{itemize}
 			L'objectif final serait de fournir cette librairie sous forme de bibliothèque dynamique d'abord au format UNIX .so et éventuellement en .dll pour windows. 
 		\subsection{Outils}
