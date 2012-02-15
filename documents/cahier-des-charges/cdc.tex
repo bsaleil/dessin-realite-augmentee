@@ -43,7 +43,7 @@
 			Le but de l'application est de simuler une écriture ou un dessin sur un tableau virtuel. Ceci en se basant 
 		sur une reconnaissance de mouvements via une webcam.
 		\subsection{Finalités}
-			Pour ce projet universitaire, l'objectif est d'obtenir un produit fini qui soit réellement utilisable.
+			Pour ce projet universitaire, l'objectif est d'obtenir un produit qui soit réellement utilisable.
 La finalité est donc d'avoir la possibilité de pouvoir utiliser rapidement l'application avec un étalonnage simple et rapide.\\
 De plus l'intérêt est également d'avoir une application utile qui peut par exemple être utilisée dans le cadre d'un cours,
 pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
@@ -51,7 +51,7 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 			Pour mener à bien ce projet, nous avons choisi de le découper.
 			Ce découpage nous permettra de mieux nous organiser, de mieux répartir les tâches, et donc de fournir un travail plus efficace, même sur le long terme.
 			\subsubsection{Librairie - Application}
-			Notre premier choix consiste à découper notre projet en deux projets bien distincts, la librairie de suivi de mouvements, et l'application graphique. \\ \\
+			Notre premier choix consiste à découper notre projet en deux projets bien distincts, une librairie de suivi de mouvements, et une application graphique. \\ \\
 			Ce choix représente plusieurs intérêts : \\
 			\begin{itemize}
 				\item{Premièrement, ce découpage permet de bien différencier les tâches, le développement de la librairie requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc... ce qui correspond parfaitement à la formation de deux membres du groupe. (Formation IMAGINA Université Montpellier 2). Le développement de l'application, lui, requiert des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE Université Montpellier 2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
@@ -69,7 +69,7 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 				\end{itemize}
 	\section{Contexte}
 		\subsection{Faisabilité}
-			Choix d'un projet en fonction de nos spécialités, de notre formation, expérience, ce qu'on sait faire.
+		Choix d'un projet en fonction de nos spécialités, de notre formation, expérience, ce qu'on sait faire.
 		\subsection{Existant}
 			\begin{itemize}
 			\item Exemples dans le jeux vidéo: Kinect, Eye-toy, CamSpace. (Techniques pour l'IHM, par exemeple, mouvements continus ou immobilité sur une zone)
@@ -79,6 +79,14 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 			Documents de supports (thèses, articles etc...)
 	\section{Analyse et conception}
 		\subsection{Organisation}
+		Le projet se déroulera autour de trois dates clés:
+			\begin{itemize}
+			\item 2 Mars 2012 : Bilan de mi-parcours.  
+			\item 27 Avril 2012 : Bilan de pré-soutenance.
+			\item 14 Mai 2012 : Rendu complet du projet.
+			\end{itemize}
+			Nous devons donc fixer nos objectifs en fonction de celles-ci, en essayer de réaliser la première etape, le prototype fonctionnel, autour de la première date.
+		
 			Détail des étapes, répartition du travail, outils de synchronisations/communications ...
 		\subsection{Planning}
 			Rétro planning gantt commenté.
@@ -87,16 +95,18 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 \newpage
 	\section{Librairie}
 		\subsection{Fonctionnalités}
-			Le but de cette librairie serait de permettre le repérage et le suivi d'un objet en particulier à partir d'images. \\
+			Le but de cette librairie serait de fournir des fonctions permettant le repérage et le suivi d'un objet en particulier à partir d'images. 
+			L'idée serait donc d'avoir dans la librairie un maximum de fonctions de traçage différentes, de la plus lente et précise à la plus rapide et permissive, de manière à adapter la complexité en fonction du degrés de précision requis pour notre traitement. \\
+			On peut alors imaginer deux classes de fonctions, des la plus basiques réalisant un tracking intuitif, sans mémoriser d'information sur l'objet suivi, jusqu'à des fonctions plus perfectionnés, effectuant un repérage préliminaire pour connaitre l'objet.
 			Le repérage devra permettre à partir d'une image et d'une position polaire de reconnaître et d'isoler un objet. Cette étape permettra de récuperer un certain nombre de caractéristiques sur l'objet qui permettront ensuite de le suivre, comme par exemple sa couleur, sa taille etc. \\
-			Les fonctions de "tracking" exploiteront ensuite les informations récoltées grâce au repérage, pour permettre le suivi de l'objet dans le plan selon différentes méthodes.
-Dans un premier temps, nous implémenterons une fonction de suivi par couleur, retournant la position polaire de l'objet sur l'image. \\ 
+Dans un premier temps, nous implémenterons une fonction basique de suivi par couleur, retournant la position polaire de l'objet sur l'image. \\
+D'autre part, nous essayerons d'inclure a la librairie des fonctions de détections d'actions permettant par exemple de signaler que l'on écrit par exemple. 
 		\subsection{Architecture}
 			Architecture de la librairie 
 			\begin{itemize}
-			\item Fonctions de détections, isolements repérage...
-			\item Fonctions de Tracking (par couleur, par forme)
-			\item Fonctions de detections d'actions? (Mouvement/transformation signifiant une action par exemple main qui se ferme pour clic)
+			\item Fonctions simples : On trace une forme ou une couleur, sans apprentissage, à partir de deux images et d'une position.
+			\item Fonctions "intelligente" : On commence par recueillir des informations (forme, taille, ancienne localisation ou couleur par exemple) sur l'objet tracé que l'on conserve ensuite    
+			\item Fonctions de detections d'actions (Mouvement/transformation signifiant une action par exemple main qui se ferme pour clic)
 			\end{itemize}
 			L'objectif final serait de fournir cette librairie sous forme de bibliothèque dynamique d'abord au format UNIX .so et éventuellement en .dll pour windows. 
 		\subsection{Outils}
