@@ -70,29 +70,38 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 				\end{itemize}
 	\section{Contexte}
 		\subsection{Faisabilité}
-		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.
-La vision par ordinateur et particulièrement le traçage virtuel d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux, comme nous le verrons dans l'analyse de l'existant.
-Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la librairie d'OpenCV.
-
+		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.\\
+Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. Nous allons nous concentrer notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposons d'aucun financement et n'allons utiliser que des outils gratuits. \\
+Comme dit précédemment, le projet est décomposé en deux parties majeures que sont l'application et la librairie (dont les contenus seront détaillés dans des sections qui leur sont propres).
+			\paragraph{Application :\\}
+Pour toute la partie logiciel, 
 ==> listing des besoins, chose à faire et de quelle manière nous pouvons y répondre/les satisfaires.
+			\paragraph{Librairie :\\}
+				Blabla librairie
 		\subsection{Existant}
+		La vision par ordinateur et particulièrement le traçage virtuel d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la librairie OpenCV.\\
 			\begin{itemize}
-			\item Exemples dans le jeux vidéo: Kinect, Eye-toy, CamSpace. (Techniques pour l'IHM, par exemeple, mouvements continus ou immobilité sur une zone)
-			\item Exemples sur les thèses et projets de Recherche (Techniques de programmations)
+				\item Exemples dans le jeux vidéo : Kinect, Eye-toy, CamSpace (techniques pour l'IHM, par exemple, mouvements continus ou immobilité sur une zone).
+				\item Exemples issus de thèses et de projets de recherche (techniques de programmations).
 			\end{itemize}
 		\subsection{Ressources}
-			Documents de supports (thèses, articles etc...)
+			\begin{itemize}
+				\item{site web machin}
+				\item{thèse truc}
+				\item{article bidule}
+			\end{itemize}
+				
 	\section{Analyse et conception}
 		\subsection{Organisation}
 		Le projet se déroulera autour de trois dates clés:
 			\begin{itemize}
-			\item 2 Mars 2012 : Bilan de mi-parcours.  
-			\item 27 Avril 2012 : Bilan de pré-soutenance.
-			\item 14 Mai 2012 : Rendu complet du projet.
+				\item 2 Mars 2012 : Bilan de mi-parcours.  
+				\item 27 Avril 2012 : Bilan de pré-soutenance.
+				\item 14 Mai 2012 : Rendu complet du projet.
 			\end{itemize}
-			Nous devons donc fixer nos objectifs en fonction de celles-ci, en essayer de réaliser la première etape, le prototype fonctionnel, autour de la première date.
+			Nous devons donc fixer nos objectifs en fonction de celles-ci, en essayer de réaliser la première étape, le prototype fonctionnel, aux alentours de la première date.
 		
-			Détail des étapes, répartition du travail, outils de synchronisations/communications ...
+			Détails des étapes, répartition du travail, outils de synchronisations/communications ...
 		\subsection{Planning}
 			Rétro planning gantt commenté.
 		\subsection{UML}
@@ -109,19 +118,19 @@ Dans un second temps, nous essayerons d'inclure à la librairie des fonctions de
 		\subsection{Architecture}
 			Architecture de la librairie 
 			\begin{itemize}
-			\item Fonctions simples : On trace une forme ou une couleur, sans apprentissage, à partir de deux images et d'une position.
-			\item Fonctions "intelligente" : On commence par recueillir des informations (forme, taille, ancienne localisation ou couleur par exemple) sur l'objet tracé que l'on conserve ensuite    
-			\item Fonctions de détection d'actions (Mouvement/transformation signifiant une action. Par exemple, main qui se ferme pour clic)
+				\item Fonctions simples : On trace une forme ou une couleur, sans apprentissage, à partir de deux images et d'une position.
+				\item Fonctions "intelligente" : On commence par recueillir des informations (forme, taille, ancienne localisation ou couleur par exemple) sur l'objet tracé que l'on conserve ensuite    
+				\item Fonctions de détection d'actions (Mouvement/transformation signifiant une action. Par exemple, main qui se ferme pour clic)
 			\end{itemize}
 			L'objectif final serait de fournir cette librairie sous forme de bibliothèque dynamique d'abord au format UNIX .so et éventuellement en .dll pour windows. 
 		\subsection{Outils}
 			Nous utiliserons le langage C/C++ et la librarie OpenCV pour le développement de la librairie, qui sera elle-même destinée à C.
 Notre choix s'est porté sur ce langage pour différentes raisons :
 		\begin{itemize}
-		\item Nous souhaitons utiliser la librairie OpenCV qui à été initialement créée pour le langage C.
-		\item L'application sera elle aussi faite en C++.
+			\item Nous souhaitons utiliser la librairie OpenCV qui à été initialement créée pour le langage C.
+			\item L'application sera elle aussi faite en C++.
 		\item C'est le langage que nous connaissons et affectionnons le plus.
-		\end{itemize}
+			\end{itemize}
 			Nous avons décidé d'utiliser OpenCV car c'est une librairie puissante, très bien documentée et fortement orientée sur la vision par ordinateur. \\
 		\subsection{Étapes}
 			Détail des étapes avec fonctionnalités pour chacune d'elle.
@@ -133,10 +142,10 @@ et de le sauvegarder : ce qui n'est pas possible avec un tableau conventionnel. 
 et d'écrire sur le tableau virtuel avec une interface Homme-Machine naturelle. \\
 
 		\begin{itemize}
-		\item L'exportation du dessin ou de l'écriture vers un format pdf, ou image
-		\item Une gomme permettant d'effacer	
-		\item Un module réseau pour faire un travail collaboratif avec l'application
-		\item Plusieurs formes de pinceaux avec plusieurs couleurs
+			\item L'exportation du dessin ou de l'écriture vers un format pdf, ou image
+			\item Une gomme permettant d'effacer	
+			\item Un module réseau pour faire un travail collaboratif avec l'application
+			\item Plusieurs formes de pinceaux avec plusieurs couleurs
 		\end{itemize}
 
 		\subsection{Architecture}
@@ -147,10 +156,10 @@ rapidement un résultat abouti.
 		L'application contient une interface graphique, il nous faut donc une librairie pour cela :
 		notre choix s'est porté sur Qt, pour plusieurs raisons : 
 		\begin{itemize}
-		\item La librairie est très puissante et complète, avec une bonne documentation
-		\item Elle est multi-plateformes
-		\item C'est une librairie que nous connaissons déjà un peu, cela réduit donc le temps passer à se former dessus
-		\item C'est une librairie essentiellement C++, ce qui s'adapte au langage choisi pour l'application, et pour la librairie
+			\item La librairie est très puissante et complète, avec une bonne documentation
+			\item Elle est multi-plateformes
+			\item C'est une librairie que nous connaissons déjà un peu, cela réduit donc le temps passer à se former dessus
+			\item C'est une librairie essentiellement C++, ce qui s'adapte au langage choisi pour l'application, et pour la librairie
 		\end{itemize} \ \\
 Nous utiliserons également QtDesigner pour nous assister dans la création de l'interface graphique (placement des éléments...). \\
 		
