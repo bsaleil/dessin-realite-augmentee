@@ -5,5 +5,4 @@
 
 IplImage * Binarisation(IplImage * source, int x, int y);
 IplImage * Localisation(IplImage * binarySource, int x, int y);
-
 int * NaifColorTrack(IplImage * source, int x, int y); 
