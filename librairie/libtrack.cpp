@@ -1,20 +1,14 @@
 #include "libtrack.hpp"
 using namespace std;
 
-IplImage * Binarisation(IplImage * source, int x, int y, CvScalar * oldPixel)
+// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldPixel'
+IplImage * binarisation(IplImage * source, Pixel *oldPix)
 {
 	IplImage *hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV);
-	CvScalar pixel;
-	if (oldPixel == NULL)
-	{
-		pixel = cvGet2D(hsv,x,y); // on recupère le pixel sous x y
-	}
-	else
-	{
-		pixel = *oldPixel; // on affecte pixel à l'ancien pixel pour recuperer la couleur a traquer.
-	}
+	CvScalar pixel =  oldPix->color; // on affecte pixel à l'ancien pixel pour recuperer la couleur a traquer.
+	
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	int v = (int)pixel.val[2];
@@ -36,15 +30,19 @@ IplImage * Binarisation(IplImage * source, int x, int y, CvScalar * oldPixel)
 	cvDilate(mask, mask, structurant, 1);
 	cvErode(mask, mask, structurant, 1);
 	
+	cvShowImage("binarisation", mask);
+	cvWaitKey (0);
+	
 	return mask;
 }
 
 /**
- * Retourne le centre de gravité des pixels blancs d'une image binarisée sous la forme d'une struc Coord (int x, int y)
+ * A partir d'une image binaire, calcule et retourne le barycentre des pixels à 1 (blancs), cencés représenter
+ * l'objet à traquer (aux erreurs de traitement près).
  */
-Coord getGravityCenter (IplImage* imgBin)
+CvPoint * getNewCoord(const IplImage* imgBin)
 {
-	assert (imgBin->nChannels == 1 );
+	assert(imgBin->nChannels == 1 );
 	
 	int sommeX = 0;
 	int sommeY = 0;
@@ -58,9 +56,9 @@ Coord getGravityCenter (IplImage* imgBin)
 				nbPixels++;
 			}
 			
-	Coord bary;
-	bary.x = (int)(sommeX / nbPixels);
-	bary.y = (int)(sommeY / nbPixels);
+	CvPoint * bary;
+	bary->x = (int)(sommeX / nbPixels);
+	bary->y = (int)(sommeY / nbPixels);
 	
 	return bary;
 }
@@ -69,21 +67,35 @@ Coord getGravityCenter (IplImage* imgBin)
  *	getNewCoord(image binaire,ancienne position) retourne nouvelle position.
  * \TODO
  */
-Coord getNewCoord(const IplImage* binaryImg, Coord oldCoord)
+Pixel * getNewCoord(const IplImage* binaryImg, Pixel * oldPix)
 {
-	Coord c = oldCoord;
+	Pixel * c = oldPix;
 	
 	//Vérif que l'image donnée soit binarisée
-	assert (binaryImg->nChannels != 1 );
-	
+	//assert (binaryImg->nChannels == 1 );
 	
 	return c;
 }
 
 
-int * NaifColorTrack(IplImage * source, int x, int y)
+Pixel * initNaiveColorTrack(IplImage * source, int x, int y)
 {
+	Pixel pixel;
+	CvPoint points;
+	points.x = x;
+	points.y = y;
+	IplImage * hsv;
+	hsv = cvCloneImage(source);
+	cvCvtColor(source, hsv, CV_BGR2HSV);
+	CvScalar color = cvGet2D(hsv,x,y);
+	pixel.points = points;
+	pixel.color = color;
+	return naiveColorTrack(source,&pixel); 
+}
 
+Pixel * naiveColorTrack(IplImage * source, Pixel * clickedPix)
+{
+	return getNewCoord(binarisation(source, clickedPix), clickedPix);
 }
 
 int main(int argc, char* argv[])
@@ -92,8 +104,8 @@ int main(int argc, char* argv[])
 	//cvNamedWindow("test", CV_WINDOW_AUTOSIZE);
 	cvShowImage("source", source);
 	cvWaitKey(0);
-	cvShowImage("binarisation", Binarisation(source, 164, 527, NULL));
-	cvWaitKey (0);
+	Pixel * pix = initNaiveColorTrack(source, 164,530);
+	cout << pix->points.x << "-" << pix->points.y << endl;
   	/* Destruction de la fenêtre */
 	cvDestroyAllWindows ();
 	/* Libération de la mémoire */

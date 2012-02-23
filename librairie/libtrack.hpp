@@ -1,21 +1,25 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
 #include <assert.h>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
 
-typedef struct Coordonnees
+typedef struct Pixel
 {
-    int x; // Abscisses
-    int y; // Ordonnées
-}Coord; // Utiliser de cvScalar plutôt je pense?
+    CvPoint points; // coordonnées
+    CvScalar color; // Couleur
+    //éventuellement ajouter de nouveaux attributs par la suite.
+}Pixel; 
 
-IplImage * Binarisation(IplImage * source, int x, int y, CvScalar& oldPixel); // si on passe NULL, on prend le pixel sous x et y pour capturer la couleur
+// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldPixel'
+IplImage * binarisation(IplImage * source, Pixel * oldPix);
 
 /*
  *  getNewCoord(image binaire,ancienne position) => retourne nouvelle position.
  */
-Coord getNewCoord(const IplImage* binaryImg, Coord oldCoord);
+Pixel * getNewCoord(const IplImage* binaryImg, Pixel * oldPix);
 
-int * NaifColorTrack(IplImage * source, int x, int y); 
+Pixel * initNaiveColorTrack(IplImage * source, int x, int y);
+Pixel * naiveColorTrack(IplImage * source, Pixel * oldPix);
