@@ -3,9 +3,21 @@
 
 #include <iostream>
 #include <QMainWindow>
+#include <QAction>
+#include <QDebug>
+
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 #include "ui_client.h"
 #include "webcammanager.hpp"
+#include "widgetwebcam.hpp"
+
+namespace Ui 
+{
+	class Client;
+}
+
 
 class Client : public QMainWindow
 {
@@ -14,9 +26,15 @@ class Client : public QMainWindow
 	public :
 		Client();
 	private:
-		Ui::Client ui;
+		Ui::Client *ui;
+		QActionGroup *actionGroup;
 		
-		WebcamManager *wm;
+		WebcamManager *camManager;
+		WidgetWebcam *camWidget;
+	
+	private slots:
+		void slotStart();
+		
 };
 
 #endif
