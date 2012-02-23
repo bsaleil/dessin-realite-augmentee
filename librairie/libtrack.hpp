@@ -9,9 +9,9 @@ typedef struct Coordonnees
 {
     int x; // Abscisses
     int y; // Ordonnées
-}Coord;
+}Coord; // Utiliser de cvScalar plutôt je pense?
 
-IplImage * Binarisation(IplImage * source, int x, int y);
+IplImage * Binarisation(IplImage * source, int x, int y, CvScalar& oldPixel); // si on passe NULL, on prend le pixel sous x et y pour capturer la couleur
 
 /*
  *  getNewCoord(image binaire,ancienne position) => retourne nouvelle position.

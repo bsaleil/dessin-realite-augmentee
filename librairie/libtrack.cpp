@@ -1,13 +1,20 @@
 #include "libtrack.hpp"
 using namespace std;
 
-IplImage * Binarisation(IplImage * source, int x, int y)
+IplImage * Binarisation(IplImage * source, int x, int y, CvScalar * oldPixel)
 {
 	IplImage *hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV);
-	CvScalar pixel = cvGet2D(hsv,x,y); // on recupère le pixel
-	
+	CvScalar pixel;
+	if (oldPixel == NULL)
+	{
+		pixel = cvGet2D(hsv,x,y); // on recupère le pixel sous x y
+	}
+	else
+	{
+		pixel = *oldPixel; // on affecte pixel à l'ancien pixel pour recuperer la couleur a traquer.
+	}
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	int v = (int)pixel.val[2];
@@ -20,10 +27,10 @@ IplImage * Binarisation(IplImage * source, int x, int y)
 	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
 	IplConvKernel *structurant;
 /*	structurants possibles : 
-	CV_SHAPE_RECT
-    CV_SHAPE_CROSS
-    CV_SHAPE_ELLIPSE
-    CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
+		CV_SHAPE_RECT
+    		CV_SHAPE_CROSS
+    		CV_SHAPE_ELLIPSE
+   		CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
 	structurant = cvCreateStructuringElementEx(5, 5, 2, 2, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
@@ -85,7 +92,7 @@ int main(int argc, char* argv[])
 	//cvNamedWindow("test", CV_WINDOW_AUTOSIZE);
 	cvShowImage("source", source);
 	cvWaitKey(0);
-	cvShowImage("binarisation", Binarisation(source, 164, 527));
+	cvShowImage("binarisation", Binarisation(source, 164, 527, NULL));
 	cvWaitKey (0);
   	/* Destruction de la fenêtre */
 	cvDestroyAllWindows ();
