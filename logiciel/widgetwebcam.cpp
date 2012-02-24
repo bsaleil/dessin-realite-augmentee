@@ -13,17 +13,6 @@ WidgetWebcam::WidgetWebcam(QString text) : QLabel(text)
 	WidgetWebcam();
 }
 
-void WidgetWebcam::mousePressEvent(QMouseEvent * event)
-{
-	// Si la classe est prête à recevoir le clic d'étalonnage
-	if (readyToCalibrate)
-	{
-		// TODO
-		qDebug() << event->x() << "," << event->y();
-		// appelLibrairie(image,x,y);
-	}
-}
-
 void WidgetWebcam::calibrate(IplImage* iImage)
 {
 	// Conversion
@@ -35,6 +24,17 @@ void WidgetWebcam::calibrate(IplImage* iImage)
 	
 	// Etalonnage maintenant possible
 	readyToCalibrate = true;
+}
+
+void WidgetWebcam::mousePressEvent(QMouseEvent * event)
+{
+	// Si la classe est prête à recevoir le clic d'étalonnage
+	if (readyToCalibrate)
+	{
+		// TODO
+		qDebug() << event->x() << "," << event->y();
+		// appelLibrairie(image,x,y);
+	}
 }
 
 QImage* WidgetWebcam::iplToQimage(IplImage* image)

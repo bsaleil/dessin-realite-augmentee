@@ -32,28 +32,6 @@ Client::Client() : ui(new Ui::Client)
 	connect(ui->actionD_marrer,SIGNAL(triggered()),this,SLOT(slotStart()));
 }
 
-void Client::slotStart()
-{
-	// On désactive le choix des webcams
-	ui->menuWebcam->setEnabled(false);
-	
-	// On récupère la webcam sélectionnée
-	QList<QAction*> listActionsWebcam = actionGroup->actions();
-	webcamActive = 0;
-	int i=0;
-	for (i=0; i<listActionsWebcam.length(); i++)
-	{
-		if (listActionsWebcam[i]->isChecked())
-		{ webcamActive = listActionsWebcam[i]->text().remove("webcam").toInt(); }
-	}
-	// La numérotation commence à 0
-	webcamActive--;
-	
-	// On débute l'étalonnage
-	calibration();
-}
-
-
 void Client::calibration()
 {
 	// Temps avant de prendre une image pour l'étalonnage
@@ -72,7 +50,6 @@ void Client::calibration()
 	connect(timerCounter, SIGNAL(timeout()), this, SLOT(slotCounterChange()));
 	timerCounter->start(1000);
 }
-
 
 void Client::slotCounterChange()
 {
@@ -98,3 +75,23 @@ void Client::slotCounterChange()
 	}
 }
 
+void Client::slotStart()
+{
+	// On désactive le choix des webcams
+	ui->menuWebcam->setEnabled(false);
+	
+	// On récupère la webcam sélectionnée
+	QList<QAction*> listActionsWebcam = actionGroup->actions();
+	webcamActive = 0;
+	int i=0;
+	for (i=0; i<listActionsWebcam.length(); i++)
+	{
+		if (listActionsWebcam[i]->isChecked())
+		{ webcamActive = listActionsWebcam[i]->text().remove("webcam").toInt(); }
+	}
+	// La numérotation commence à 0
+	webcamActive--;
+	
+	// On débute l'étalonnage
+	calibration();
+}

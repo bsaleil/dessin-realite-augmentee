@@ -24,10 +24,9 @@ class WidgetWebcam : public QLabel
 		WidgetWebcam();
 		WidgetWebcam(QString); 			// QLabel avec texte à afficher
 		
-		void mousePressEvent(QMouseEvent*);	// Récupération du clic pour désigner objet à suivre
 		void calibrate(IplImage*);		// Effectuer l'étalonnage sur l'image
-
 		QImage* iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
+		void mousePressEvent(QMouseEvent*);	// Récupération du clic pour désigner objet à suivre
 	
 	private :
 		bool readyToCalibrate; 		// Indique si prêt à recevoir le clic d'étalonnage

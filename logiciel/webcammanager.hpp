@@ -17,8 +17,9 @@ class WebcamManager
 {	
 	public :
 		WebcamManager();
-		int getNumberOfWebcams();	// Retourne le nombre de webcams disponibles
+		
 		IplImage* getImageInit(int);	// Retourne l'image donnée par la webcam
+		int getNumberOfWebcams();	// Retourne le nombre de webcams disponibles
 };
 
 #endif
