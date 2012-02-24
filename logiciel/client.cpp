@@ -44,8 +44,13 @@ void Client::slotStart()
 		if (listActionsWebcam[i]->isChecked())
 		{ webcam = listActionsWebcam[i]->text().remove("webcam").toInt(); }
 	}
-	qDebug() << webcam;
-	//IplImage *image = camManager->getOneImage(webcam-1);
+	
+	// Récupère l'image d'initialisation
+	IplImage *image;
+	image = camManager->getImageInit(webcam-1);
+	
+	// TODO : test pour voir l'image
+	cvSaveImage("image.png", image, NULL);
 	
 	// Appel widgetwebcam avec image
 	// int ret = camWidget->calibrate(image);
