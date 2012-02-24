@@ -33,7 +33,9 @@ void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 	{
 		// TODO
 		qDebug() << event->x() << "," << event->y();
-		// appelLibrairie(image,x,y);
+		//Pixel * curseur = initNaiveColorTrack(image, x,y);
+		// Ensuite si tu veux acceder
+		
 	}
 }
 

@@ -26,8 +26,8 @@ class WidgetWebcam : public QLabel
 		
 		void calibrate(IplImage*);		// Effectuer l'étalonnage sur l'image
 		QImage* iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
+	protected :
 		void mousePressEvent(QMouseEvent*);	// Récupération du clic pour désigner objet à suivre
-	
 	private :
 		bool readyToCalibrate; 		// Indique si prêt à recevoir le clic d'étalonnage
 };
