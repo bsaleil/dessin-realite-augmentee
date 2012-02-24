@@ -1,8 +1,8 @@
 #include "libtrack.hpp"
 using namespace std;
 
-// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldPixel' (coord et coul)
-IplImage * binarisation(IplImage * source, Pixel *oldPix)
+// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldCursor' (coord et coul)
+IplImage * binarisation(IplImage * source, Cursor *oldPix)
 {
 	IplImage *hsv;
 	hsv = cvCloneImage(source);
@@ -22,12 +22,12 @@ IplImage * binarisation(IplImage * source, Pixel *oldPix)
 	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
 	IplConvKernel *structurant;
 /*	structurants possibles : 
-		-CV_SHAPE_RECT
+	-CV_SHAPE_RECT
     	-CV_SHAPE_CROSS
     	-CV_SHAPE_ELLIPSE
-   		-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
+   	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
-	structurant = cvCreateStructuringElementEx(5, 5, 2, 2, CV_SHAPE_ELLIPSE, NULL);
+	structurant = cvCreateStructuringElementEx(5, 5, 2, 2, CV_SHAPE_ELLIPSE, NULL); // la le 5,5 représente le structurant (kernel) utilisé pour l'ouverture
 	cvDilate(mask, mask, structurant, 1);
 	cvErode(mask, mask, structurant, 1);
 	
@@ -36,14 +36,17 @@ IplImage * binarisation(IplImage * source, Pixel *oldPix)
 	
 	return mask;
 }
-
 /**
  * A partir d'une image binaire, calcule et retourne sous forme d'un CvPoint* le barycentre des pixels à 1 (blancs),
  *  cencés représenter l'objet à traquer (aux erreurs de traitement près).
  */
-CvPoint * getNewCoord(const IplImage* imgBin)
+CvPoint * getNewCoord(const IplImage* imgBin, Cursor * oldPix)
 {
-	assert(imgBin->nChannels == 1 );
+	if(imgBin->nChannels != 1 )
+	{
+		perror("Invalid IplImage number of channels.");
+		assert(imgBin->nChannels != 1);
+	}
 	
 	int sommeX = 0;
 	int sommeY = 0;
@@ -64,26 +67,59 @@ CvPoint * getNewCoord(const IplImage* imgBin)
 	return bary;
 }
 
+/*Met à jour le Cursor représentant le barycentre du curseur à tracker.
+ * 0 en cas de succès
+ * -1 en cas d'erreur : à définir
+ */
+int setNewCoord(const IplImage* imgBin, Cursor * oldPix)
+{
+	if(imgBin->nChannels != 1 )
+	{
+		perror("Invalid IplImage number of channels.");
+		return -1;
+	}
+	
+	int sommeX = 0;
+	int sommeY = 0;
+	int nbPixels = 0;
+	for(int x = 0; x < imgBin->width; x++)
+		for(int y = 0; y < imgBin->height; y++)
+			if(((uchar *)(imgBin->imageData + y*imgBin->widthStep))[x] == 255)
+			{
+				sommeX += x;
+				sommeY += y;
+				nbPixels++;
+			}
+
+	oldPix->coord.x = (int)(sommeX / nbPixels);
+	oldPix->coord.y = (int)(sommeY / nbPixels);
+	
+	return 1;
+}
+
 /*
  *	getNewCoord(image binaire,ancienne position) retourne nouvelle position.
  * Méthode envisagée : chercher la zone correspondant à l'objet traquée la plus proche du pixel donnée
  * => méthode non précise
  * \TODO
  */
-Pixel * getNewCoord(const IplImage* binaryImg, Pixel * oldPix)
+/* void setNewCoord(const IplImage* binaryImg, Cursor * oldPix)
 {
-	Pixel * c = oldPix;
+	Cursor * c = oldPix;
 	
 	//Vérif que l'image donnée soit binarisée
 	assert (binaryImg->nChannels == 1 );
+	//Quoiquonveut? trouver le centre de la zone blanche la plus proche de oldPix->points
+	//Commentkonfé?
+	// on fait la zone la plus proche? ca implique de déterminer des zones... <= tu m'avais parlé de composantes connexe?
 	
 	return c;
-}
+}*/
 
 
-Pixel * initNaiveColorTrack(IplImage * source, int x, int y)
+Cursor initNaiveColorTrack(IplImage * source, int x, int y)
 {
-	Pixel pixel;
+	Cursor pixel;
 	CvPoint points;
 	points.x = x;
 	points.y = y;
@@ -93,15 +129,16 @@ Pixel * initNaiveColorTrack(IplImage * source, int x, int y)
 	cvCvtColor(source, hsv, CV_BGR2HSV);
 	
 	CvScalar color = cvGet2D(hsv,x,y);
-	pixel.points = points;
+	pixel.coord = points;
 	pixel.color = color;
-	return naiveColorTrack(source,&pixel); 
+	naiveColorTrack(source,&pixel); 
+	return pixel;
 }
 
-
-Pixel * naiveColorTrack(IplImage * source, Pixel * clickedPix)
+// 
+int naiveColorTrack(IplImage * source, Cursor * clickedPix)
 {
-	return getNewCoord(binarisation(source, clickedPix), clickedPix);
+	return setNewCoord(binarisation(source, clickedPix), clickedPix);
 }
 
 int main(int argc, char* argv[])
@@ -111,12 +148,14 @@ int main(int argc, char* argv[])
 	cvShowImage("source", source);
 	if ( argv[2] == NULL ||  argv[3] == NULL)
 	{	
-		cout << "entrez des coordonnées correcte en parametre" << endl;
+		cout << "entrez des coordonnées correctes en parametres : \"x y \"." << endl;
 		return -1;
 	}
 	cvWaitKey(0);
-	Pixel * pix = initNaiveColorTrack(source, atoi(argv[2]),atoi(argv[3]));
-	cout << pix->points.x << "-" << pix->points.y << endl;
+	Cursor pix = initNaiveColorTrack(source, atoi(argv[2]),atoi(argv[3]));
+	cout << pix.coord.x << "-" << pix.coord.y << endl;
+	naiveColorTrack(source, &pix);
+	cout << pix.coord.x << "-" << pix.coord.y << endl;
 
 	cvDestroyAllWindows ();
 	cvReleaseImage (&source);
