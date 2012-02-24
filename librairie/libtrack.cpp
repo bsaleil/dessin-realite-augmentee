@@ -1,18 +1,19 @@
 #include "libtrack.hpp"
 using namespace std;
 
-// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldPixel'
+// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldPixel' (coord et coul)
 IplImage * binarisation(IplImage * source, Pixel *oldPix)
 {
 	IplImage *hsv;
 	hsv = cvCloneImage(source);
-	cvCvtColor(source, hsv, CV_BGR2HSV);
-	CvScalar pixel =  oldPix->color; // on affecte pixel à l'ancien pixel pour recuperer la couleur a traquer.
+	cvCvtColor(source, hsv, CV_BGR2HSV); // on travaille sur l'image en hsv => permet d'ignorer la luminosité
+	CvScalar pixel =  oldPix->color; // permet de récupérer la couleur à traquer.
 	
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	int v = (int)pixel.val[2];
-	int tolerance = 20;
+	int tolerance = 20; // à passer en paramètre d'ajustement??
+	
 	IplImage *mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	cvInRangeS(hsv, cvScalar(h - tolerance -1, s - tolerance, 0,0), cvScalar(h + tolerance -1, s + tolerance, 255,0), mask);
@@ -21,10 +22,10 @@ IplImage * binarisation(IplImage * source, Pixel *oldPix)
 	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
 	IplConvKernel *structurant;
 /*	structurants possibles : 
-		CV_SHAPE_RECT
-    		CV_SHAPE_CROSS
-    		CV_SHAPE_ELLIPSE
-   		CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
+		-CV_SHAPE_RECT
+    	-CV_SHAPE_CROSS
+    	-CV_SHAPE_ELLIPSE
+   		-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
 	structurant = cvCreateStructuringElementEx(5, 5, 2, 2, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
@@ -37,8 +38,8 @@ IplImage * binarisation(IplImage * source, Pixel *oldPix)
 }
 
 /**
- * A partir d'une image binaire, calcule et retourne le barycentre des pixels à 1 (blancs), cencés représenter
- * l'objet à traquer (aux erreurs de traitement près).
+ * A partir d'une image binaire, calcule et retourne sous forme d'un CvPoint* le barycentre des pixels à 1 (blancs),
+ *  cencés représenter l'objet à traquer (aux erreurs de traitement près).
  */
 CvPoint * getNewCoord(const IplImage* imgBin)
 {
@@ -65,6 +66,8 @@ CvPoint * getNewCoord(const IplImage* imgBin)
 
 /*
  *	getNewCoord(image binaire,ancienne position) retourne nouvelle position.
+ * Méthode envisagée : chercher la zone correspondant à l'objet traquée la plus proche du pixel donnée
+ * => méthode non précise
  * \TODO
  */
 Pixel * getNewCoord(const IplImage* binaryImg, Pixel * oldPix)
@@ -72,7 +75,7 @@ Pixel * getNewCoord(const IplImage* binaryImg, Pixel * oldPix)
 	Pixel * c = oldPix;
 	
 	//Vérif que l'image donnée soit binarisée
-	//assert (binaryImg->nChannels == 1 );
+	assert (binaryImg->nChannels == 1 );
 	
 	return c;
 }
@@ -85,13 +88,16 @@ Pixel * initNaiveColorTrack(IplImage * source, int x, int y)
 	points.x = x;
 	points.y = y;
 	IplImage * hsv;
+	
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV);
+	
 	CvScalar color = cvGet2D(hsv,x,y);
 	pixel.points = points;
 	pixel.color = color;
 	return naiveColorTrack(source,&pixel); 
 }
+
 
 Pixel * naiveColorTrack(IplImage * source, Pixel * clickedPix)
 {
@@ -106,9 +112,8 @@ int main(int argc, char* argv[])
 	cvWaitKey(0);
 	Pixel * pix = initNaiveColorTrack(source, 164,530);
 	cout << pix->points.x << "-" << pix->points.y << endl;
-  	/* Destruction de la fenêtre */
+
 	cvDestroyAllWindows ();
-	/* Libération de la mémoire */
 	cvReleaseImage (&source);
 	
 }

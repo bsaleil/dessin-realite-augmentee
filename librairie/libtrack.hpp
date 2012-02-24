@@ -9,7 +9,7 @@
 typedef struct Pixel
 {
     CvPoint points; // coordonnées
-    CvScalar color; // Couleur
+    CvScalar color; // couleur
     //éventuellement ajouter de nouveaux attributs par la suite.
 }Pixel; 
 
@@ -21,5 +21,8 @@ IplImage * binarisation(IplImage * source, Pixel * oldPix);
  */
 Pixel * getNewCoord(const IplImage* binaryImg, Pixel * oldPix);
 
+//
 Pixel * initNaiveColorTrack(IplImage * source, int x, int y);
+
+//
 Pixel * naiveColorTrack(IplImage * source, Pixel * oldPix);
