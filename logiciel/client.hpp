@@ -5,6 +5,9 @@
 #include <QMainWindow>
 #include <QAction>
 #include <QDebug>
+#include <QMdiArea>
+#include <QLabel>
+#include <QTimer>
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
@@ -25,15 +28,24 @@ class Client : public QMainWindow
 	
 	public :
 		Client();
+		
 	private:
 		Ui::Client *ui;
 		QActionGroup *actionGroup;
+		QMdiArea *mdiArea;
 		
 		WebcamManager *camManager;
 		WidgetWebcam *camWidget;
+		
+		void calibration();
+		int calibrationCounter;
+		QLabel *labelCounter;
+		QTimer *timerCounter;
+		int webcamActive; // Indice de la webcam utilisée
 	
 	private slots:
 		void slotStart();
+		void slotCounterChange();
 		
 };
 

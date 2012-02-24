@@ -3,6 +3,8 @@
 Client::Client() : ui(new Ui::Client)
 {
 	ui->setupUi(this);
+	mdiArea = new QMdiArea();
+	this->setCentralWidget(mdiArea);
 	
 	camManager = new WebcamManager();
 	camWidget = new WidgetWebcam();
@@ -35,26 +37,62 @@ void Client::slotStart()
 	// On désactive le choix des webcams
 	ui->menuWebcam->setEnabled(false);
 	
-	// On récupère une l'image de la webcam
+	// On récupère la webcam sélectionnée
 	QList<QAction*> listActionsWebcam = actionGroup->actions();
-	int webcam = 0;
+	webcamActive = 0;
 	int i=0;
 	for (i=0; i<listActionsWebcam.length(); i++)
 	{
 		if (listActionsWebcam[i]->isChecked())
-		{ webcam = listActionsWebcam[i]->text().remove("webcam").toInt(); }
+		{ webcamActive = listActionsWebcam[i]->text().remove("webcam").toInt(); }
 	}
 	
-	// Récupère l'image d'initialisation
-	IplImage *image;
-	image = camManager->getImageInit(webcam-1);
-	
-	// TODO : test pour voir l'image
-	cvSaveImage("image.png", image, NULL);
-	
-	// Appel widgetwebcam avec image
-	// int ret = camWidget->calibrate(image);
-	
-	// Traiter retour...
-	
+	// La numérotation commence à 0
+	webcamActive--;
+	calibration();
 }
+
+
+void Client::calibration()
+{
+	// Temps avant de prendre une image pour l'étalonnage
+	calibrationCounter = 5;
+	
+	// Affichage du compteur
+	labelCounter = new QLabel("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
+
+	labelCounter->setAlignment(Qt::AlignCenter); labelCounter->setFixedSize(640, 480);
+	mdiArea->addSubWindow(labelCounter);
+	labelCounter->show();
+	
+	// Démarrage du timer
+	timerCounter = new QTimer(this);
+	connect(timerCounter, SIGNAL(timeout()), this, SLOT(slotCounterChange()));
+	timerCounter->start(1000);
+}
+
+
+void Client::slotCounterChange()
+{
+	if (calibrationCounter > 0)
+	{
+		labelCounter->setText("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
+		labelCounter->update();
+		calibrationCounter--;
+	}
+	else
+	{
+		timerCounter->stop();
+			
+		// Récupère l'image d'initialisation
+		IplImage *image;
+		image = camManager->getImageInit(webcamActive);
+
+		// Appel widgetwebcam avec image
+		// TODO : retour.
+		camWidget->calibrate(image);
+	
+		// Traiter retour...
+	}
+}
+

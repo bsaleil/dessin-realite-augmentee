@@ -2,9 +2,12 @@
 #define HPP_WIDGETWEBCAM
 
 #include <iostream>
-#include <QWidget>
+#include <QImage>
+#include <QPixmap>
+#include <QLabel>
+#include <opencv/cv.h>
 
-class WidgetWebcam : public QWidget
+class WidgetWebcam : public QLabel
 {	
 	Q_OBJECT
 	
@@ -13,6 +16,10 @@ class WidgetWebcam : public QWidget
 		
 		// Pour initialiser la couleur à suivre
 		void mousePressEvent(QMouseEvent*);
+		void calibrate(IplImage*);
+
+		// Conversion d'une IplImage en QImage
+		QImage* iplToQimage(IplImage* image);
 };
 
 #endif
