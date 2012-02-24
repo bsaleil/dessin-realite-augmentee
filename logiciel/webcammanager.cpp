@@ -27,7 +27,6 @@ int WebcamManager::getNumberOfWebcams()
 
 IplImage* WebcamManager::getImageInit(int num)
 {
-	cout << num << endl;
 	CvCapture *capture;
 
 	// Ouverture de la webcam
@@ -47,4 +46,3 @@ IplImage* WebcamManager::getImageInit(int num)
 	// Retourne l'image capturée
 	return image;
 }
-

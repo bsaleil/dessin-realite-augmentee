@@ -2,14 +2,16 @@
 
 Client::Client() : ui(new Ui::Client)
 {
+	// Construction de l'interface
 	ui->setupUi(this);
 	mdiArea = new QMdiArea();
 	this->setCentralWidget(mdiArea);
 	
+	// Instanciation des classes utiles
 	camManager = new WebcamManager();
 	camWidget = new WidgetWebcam();
 	
-	// Pour lister les webcams
+	// Listage des webcams
 	actionGroup = new QActionGroup(ui->menuWebcam);
 	actionGroup->setExclusive(true);
 	
@@ -17,7 +19,7 @@ Client::Client() : ui(new Ui::Client)
 	int i=0;
 	for (i=0; i<nbCams; i++)
 	{
-		// TODO : lister le nom des webcams plutôt que le numéro (opencv)
+		// Ajout au menu
 		QAction *action = new QAction("webcam" + QString::number(i+1), ui->menuWebcam);
 		action->setCheckable(true);
 		actionGroup->addAction(action);
@@ -27,13 +29,11 @@ Client::Client() : ui(new Ui::Client)
 		
 		ui->menuWebcam->addAction(action);
 	}
-	
 	connect(ui->actionD_marrer,SIGNAL(triggered()),this,SLOT(slotStart()));
 }
 
 void Client::slotStart()
 {
-	std::cout << "debug" << std::endl;
 	// On désactive le choix des webcams
 	ui->menuWebcam->setEnabled(false);
 	
@@ -46,9 +46,10 @@ void Client::slotStart()
 		if (listActionsWebcam[i]->isChecked())
 		{ webcamActive = listActionsWebcam[i]->text().remove("webcam").toInt(); }
 	}
-	
 	// La numérotation commence à 0
 	webcamActive--;
+	
+	// On débute l'étalonnage
 	calibration();
 }
 
@@ -61,7 +62,7 @@ void Client::calibration()
 	// Affichage du compteur
 	camWidget = new WidgetWebcam("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
 	calibrationCounter--;
-
+	// Construction de l'interface
 	camWidget->setAlignment(Qt::AlignCenter); camWidget->setFixedSize(640, 480);
 	mdiArea->addSubWindow(camWidget);
 	camWidget->show();
@@ -75,25 +76,25 @@ void Client::calibration()
 
 void Client::slotCounterChange()
 {
+	// Si le compteur est > 0, on met à jour l'affichage
 	if (calibrationCounter > 0)
 	{
 		camWidget->setText("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
 		camWidget->update();
 		calibrationCounter--;
 	}
+	// Lorsqu'il atteint 0, on arrete le timer et on poursuit l'étalonnage
 	else
 	{
+		// Arrêt du timer
 		timerCounter->stop();
 			
 		// Récupère l'image d'initialisation
 		IplImage *image;
 		image = camManager->getImageInit(webcamActive);
 
-		// Appel widgetwebcam avec image
-		// TODO : retour.
+		// Appel WidgetWebcam avec l'image récupérée
 		camWidget->calibrate(image);
-	
-		// Traiter retour...
 	}
 }
 

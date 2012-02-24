@@ -2,17 +2,26 @@
 
 WidgetWebcam::WidgetWebcam()
 {
+	// De base, la classe n'est pas prête à l'étalonnage
+	readyToCalibrate = false;
 }
 
 WidgetWebcam::WidgetWebcam(QString text) : QLabel(text)
 {
+	// On appelle le constructeur de QLabel pour afficher le texte
+	// Puis on appelle le constructeur par défaut
+	WidgetWebcam();
 }
 
-// TODO : récupère la coordonée du clic, en déduit la couleur issue de l'image dessous
 void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 {
-
-
+	// Si la classe est prête à recevoir le clic d'étalonnage
+	if (readyToCalibrate)
+	{
+		// TODO
+		qDebug() << event->x() << "," << event->y();
+		// appelLibrairie(image,x,y);
+	}
 }
 
 void WidgetWebcam::calibrate(IplImage* iImage)
@@ -24,7 +33,8 @@ void WidgetWebcam::calibrate(IplImage* iImage)
 	this->setPixmap(QPixmap::fromImage(*qImage));
 	this->show();
 	
-	// TODO : étalonner
+	// Etalonnage maintenant possible
+	readyToCalibrate = true;
 }
 
 QImage* WidgetWebcam::iplToQimage(IplImage* image)
