@@ -4,6 +4,10 @@ WidgetWebcam::WidgetWebcam()
 {
 }
 
+WidgetWebcam::WidgetWebcam(QString text) : QLabel(text)
+{
+}
+
 // TODO : récupère la coordonée du clic, en déduit la couleur issue de l'image dessous
 void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 {

@@ -39,7 +39,6 @@ class Client : public QMainWindow
 		
 		void calibration();
 		int calibrationCounter;
-		QLabel *labelCounter;
 		QTimer *timerCounter;
 		int webcamActive; // Indice de la webcam utilisée
 	

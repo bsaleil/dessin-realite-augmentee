@@ -13,6 +13,7 @@ class WidgetWebcam : public QLabel
 	
 	public :
 		WidgetWebcam();
+		WidgetWebcam(QString); // QLabel avec texte
 		
 		// Pour initialiser la couleur à suivre
 		void mousePressEvent(QMouseEvent*);

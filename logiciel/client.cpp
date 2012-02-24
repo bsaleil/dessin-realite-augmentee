@@ -59,11 +59,12 @@ void Client::calibration()
 	calibrationCounter = 5;
 	
 	// Affichage du compteur
-	labelCounter = new QLabel("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
+	camWidget = new WidgetWebcam("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
+	calibrationCounter--;
 
-	labelCounter->setAlignment(Qt::AlignCenter); labelCounter->setFixedSize(640, 480);
-	mdiArea->addSubWindow(labelCounter);
-	labelCounter->show();
+	camWidget->setAlignment(Qt::AlignCenter); camWidget->setFixedSize(640, 480);
+	mdiArea->addSubWindow(camWidget);
+	camWidget->show();
 	
 	// Démarrage du timer
 	timerCounter = new QTimer(this);
@@ -76,8 +77,8 @@ void Client::slotCounterChange()
 {
 	if (calibrationCounter > 0)
 	{
-		labelCounter->setText("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
-		labelCounter->update();
+		camWidget->setText("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
+		camWidget->update();
 		calibrationCounter--;
 	}
 	else
