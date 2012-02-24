@@ -21,6 +21,7 @@
 #include "ui_client.h"
 #include "webcammanager.hpp"
 #include "widgetwebcam.hpp"
+#include "localdrawingboard.hpp"
 
 namespace Ui 
 {
@@ -45,6 +46,7 @@ class Client : public QMainWindow
 		
 		void calibration();		// Début de l'étalonnage
 		
+		DrawingBoard *drawingBoard;// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams
 		WidgetWebcam *camWidget;	// Widget d'affichage de la webcam
 	

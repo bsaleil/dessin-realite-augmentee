@@ -8,6 +8,7 @@ Client::Client() : ui(new Ui::Client)
 	this->setCentralWidget(mdiArea);
 	
 	// Instanciation des classes utiles
+	drawingBoard = new LocalDrawingBoard();
 	camManager = new WebcamManager();
 	camWidget = new WidgetWebcam();
 	
@@ -42,6 +43,8 @@ void Client::calibration()
 	calibrationCounter--;
 	// Construction de l'interface
 	camWidget->setAlignment(Qt::AlignCenter); camWidget->setFixedSize(640, 480);
+	mdiArea->addSubWindow(drawingBoard);
+	drawingBoard->show();
 	mdiArea->addSubWindow(camWidget);
 	camWidget->show();
 	

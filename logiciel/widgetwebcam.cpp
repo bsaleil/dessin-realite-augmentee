@@ -34,7 +34,9 @@ void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 		// TODO
 		qDebug() << event->x() << "," << event->y();
 		//Pixel * curseur = initNaiveColorTrack(image, x,y);
-		// Ensuite si tu veux acceder
+		//après : curseur = naiveColorTrack(image, curseur);
+		// Ensuite si tu veux acceder : curseur->points->x; (par exemple)
+		//dedans y'a aussi color->val[0] (le h de hsv, respectivement 1 pour s etc.)
 		
 	}
 }
