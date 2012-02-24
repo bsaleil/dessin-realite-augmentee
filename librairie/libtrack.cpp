@@ -109,8 +109,13 @@ int main(int argc, char* argv[])
 	IplImage* source = cvLoadImage(argv[1], CV_LOAD_IMAGE_UNCHANGED);
 	//cvNamedWindow("test", CV_WINDOW_AUTOSIZE);
 	cvShowImage("source", source);
+	if ( argv[2] == NULL ||  argv[3] == NULL)
+	{	
+		cout << "entrez des coordonnées correcte en parametre" << endl;
+		return -1;
+	}
 	cvWaitKey(0);
-	Pixel * pix = initNaiveColorTrack(source, 164,530);
+	Pixel * pix = initNaiveColorTrack(source, atoi(argv[2]),atoi(argv[3]));
 	cout << pix->points.x << "-" << pix->points.y << endl;
 
 	cvDestroyAllWindows ();
