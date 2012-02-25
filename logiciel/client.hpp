@@ -42,6 +42,7 @@ class Client : public QMainWindow
 		QTimer *timerCounter;		// Timer pour compteur avant étalonnage
 		
 		int calibrationCounter;	// Compteur avant image pour étalonnage
+		bool calibrationDone;		// Indique si l'étalonnage a été effectué
 		int webcamActive; 		// Indice de la webcam utilisée
 		
 		void calibration();		// Début de l'étalonnage
@@ -53,7 +54,7 @@ class Client : public QMainWindow
 	private slots:
 		void slotCounterChange();	// Slot appelé à chaque tick du compteur d'étalonnage
 		void slotStart();		// Slot appelé lors du clic sur démarrer
-		
+		void slotTimerCam();
 		
 };
 #endif

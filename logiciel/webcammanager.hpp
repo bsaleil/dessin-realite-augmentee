@@ -18,8 +18,16 @@ class WebcamManager
 	public :
 		WebcamManager();
 		
+		IplImage* getImage();		// Retourne une image du flux
 		IplImage* getImageInit(int);	// Retourne l'image donnée par la webcam
 		int getNumberOfWebcams();	// Retourne le nombre de webcams disponibles
+		// TODO : éventuellement un retour
+		void runWebcam();		// Ouvre la webcam
+		void stopWebcam();
+		
+	private :
+		int webcam;
+		CvCapture *capture;		// Capture de la webcam
 };
 
 #endif

@@ -16,6 +16,8 @@
 
 #include <opencv/cv.h>
 
+#include "../librairie/libtrack.hpp"
+
 class WidgetWebcam : public QLabel
 {	
 	Q_OBJECT
@@ -25,11 +27,17 @@ class WidgetWebcam : public QLabel
 		WidgetWebcam(QString); 			// QLabel avec texte à afficher
 		
 		void calibrate(IplImage*);		// Effectuer l'étalonnage sur l'image
+		bool calibrationDone();		// Retourne vrai si l'étalonnage est effectué
 		QImage* iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
+		void newImageFromWebcam(IplImage*);	// Reçoit une image depuis la webcam courante
+		
 	protected :
 		void mousePressEvent(QMouseEvent*);	// Récupération du clic pour désigner objet à suivre
+		void mouseMoveEvent(QMouseEvent*);
 	private :
+		bool calibrationIsDone;
 		bool readyToCalibrate; 		// Indique si prêt à recevoir le clic d'étalonnage
+		IplImage* imageInit; 			// Contient l'image pour l'initialisation
 };
 
 #endif

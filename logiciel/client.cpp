@@ -7,6 +7,8 @@ Client::Client() : ui(new Ui::Client)
 	mdiArea = new QMdiArea();
 	this->setCentralWidget(mdiArea);
 	
+	calibrationDone = false;
+	
 	// Instanciation des classes utiles
 	drawingBoard = new LocalDrawingBoard();
 	camManager = new WebcamManager();
@@ -36,7 +38,7 @@ Client::Client() : ui(new Ui::Client)
 void Client::calibration()
 {
 	// Temps avant de prendre une image pour l'étalonnage
-	calibrationCounter = 5;
+	calibrationCounter = 2;
 	
 	// Affichage du compteur
 	camWidget = new WidgetWebcam("Etalonnage dans : <br/><span style=\"font-size:100px;\">"+QString::number(calibrationCounter)+"</span>");
@@ -75,6 +77,11 @@ void Client::slotCounterChange()
 
 		// Appel WidgetWebcam avec l'image récupérée
 		camWidget->calibrate(image);
+			
+		// Timer d'affichage du flux de la caméra
+		QTimer* timerCam = new QTimer(this);
+		timerCam->start(40); // Pour 25 images par seconde
+		connect(timerCam, SIGNAL(timeout()), this, SLOT(slotTimerCam()));
 	}
 }
 
@@ -97,4 +104,20 @@ void Client::slotStart()
 	
 	// On débute l'étalonnage
 	calibration();
+}
+
+void Client::slotTimerCam()
+{
+	if(calibrationDone)
+	{
+		// On lit l'image
+		IplImage *image = camManager->getImage();
+		// On l'envoit au widget
+		camWidget->newImageFromWebcam(image);
+	}
+	else if(camWidget->calibrationDone())
+	{
+		calibrationDone = true;
+		camManager->runWebcam();
+	}
 }

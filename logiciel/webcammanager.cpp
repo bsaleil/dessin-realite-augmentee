@@ -4,23 +4,33 @@ WebcamManager::WebcamManager()
 {
 }
 
+IplImage* WebcamManager::getImage()
+{
+	return cvQueryFrame(capture);
+}
+
 IplImage* WebcamManager::getImageInit(int num)
 {
-	CvCapture *capture;
+	webcam = num;
+	CvCapture *captureInit;
 
 	// Ouverture de la webcam
-	capture = cvCaptureFromCAM(num);
-	if(!capture) 
+	captureInit = cvCaptureFromCAM(num);
+	if(!captureInit) 
 	{
 		cout << "Erreur à l'ouverture de la webcam" << endl;
 		return NULL;
 	}
-		
+	
+	// Pour permettre un calibrage de la lumière
+	for (int i=0; i<10;i++)
+		cvQueryFrame(captureInit);
+	
 	// Stocke l'image capturée
-	IplImage *image = cvCloneImage(cvQueryFrame(capture));
+	IplImage *image = cvCloneImage(cvQueryFrame(captureInit));
 	
 	// Libère la webcam
-	cvReleaseCapture(&capture);
+	cvReleaseCapture(&captureInit);
 
 	// Retourne l'image capturée
 	return image;
@@ -46,3 +56,14 @@ int WebcamManager::getNumberOfWebcams()
 	}
 	return nbCams;
 }
+
+void WebcamManager::runWebcam()
+{
+	capture = cvCaptureFromCAM(webcam);
+}
+
+void WebcamManager::stopWebcam()
+{
+	cvReleaseCapture(&capture);
+}
+
