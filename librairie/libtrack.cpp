@@ -150,7 +150,7 @@ IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
 //Met à jour la structure de suivi naif en fonction de l'image passée en param.
 int naiveColorTrack(IplImage * source, IplImage * cursor)
 {
-	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) mmh.
+	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) 
 	// Allocate Output Images:
 	int iwidth = source->width - cursor->width + 1;
 	int iheight = source->height - cursor->height + 1;
@@ -164,16 +164,12 @@ int naiveColorTrack(IplImage * source, IplImage * cursor)
 	CvPoint maxLoc, minLoc;
 	cvMinMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, NULL); 
 	
-	int x = maxLoc.x; //+ (source->width - cursor->width + 1);
-	int y= maxLoc.y; //+(source->height - cursor->height + 1);
-	int xSource;
-	int ySource;
+	int x = maxLoc.x ;
+	int y= maxLoc.y ;
 	
-	// recuperer x et y
-	
-	//mettre a l'echelle
-	xSource = (x* source->width) /iwidth;
-	ySource = (y* source->height) /iheight;
+	//recentrage
+	x += (int)(cursor->width /2);
+	y += (int)(cursor->height /2);
 	
 	cout << x << "--" << y << endl;
 	return 0;
