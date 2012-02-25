@@ -141,21 +141,23 @@ int naiveColorTrack(IplImage * source, Cursor * clickedPix)
 	return setNewCoord(binarisation(source, clickedPix), clickedPix);
 }
 
-//Initialise la structure de suivi malin
-IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
+
+//Initialise la structure de suivi par matching de forme&couleur
+IplImage initNaiveShapeTrack(IplImage * source, CvPoint a, CvPoint b)
 {
-	
+
 }
 
-//Met à jour la structure de suivi naif en fonction de l'image passée en param.
-int naiveColorTrack(IplImage * source, IplImage * cursor)
+
+//Met à jour la structure de suivi par forme.
+int naiveShapeTrack(IplImage * source, IplImage * cursor)
 {
 	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) 
 	// Allocate Output Images:
 	int iwidth = source->width - cursor->width + 1;
 	int iheight = source->height - cursor->height + 1;
 	result= cvCreateImage( cvSize( iwidth, iheight ), 32, 1 );
-	cvMatchTemplate(source, cursor ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED); // dernier param choisie au petit bonheur la chaaaaaance
+	cvMatchTemplate(source, cursor ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED);
 	cvNormalize( result, result, 1, 0, CV_MINMAX );
 	cvShowImage("result", result); 
 	cvWaitKey(0);
@@ -173,6 +175,19 @@ int naiveColorTrack(IplImage * source, IplImage * cursor)
 	
 	cout << x << "--" << y << endl;
 	return 0;
+}
+
+
+//Initialise la structure de suivi malin
+IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
+{
+	
+}
+
+//Met à jour la structure de suivi malin. //param a définir
+int smartSmartTrack(IplImage * source, IplImage * cursor)
+{
+
 }
 
 int main(int argc, char* argv[])
