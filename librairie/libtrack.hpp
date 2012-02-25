@@ -10,7 +10,8 @@ typedef struct Cursor
 {
     CvPoint coord; // coordonnées
     CvScalar color; // couleur
-    //éventuellement ajouter de nouveaux attributs par la suite.
+    IplImage structure; //?
+    //éventuellement ajouter de nouveaux attributs par la suite, genre un IplImage qui représente la forme de l'objet
 }Cursor; 
 
 // Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldCursor'
@@ -27,8 +28,14 @@ CvPoint * getNewCoord(const IplImage* binaryImg, Cursor * oldCursor);
  */
 int setNewCoord(const IplImage* binaryImg, Cursor * oldPix);
 
-//Initialise la structure de suivi
+//Initialise la structure de suivi naif
 Cursor initNaiveColorTrack(IplImage * source, int x, int y);
 
-//Met à jour la structure de suivi en fonction de l'image passée en param.
+//Met à jour la structure de suivi naif en fonction de l'image passée en param.
 int naiveColorTrack(IplImage * source, Cursor * oldPix);
+
+//Initialise la structure de suivi malin
+IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b);
+
+//Met à jour la structure de suivi naif en fonction de l'image passée en param.
+int naiveColorTrack(IplImage * source, IplImage * cursor);

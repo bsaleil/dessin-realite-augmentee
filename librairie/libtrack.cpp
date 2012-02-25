@@ -94,7 +94,7 @@ int setNewCoord(const IplImage* imgBin, Cursor * oldPix)
 	oldPix->coord.x = (int)(sommeX / nbPixels);
 	oldPix->coord.y = (int)(sommeY / nbPixels);
 	
-	return 1;
+	return 0;
 }
 
 /*
@@ -139,6 +139,18 @@ Cursor initNaiveColorTrack(IplImage * source, int x, int y)
 int naiveColorTrack(IplImage * source, Cursor * clickedPix)
 {
 	return setNewCoord(binarisation(source, clickedPix), clickedPix);
+}
+
+//Initialise la structure de suivi malin
+IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
+{
+
+}
+
+//Met à jour la structure de suivi naif en fonction de l'image passée en param.
+int naiveColorTrack(IplImage * source, IplImage * cursor)
+{
+
 }
 
 int main(int argc, char* argv[])
