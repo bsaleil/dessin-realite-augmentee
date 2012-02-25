@@ -144,13 +144,39 @@ int naiveColorTrack(IplImage * source, Cursor * clickedPix)
 //Initialise la structure de suivi malin
 IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
 {
-
+	
 }
 
 //Met à jour la structure de suivi naif en fonction de l'image passée en param.
 int naiveColorTrack(IplImage * source, IplImage * cursor)
 {
-
+	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) mmh.
+	// Allocate Output Images:
+	int iwidth = source->width - cursor->width + 1;
+	int iheight = source->height - cursor->height + 1;
+	result= cvCreateImage( cvSize( iwidth, iheight ), 32, 1 );
+	cvMatchTemplate(source, cursor ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED); // dernier param choisie au petit bonheur la chaaaaaance
+	cvNormalize( result, result, 1, 0, CV_MINMAX );
+	cvShowImage("result", result); 
+	cvWaitKey(0);
+	
+	double minVal, maxVal;
+	CvPoint maxLoc, minLoc;
+	cvMinMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, NULL); 
+	
+	int x = maxLoc.x; //+ (source->width - cursor->width + 1);
+	int y= maxLoc.y; //+(source->height - cursor->height + 1);
+	int xSource;
+	int ySource;
+	
+	// recuperer x et y
+	
+	//mettre a l'echelle
+	xSource = (x* source->width) /iwidth;
+	ySource = (y* source->height) /iheight;
+	
+	cout << x << "--" << y << endl;
+	return 0;
 }
 
 int main(int argc, char* argv[])
@@ -158,7 +184,8 @@ int main(int argc, char* argv[])
 	IplImage* source = cvLoadImage(argv[1], CV_LOAD_IMAGE_UNCHANGED);
 	//cvNamedWindow("test", CV_WINDOW_AUTOSIZE);
 	cvShowImage("source", source);
-	if ( argv[2] == NULL ||  argv[3] == NULL)
+	cvWaitKey(0);
+/*	if ( argv[2] == NULL ||  argv[3] == NULL)
 	{	
 		cout << "entrez des coordonnées correctes en parametres : \"x y \"." << endl;
 		return -1;
@@ -168,7 +195,11 @@ int main(int argc, char* argv[])
 	cout << pix.coord.x << "-" << pix.coord.y << endl;
 	naiveColorTrack(source, &pix);
 	cout << pix.coord.x << "-" << pix.coord.y << endl;
-
+*/
+	IplImage *detail = cvLoadImage(argv[2], CV_LOAD_IMAGE_UNCHANGED);
+	cvShowImage("detail", detail);
+	cvWaitKey(0);
+	naiveColorTrack(source, detail);
 	cvDestroyAllWindows ();
 	cvReleaseImage (&source);
 	
