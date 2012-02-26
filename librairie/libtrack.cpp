@@ -12,7 +12,7 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	int v = (int)pixel.val[2];
-	int tolerance = 20; // à passer en paramètre d'ajustement??
+	int tolerance = 10; // à passer en paramètre d'ajustement??
 	
 	IplImage *mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
@@ -31,8 +31,8 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
 	cvDilate(mask, mask, structurant, 1);
 	cvErode(mask, mask, structurant, 1);
 	
-	cvShowImage("binarisation", mask);
-	cvWaitKey (0);
+	//cvShowImage("binarisation", mask);
+	//cvWaitKey (0);
 	
 	return mask;
 }
@@ -128,7 +128,7 @@ Cursor initNaiveColorTrack(IplImage * source, int x, int y)
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV);
 	
-	CvScalar color = cvGet2D(hsv,x,y);
+	CvScalar color = cvGet2D(hsv,y,x);
 	pixel.coord = points;
 	pixel.color = color;
 	naiveColorTrack(source,&pixel); 
@@ -188,30 +188,4 @@ IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
 int smartSmartTrack(IplImage * source, IplImage * cursor)
 {
 
-}
-
-int main(int argc, char* argv[])
-{
-	IplImage* source = cvLoadImage(argv[1], CV_LOAD_IMAGE_UNCHANGED);
-	//cvNamedWindow("test", CV_WINDOW_AUTOSIZE);
-	cvShowImage("source", source);
-	cvWaitKey(0);
-/*	if ( argv[2] == NULL ||  argv[3] == NULL)
-	{	
-		cout << "entrez des coordonnées correctes en parametres : \"x y \"." << endl;
-		return -1;
-	}
-	cvWaitKey(0);
-	Cursor pix = initNaiveColorTrack(source, atoi(argv[2]),atoi(argv[3]));
-	cout << pix.coord.x << "-" << pix.coord.y << endl;
-	naiveColorTrack(source, &pix);
-	cout << pix.coord.x << "-" << pix.coord.y << endl;
-*/
-	IplImage *detail = cvLoadImage(argv[2], CV_LOAD_IMAGE_UNCHANGED);
-	cvShowImage("detail", detail);
-	cvWaitKey(0);
-	naiveColorTrack(source, detail);
-	cvDestroyAllWindows ();
-	cvReleaseImage (&source);
-	
 }

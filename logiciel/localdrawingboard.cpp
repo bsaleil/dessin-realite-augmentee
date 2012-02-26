@@ -8,10 +8,16 @@ LocalDrawingBoard::LocalDrawingBoard()
 	qDebug() << "drawing";
 }
 
-void LocalDrawingBoard::drawPoint(int x,int y)
+void LocalDrawingBoard::drawPoint(int x, int y)
 {
-	scene->addEllipse(x,y,5,5,QPen(),QBrush(Qt::SolidPattern));
+	scene->addEllipse(x, y, 5, 5, QPen(), QBrush(Qt::SolidPattern));
 }
+
+void LocalDrawingBoard::drawQPoint(QPoint p)
+{
+	scene->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
+}
+
 void LocalDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 {
 }

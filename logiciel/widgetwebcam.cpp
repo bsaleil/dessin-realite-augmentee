@@ -50,7 +50,7 @@ void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 		//dedans y'a aussi color->val[0] (le h de hsv, respectivement 1 pour s etc.)
 		
 		// Initialisation du tracking
-		Cursor cursor = initNaiveColorTrack(imageInit, event->x(), event->y());
+		cursor = initNaiveColorTrack(imageInit, event->x(), event->y());
 
 		calibrationIsDone = true;
 	}
@@ -99,10 +99,19 @@ QImage* WidgetWebcam::iplToQimage(IplImage* image)
 	return qimg;
 }
 
-void WidgetWebcam::newImageFromWebcam(IplImage* img)
+QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 {
-	this->setPixmap(QPixmap::fromImage(*iplToQimage(img)));
-	
-	// TODO : appeller la librairie pour le tracking
+	if (calibrationIsDone)
+	{
+		// Affichage de l'image capturée par la webcam
+		this->setPixmap(QPixmap::fromImage(*iplToQimage(img)));
+		
+		// TODO : appeller la librairie pour le tracking
+		int x = cursor.coord.x;
+		int y = cursor.coord.y;
+		naiveColorTrack(img, &cursor);
+		
+		return QPoint(cursor.coord.x, cursor.coord.y);
+	}
 }
 
