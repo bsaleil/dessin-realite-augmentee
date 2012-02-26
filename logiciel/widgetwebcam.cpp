@@ -92,10 +92,10 @@ QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 	if (calibrationIsDone)
 	{
 		IplImage *mirrorImage = cvCloneImage(img);
-		cvFlip(img,mirrorImage,1);
+		cvFlip(img, mirrorImage,1);
 		
 		// Affichage de l'image capturée par la webcam
-		this->setPixmap(QPixmap::fromImage(*iplToQimage(binarisation(mirrorImage,&cursor))));
+		this->setPixmap(QPixmap::fromImage(*iplToQimage(binarisation(mirrorImage, &cursor))));
 		
 		// Appel de la librairie pour le tracking
 		int x = cursor.coord.x;
@@ -105,4 +105,6 @@ QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 		return QPoint(cursor.coord.x, cursor.coord.y);
 	}
 }
+
+
 
