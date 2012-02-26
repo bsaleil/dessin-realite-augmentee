@@ -80,6 +80,9 @@
    <property name="text">
     <string>Démarrer</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
   </action>
   <action name="actionArr_ter">
    <property name="text">

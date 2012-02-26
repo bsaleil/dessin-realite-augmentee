@@ -17,10 +17,11 @@ WidgetWebcam::WidgetWebcam(QString text) : QLabel(text)
 void WidgetWebcam::calibrate(IplImage* iImage)
 {
 	// Sauvegarde de l'iplImage pour initialiser
-	imageInit = iImage;
+	imageInit = cvCloneImage(iImage);
+	cvFlip(iImage,imageInit,1);
 	
 	// Conversion
-	QImage *qImage = iplToQimage(iImage);
+	QImage *qImage = iplToQimage(imageInit);
 	
 	// Affichage
 	this->setPixmap(QPixmap::fromImage(*qImage));
@@ -103,13 +104,16 @@ QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 {
 	if (calibrationIsDone)
 	{
-		// Affichage de l'image capturée par la webcam
-		this->setPixmap(QPixmap::fromImage(*iplToQimage(img)));
+		IplImage *mirrorImage = cvCloneImage(img);
+		cvFlip(img,mirrorImage,1);
 		
-		// TODO : appeller la librairie pour le tracking
+		// Affichage de l'image capturée par la webcam
+		this->setPixmap(QPixmap::fromImage(*iplToQimage(binarisation(mirrorImage,&cursor))));
+		
+		// Appel de la librairie pour le tracking
 		int x = cursor.coord.x;
 		int y = cursor.coord.y;
-		naiveColorTrack(img, &cursor);
+		naiveColorTrack(mirrorImage, &cursor);
 		
 		return QPoint(cursor.coord.x, cursor.coord.y);
 	}

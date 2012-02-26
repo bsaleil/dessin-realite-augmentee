@@ -5,7 +5,7 @@ int main(int argc, char**argv)
 {
 	QApplication app(argc,argv);
 	Client c;
-	c.show();
+	c.showMaximized();
 	
 	return app.exec();
 }
