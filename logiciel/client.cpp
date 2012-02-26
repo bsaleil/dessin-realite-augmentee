@@ -112,8 +112,12 @@ void Client::slotTimerCam()
 	{
 		// On lit l'image
 		IplImage *image = camManager->getImage();
-		// On l'envoit au widget
-		camWidget->newImageFromWebcam(image);
+		
+		// On l'envoit au widget, on récupère le centre de l'objet tracké
+		QPoint p = camWidget->newImageFromWebcam(image);
+		
+		// Dessin du point sur le tableau
+		drawingBoard->drawQPoint(p);
 	}
 	else if(camWidget->calibrationDone())
 	{

@@ -34,7 +34,7 @@ class Client : public QMainWindow
 	
 	public :
 		Client();
-		
+
 	private:
 		Ui::Client *ui;			// Interface graphique
 		QActionGroup *actionGroup;	// Groupe d'action pour les webcams
