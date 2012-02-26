@@ -33,26 +33,13 @@ void WidgetWebcam::calibrate(IplImage* iImage)
 
 bool WidgetWebcam::calibrationDone() { return calibrationIsDone; }
 
-void WidgetWebcam::mouseMoveEvent(QMouseEvent * event)
-{
-	qDebug() << "debug(" << event->x() << "," << event->y() << ")";
-}
-
 void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 {
 	// Si la classe est prête à recevoir le clic d'étalonnage
-	if (readyToCalibrate)
+	if (readyToCalibrate && !calibrationIsDone)
 	{
-		// TODO
-		//qDebug() << event->x() << "," << event->y();
-		//Pixel * curseur = initNaiveColorTrack(image, x,y);
-		//après : curseur = naiveColorTrack(image, curseur);
-		// Ensuite si tu veux acceder : curseur->points->x; (par exemple)
-		//dedans y'a aussi color->val[0] (le h de hsv, respectivement 1 pour s etc.)
-		
 		// Initialisation du tracking
 		cursor = initNaiveColorTrack(imageInit, event->x(), event->y());
-
 		calibrationIsDone = true;
 	}
 }

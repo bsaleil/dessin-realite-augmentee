@@ -33,7 +33,6 @@ class WidgetWebcam : public QLabel
 		
 	protected :
 		void mousePressEvent(QMouseEvent*);	// Récupération du clic pour désigner objet à suivre
-		void mouseMoveEvent(QMouseEvent*);	// Récupération du mouvement de souris pour debug
 	private :
 		bool calibrationIsDone;		// Indique si l'étalonnage est effectué
 		bool readyToCalibrate; 		// Indique si prêt à recevoir le clic d'étalonnage
