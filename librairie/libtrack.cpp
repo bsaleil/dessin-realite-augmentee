@@ -33,7 +33,8 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
 	
 	//cvShowImage("binarisation", mask);
 	//cvWaitKey (0);
-	
+	cvReleaseImage(&hsv);
+	//cvReleaseImage(&source);
 	return mask;
 }
 /**
@@ -129,6 +130,7 @@ Cursor initNaiveColorTrack(IplImage * source, int x, int y)
 	cvCvtColor(source, hsv, CV_BGR2HSV);
 	
 	CvScalar color = cvGet2D(hsv,y,x);
+	cvReleaseImage(&hsv);
 	pixel.coord = points;
 	pixel.color = color;
 	naiveColorTrack(source,&pixel); 
@@ -165,7 +167,7 @@ int naiveShapeTrack(IplImage * source, IplImage * cursor)
 	double minVal, maxVal;
 	CvPoint maxLoc, minLoc;
 	cvMinMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, NULL); 
-	
+	cvReleaseImage(&result);
 	int x = maxLoc.x ;
 	int y= maxLoc.y ;
 	
