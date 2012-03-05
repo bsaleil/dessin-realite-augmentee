@@ -77,6 +77,7 @@ void Client::slotCounterChange()
 
 		// Appel WidgetWebcam avec l'image récupérée
 		camWidget->calibrate(image);
+		cvReleaseImage(&image);
 			
 		// Timer d'affichage du flux de la caméra
 		QTimer* timerCam = new QTimer(this);
@@ -111,13 +112,15 @@ void Client::slotTimerCam()
 	if(calibrationDone)
 	{
 		// On lit l'image
-		IplImage *image = camManager->getImage();
+		IplImage * image = cvCloneImage(camManager->getImage());
 		
 		// On l'envoit au widget, on récupère le centre de l'objet tracké
 		QPoint p = camWidget->newImageFromWebcam(image);
 		
 		// Dessin du point sur le tableau
 		drawingBoard->drawQPoint(p);
+
+		cvReleaseImage(&image); //ça segmente falt la dessus, mais le faudrait pourtant, y'a fuite de mémoire là non?
 	}
 	else if(camWidget->calibrationDone())
 	{

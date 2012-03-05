@@ -12,7 +12,7 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	int v = (int)pixel.val[2];
-	int tolerance = 10; // à passer en paramètre d'ajustement??
+	int tolerance = 14; // à passer en paramètre d'ajustement??
 	
 	IplImage *mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
@@ -27,9 +27,10 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
     	-CV_SHAPE_ELLIPSE
    	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
-	structurant = cvCreateStructuringElementEx(5, 5, 2, 2, CV_SHAPE_ELLIPSE, NULL); // la le 5,5 représente le structurant (kernel) utilisé pour l'ouverture
-	cvDilate(mask, mask, structurant, 1);
+	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // la le 5,5 représente le structurant (kernel) utilisé pour l'ouverture
 	cvErode(mask, mask, structurant, 1);
+	structurant = cvCreateStructuringElementEx(4, 4, 1, 1, CV_SHAPE_ELLIPSE, NULL);
+	cvDilate(mask, mask, structurant, 1);
 	
 	//cvShowImage("binarisation", mask);
 	//cvWaitKey (0);
@@ -64,7 +65,6 @@ CvPoint * getNewCoord(const IplImage* imgBin, Cursor * oldPix)
 	CvPoint * bary;
 	bary->x = (int)(sommeX / nbPixels);
 	bary->y = (int)(sommeY / nbPixels);
-	
 	return bary;
 }
 
@@ -91,9 +91,11 @@ int setNewCoord(const IplImage* imgBin, Cursor * oldPix)
 				sommeY += y;
 				nbPixels++;
 			}
-
-	oldPix->coord.x = (int)(sommeX / nbPixels);
-	oldPix->coord.y = (int)(sommeY / nbPixels);
+	if (nbPixels > 0)
+	{
+		oldPix->coord.x = (int)(sommeX / nbPixels);
+		oldPix->coord.y = (int)(sommeY / nbPixels);
+	}
 	
 	return 0;
 }
@@ -140,7 +142,9 @@ Cursor initNaiveColorTrack(IplImage * source, int x, int y)
 // 
 int naiveColorTrack(IplImage * source, Cursor * clickedPix)
 {
+
 	return setNewCoord(binarisation(source, clickedPix), clickedPix);
+
 }
 
 

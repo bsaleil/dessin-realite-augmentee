@@ -19,10 +19,9 @@ void WidgetWebcam::calibrate(IplImage* iImage)
 	// Sauvegarde de l'iplImage pour initialiser
 	imageInit = cvCloneImage(iImage);
 	cvFlip(iImage,imageInit,1);
-	
 	// Conversion
 	QImage *qImage = iplToQimage(imageInit);
-	
+
 	// Affichage
 	this->setPixmap(QPixmap::fromImage(*qImage));
 	this->show();
@@ -101,7 +100,7 @@ QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 		int x = cursor.coord.x;
 		int y = cursor.coord.y;
 		naiveColorTrack(mirrorImage, &cursor);
-		
+		cvReleaseImage(&mirrorImage); // on libère l'image (fuite de mémoire!)
 		return QPoint(cursor.coord.x, cursor.coord.y);
 	}
 }
