@@ -111,16 +111,9 @@ void Client::slotTimerCam()
 {
 	if(calibrationDone)
 	{
-		// On lit l'image
-		IplImage * image = cvCloneImage(camManager->getImage());
-		
-		// On l'envoit au widget, on récupère le centre de l'objet tracké
-		QPoint p = camWidget->newImageFromWebcam(image);
-		
-		// Dessin du point sur le tableau
+		// On récupère le point, et on le dessine sur le tableau.
+		QPoint p = camWidget->newImageFromWebcam(camManager->getImage());
 		drawingBoard->drawQPoint(p);
-
-		cvReleaseImage(&image); //ça segmente falt la dessus, mais le faudrait pourtant, y'a fuite de mémoire là non?
 	}
 	else if(camWidget->calibrationDone())
 	{

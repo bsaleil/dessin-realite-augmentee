@@ -6,6 +6,7 @@ WebcamManager::WebcamManager()
 
 IplImage* WebcamManager::getImage()
 {
+	// Capture d'une image de la webcam
 	return cvQueryFrame(capture);
 }
 

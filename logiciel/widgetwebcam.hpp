@@ -28,7 +28,7 @@ class WidgetWebcam : public QLabel
 		
 		void calibrate(IplImage*);		// Effectuer l'étalonnage sur l'image
 		bool calibrationDone();		// Retourne vrai si l'étalonnage est effectué
-		QImage* iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
+		QImage iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
 		QPoint newImageFromWebcam(IplImage*);	// Reçoit une image depuis la webcam courante
 		
 	protected :
@@ -38,6 +38,7 @@ class WidgetWebcam : public QLabel
 		bool readyToCalibrate; 		// Indique si prêt à recevoir le clic d'étalonnage
 		IplImage* imageInit;			// Contient l'image pour l'initialisation
 		Cursor cursor;				// Structure retournée lors du tracking par couleur
+		QPixmap pixmapCourante;
 };
 
 #endif

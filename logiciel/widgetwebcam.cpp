@@ -2,6 +2,8 @@
 
 WidgetWebcam::WidgetWebcam()
 {
+	this->setPixmap(pixmapCourante);
+	
 	// De base, la classe n'est pas prête à l'étalonnage
 	readyToCalibrate = false;
 	calibrationIsDone = false;
@@ -20,10 +22,10 @@ void WidgetWebcam::calibrate(IplImage* iImage)
 	imageInit = cvCloneImage(iImage);
 	cvFlip(iImage,imageInit,1);
 	// Conversion
-	QImage *qImage = iplToQimage(imageInit);
+	QImage qImage = iplToQimage(imageInit);
 
 	// Affichage
-	this->setPixmap(QPixmap::fromImage(*qImage));
+	this->setPixmap(QPixmap::fromImage(qImage));
 	this->show();
 	
 	// Etalonnage maintenant possible
@@ -43,12 +45,12 @@ void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 	}
 }
 
-QImage* WidgetWebcam::iplToQimage(IplImage* image)
+QImage WidgetWebcam::iplToQimage(IplImage* image)
 {
 	int h = image->height;
 	int w = image->width;
 	int channels = image->nChannels;
-	QImage *qimg = new QImage(w, h, QImage::Format_ARGB32);
+	QImage qimg(w, h, QImage::Format_ARGB32);
 	char *data = image->imageData;
 	
 	for (int y = 0; y < h; y++, data += image->widthStep)
@@ -75,11 +77,11 @@ QImage* WidgetWebcam::iplToQimage(IplImage* image)
 			if (channels == 4)
 			{
 				a = data[x * channels + 3];
-				qimg->setPixel(x, y, qRgba(r, g, b, a));
+				qimg.setPixel(x, y, qRgba(r, g, b, a));
 			}
 			else
 			{
-				qimg->setPixel(x, y, qRgb(r, g, b));
+				qimg.setPixel(x, y, qRgb(r, g, b));
 			}
 		}
 	}
@@ -90,19 +92,25 @@ QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 {
 	if (calibrationIsDone)
 	{
+		// Flip de l'image pour améliorer l'IHM
 		IplImage *mirrorImage = cvCloneImage(img);
-		cvFlip(img, mirrorImage,1);
+		cvFlip(mirrorImage, mirrorImage,1);
 		
-		// Affichage de l'image capturée par la webcam
-		this->setPixmap(QPixmap::fromImage(*iplToQimage(binarisation(mirrorImage, &cursor))));
+		// Affichage de l'image sur le widget Qt
+		IplImage * imageBinarise = binarisation(mirrorImage,&cursor);
+		QImage qim = iplToQimage(imageBinarise);
+		this->setPixmap(QPixmap::fromImage(qim));
 		
 		// Appel de la librairie pour le tracking
-		int x = cursor.coord.x;
-		int y = cursor.coord.y;
 		naiveColorTrack(mirrorImage, &cursor);
-		cvReleaseImage(&mirrorImage); // on libère l'image (fuite de mémoire!)
+		
+		// Libération
+		cvReleaseImage(&mirrorImage);
+		cvReleaseImage(&imageBinarise);
+		
 		return QPoint(cursor.coord.x, cursor.coord.y);
 	}
+	return QPoint();
 }
 
 

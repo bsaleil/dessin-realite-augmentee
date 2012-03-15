@@ -11,10 +11,10 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
 	
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
-	int v = (int)pixel.val[2];
+	//int v = (int)pixel.val[2];
 	int tolerance = 14; // à passer en paramètre d'ajustement??
 	
-	IplImage *mask = NULL;
+	IplImage * mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	cvInRangeS(hsv, cvScalar(h - tolerance -1, s - tolerance, 0,0), cvScalar(h + tolerance -1, s + tolerance, 255,0), mask);
 	
@@ -37,35 +37,6 @@ IplImage * binarisation(IplImage * source, Cursor *oldPix)
 	cvReleaseImage(&hsv);
 	//cvReleaseImage(&source);
 	return mask;
-}
-/**
- * A partir d'une image binaire, calcule et retourne sous forme d'un CvPoint* le barycentre des pixels à 1 (blancs),
- *  cencés représenter l'objet à traquer (aux erreurs de traitement près).
- */
-CvPoint * getNewCoord(const IplImage* imgBin, Cursor * oldPix)
-{
-	if(imgBin->nChannels != 1 )
-	{
-		perror("Invalid IplImage number of channels.");
-		assert(imgBin->nChannels != 1);
-	}
-	
-	int sommeX = 0;
-	int sommeY = 0;
-	int nbPixels = 0;
-	for(int x = 0; x < imgBin->width; x++)
-		for(int y = 0; y < imgBin->height; y++)
-			if(((uchar *)(imgBin->imageData + y*imgBin->widthStep))[x] == 255)
-			{
-				sommeX += x;
-				sommeY += y;
-				nbPixels++;
-			}
-			
-	CvPoint * bary;
-	bary->x = (int)(sommeX / nbPixels);
-	bary->y = (int)(sommeY / nbPixels);
-	return bary;
 }
 
 /*Met à jour le Cursor représentant le barycentre du curseur à tracker.
@@ -100,27 +71,13 @@ int setNewCoord(const IplImage* imgBin, Cursor * oldPix)
 	return 0;
 }
 
+
 /*
- *	getNewCoord(image binaire,ancienne position) retourne nouvelle position.
- * Méthode envisagée : chercher la zone correspondant à l'objet traquée la plus proche du pixel donnée
- * => méthode non précise
- * \TODO
- */
-/* void setNewCoord(const IplImage* binaryImg, Cursor * oldPix)
-{
-	Cursor * c = oldPix;
-	
-	//Vérif que l'image donnée soit binarisée
-	assert (binaryImg->nChannels == 1 );
-	//Quoiquonveut? trouver le centre de la zone blanche la plus proche de oldPix->points
-	//Commentkonfé?
-	// on fait la zone la plus proche? ca implique de déterminer des zones... <= tu m'avais parlé de composantes connexe?
-	
-	return c;
-}*/
-
-
-Cursor initNaiveColorTrack(IplImage * source, int x, int y)
+Initialise un track naif par couleur
+Entrée: Une image, la zone du curseur
+Retour: La structure representant le curseur
+*/
+Cursor initNaiveColorTrack(IplImage * source, int x, int y) //TODO passer en ZONE au lieu d'en point
 {
 	Cursor pixel;
 	CvPoint points;
@@ -139,23 +96,23 @@ Cursor initNaiveColorTrack(IplImage * source, int x, int y)
 	return pixel;
 }
 
-// 
+/*
+Track la nouvelle position du curseur sur l'image par couleur par moyenne de pixel
+Entrée: Une image et un curseur
+Retour: une int (et maj le curseur)
+*/
 int naiveColorTrack(IplImage * source, Cursor * clickedPix)
 {
-
-	return setNewCoord(binarisation(source, clickedPix), clickedPix);
-
+	IplImage *mask = binarisation(source, clickedPix);
+	int res = setNewCoord(mask, clickedPix);
+	cvReleaseImage(&mask);
+	return res;
 }
-
-
-//Initialise la structure de suivi par matching de forme&couleur
-IplImage initNaiveShapeTrack(IplImage * source, CvPoint a, CvPoint b)
-{
-
-}
-
-
-//Met à jour la structure de suivi par forme.
+/*
+Track la nouvelle position du curseur sur l'image par forme
+Entrée: Une image et un curseur
+Retour: une int (et maj le curseur)
+*/
 int naiveShapeTrack(IplImage * source, IplImage * cursor)
 {
 	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) 
@@ -181,17 +138,4 @@ int naiveShapeTrack(IplImage * source, IplImage * cursor)
 	
 	cout << x << "--" << y << endl;
 	return 0;
-}
-
-
-//Initialise la structure de suivi malin
-IplImage initSmartTrack(IplImage * source, CvPoint a, CvPoint b)
-{
-	
-}
-
-//Met à jour la structure de suivi malin. //param a définir
-int smartSmartTrack(IplImage * source, IplImage * cursor)
-{
-
 }
