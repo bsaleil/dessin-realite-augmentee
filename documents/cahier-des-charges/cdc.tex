@@ -24,11 +24,6 @@
 	}
 \fi
 
-% Commentaires de début de fichiers destinés aux autres.
-% Je propose d'intégrer le cahier des charges au rapport final, en virant la conclusion, en ajoutant une partie développement etc... ?
-% (julien : ou alors le mettre carrément tel quel en annexe, et s'en servir pour le rapport final <---- Kevin agree.)
-% (geo : ouais, assez d'accord avec julien)
-
 \begin{document}
 	% Page de titre
 	\maketitle
@@ -66,7 +61,6 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 					\item{Ajout d'algorithmes de reconnaissance et de nouvelles méthodes de reconnaissance pour la librairie, et amélioration du module réseau (définition du protocole, application serveur fonctionnelle, gestion des paquets, etc...)}
 					\item{Optimisation des algorithmes de trace et optimisation des méthodes. Ajout de l'interface gestuelle et personnalisation du dessin.}
 					\item{Finalisation du code, préparation d'une utilisation en production. Compilation dynamique de la librairie, création de paquets linux (.deb,...) compilation sur plusieurs systèmes d'exploitation.}
-				% TODO : Liste organisée
 				\end{itemize}
 	\section{Contexte}
 		\subsection{Faisabilité}
@@ -74,8 +68,8 @@ pour rapidement dessiner un schéma et l'exporter et le sauvegarder ensuite. \\
 Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. Nous allons nous concentrer notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposons d'aucun financement et n'allons utiliser que des outils gratuits. \\
 Comme dit précédemment, le projet est décomposé en deux parties majeures que sont l'application et la librairie (dont les contenus seront détaillés dans des sections qui leur sont propres).
 			\paragraph{Application :\\}
-Pour toute la partie logiciel, 
-==> listing des besoins, chose à faire et de quelle manière nous pouvons y répondre/les satisfaires.
+L'application doit exploiter le plus efficacement possible la librairie de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
+Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
 			\paragraph{Librairie :\\}
 				Cette partie du développement a pour objectif de fournir un ensemble de fonctions permettant la reconnaissance et le traçage d'un objet à partir d'un flux vidéo, ou plus généralement d'une suite d'images. Un certain nombre de librairies existantes proposent des moyens d'accéder à cet objectif, notamment grâce à des outils de reconnaissance de forme, de suivi de modèle ou d'évalutation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointes.
 		\subsection{Existant}
@@ -85,17 +79,20 @@ Pour toute la partie logiciel,
 				\item Exemples issus de thèses et de projets de recherche (techniques de programmations).
 			\end{itemize}
 		\subsection{Ressources}
+		Nous utiliserons en première partie du projet, des articles de recherches essentiellement pour découvrir et comprendre différentes problématiques liées à l'IHM naturelle (mouvements du corps) ainsi que des recherches autour de l'imagerie numérique. \\
+		%TODO : Remplir ces lignes 
 			\begin{itemize}
 				\item{site web machin}
 				\item{thèse truc}
 				\item{article bidule}
 			\end{itemize}
-				
+	\newpage
 	\section{Analyse et conception}
 		\subsection{Organisation}
 		Le projet se déroulera autour de trois dates clés:
 			\begin{itemize}
-				\item 2 Mars 2012 : Bilan de mi-parcours.  
+				\item 2 Mars 2012 : Bilan de mi-parcours.
+				\item mi-avril 2012 : Pré-soutenance au LIRMM.
 				\item 27 Avril 2012 : Bilan de pré-soutenance.
 				\item 14 Mai 2012 : Rendu complet du projet.
 			\end{itemize}
@@ -103,8 +100,10 @@ Pour toute la partie logiciel,
 		
 			Détails des étapes, répartition du travail, outils de synchronisations/communications ...
 		\subsection{Planning}
+		% TODO 
 			Rétro planning gantt commenté.
 		\subsection{UML}
+		% TODO
 			Analyse avec diagramme de classe, use case, séquence, etat?
 \newpage
 	\section{Librairie}
