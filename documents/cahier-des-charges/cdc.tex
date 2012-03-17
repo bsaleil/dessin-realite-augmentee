@@ -79,14 +79,42 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\item Exemples issus de thèses et de projets de recherche (techniques de programmations).
 			\end{itemize}
 		\subsection{Ressources}
-		Nous utiliserons en première partie du projet, des articles de recherches essentiellement pour découvrir et comprendre différentes problématiques liées à l'IHM naturelle (mouvements du corps) ainsi que des recherches autour de l'imagerie numérique. \\
-		%TODO : Remplir ces lignes 
+		Nous utiliserons en première partie du projet essentiellement des articles de recherches pour découvrir et comprendre différentes problématiques liées à l'IHM naturelle (mouvements du corps) ainsi que des recherches autour de l'imagerie numérique. \\ Ensuite nous utiliserons des ressources plus concrètes comme des livres de programmation (OpenCV, documentation).
+		
+		\paragraph{Documents de recherches}
 			\begin{itemize}
-				\item{site web machin}
-				\item{thèse truc}
-				\item{article bidule}
+			\item \it{Real-time viewpoint-invariant hand localization with cluttered backgrounds} \\
+			Enver Sangineto, Marco Cupelli.
+			\begin{verbatim}
+			http://www.sciencedirect.com/science/article/pii/S026288561100120X
+			\end{verbatim}
+			\item \it{Vision par ordinateur pour l’interaction homme-machine fortement couplée}\\
+			Thèse de françois Bérard sur un sujet proche avec beaucoup d'informations
+			\begin{verbatim}
+			http://hal.inria.fr/docs/00/04/61/56/PDF/tel-00004804.pdf
+			\end{verbatim}
+			\item \it{Defining Search Areas to Localize Limbs in Body Motion Analysis} \\
+			Thomas Foures, Philippe Joly.
+			\item \it{Indexation de la vidéo par le costume.}\\ 
+			Thèse de doctorat, Université Paul Sabatier Toulouse, Gaël Jaffré.
+			\begin{verbatim}
+			http://www.irit.fr/recherches/SAMOVA/pageautomatic-character-labelling-in-videos.html
+			\end{verbatim}
 			\end{itemize}
-	\newpage
+			
+		\paragraph{Documents de programmation}
+			\begin{itemize}
+			\item \it{Vision par ordinateur : Outils fondamentaux} \\
+			Radu HORAUD (CNRS) et Olivier MONGA (INRIA)
+			\begin{verbatim}
+			http://hal.archives-ouvertes.fr/docs/00/59/00/49/PDF/VO-HoraudMonga.pdf
+			\end{verbatim}
+			\item Learning Open CV \\
+			 Gary Bradski et Adrian Kaehler
+			\item Open Cv 2 Computer Vision Application Programming Cookbook\\
+			Robert Laganière
+			\end{itemize}
+			
 	\section{Analyse et conception}
 		\subsection{Organisation}
 		Le projet se déroulera autour de trois dates clés:
@@ -98,13 +126,29 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 			\end{itemize}
 			Nous devons donc fixer nos objectifs en fonction de celles-ci, en essayer de réaliser la première étape, le prototype fonctionnel, aux alentours de la première date.
 		
-			Détails des étapes, répartition du travail, outils de synchronisations/communications ...
+			Nous utiliserons donc un planning, pour avoir une vision globale des grandes lignes du projet, et des réunions fréquentes pour se synchroniser. 
 		\subsection{Planning}
-		% TODO 
-			Rétro planning gantt commenté.
+			\includegraphics[scale=0.3]{retroplanning.pdf}
+			\begin{center}
+			\it{rétro-planning}
+			\end{center}
+			
+		Deux équipes tranvailleront en parallèle  : une pour la librairie de reconnaissance, et l'autre à la partie logicielle et interface homme-machine. \\
+		Une première phase de conception, pour faire l'UML et bien penser l'application sera importante en temps. 
+		La conception doit permettre d'ajouter des modules très facilement (comme les fonctionnalités réseaux, la personnalisation des formes, couleurs...). \\
+		Ensuite le développement devra être incrémental et avoir des étapes avec des résultats visibles et exploitables avant d'ajouter d'autres fonctionnalités. \\ 
 		\subsection{UML}
-		% TODO
-			Analyse avec diagramme de classe, use case, séquence, etat?
+		% TODO : à finir
+		Tout d'abord nous devons évaluer les fonctionnalités finales de l'application et ne pas les perdre de vue, elles sont donc décrites dans les cas d'utilisations suivants. \\
+			\begin{center}
+			\includegraphics[scale=0.7]{../uml/Accueil.png} \\
+			\it{Cas d'utilisation de l'accueil de l'application}
+			\end{center}
+			
+			\begin{center}
+			\includegraphics[scale=0.7]{../uml/Dessin.png} \\
+			\it{Cas d'utilisation de l'accueil de l'application}
+			\end{center}
 \newpage
 	\section{Librairie}
 		\subsection{Fonctionnalités}
@@ -148,6 +192,7 @@ et d'écrire sur le tableau virtuel avec une interface Homme-Machine naturelle. 
 		\end{itemize}
 
 		\subsection{Architecture}
+		% TODO : présenter l'architecture, avec diagramme des "boîtes"
 			Architecture de l'application
 		\subsection{Outils}
 			Nous utiliserons des librairies pour accélérer le développement de l'application, et donc d'obtenir plus 
@@ -168,8 +213,10 @@ OpenCV nous servira également pour accéder à la webcam (ou aux webcams). De p
 porter l'application sous ces systèmes. \\ 
 
 		\subsection{Étapes}
+		% TODO 
 			Détail des étapes avec fonctionnalités pour chacune d'elle.
-	\section{Conclusion}	
+	\section{Conclusion}
+	% TODO 	
 		Conclusion (1 ou 2 paragraphe ?)
 	
 \end{document}
