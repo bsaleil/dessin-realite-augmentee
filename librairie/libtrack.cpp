@@ -1,8 +1,47 @@
 #include "libtrack.hpp"
 using namespace std;
 
+Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag)
+{
+	if (flag == TRACK_COLOR) 
+	{
+		return initColorTrack(source, A, B);e
+	}
+
+	else if (flag == TRACK_SHAPE)
+	{
+		return 0; // TODO initShapeTrack
+	}
+}
+
+/*
+Initialise un track par couleur
+Entrée: Une image, la zone du curseur
+Retour: La structure representant le curseur
+*/
+Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
+{
+	Cursor * cursor;
+	CvPoint points;
+	cursor->cornerA= A;
+	cursor->cornerB= B;
+	//TODO calcul du centre en fonction de A et de B 
+	cursor->center = center(A,B);
+	IplImage * hsv;
+	hsv = cvCloneImage(source);
+	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
+									
+	//TODO calcul moyenne de couleur grace a A et B et hsv;
+	CvScalar color = colorAverage(hsv,A,B);
+	cvReleaseImage(&hsv);
+	cursor->center = points;
+	cursor->color = color;
+	colorTrack(source,cursor); 
+	return cursor;
+}
+
 // Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldCursor' (coord et coul)
-IplImage * binarisation(IplImage *source, Cursor *oldPix)
+int binarisation(IplImage * source, Cursor *oldPix)
 {
 	IplImage *hsv;
 	hsv = cvCloneImage(source);
@@ -12,13 +51,13 @@ IplImage * binarisation(IplImage *source, Cursor *oldPix)
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	//int v = (int)pixel.val[2];
-	int tolerance = oldPix->threshold; //TODO besoin de caster? chartoint ou quoi?
+	int tolerance = oldPix->threshold;
 	
 	IplImage * mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	cvInRangeS(hsv, cvScalar(h - tolerance -1, s - tolerance, 0,0), cvScalar(h + tolerance -1, s + tolerance, 255,0), mask);
 	
-	//Il convient ensuite d'appliquer une fermeture (érosion puis dilatation) à notre image, 
+	//Il convient ensuite d'appliquer une ouverture (dilatation puis érosion) à notre image, 
 	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
 	IplConvKernel *structurant;
 /*	structurants possibles : 
@@ -27,25 +66,23 @@ IplImage * binarisation(IplImage *source, Cursor *oldPix)
     	-CV_SHAPE_ELLIPSE
    	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
-	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(x,y,h,w,custom)
+	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // la le 5,5 représente le structurant (kernel) utilisé pour l'ouverture
 	cvErode(mask, mask, structurant, 1);
 	structurant = cvCreateStructuringElementEx(4, 4, 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
-	
-	//cvShowImage("binarisation", mask);
-	//cvWaitKey (0);
+
 	cvReleaseImage(&hsv);
-	//cvReleaseImage(&source);
-	return mask;
+	oldPix->mask = mask;
+	return 0;
 }
 
 /*Met à jour le Cursor représentant le barycentre du curseur à tracker.
  * 0 en cas de succès
  * -1 en cas d'erreur : à définir
  */
-int setNewCoord(const IplImage *imgBin, Cursor *oldPix)
+int setNewCoord(Cursor * oldPix)
 {
-	if(imgBin->nChannels != 1 )
+	if(oldPix->mask->nChannels != 1 )
 	{
 		perror("Invalid IplImage number of channels.");
 		return -1;
@@ -54,9 +91,9 @@ int setNewCoord(const IplImage *imgBin, Cursor *oldPix)
 	int sommeX = 0;
 	int sommeY = 0;
 	int nbPixels = 0;
-	for(int x = 0; x < imgBin->width; x++)
-		for(int y = 0; y < imgBin->height; y++)
-			if(((uchar *)(imgBin->imageData + y*imgBin->widthStep))[x] == 255)
+	for(int x = 0; x < oldPix->mask->width; x++)
+		for(int y = 0; y < oldPix->mask->height; y++)
+			if(((uchar *)(oldPix->mask->imageData + y*oldPix->mask->widthStep))[x] == 255)
 			{
 				sommeX += x;
 				sommeY += y;
@@ -64,97 +101,27 @@ int setNewCoord(const IplImage *imgBin, Cursor *oldPix)
 			}
 	if (nbPixels > 0)
 	{
-		oldPix->coord.x = (int)(sommeX / nbPixels);
-		oldPix->coord.y = (int)(sommeY / nbPixels);
+		oldPix->center.x = (int)(sommeX / nbPixels);
+		oldPix->center.y = (int)(sommeY / nbPixels);
 	}
 	
 	return 0;
 }
 
-Cursor* calibration (IplImage* imgSource, CvPoint cornerA, CvPoint cornerB, Type_Track type)
-{
-//TRACK_COLOR, TRACK_SHAPE, TRACK_BLOB
-	if (type == TRACK_COLOR)
-		initcolorTrack
-}
 
 
-/*
-Initialise un track par couleur
-Entrée: Une image, la zone du curseur
-Retour: La structure representant le curseur
-*/
-Cursor initcolorTrack(IplImage *source, int x, int y) //TODO passer en ZONE au lieu d'en point
-{
-	Cursor pixel;
-	CvPoint points;
-	points.x = x;
-	points.y = y;
-	IplImage * hsv;
-	
-	hsv = cvCloneImage(source);
-	cvCvtColor(source, hsv, CV_BGR2HSV);
-	
-	CvScalar color = cvGet2D(hsv,y,x);
-	cvReleaseImage(&hsv);
-	pixel.coord = points;
-	pixel.color = color;
-	colorTrack(source,&pixel); 
-	return pixel;
-}
 
 /*
 Track la nouvelle position du curseur sur l'image par couleur par moyenne de pixel
 Entrée: Une image et un curseur
 Retour: une int (et maj le curseur)
 */
-int colorTrack(IplImage * source, Cursor * clickedPix)
+int colorTrack(IplImage * source, Cursor * oldCursor)
 {
-	IplImage *mask = binarisation(source, clickedPix);
-	int res = setNewCoord(mask, clickedPix);
-	cvReleaseImage(&mask);
-	return res;
+	int res =binarisation(source, oldCursor);
+	int res2 = setNewCoord(oldCursor);
+	return res2;
 }
-
-
-//Initialise la structure de suivi  par Couleur
-Cursor initBlobTrack(IplImage *source, int x, int y)
-{
-	Cursor pixel;
-	CvPoint points;
-	points.x = x;
-	points.y = y;
-	IplImage * hsv;
-	
-	hsv = cvCloneImage(source);
-	cvCvtColor(source, hsv, CV_BGR2HSV);
-	
-	CvScalar color = cvGet2D(hsv,y,x);
-	cvReleaseImage(&hsv);
-	pixel.coord = points;
-	pixel.color = color;
-	blobTrack(source,&pixel); 
-	return pixel;
-}
-
-
-//Met à jour la structure de suivi  par Couleur en fonction de l'image passée en param.
-int blobTrack(IplImage * source, Cursor * oldPix)
-{
-	cvb::CvBlobs blobs;
-	IplImage *labelImg=cvCreateImage(cvGetSize(source), IPL_DEPTH_LABEL, 1);
-	IplImage *mask = binarisation(source, oldPix);
-	cvShowImage("Live",mask);
-	cvWaitKey(0);
-	unsigned int result=cvLabel(mask,labelImg,blobs);
-	cvRenderBlobs(labelImg,blobs,source,source);
-	cvShowImage("Live",labelImg);
-	cvWaitKey(0);
-
-	cvShowImage("Live",source);
-	cvWaitKey(0);
-}
-
 /*
 Track la nouvelle position du curseur sur l'image par forme
 Entrée: Une image et un curseur
@@ -186,3 +153,4 @@ int shapeTrack(IplImage * source, IplImage * cursor)
 	cout << x << "--" << y << endl;
 	return 0;
 }
+
