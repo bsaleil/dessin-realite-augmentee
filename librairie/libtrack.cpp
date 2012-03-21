@@ -122,6 +122,61 @@ int colorTrack(IplImage * source, Cursor * oldCursor)
 	int res2 = setNewCoord(oldCursor);
 	return res2;
 }
+
+/*
+//Initialise la structure de suivi naif par Couleur
+Cursor initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
+{
+	Cursor * cursor;
+	CvPoint points;
+	cursor->cornerA= A;
+	cursor->cornerB= B;
+	//TODO calcul du centre en fonction de A et de B 
+	cursor->center = center(A,B);
+	IplImage * hsv;
+	hsv = cvCloneImage(source);
+	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
+									
+	//TODO calcul moyenne de couleur grace a A et B et hsv;
+	CvScalar color = colorAverage(hsv,A,B);
+	cvReleaseImage(&hsv);
+	cursor->center = points;
+	cursor->color = color;
+	blobTrack(source,cursor); 
+	return cursor;
+}
+
+
+//Met à jour la structure de suivi
+int blobTrack(IplImage * source, Cursor * oldPix)
+{
+	cvb::CvBlobs blobs;
+	IplImage *labelImg=cvCreateImage(cvGetSize(source), IPL_DEPTH_LABEL, 1);
+	unsigned int result=cvLabel(oldPix->mask,labelImg,blobs);
+	cvRenderBlobs(labelImg,blobs,source,source);
+	if ( blobs.begin() != blobs.end())
+	{
+	int max = blobs.begin()->second->area;
+	for (cvb::CvBlobs::const_iterator it=blobs.begin(); it!=blobs.end(); ++it)
+	{
+		if (it->second->area >= max)
+		{
+			max = it->second->area;
+			if (max > 150 &&  (it->second->centroid.x > oldPix->coord.x+10 || it->second->centroid.x < oldPix->coord.x-10) || (it->second->centroid.y > oldPix->coord.y+10 || it->second->centroid.y < oldPix->coord.y-10) )
+			{
+				oldPix->coord.x = it->second->centroid.x;
+				oldPix->coord.y = it->second->centroid.y;
+			}
+			std::cout << "Blob #" << it->second->label << ": Area=" << it->second->area << ", Centroid=(" << it->second->centroid.x << ", " << it->second->centroid.y << ")" << std::endl;
+		}
+  		
+	}
+	
+	}
+	return 0;
+}
+
+*/
 /*
 Track la nouvelle position du curseur sur l'image par forme
 Entrée: Une image et un curseur
@@ -154,3 +209,32 @@ int shapeTrack(IplImage * source, IplImage * cursor)
 	return 0;
 }
 
+//Average color
+CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B)
+{
+  	CvScalar scalar;
+  	
+	int h =0;
+	int s = 0;
+	int nbPx =0;
+
+	uchar *p, *line;
+
+  for (line =  (uchar*) hsv->imageData;
+       line <  (uchar*) hsv->imageData + hsv->imageSize;
+       line += hsv->widthStep)
+  {
+    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nChannels)
+    	{h+= *p;   nbPx ++;}
+    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nChannels)
+    	s+= *p;   
+  }
+  scalar->val0 = h;
+  scalar->val1 = s;
+  
+  return scalar;
+}
+
+//Center between A & B
+CvPoint center(CvPoint A, CvPoint B)
+{}
