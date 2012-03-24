@@ -21,7 +21,7 @@
 #include <QLineEdit>
 #include "webcammanager.hpp"
 #include "viewcalibration.hpp"
-#include "../librairie/libtrack.hpp"
+#include "../../librairie/libtrack.hpp"
 #include "client.hpp"
 
 class Calibration : public QWidget

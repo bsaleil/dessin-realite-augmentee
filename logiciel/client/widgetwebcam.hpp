@@ -18,7 +18,7 @@
 
 #include <opencv/cv.h>
 
-#include "../librairie/libtrack.hpp"
+#include "../../librairie/libtrack.hpp"
 
 class WidgetWebcam : public QLabel
 {	
