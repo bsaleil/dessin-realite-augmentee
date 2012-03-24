@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include "webcammanager.hpp"
 #include "viewetalonnage.hpp"
+#include "../librairie/libtrack.hpp"
 
 class Webcams : public QDialog
 {	
@@ -32,6 +33,7 @@ class Webcams : public QDialog
 		IplImage *imageCapturee;
 		QPoint *pointChoisiA;
 		QPoint *pointChoisiB;
+		Cursor *curseur;
 		
 		QComboBox *choixWebcams;
 		QVBoxLayout *layoutCentral;

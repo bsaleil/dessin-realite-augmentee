@@ -1,3 +1,6 @@
+#ifndef HPP_LIBTRACK
+#define HPP_LIBTRACK
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -50,3 +53,5 @@ CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B);
 
 //Center between A & B
 CvPoint center(CvPoint A, CvPoint B);
+
+#endif

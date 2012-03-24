@@ -93,8 +93,13 @@ void Webcams::loadSettingsStep(int oldStep)
 		step = 2;
 		loadClicksStep(2);
 	}
+	// L'étalonnage a bien été effectué.
 	else
 	{
+		CvPoint a; a.x = pointChoisiA->x(); a.y = pointChoisiA->y();
+		CvPoint b; b.x = pointChoisiB->x(); b.y = pointChoisiB->y();
+		curseur = calibration(imageCapturee, a, b, TRACK_COLOR);
+		
 		clearLayout(layoutCentral);
 	
 		QLabel *labelSettings = new QLabel("Ajustez le reperage de l'objet :");
