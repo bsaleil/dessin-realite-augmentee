@@ -15,7 +15,7 @@ typedef struct Cursor
 
 	CvScalar color; //HSV color of binarisation
 	IplImage * mask; // mask or template used for tracking.
-	unsigned int threshold = 10;
+	unsigned int threshold;
 }Cursor; 
 
 Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag);

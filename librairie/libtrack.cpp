@@ -25,6 +25,7 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	CvPoint points;
 	cursor->cornerA= A;
 	cursor->cornerB= B;
+	cursor->threshold =10;
 	//TODO calcul du centre en fonction de A et de B 
 	cursor->center = center(A,B);
 	IplImage * hsv;
