@@ -13,6 +13,8 @@
 #include <QLabel>
 #include <QDebug>
 #include <QMouseEvent>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include <opencv/cv.h>
 
@@ -24,21 +26,11 @@ class WidgetWebcam : public QLabel
 	
 	public :
 		WidgetWebcam();
-		WidgetWebcam(QString); 			// QLabel avec texte à afficher
+		QPoint getNewPosition(IplImage*,Cursor*);	// Affiche l'image et retourne la nouvelle position de l'objet
 		
-		void calibrate(IplImage*);		// Effectuer l'étalonnage sur l'image
-		bool calibrationDone();		// Retourne vrai si l'étalonnage est effectué
-		QImage iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
-		QPoint newImageFromWebcam(IplImage*);	// Reçoit une image depuis la webcam courante
-		
-	protected :
-		void mousePressEvent(QMouseEvent*);	// Récupération du clic pour désigner objet à suivre
 	private :
-		bool calibrationIsDone;		// Indique si l'étalonnage est effectué
-		bool readyToCalibrate; 		// Indique si prêt à recevoir le clic d'étalonnage
-		IplImage* imageInit;			// Contient l'image pour l'initialisation
-		Cursor cursor;				// Structure retournée lors du tracking par couleur
-		QPixmap pixmapCourante;
+		
+		QImage iplToQimage(IplImage* image);	// Conversion d'une IplImage en QImage
 };
 
 #endif

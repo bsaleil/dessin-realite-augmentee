@@ -1,6 +1,6 @@
 #include "webcams.hpp"
 
-Webcams::Webcams() : QDialog()
+Webcams::Webcams() : QWidget()
 {
 	step = 1;
 	// Etat de l'étalonnage :
@@ -9,7 +9,7 @@ Webcams::Webcams() : QDialog()
 
 	// Layout principal
 	QVBoxLayout *layoutPrincipal = new QVBoxLayout();
-		QLabel *labelPrincipal = new QLabel(QString::fromUtf8("Étalonnage :"));
+		QLabel *labelPrincipal = new QLabel(QString::fromUtf8("Configuration :"));
 			QFont font; font.setPointSize(20); labelPrincipal->setFont(font);
         		labelPrincipal->setAlignment(Qt::AlignCenter);
 		QSpacerItem *espaceHaut = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -103,15 +103,56 @@ void Webcams::loadSettingsStep(int oldStep)
 		clearLayout(layoutCentral);
 	
 		QLabel *labelSettings = new QLabel("Ajustez le reperage de l'objet :");
-		QLabel *imageSettings = new QLabel("image binarisee MAJ");
-		QSlider *sliderSettings = new QSlider(Qt::Horizontal);
-	
+		imageSettings = new QLabel("");
+			imageSettings->setPixmap(QPixmap::fromImage(iplToQimage(curseur->mask)));
+			labelSlider = new QLabel("Seuil : " + QString::number(curseur->threshold));
+			QSlider *sliderSettings = new QSlider(Qt::Horizontal);
+				sliderSettings->setMinimum(0); sliderSettings->setMaximum(50); sliderSettings->setValue(10);
+		
 		layoutCentral->addWidget(labelSettings);
 		layoutCentral->addWidget(imageSettings);
+		
+		layoutCentral->addWidget(labelSlider);
 		layoutCentral->addWidget(sliderSettings);
 	
-		boutonSuivant->setText("Demarrer");
+		connect(sliderSettings,SIGNAL(valueChanged(int)),this,SLOT(slotSliderSettings(int)));
 	}
+}
+
+void Webcams::loadNetworkStep(int oldStep)
+{
+	clearLayout(layoutCentral);
+	
+	QRadioButton *boutonLocal = new QRadioButton("Je veux dessiner seul."); boutonLocal->toggle();
+	boutonDistant = new QRadioButton("Je veux dessiner avec d'autres personnes : ");
+	
+	QLabel *labelAdresse = new QLabel("Adresse/Nom du serveur : ");
+	editAdresse = new QLineEdit();
+	QLabel *labelPort = new QLabel("Port : ");
+	spinPort = new QSpinBox(); spinPort->setMaximum(65535); spinPort->setValue(65042);
+	QSpacerItem *espaceReseau = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
+	
+	QHBoxLayout *layoutReseau = new QHBoxLayout();
+	layoutReseau->addItem(espaceReseau);
+	layoutReseau->addWidget(labelAdresse); layoutReseau->addWidget(editAdresse);
+	layoutReseau->addWidget(labelPort); layoutReseau->addWidget(spinPort);
+	
+	layoutCentral->addWidget(boutonLocal);
+	layoutCentral->addWidget(boutonDistant);
+	layoutCentral->addLayout(layoutReseau);
+	
+	boutonSuivant->setText("Demarrer");
+}
+
+void Webcams::slotSliderSettings(int value)
+{
+	// Modification de la valeur affichée
+	labelSlider->setText("Seuil : " + QString::number(value));
+	// Appel de la fonction pour la nouvelle image
+	curseur->threshold = value;
+	binarisation(imageCapturee,curseur);
+	// Modification de l'image affichée
+	imageSettings->setPixmap(QPixmap::fromImage(iplToQimage(curseur->mask)));
 }
 
 void Webcams::clearLayout(QLayout *layout)
@@ -122,13 +163,14 @@ void Webcams::clearLayout(QLayout *layout)
 		if (item->layout())
 		{
 			clearLayout(item->layout());
-			delete item->layout();
+			layout->removeItem(item);
 		}
 		if (item->widget())
 		{
-			delete item->widget();
+			layout->removeItem(item);
 		}
-		delete item;
+		delete item->layout();
+		delete item->widget();
 	}
 }
 
@@ -147,6 +189,10 @@ void Webcams::slotPrevious()
 	{
 		step = 2; loadClicksStep(3);
 	}
+	else if (step == 4)
+	{
+		step = 3; loadSettingsStep(4);
+	}
 }
 void Webcams::slotNext()
 {
@@ -160,7 +206,29 @@ void Webcams::slotNext()
 	}
 	else if (step == 3)
 	{
-		std::cout << "Demarrer" << std::endl;
+		step = 4; loadNetworkStep(3);
+	}
+	else if (step == 4)
+	{
+		launchClient();
+	}
+}
+
+void Webcams::launchClient()
+{
+	if (boutonDistant->isChecked())
+	{
+		// TODO : Envois packet au serveur pour tester présence du serveur ?
+		// Si présent on lance l'appli, sinon on redonne l'étape 4.
+		Client *a = new Client(webcamChoisie,imageCapturee,*curseur,editAdresse->text(),spinPort->value());
+		a->showMaximized();
+		this->close();
+	}
+	else
+	{
+		Client *a = new Client(webcamChoisie,imageCapturee,*curseur);
+		a->showMaximized();
+		this->close();
 	}
 }
 

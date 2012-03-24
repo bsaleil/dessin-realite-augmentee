@@ -63,6 +63,11 @@ void WebcamManager::runWebcam()
 	capture = cvCaptureFromCAM(webcam);
 }
 
+void WebcamManager::setWebcam(int w)
+{
+	webcam = w;
+}
+
 void WebcamManager::stopWebcam()
 {
 	cvReleaseCapture(&capture);

@@ -40,21 +40,7 @@
     </property>
     <addaction name="actionQuitter"/>
    </widget>
-   <widget class="QMenu" name="menuWebcam">
-    <property name="title">
-     <string>Webcam</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuAction">
-    <property name="title">
-     <string>Action</string>
-    </property>
-    <addaction name="actionD_marrer"/>
-    <addaction name="actionArr_ter"/>
-   </widget>
    <addaction name="menuFichier"/>
-   <addaction name="menuWebcam"/>
-   <addaction name="menuAction"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuitter">

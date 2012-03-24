@@ -23,6 +23,7 @@ class WebcamManager
 		int getNumberOfWebcams();	// Retourne le nombre de webcams disponibles
 		// TODO : éventuellement un retour
 		void runWebcam();		// Ouvre la webcam
+		void setWebcam(int);		// Défini la webcam à utiliser
 		void stopWebcam();
 		
 	private :

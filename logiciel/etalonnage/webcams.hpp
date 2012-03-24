@@ -16,11 +16,15 @@
 #include <QTime>
 #include <QMoveEvent>
 #include <QMessageBox>
+#include <QRadioButton>
+#include <QSpinBox>
+#include <QLineEdit>
 #include "webcammanager.hpp"
 #include "viewetalonnage.hpp"
 #include "../librairie/libtrack.hpp"
+#include "client.hpp"
 
-class Webcams : public QDialog
+class Webcams : public QWidget
 {	
 	Q_OBJECT
 
@@ -30,15 +34,24 @@ class Webcams : public QDialog
 	private :
 		// Etat de l'étalonnage :
 		int webcamChoisie;
-		IplImage *imageCapturee;
 		QPoint *pointChoisiA;
 		QPoint *pointChoisiB;
+		
+		// Utilisé pour le track
+		IplImage *imageCapturee;
 		Cursor *curseur;
 		
 		QComboBox *choixWebcams;
 		QVBoxLayout *layoutCentral;
 		QPushButton *boutonPrecedent;
 		QPushButton *boutonSuivant;
+		
+		QLabel *labelSlider;
+		QLabel *imageSettings;
+		QRadioButton *boutonDistant;
+		
+		QSpinBox *spinPort;
+		QLineEdit *editAdresse;
 		
 		int step;
 		
@@ -48,10 +61,13 @@ class Webcams : public QDialog
 		void loadClicksStep(int oldStep);
 		void loadSettingsStep(int oldStep);
 		void loadWebcamsStep(int oldStep);
+		void loadNetworkStep(int oldStep);
+		void launchClient();
 	private slots :
 		void slotPrevious();
 		void slotNext();
 		void slotNewPhoto();
+		void slotSliderSettings(int value);
 };
 
 #endif
