@@ -1,4 +1,4 @@
-#include "webcams.hpp"
+#include "calibration.hpp"
 
 Calibration::Calibration() : QWidget()
 {
@@ -67,7 +67,7 @@ void Calibration::loadClicksStep(int oldStep)
 	
 	QLabel *labelClicks = new QLabel("Cliquez deux fois pour selectionner votre objet :");
 	
-	ViewEtalonnage *viewImage = new ViewEtalonnage(pointChoisiA,pointChoisiB);
+	ViewCalibration *viewImage = new ViewCalibration(pointChoisiA,pointChoisiB);
 	WebcamManager wm;
 	
 	imageCapturee = wm.getImageInit(webcamChoisie);
