@@ -11,8 +11,6 @@ QPoint WidgetWebcam::getNewPosition(IplImage *i, Cursor *c)
 	track(i,c);
 	QPoint p(c->center.x,c->center.y);
 	
-	qDebug() << p;
-	
 	setPixmap(QPixmap::fromImage(iplToQimage(i)));
 	return p;
 }

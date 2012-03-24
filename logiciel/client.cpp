@@ -1,16 +1,17 @@
 #include "client.hpp"
 
 Client::Client(int w, IplImage* i, Cursor c) : ui(new Ui::Client)
-{
+{	
 	image = i;
-	Cursor cu = c;
-	curseur = &cu;
+	curseur = new Cursor;
+	*curseur = c; 
 
 	// Construction de l'interface
 	ui->setupUi(this);
 	mdiArea = new QMdiArea();
 	this->setCentralWidget(mdiArea);
 	
+	// TODO : Nettoyage des classes client et webcams avec renommage
 	// Classes utilisées
 	// TODO instancier selon l'état réseau ou local
 	drawingBoard = new LocalDrawingBoard();
@@ -41,9 +42,10 @@ Client::Client(int w, IplImage* i, Cursor c, QString h, int p)
 }
 
 void Client::tick()
-{
+{		
 	// Récupération de la nouvelle image
 	image = camManager->getImage();
+	cvFlip(image, image,1);
 	// Calcul de la position de l'objet suivi
 	QPoint p = camWidget->getNewPosition(image,curseur);
 	// Dessin du point
