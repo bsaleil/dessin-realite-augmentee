@@ -1,6 +1,6 @@
-#include "viewetalonnage.hpp"
+#include "viewcalibration.hpp"
 
-ViewEtalonnage::ViewEtalonnage(QPoint *A, QPoint *B) : QGraphicsView()
+ViewCalibration::ViewCalibration(QPoint *A, QPoint *B) : QGraphicsView()
 {
 	pointA = A;
 	pointB = B;
@@ -10,7 +10,7 @@ ViewEtalonnage::ViewEtalonnage(QPoint *A, QPoint *B) : QGraphicsView()
 	setScene(scene);
 }
 
-void ViewEtalonnage::mousePressEvent(QMouseEvent* ev)
+void ViewCalibration::mousePressEvent(QMouseEvent* ev)
 {
 	if (ev->x() >= 0 && ev->x() <= largeurImage && ev->y() >= 0 && ev->y() <= hauteurImage)
 	{
@@ -41,7 +41,7 @@ void ViewEtalonnage::mousePressEvent(QMouseEvent* ev)
 	}
 }
 
-void ViewEtalonnage::addPixmap(QPixmap p)
+void ViewCalibration::addPixmap(QPixmap p)
 {
 	largeurImage = p.width();
 	hauteurImage = p.height();

@@ -17,12 +17,12 @@
 #include <QMoveEvent>
 #include <QGraphicsView>
 
-class ViewEtalonnage : public QGraphicsView
+class ViewCalibration : public QGraphicsView
 {	
 	Q_OBJECT
 
 	public :
-		ViewEtalonnage(QPoint* pointA, QPoint* pointB);
+		ViewCalibration(QPoint* pointA, QPoint* pointB);
 		void addPixmap(QPixmap p);
 	protected :
 		void mousePressEvent(QMouseEvent* ev);
