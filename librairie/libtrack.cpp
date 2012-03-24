@@ -40,7 +40,7 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->cornerB = B;
 	curs->threshold = 10;
 	//TODO calcul du centre en fonction de A et de B 
-	cout << "ok" << endl;
+	//cout << "ok" << endl;
 
 	curs->center = center(A,B);
 	IplImage * hsv;
@@ -266,19 +266,4 @@ CvPoint center(CvPoint A, CvPoint B)
 	center.x = (A.x + B.x)/2;
 	center.y = (A.y + B.y)/2;
 	return center;
-}
-
-Cursor * cloneCursor(Cursor * C)
-{
-	Cursor * curs = new Cursor;
-	curs->center = C->center;
-
-	curs->cornerA =C->cornerA;
-	curs->cornerB=C->cornerB;
-
-	curs->color = C->color; 
-	IplImage * m = cvCloneImage(C->mask);
-	curs->mask = m;
-	curs->threshold = C->threshold;
-	return curs;
 }
