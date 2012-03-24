@@ -20,16 +20,16 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include "webcammanager.hpp"
-#include "viewetalonnage.hpp"
+#include "viewcalibration.hpp"
 #include "../librairie/libtrack.hpp"
 #include "client.hpp"
 
-class Webcams : public QWidget
+class Calibration : public QWidget
 {	
 	Q_OBJECT
 
 	public :
-		Webcams();	
+		Calibration();	
 	
 	private :
 		// Etat de l'étalonnage :

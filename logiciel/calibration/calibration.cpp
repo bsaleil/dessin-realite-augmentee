@@ -1,6 +1,6 @@
 #include "webcams.hpp"
 
-Webcams::Webcams() : QWidget()
+Calibration::Calibration() : QWidget()
 {
 	step = 1;
 	// Etat de l'étalonnage :
@@ -37,7 +37,7 @@ Webcams::Webcams() : QWidget()
 	connect(boutonSuivant,SIGNAL(clicked()), this, SLOT(slotNext()));
 }
 
-void Webcams::loadWebcamsStep(int oldStep)
+void Calibration::loadWebcamsStep(int oldStep)
 {
 	clearLayout(layoutCentral);
 	
@@ -55,7 +55,7 @@ void Webcams::loadWebcamsStep(int oldStep)
 	boutonPrecedent->setEnabled(false);
 }
 
-void Webcams::loadClicksStep(int oldStep)
+void Calibration::loadClicksStep(int oldStep)
 {
 	pointChoisiA = new QPoint(-1,-1);
 	pointChoisiB = new QPoint(-1,-1);
@@ -84,7 +84,7 @@ void Webcams::loadClicksStep(int oldStep)
 	boutonPrecedent->setEnabled(true);
 }
 
-void Webcams::loadSettingsStep(int oldStep)
+void Calibration::loadSettingsStep(int oldStep)
 {
 	// Si étalonnage pas fait/pas fini
 	if (pointChoisiA->x() == -1 || pointChoisiB->x() == -1)
@@ -119,7 +119,7 @@ void Webcams::loadSettingsStep(int oldStep)
 	}
 }
 
-void Webcams::loadNetworkStep(int oldStep)
+void Calibration::loadNetworkStep(int oldStep)
 {
 	clearLayout(layoutCentral);
 	
@@ -144,7 +144,7 @@ void Webcams::loadNetworkStep(int oldStep)
 	boutonSuivant->setText("Demarrer");
 }
 
-void Webcams::slotSliderSettings(int value)
+void Calibration::slotSliderSettings(int value)
 {
 	// Modification de la valeur affichée
 	labelSlider->setText("Seuil : " + QString::number(value));
@@ -155,7 +155,7 @@ void Webcams::slotSliderSettings(int value)
 	imageSettings->setPixmap(QPixmap::fromImage(iplToQimage(curseur->mask)));
 }
 
-void Webcams::clearLayout(QLayout *layout)
+void Calibration::clearLayout(QLayout *layout)
 {
 	QLayoutItem *item;
 	while((item = layout->takeAt(0)))
@@ -174,12 +174,12 @@ void Webcams::clearLayout(QLayout *layout)
 	}
 }
 
-void Webcams::slotNewPhoto()
+void Calibration::slotNewPhoto()
 {
 	loadClicksStep(2);
 }
 
-void Webcams::slotPrevious()
+void Calibration::slotPrevious()
 {
 	if (step == 2)
 	{
@@ -194,7 +194,7 @@ void Webcams::slotPrevious()
 		step = 3; loadSettingsStep(4);
 	}
 }
-void Webcams::slotNext()
+void Calibration::slotNext()
 {
 	if (step == 1)
 	{
@@ -214,7 +214,7 @@ void Webcams::slotNext()
 	}
 }
 
-void Webcams::launchClient()
+void Calibration::launchClient()
 {
 	if (boutonDistant->isChecked())
 	{
@@ -232,7 +232,7 @@ void Webcams::launchClient()
 	}
 }
 
-QImage Webcams::iplToQimage(IplImage* image)
+QImage Calibration::iplToQimage(IplImage* image)
 {
 	int h = image->height;
 	int w = image->width;
