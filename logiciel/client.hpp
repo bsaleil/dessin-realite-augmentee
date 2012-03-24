@@ -23,6 +23,7 @@
 #include "webcammanager.hpp"
 #include "widgetwebcam.hpp"
 #include "localdrawingboard.hpp"
+#include "networkdrawingboard.hpp"
 #include "webcams.hpp"
 
 namespace Ui 
