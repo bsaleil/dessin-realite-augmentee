@@ -152,7 +152,6 @@ Cursor initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	CvPoint points;
 	cursor->cornerA= A;
 	cursor->cornerB= B;
-	//TODO calcul du centre en fonction de A et de B 
 	cursor->center = center(A,B);
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
@@ -231,12 +230,13 @@ int shapeTrack(IplImage * source, IplImage * cursor)
 }
 
 //Average color
-/*CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B)
+CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 {
   	CvScalar scalar;
   	
 	int h =0;
 	int s = 0;
+	int v = 0;
 	int nbPx =0;
 
 	uchar *p, *line;
@@ -245,16 +245,19 @@ int shapeTrack(IplImage * source, IplImage * cursor)
        line <  (uchar*) hsv->imageData + hsv->imageSize;
        line += hsv->widthStep)
   {
-    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nbChannels)
+    for (p = line; p < line + hsv->width * hsv->nChannels; p+= hsv->nChannels)
     	{h+= *p;   nbPx ++;}
-    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nbChannels)
+    for (p = line+1; p < line + hsv->width * hsv->nChannels; p+= hsv->nChannels)
     	s+= *p;   
+    for (p = line+2; p < line + hsv->width * hsv->nChannels; p+= hsv->nChannels)
+   		v+= *p;   
   }
-  scalar->val0 = h;
-  scalar->val1 = s;
+  scalar.val[0] = h / nbPx;
+  scalar.val[1] = s /nbPx ;
+  scalar.val[2] = v /nbPx ;
   
   return scalar;
-}*/
+}
 
 //Center between A & B
 CvPoint center(CvPoint A, CvPoint B)
