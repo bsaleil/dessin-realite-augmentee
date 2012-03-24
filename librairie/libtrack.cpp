@@ -34,7 +34,7 @@ Retour: La structure representant le curseur
 */
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
-	Cursor  curs;
+	Cursor curs;
 	curs.flag = TRACK_COLOR;
 	curs.cornerA = A;
 	curs.cornerB = B;
@@ -88,6 +88,8 @@ int binarisation(IplImage * source, Cursor *oldPix)
 	cvDilate(mask, mask, structurant, 1);
 
 	cvReleaseImage(&hsv);
+	cvShowImage("result", mask); 
+        cvWaitKey(0);
 	oldPix->mask = mask;
 	return 0;
 }
