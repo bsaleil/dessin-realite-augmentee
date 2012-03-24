@@ -5,10 +5,23 @@ Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag)
 {
 	if (flag == TRACK_COLOR) 
 	{
-		return initColorTrack(source, A, B);e
+		return initColorTrack(source, A, B);
 	}
 
 	else if (flag == TRACK_SHAPE)
+	{
+		return 0; // TODO initShapeTrack
+	}
+}
+
+int track(IplImage * source, Cursor * oldCursor)
+{
+	if (oldCursor->flag == TRACK_COLOR) 
+	{
+		return colorTrack(source, A, B);
+	}
+
+	else if (oldCursor->flag == TRACK_SHAPE)
 	{
 		return 0; // TODO initShapeTrack
 	}
@@ -22,6 +35,7 @@ Retour: La structure representant le curseur
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
 	Cursor * cursor;
+	cursor->flag = TRACK_COLOR;
 	CvPoint points;
 	cursor->cornerA= A;
 	cursor->cornerB= B;
@@ -33,7 +47,8 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 									
 	//TODO calcul moyenne de couleur grace a A et B et hsv;
-	CvScalar color = colorAverage(hsv,A,B);
+	//CvScalar color = colorAverage(hsv,A,B);
+	CvScalar color = cvGet2D(hsv,cursor->center.y,cursor->center.x);
 	cvReleaseImage(&hsv);
 	cursor->center = points;
 	cursor->color = color;
@@ -238,4 +253,9 @@ CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B)
 
 //Center between A & B
 CvPoint center(CvPoint A, CvPoint B)
-{}
+{
+	CvPoint center;
+	center.x = abs(A.x - B.x);
+	center.y = abs(A.y - B.y);
+	return center;
+}
