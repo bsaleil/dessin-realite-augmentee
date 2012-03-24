@@ -36,6 +36,7 @@ bool WidgetWebcam::calibrationDone() { return calibrationIsDone; }
 
 void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 {
+	/*
 	// Si la classe est prête à recevoir le clic d'étalonnage
 	if (readyToCalibrate && !calibrationIsDone)
 	{
@@ -43,6 +44,7 @@ void WidgetWebcam::mousePressEvent(QMouseEvent * event)
 		cursor = initNaiveColorTrack(imageInit, event->x(), event->y());
 		calibrationIsDone = true;
 	}
+	*/
 }
 
 QImage WidgetWebcam::iplToQimage(IplImage* image)
@@ -90,6 +92,7 @@ QImage WidgetWebcam::iplToQimage(IplImage* image)
 
 QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 {
+	/*
 	if (calibrationIsDone)
 	{
 		// Flip de l'image pour améliorer l'IHM
@@ -111,6 +114,7 @@ QPoint WidgetWebcam::newImageFromWebcam(IplImage* img)
 		return QPoint(cursor.coord.x, cursor.coord.y);
 	}
 	return QPoint();
+	*/
 }
 
 
