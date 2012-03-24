@@ -267,3 +267,18 @@ CvPoint center(CvPoint A, CvPoint B)
 	center.y = (A.y + B.y)/2;
 	return center;
 }
+
+Cursor * cloneCursor(Cursor * C)
+{
+	Cursor * curs = new Cursor;
+	curs->center = C->center;
+
+	curs->cornerA =C->cornerA;
+	curs->cornerB=C->cornerB;
+
+	curs->color = C->color; 
+	IplImage * m = cvCloneImage(C->mask);
+	curs->mask = m;
+	curs->threshold = C->threshold;
+	return curs;
+}
