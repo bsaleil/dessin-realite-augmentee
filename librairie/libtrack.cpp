@@ -34,26 +34,26 @@ Retour: La structure representant le curseur
 */
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
-	Cursor * cursor;
-	cursor->flag = TRACK_COLOR;
-	CvPoint points;
-	cursor->cornerA= A;
-	cursor->cornerB= B;
-	cursor->threshold =10;
+	Cursor  curs;
+	curs.flag = TRACK_COLOR;
+	curs.cornerA = A;
+	curs.cornerB = B;
+	curs.threshold = 10;
 	//TODO calcul du centre en fonction de A et de B 
-	cursor->center = center(A,B);
+	cout << "ok" << endl;
+	curs.center = center(A,B);
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 									
 	//TODO calcul moyenne de couleur grace a A et B et hsv;
 	//CvScalar color = colorAverage(hsv,A,B);
-	CvScalar color = cvGet2D(hsv,cursor->center.y,cursor->center.x);
+	CvScalar color = cvGet2D(hsv,curs.center.y,curs.center.x);
+	
 	cvReleaseImage(&hsv);
-	cursor->center = points;
-	cursor->color = color;
-	colorTrack(source,cursor); 
-	return cursor;
+	curs.color = color;
+	colorTrack(source,&curs); 
+	return &curs;
 }
 
 // Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldCursor' (coord et coul)

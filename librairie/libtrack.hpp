@@ -17,7 +17,7 @@ typedef struct Cursor
 	CvPoint cornerB; // Down-Right
 
 	CvScalar color; //HSV color of binarisation
-	IplImage * mask; // mask or template used for tracking.
+	IplImage *mask; // mask or template used for tracking.
 	unsigned int threshold;
 
 	Type_Track flag; // type of tracking
