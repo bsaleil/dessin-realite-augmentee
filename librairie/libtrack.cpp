@@ -10,7 +10,7 @@ Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag)
 
 	else if (flag == TRACK_SHAPE)
 	{
-		return 0; // TODO initShapeTrack
+		return initShapeTrack(source, A, B);
 	}
 }
 
@@ -23,7 +23,7 @@ int track(IplImage * source, Cursor * oldCursor)
 
 	else if (oldCursor->flag == TRACK_SHAPE)
 	{
-		return 0; // TODO initShapeTrack
+		return shapeTrack(source, oldCursor);
 	}
 }
 
@@ -35,7 +35,7 @@ Retour: La structure representant le curseur
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
 	Cursor * curs = new Cursor;
-	//curs->flag = TRACK_COLOR;
+	curs->flag = TRACK_COLOR;
 	curs->cornerA = A;
 	curs->cornerB = B;
 	curs->threshold = 10;
@@ -56,6 +56,7 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	colorTrack(source,curs);
 	return curs;
 }
+
 
 // Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldCursor' (coord et coul)
 int binarisation(IplImage * source, Cursor *oldPix)
@@ -118,8 +119,12 @@ int setNewCoord(Cursor * oldPix)
 			}
 	if (nbPixels > 0)
 	{
-		oldPix->center.x = (int)(sommeX / nbPixels);
-		oldPix->center.y = (int)(sommeY / nbPixels);
+		int x = (int)(sommeX / nbPixels);
+		int y = (int)(sommeY / nbPixels);
+		if (x>oldPix->center.x+10 || x<oldPix->center.x-10)
+			oldPix->center.x = (int)(sommeX / nbPixels);
+		if (y>oldPix->center.y+10 || y<oldPix->center.y-10)
+			oldPix->center.y = (int)(sommeY / nbPixels);
 	}
 	
 	return 0;
@@ -195,24 +200,48 @@ int blobTrack(IplImage * source, Cursor * oldPix)
 	}
 	return 0;
 }
-
 */
+
+Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B) 
+{
+	Cursor * curs = new Cursor;
+	curs->flag = TRACK_SHAPE;
+	curs->cornerA = A;
+	curs->cornerB = B;
+	curs->threshold = 10;
+	//TODO calcul du centre en fonction de A et de B 
+	//cout << "ok" << endl;
+
+	curs->center = center(A,B);
+	CvRect roi;
+	roi.x = A.x;
+	roi.y = A.y;
+	
+	roi.width = abs(A.x-B.x);
+	roi.height = abs(A.y-B.y);
+	
+	IplImage * mask = reshape(source, roi);
+	curs->mask = mask;		
+	
+	shapeTrack(source,curs);
+	return curs;
+}
+
+
 /*
 Track la nouvelle position du curseur sur l'image par forme
 Entrée: Une image et un curseur
 Retour: une int (et maj le curseur)
 */
-int shapeTrack(IplImage * source, IplImage * cursor)
+int shapeTrack(IplImage * source, Cursor * cursor)
 {
 	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) 
 	// Allocate Output Images:
-	int iwidth = source->width - cursor->width + 1;
-	int iheight = source->height - cursor->height + 1;
+	int iwidth = source->width - cursor->mask->width + 1;
+	int iheight = source->height - cursor->mask->height + 1;
 	result= cvCreateImage( cvSize( iwidth, iheight ), 32, 1 );
-	cvMatchTemplate(source, cursor ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED);
+	cvMatchTemplate(source, cursor->mask ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED);
 	cvNormalize( result, result, 1, 0, CV_MINMAX );
-	cvShowImage("result", result); 
-	cvWaitKey(0);
 	
 	double minVal, maxVal;
 	CvPoint maxLoc, minLoc;
@@ -222,13 +251,14 @@ int shapeTrack(IplImage * source, IplImage * cursor)
 	int y= maxLoc.y ;
 	
 	//recentrage
-	x += (int)(cursor->width /2);
-	y += (int)(cursor->height /2);
+	x += (int)(cursor->mask->width /2);
+	y += (int)(cursor->mask->height /2);
 	
-	cout << x << "--" << y << endl;
+	cursor->center.x =x;
+	cursor->center.y =y;
 	return 0;
 }
-
+/*
 //Average color
 CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 {
@@ -257,6 +287,17 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
   scalar.val[2] = v /nbPx ;
   
   return scalar;
+}*/
+
+IplImage * reshape(IplImage * source, CvRect roi)
+{
+	IplImage* templ = cvCreateImage(cvSize(roi.width,roi.height), source->depth, source->nChannels);
+	cvSetImageROI(source, roi);
+
+	cvCopy(source, templ);
+	cvResetImageROI(source);
+
+	return templ;
 }
 
 //Center between A & B

@@ -39,6 +39,8 @@ int setNewCoord(const IplImage* binaryImg, Cursor * oldPix);
 //Initialise la structure de suivi naif par Couleur
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B);
 
+Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B);
+
 //Met à jour la structure de suivi naif par Couleur en fonction de l'image passée en param.
 int colorTrack(IplImage * source, Cursor * oldPix);
 
@@ -46,12 +48,16 @@ int colorTrack(IplImage * source, Cursor * oldPix);
 //IplImage initShapeTrack(IplImage * source, CvPoint a, CvPoint b); //TODO
 
 //Met à jour la structure de suivi par forme
-int shapeTrack(IplImage *source, IplImage * cursor);
+int shapeTrack(IplImage *source, Cursor * cursor);
 
 //Average color
 CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B);
 
 //Center between A & B
 CvPoint center(CvPoint A, CvPoint B);
+
+Cursor * cloneCursor(Cursor * C);
+
+IplImage * reshape(IplImage * source, CvRect roi);
 
 #endif
