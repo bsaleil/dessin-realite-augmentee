@@ -18,7 +18,7 @@ int track(IplImage * source, Cursor * oldCursor)
 {
 	if (oldCursor->flag == TRACK_COLOR) 
 	{
-		return colorTrack(source, A, B);
+		return colorTrack(source, oldCursor);
 	}
 
 	else if (oldCursor->flag == TRACK_SHAPE)
@@ -134,9 +134,13 @@ Retour: une int (et maj le curseur)
 */
 int colorTrack(IplImage * source, Cursor * oldCursor)
 {
-	int res =binarisation(source, oldCursor);
-	int res2 = setNewCoord(oldCursor);
-	return res2;
+	int res = binarisation(source, oldCursor);
+	if (res == 0) 
+	{
+		int res2 = setNewCoord(oldCursor);
+		return res2;
+	}
+	else {return -1;}
 }
 
 /*
@@ -226,7 +230,7 @@ int shapeTrack(IplImage * source, IplImage * cursor)
 }
 
 //Average color
-CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B)
+/*CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B)
 {
   	CvScalar scalar;
   	
@@ -240,16 +244,16 @@ CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B)
        line <  (uchar*) hsv->imageData + hsv->imageSize;
        line += hsv->widthStep)
   {
-    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nChannels)
+    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nbChannels)
     	{h+= *p;   nbPx ++;}
-    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nChannels)
+    for (p = line; p < line + hsv->width * hsv->nChannels; p+=nbChannels)
     	s+= *p;   
   }
   scalar->val0 = h;
   scalar->val1 = s;
   
   return scalar;
-}
+}*/
 
 //Center between A & B
 CvPoint center(CvPoint A, CvPoint B)
