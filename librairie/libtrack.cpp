@@ -259,7 +259,7 @@ int shapeTrack(IplImage * source, IplImage * cursor)
 CvPoint center(CvPoint A, CvPoint B)
 {
 	CvPoint center;
-	center.x = abs(A.x - B.x);
-	center.y = abs(A.y - B.y);
+	center.x = (A.x + B.x)/2;
+	center.y = (A.y + B.y)/2;
 	return center;
 }
