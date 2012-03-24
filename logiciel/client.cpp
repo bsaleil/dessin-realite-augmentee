@@ -1,7 +1,7 @@
 #include "client.hpp"
 
 Client::Client() : ui(new Ui::Client)
-{
+{	
 	// Construction de l'interface
 	ui->setupUi(this);
 	mdiArea = new QMdiArea();
@@ -33,6 +33,10 @@ Client::Client() : ui(new Ui::Client)
 		ui->menuWebcam->addAction(action);
 	}
 	connect(ui->actionD_marrer,SIGNAL(triggered()),this,SLOT(slotStart()));
+	
+	// Creation de la fenetre d'étalonnage
+	Webcams *w = new Webcams();
+	QMdiSubWindow *sw = mdiArea->addSubWindow(w);
 }
 
 void Client::calibration()

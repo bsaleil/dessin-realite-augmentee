@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QMdiArea>
+#include <QMdiSubWindow>
 #include <QTimer>
 
 #include <opencv/cv.h>
@@ -22,6 +23,7 @@
 #include "webcammanager.hpp"
 #include "widgetwebcam.hpp"
 #include "localdrawingboard.hpp"
+#include "webcams.hpp"
 
 namespace Ui 
 {
@@ -47,7 +49,7 @@ class Client : public QMainWindow
 		
 		void calibration();		// Début de l'étalonnage
 		
-		DrawingBoard *drawingBoard;// Widget de dessin
+		DrawingBoard *drawingBoard;	// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams
 		WidgetWebcam *camWidget;	// Widget d'affichage de la webcam
 	
