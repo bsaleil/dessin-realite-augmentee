@@ -16,10 +16,13 @@
 class NetworkDrawingBoard : public DrawingBoard
 {
 	public :
-		NetworkDrawingBoard();
+		NetworkDrawingBoard(QString, int);	// Hôte et port 
 		void drawPoint(int x,int y);
 		void drawQPoint(QPoint);
 		void drawLine(int fromX, int fromY, int toX, int toY);
+	private :
+		QString host;
+		int port;
 };
 
 #endif

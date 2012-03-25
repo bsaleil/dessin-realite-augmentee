@@ -1,7 +1,10 @@
 #include "networkdrawingboard.hpp"
 
-NetworkDrawingBoard::NetworkDrawingBoard()
-{}		
+NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
+{
+	host = h;
+	port = p;
+}		
 		
 void NetworkDrawingBoard::drawPoint(int x, int y)
 {}		

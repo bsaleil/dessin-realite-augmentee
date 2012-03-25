@@ -13,7 +13,6 @@ Client::Client(int w, IplImage* i, Cursor c) : ui(new Ui::Client)
 	
 	// TODO : Nettoyage des classes client et webcams avec renommage
 	// Classes utilisées
-	// TODO instancier selon l'état réseau ou local
 	drawingBoard = new LocalDrawingBoard();
 	camManager = new WebcamManager();
 	camWidget = new WidgetWebcam();
@@ -35,9 +34,13 @@ Client::Client(int w, IplImage* i, Cursor c) : ui(new Ui::Client)
 	timer->start(40);
 }
 
-Client::Client(int w, IplImage* i, Cursor c, QString h, int p)
+Client::Client(int w, IplImage* i, Cursor c, QString h, int p) : ui(new Ui::Client)
 {
-	Client(w,i,c);
+	Client(w, i, c);
+	
+	// Instanciation du drawingBoard en réseau
+	drawingBoard = new NetworkDrawingBoard(h, p);
+	
 	qDebug() << "Host : " << h << "\n" << "Port : " << p;
 }
 
@@ -51,3 +54,4 @@ void Client::tick()
 	// Dessin du point
 	drawingBoard->drawQPoint(p);
 }
+
