@@ -25,6 +25,7 @@ int track(IplImage * source, Cursor * oldCursor)
 	{
 		return shapeTrack(source, oldCursor);
 	}
+	else return -2;
 }
 
 /*
@@ -39,8 +40,6 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->cornerA = A;
 	curs->cornerB = B;
 	curs->threshold = 10;
-	//TODO calcul du centre en fonction de A et de B 
-	//cout << "ok" << endl;
 
 	curs->center = center(A,B);
 	IplImage * hsv;
@@ -75,16 +74,16 @@ int binarisation(IplImage * source, Cursor *oldPix)
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	cvInRangeS(hsv, cvScalar(h - tolerance -1, s - tolerance, 0,0), cvScalar(h + tolerance -1, s + tolerance, 255,0), mask);
 	
-	//Il convient ensuite d'appliquer une ouverture (dilatation puis érosion) à notre image, 
+	//Il convient ensuite d'appliquer une fermeture (érosion puis dilatation) à notre image, 
 	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
 	IplConvKernel *structurant;
 /*	structurants possibles : 
 	-CV_SHAPE_RECT
-    	-CV_SHAPE_CROSS
+    -CV_SHAPE_CROSS
     	-CV_SHAPE_ELLIPSE
    	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
-	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // la le 5,5 représente le structurant (kernel) utilisé pour l'ouverture
+	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
 	cvErode(mask, mask, structurant, 1);
 	structurant = cvCreateStructuringElementEx(4, 4, 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
@@ -121,6 +120,9 @@ int setNewCoord(Cursor * oldPix)
 	{
 		int x = (int)(sommeX / nbPixels);
 		int y = (int)(sommeY / nbPixels);
+		
+		// On ne redessine le point que si il y a une différence d'au moins 10 pixels
+		//TODO On paramètre ou on laisse 10? (pas mal, malgré un dessin un peu "carré")
 		if (x>oldPix->center.x+10 || x<oldPix->center.x-10)
 			oldPix->center.x = (int)(sommeX / nbPixels);
 		if (y>oldPix->center.y+10 || y<oldPix->center.y-10)
@@ -162,7 +164,6 @@ Cursor initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 									
-	//TODO calcul moyenne de couleur grace a A et B et hsv;
 	CvScalar color = colorAverage(hsv,A,B);
 	cvReleaseImage(&hsv);
 	cursor->center = points;
@@ -209,8 +210,6 @@ Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->cornerA = A;
 	curs->cornerB = B;
 	curs->threshold = 10;
-	//TODO calcul du centre en fonction de A et de B 
-	//cout << "ok" << endl;
 
 	curs->center = center(A,B);
 	CvRect roi;
@@ -258,36 +257,48 @@ int shapeTrack(IplImage * source, Cursor * cursor)
 	cursor->center.y =y;
 	return 0;
 }
-/*
+
 //Average color
 CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 {
+	CvRect roi;
+	roi.x = A.x;
+	roi.y = A.y;
+	
+	roi.width = abs(A.x-B.x);
+	roi.height = abs(A.y-B.y);
+	
+	IplImage * mask = reshape(source, roi);
+	
+	
   	CvScalar scalar;
   	
 	int h =0;
 	int s = 0;
-	int v = 0;
+//	int v = 0;
 	int nbPx =0;
 
 	uchar *p, *line;
 
-  for (line =  (uchar*) hsv->imageData;
-       line <  (uchar*) hsv->imageData + hsv->imageSize;
-       line += hsv->widthStep)
+  for (line =  (uchar*) mask->imageData;
+       line <  (uchar*) mask->imageData + mask->imageSize;
+       line += mask->widthStep)
   {
-    for (p = line; p < line + hsv->width * hsv->nChannels; p+= hsv->nChannels)
+    for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
     	{h+= *p;   nbPx ++;}
-    for (p = line+1; p < line + hsv->width * hsv->nChannels; p+= hsv->nChannels)
+    for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
     	s+= *p;   
-    for (p = line+2; p < line + hsv->width * hsv->nChannels; p+= hsv->nChannels)
-   		v+= *p;   
-  }
-  scalar.val[0] = h / nbPx;
+//    for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+//   		v+= *p;   
+   		
+  }  
+  cvReleaseImage(&mask);
+  scalar.val[0] = h /nbPx;
   scalar.val[1] = s /nbPx ;
   scalar.val[2] = v /nbPx ;
   
   return scalar;
-}*/
+}
 
 IplImage * reshape(IplImage * source, CvRect roi)
 {
