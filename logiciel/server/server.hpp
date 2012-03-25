@@ -3,25 +3,31 @@
 
 using namespace std;
 
-#include <iostream>
-
 #include <QObject>
+#include <QGraphicsScene>
 #include <QtDebug>
 #include <QtNetwork>
 
+#include "servergraphics.hpp"
+
 class Server : QObject
 {
-		Q_OBJECT
-		
-		private :
-			QTcpServer* tcpServer;
-			QList<QTcpSocket*> clients;
-		
-		public :
-			Server();
+	Q_OBJECT
+	
+	private :
+		QTcpServer* tcpServer;
+		QList<QTcpSocket*> clients;
 			
-		private slots :
-			void newConnection();
+		ServerGraphics* graphics;
+		
+	public :
+		Server();
+		
+		void broadcastMessage(QObject*);		// Envoi à tous les clients l'objet en paramètre
+		void messageTo(QTcpSocket* s, QObject* o);// Envoi au client spécifié	
+		
+	private slots :
+		void newConnection();
 };
 
 
