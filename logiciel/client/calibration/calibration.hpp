@@ -63,6 +63,7 @@ class Calibration : public QWidget
 		void loadWebcamsStep(int oldStep);
 		void loadNetworkStep(int oldStep);
 		void launchClient();
+		
 	private slots :
 		void slotPrevious();
 		void slotNext();

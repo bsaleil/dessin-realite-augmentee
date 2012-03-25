@@ -127,9 +127,9 @@ void Calibration::loadNetworkStep(int oldStep)
 	boutonDistant = new QRadioButton("Je veux dessiner avec d'autres personnes : ");
 	
 	QLabel *labelAdresse = new QLabel("Adresse/Nom du serveur : ");
-	editAdresse = new QLineEdit();
+	editAdresse = new QLineEdit("localhost");
 	QLabel *labelPort = new QLabel("Port : ");
-	spinPort = new QSpinBox(); spinPort->setMaximum(65535); spinPort->setValue(65042);
+	spinPort = new QSpinBox(); spinPort->setMaximum(65535); spinPort->setValue(34000);
 	QSpacerItem *espaceReseau = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 	
 	QHBoxLayout *layoutReseau = new QHBoxLayout();
