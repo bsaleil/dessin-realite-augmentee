@@ -268,14 +268,14 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 	roi.width = abs(A.x-B.x);
 	roi.height = abs(A.y-B.y);
 	
-	IplImage * mask = reshape(source, roi);
+	IplImage * mask = reshape(hsv, roi);
 	
 	
   	CvScalar scalar;
   	
 	int h =0;
 	int s = 0;
-//	int v = 0;
+	int v = 0;
 	int nbPx =0;
 
 	uchar *p, *line;
