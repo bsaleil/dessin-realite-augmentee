@@ -288,8 +288,8 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
     	{h+= *p;   nbPx ++;}
     for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
     	s+= *p;   
-//    for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-//   		v+= *p;   
+    for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+   		v+= *p;   
    		
   }  
   cvReleaseImage(&mask);
