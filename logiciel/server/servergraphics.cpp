@@ -5,16 +5,11 @@ ServerGraphics::ServerGraphics()
 	setFixedSize(640, 480);
 	setSceneRect(0, 0, 640, 480);
 	
-	scene = new QGraphicsScene();
-	setScene(scene);
+	sceneTab = new QGraphicsScene();
+	setScene(sceneTab);
 }
 
 void ServerGraphics::addPoint(QPoint p)
 {
-	
-}
-
-QGraphicsScene* ServerGraphics::getGraphicsScene()
-{
-	return scene;
+	sceneTab->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
 }

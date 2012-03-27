@@ -27,11 +27,19 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 
 void NetworkDrawingBoard::drawPoint(int x, int y)
 {
-	// Envoie l'odre de dessin au serveur
+	// Envoie l'ordre de dessin au serveur
 }		
 		
-void NetworkDrawingBoard::drawQPoint(QPoint)
-{}
+void NetworkDrawingBoard::drawQPoint(QPoint p)
+{	
+	// Envoie l'ordre de dessin au serveur
+	QString command("order");
+	QString type("qpoint");
+	
+	stream << command;
+	stream << type;
+	stream << p;
+}
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 {}
@@ -39,14 +47,14 @@ void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 void NetworkDrawingBoard::connectionActive()
 {
 	qDebug() << "Connexion active";
+	
+	// Lie la socket au flux
+	stream.setDevice(socket);
 }
 
 void NetworkDrawingBoard::dataIncoming()
 {
 	qDebug() << "Réception de données";
-	
-	// Le QDataStream est lié à la socket
-	QDataStream stream(socket);
 	
 	// On regarde le message
 	QString command;
@@ -68,11 +76,27 @@ void NetworkDrawingBoard::dataIncoming()
 			scene->addPixmap(pixmap);
 		}
 	}
+	if(command == "order")
+	{
+		// TODO : dessiner au point indiqué par le serveur
+		QString type;
+		stream >> type;
+		
+		if(type == "qpoint")
+		{
+			QPoint p;
+			stream >> p;
+			
+			// Dessiner sur le tableau local
+			scene->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
+		}
+	}
 }
 
 void NetworkDrawingBoard::disconnected()
 {
 	qDebug() << "Déconnexion du serveur";
 }
+
 
 

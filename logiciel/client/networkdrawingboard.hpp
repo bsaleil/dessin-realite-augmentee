@@ -27,6 +27,7 @@ class NetworkDrawingBoard : public DrawingBoard
 		QTcpSocket* socket;			// Communication avec le serveur
 		QString host;
 		int port;
+		QDataStream stream; 			// Lié à la socket, pour sérialiser des données
 	
 	private slots :
 		void connectionActive();		// Connexion active

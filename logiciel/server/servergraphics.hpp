@@ -12,18 +12,17 @@ using namespace std;
 #include <QGraphicsView>
 #include <QDebug>
 
-class ServerGraphics : QGraphicsView
+class ServerGraphics : public QGraphicsView
 {
 	Q_OBJECT
 	
 	private :
-		QGraphicsScene* scene;
+		QGraphicsScene* sceneTab;
 	
 	public :
 		ServerGraphics();
 		void addPoint(QPoint p);		// Ajoute un point sur la scene
-		
-		QGraphicsScene* getGraphicsScene();
+
 };
 
 

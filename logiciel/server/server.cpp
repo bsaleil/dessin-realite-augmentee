@@ -17,11 +17,11 @@ void Server::newConnection()
 	
 	QTcpSocket *client = tcpServer->nextPendingConnection();
 	clients << client;
-
-	QGraphicsScene *scene = graphics->getGraphicsScene();
-	QGraphicsView* view = new QGraphicsView(scene);
 	
-	QPixmap pixmap = QPixmap::grabWidget(view);
+	// On lit la socket au slot approprié
+	connect(client, SIGNAL(readyRead()), this, SLOT(readData()));
+
+	QPixmap pixmap = QPixmap::grabWidget(graphics);
 
 	// Envoi de la scène sérialisée
 	QDataStream stream(client);
@@ -30,9 +30,16 @@ void Server::newConnection()
 	stream << pixmap;
 }
 
-void Server::broadcastMessage(QObject* o)
+void Server::sendPoint(QPoint point)
 {
-	// TODO : foreach client, send
+	for(int i=0; i <clients.size(); ++i)
+	{
+		QDataStream stream(clients.at(i));
+		QString command("order");
+		QString type("qpoint");
+		stream << command << type;
+		stream << point;
+	}
 }
 
 void Server::messageTo(QTcpSocket* s, QObject* o)
@@ -40,3 +47,37 @@ void Server::messageTo(QTcpSocket* s, QObject* o)
 	
 }
 
+void Server::readData()
+{	
+	// Cherche qui a émit le signal
+	QTcpSocket *client = qobject_cast<QTcpSocket*>(sender());
+	
+	if(client == 0)
+		return;
+	
+	// Traiter le message
+	QDataStream stream(client);
+	
+	QString command;
+	QString type;
+	
+	stream >> command;
+	stream >> type;
+	
+	// TODO : factoriser
+	if(command == "order")
+	{
+		if(type == "qpoint")
+		{
+			QPoint p;	
+			stream >> p;
+			qDebug() << command << "    " << type << "Point " << p;
+			
+			graphics->addPoint(p);
+			
+			// Envoi à tous les clients du point à dessiner
+			sendPoint(p);
+		}
+	}
+}
+ 

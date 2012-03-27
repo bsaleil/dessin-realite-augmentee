@@ -24,11 +24,12 @@ class Server : QObject
 	public :
 		Server();
 		
-		void broadcastMessage(QObject*);		// Envoi à tous les clients l'objet en paramètre
+		void sendPoint(QPoint);		// Envoi à tous les clients la commande du point spécifiées
 		void messageTo(QTcpSocket* s, QObject* o);// Envoi au client spécifié	
 		
 	private slots :
 		void newConnection();
+		void readData();						// Lit les données envoyées par le client
 };
 
 
