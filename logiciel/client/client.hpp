@@ -39,6 +39,8 @@ class Client : public QMainWindow
 		Client(int, IplImage*, Cursor, QString, int);	// Pour une utilisation distante (hôte,port)
 
 	private :
+		void init(int, IplImage*, Cursor);			// Initialisation commune local-distant
+	
 		Ui::Client *ui;			// Interface graphique
 		QMdiArea *mdiArea;		// Zone multi fenetre
 		

@@ -1,4 +1,5 @@
 #include "libtrack.hpp"
+#define MARGE 5
 using namespace std;
 
 Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag)
@@ -121,11 +122,10 @@ int setNewCoord(Cursor * oldPix)
 		int x = (int)(sommeX / nbPixels);
 		int y = (int)(sommeY / nbPixels);
 		
-		// On ne redessine le point que si il y a une différence d'au moins 10 pixels
-		//TODO On paramètre ou on laisse 10? (pas mal, malgré un dessin un peu "carré")
-		if (x>oldPix->center.x+10 || x<oldPix->center.x-10)
+		// On ne redessine le point que si il y a une différence d'au moins X pixels
+		if (x>oldPix->center.x+MARGE || x<oldPix->center.x-MARGE)
 			oldPix->center.x = (int)(sommeX / nbPixels);
-		if (y>oldPix->center.y+10 || y<oldPix->center.y-10)
+		if (y>oldPix->center.y+MARGE || y<oldPix->center.y-MARGE)
 			oldPix->center.y = (int)(sommeY / nbPixels);
 	}
 	
