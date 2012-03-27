@@ -37,6 +37,30 @@ void NetworkDrawingBoard::connectionActive()
 void NetworkDrawingBoard::dataIncoming()
 {
 	qDebug() << "Réception de données";
+	
+	// Le QDataStream est lié à la socket
+	QDataStream stream(socket);
+	
+	// On regarde le message
+	QString command;
+	stream >> command;
+	
+	if(command == "item")
+	{	
+		QString type;
+		stream >> type;
+		if(type == "qpixmap")
+		{
+			// Synchronisation de la scène avec le serveur
+			QPixmap pixmap;
+			
+			stream >> pixmap;
+			pixmap.save("image.png");
+			
+			// On mets le pixmap dans la scène locale
+			
+		}
+	}
 }
 
 void NetworkDrawingBoard::disconnected()

@@ -17,18 +17,26 @@ void Server::newConnection()
 	
 	QTcpSocket *client = tcpServer->nextPendingConnection();
 	clients << client;
+
+	QGraphicsScene *scene = graphics->getGraphicsScene();
+	QGraphicsView* view = new QGraphicsView(scene);
 	
-	qDebug() << graphics->getGraphicsScene();
-	messageTo(client, graphics->getGraphicsScene());
+	QPixmap pixmap = QPixmap::grabWidget(view);
+
+	// Envoi de la scène sérialisée
+	QDataStream stream(client);
+	stream << QString("item");
+	stream << QString("qpixmap");
+	stream << pixmap;
 }
 
 void Server::broadcastMessage(QObject* o)
 {
-	
+	// TODO : foreach client, send
 }
 
 void Server::messageTo(QTcpSocket* s, QObject* o)
 {
-	//s->write(o);
+	
 }
 

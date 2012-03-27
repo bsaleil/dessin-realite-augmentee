@@ -6,6 +6,7 @@ using namespace std;
 #include <QObject>
 #include <QGraphicsScene>
 #include <QtDebug>
+#include <QFile>
 #include <QtNetwork>
 
 #include "servergraphics.hpp"

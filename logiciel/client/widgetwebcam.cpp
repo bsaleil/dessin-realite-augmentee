@@ -8,8 +8,8 @@ WidgetWebcam::WidgetWebcam() : QLabel()
 QPoint WidgetWebcam::getNewPosition(IplImage *i, Cursor *c)
 {
 	// Appel de la librairie
-	track(i,c);
-	QPoint p(c->center.x,c->center.y);
+	track(i, c);
+	QPoint p(c->center.x, c->center.y);
 	
 	setPixmap(QPixmap::fromImage(iplToQimage(i)));
 	return p;

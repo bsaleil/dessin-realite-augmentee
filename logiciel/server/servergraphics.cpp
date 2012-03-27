@@ -2,9 +2,10 @@
 
 ServerGraphics::ServerGraphics()
 {
-	qDebug() << "tableau du serveur";
-	scene = new QGraphicsScene(this);
+	this->setFixedSize(640, 480);
+	this->setSceneRect(0, 0, 640, 480);
 	
+	scene = new QGraphicsScene();
 	this->setScene(scene);
 }
 
