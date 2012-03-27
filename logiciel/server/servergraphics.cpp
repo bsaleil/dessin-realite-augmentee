@@ -2,16 +2,16 @@
 
 ServerGraphics::ServerGraphics()
 {
-	this->setFixedSize(640, 480);
-	this->setSceneRect(0, 0, 640, 480);
+	setFixedSize(640, 480);
+	setSceneRect(0, 0, 640, 480);
 	
 	scene = new QGraphicsScene();
-	this->setScene(scene);
+	setScene(scene);
 }
 
 void ServerGraphics::addPoint(QPoint p)
 {
-		
+	
 }
 
 QGraphicsScene* ServerGraphics::getGraphicsScene()

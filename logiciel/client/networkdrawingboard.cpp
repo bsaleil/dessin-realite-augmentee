@@ -6,6 +6,11 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 	host = h;
 	port = p;
 	
+	setFixedSize(640, 480);
+	setSceneRect(0, 0, 640, 480);
+	scene = new QGraphicsScene();
+	setScene(scene);
+	
 	// Connexion au serveur
 	socket->abort();
 	socket->connectToHost(host, port);
@@ -21,7 +26,9 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 }		
 
 void NetworkDrawingBoard::drawPoint(int x, int y)
-{}		
+{
+	// Envoie l'odre de dessin au serveur
+}		
 		
 void NetworkDrawingBoard::drawQPoint(QPoint)
 {}
@@ -58,7 +65,7 @@ void NetworkDrawingBoard::dataIncoming()
 			pixmap.save("image.png");
 			
 			// On mets le pixmap dans la scène locale
-			
+			scene->addPixmap(pixmap);
 		}
 	}
 }

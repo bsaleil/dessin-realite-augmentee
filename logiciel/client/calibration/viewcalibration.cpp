@@ -20,7 +20,6 @@ void ViewCalibration::mousePressEvent(QMouseEvent* ev)
 			*pointA = ev->pos();
 			nbClicsEffectues++;
 			scene->addEllipse(ev->x()-2, ev->y()-2, 4, 4, QPen(QColor("red")), QBrush(Qt::SolidPattern));
-			
 		}
 		// Sinon si deuxieme clic
 		else if (nbClicsEffectues == 1)
