@@ -78,6 +78,6 @@ IplImage * reshape(IplImage * source, CvRect roi);
  * 0 success
  * -1 failure
  */
-int setNewCoord(const IplImage* binaryImg, Cursor * oldPix);
+int setNewCoord(Cursor * oldPix);
 
 #endif

@@ -18,11 +18,10 @@ Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE_TRACK flag)
 	{
 		return initShapeTrack(source, A, B);
 	}
-	else if (oldCursor->flag == TRACK_BLOB)
+	else if (flag == TRACK_BLOB)
 	{
-		return initBlobTrack(source, oldCursor);
+		return initBlobTrack(source, A, B);
 	}
-	else return -2;
 }
 
 int track(IplImage * source, Cursor * oldCursor)
@@ -95,7 +94,7 @@ Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B)
 }
 
 
-Cursor initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
+Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 {
 	Cursor * curs = new Cursor;
 	curs->flag = TRACK_COLOR;
@@ -149,11 +148,11 @@ int shapeTrack(IplImage * source, Cursor * oldCursor)
 	int y= maxLoc.y ;
 	
 	//recentrage
-	x += (int)(cursor->mask->width /2);
-	y += (int)(cursor->mask->height /2);
+	x += (int)(oldCursor->mask->width /2);
+	y += (int)(oldCursor->mask->height /2);
 	
-	cursor->center.x =x;
-	cursor->center.y =y;
+	oldCursor->center.x =x;
+	oldCursor->center.y =y;
 	return 0;
 }
 
