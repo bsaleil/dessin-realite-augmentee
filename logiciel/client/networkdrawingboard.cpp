@@ -28,6 +28,16 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 void NetworkDrawingBoard::drawPoint(int x, int y)
 {
 	// Envoie l'ordre de dessin au serveur
+	QString command("order");
+	QString type("point");
+	QString point;
+	
+	// Sérialisation du point
+	point = x + ":" + y;
+	
+	stream << command;
+	stream << type;
+	stream << point;
 }		
 		
 void NetworkDrawingBoard::drawQPoint(QPoint p)
@@ -42,7 +52,11 @@ void NetworkDrawingBoard::drawQPoint(QPoint p)
 }
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
-{}
+{
+	// TODO : envoyer l'odre de dessiner une ligne
+	qDebug() << "Dessiner ligne : " << "de (" << fromX << "," << fromY << ") à ("
+		 << toX << "," << toY << ")";
+}
 
 void NetworkDrawingBoard::connectionActive()
 {
@@ -58,12 +72,13 @@ void NetworkDrawingBoard::dataIncoming()
 	
 	// On regarde le message
 	QString command;
+	QString type;
+	
 	stream >> command;
+	stream >> type;
 	
 	if(command == "item")
 	{	
-		QString type;
-		stream >> type;
 		if(type == "qpixmap")
 		{
 			// Synchronisation de la scène avec le serveur
@@ -76,12 +91,10 @@ void NetworkDrawingBoard::dataIncoming()
 			scene->addPixmap(pixmap);
 		}
 	}
+	
+	// Ordre de dessin
 	if(command == "order")
-	{
-		// TODO : dessiner au point indiqué par le serveur
-		QString type;
-		stream >> type;
-		
+	{		
 		if(type == "qpoint")
 		{
 			QPoint p;
