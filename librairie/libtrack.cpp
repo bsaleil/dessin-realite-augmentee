@@ -2,7 +2,12 @@
 #define MARGE 5
 using namespace std;
 
-Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag)
+
+/*------------------------------------------------------------------------------
+				Envelopes Functions
+------------------------------------------------------------------------------*/
+
+Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE_TRACK flag)
 {
 	if (flag == TRACK_COLOR) 
 	{
@@ -13,6 +18,11 @@ Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag)
 	{
 		return initShapeTrack(source, A, B);
 	}
+	else if (oldCursor->flag == TRACK_BLOB)
+	{
+		return initBlobTrack(source, oldCursor);
+	}
+	else return -2;
 }
 
 int track(IplImage * source, Cursor * oldCursor)
@@ -26,14 +36,18 @@ int track(IplImage * source, Cursor * oldCursor)
 	{
 		return shapeTrack(source, oldCursor);
 	}
+
+	else if (oldCursor->flag == TRACK_BLOB)
+	{
+		return 0;// blobTrack(source, oldCursor);
+	}
 	else return -2;
 }
 
-/*
-Initialise un track par couleur
-Entrée: Une image, la zone du curseur
-Retour: La structure representant le curseur
-*/
+/*------------------------------------------------------------------------------
+				Init Functions
+------------------------------------------------------------------------------*/
+
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
 	Cursor * curs = new Cursor;
@@ -48,8 +62,8 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 									
 	//TODO calcul moyenne de couleur grace a A et B et hsv;
-	//CvScalar color = colorAverage(hsv,A,B);
-	CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
+	CvScalar color = colorAverage(hsv,A,B);
+	//CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
 	
 	cvReleaseImage(&hsv);
 	curs->color = color;
@@ -57,8 +71,126 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	return curs;
 }
 
+Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B) 
+{
+	Cursor * curs = new Cursor;
+	curs->flag = TRACK_SHAPE;
+	curs->cornerA = A;
+	curs->cornerB = B;
+	curs->threshold = 10;
 
-// Retourne l'image binarisée de 'source' en fonction des informations contenues dans le 'oldCursor' (coord et coul)
+	curs->center = center(A,B);
+	CvRect roi;
+	roi.x = A.x;
+	roi.y = A.y;
+	
+	roi.width = abs(A.x-B.x);
+	roi.height = abs(A.y-B.y);
+	
+	IplImage * mask = reshape(source, roi);
+	curs->mask = mask;		
+	
+	shapeTrack(source,curs);
+	return curs;
+}
+
+
+Cursor initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
+{
+	Cursor * curs = new Cursor;
+	curs->flag = TRACK_COLOR;
+	curs->cornerA = A;
+	curs->cornerB = B;
+	curs->threshold = 10;
+
+	curs->center = center(A,B);
+	IplImage * hsv;
+	hsv = cvCloneImage(source);
+	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
+	CvScalar color = colorAverage(hsv,A,B);
+	cvReleaseImage(&hsv);
+	curs->color = color;
+
+	colorTrack(source,curs);
+
+	return curs;
+}
+
+
+/*------------------------------------------------------------------------------
+				Tracking Functions
+------------------------------------------------------------------------------*/
+int colorTrack(IplImage * source, Cursor * oldCursor)
+{
+	int res = binarisation(source, oldCursor);
+	if (res == 0) 
+	{
+		int res2 = setNewCoord(oldCursor);
+		return res2;
+	}
+	else {return -1;}
+}
+
+int shapeTrack(IplImage * source, Cursor * oldCursor)
+{
+	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) 
+	// Allocate Output Images:
+	int iwidth = source->width - oldCursor->mask->width + 1;
+	int iheight = source->height - oldCursor->mask->height + 1;
+	result= cvCreateImage( cvSize( iwidth, iheight ), 32, 1 );
+	cvMatchTemplate(source, oldCursor->mask ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED);
+	cvNormalize( result, result, 1, 0, CV_MINMAX );
+	
+	double minVal, maxVal;
+	CvPoint maxLoc, minLoc;
+	cvMinMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, NULL); 
+	cvReleaseImage(&result);
+	int x = maxLoc.x ;
+	int y= maxLoc.y ;
+	
+	//recentrage
+	x += (int)(cursor->mask->width /2);
+	y += (int)(cursor->mask->height /2);
+	
+	cursor->center.x =x;
+	cursor->center.y =y;
+	return 0;
+}
+
+/*
+int blobTrack(IplImage *source, Cursor * oldCursor);
+{
+	cvb::CvBlobs blobs;
+	IplImage *labelImg=cvCreateImage(cvGetSize(source), IPL_DEPTH_LABEL, 1);
+	unsigned int result=cvLabel(oldPix->mask,labelImg,blobs);
+	cvRenderBlobs(labelImg,blobs,source,source);
+	if ( blobs.begin() != blobs.end())
+	{
+	int max = blobs.begin()->second->area;
+	for (cvb::CvBlobs::const_iterator it=blobs.begin(); it!=blobs.end(); ++it)
+	{
+		if (it->second->area >= max)
+		{
+			max = it->second->area;
+			if (max > 150 &&  (it->second->centroid.x > oldPix->coord.x+10 || it->second->centroid.x < oldPix->coord.x-10) || (it->second->centroid.y > oldPix->coord.y+10 || it->second->centroid.y < oldPix->coord.y-10) )
+			{
+				oldPix->coord.x = it->second->centroid.x;
+				oldPix->coord.y = it->second->centroid.y;
+			}
+			std::cout << "Blob #" << it->second->label << ": Area=" << it->second->area << ", Centroid=(" << it->second->centroid.x << ", " << it->second->centroid.y << ")" << std::endl;
+		}
+  		
+	}
+	
+	}
+	return 0;
+}
+*/
+
+/*------------------------------------------------------------------------------
+				Colors Functions
+------------------------------------------------------------------------------*/
+
 int binarisation(IplImage * source, Cursor *oldPix)
 {
 	IplImage *hsv;
@@ -94,10 +226,67 @@ int binarisation(IplImage * source, Cursor *oldPix)
 	return 0;
 }
 
-/*Met à jour le Cursor représentant le barycentre du curseur à tracker.
- * 0 en cas de succès
- * -1 en cas d'erreur : à définir
- */
+CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
+{
+	CvRect roi;
+	roi.x = A.x;
+	roi.y = A.y;
+	
+	roi.width = abs(A.x-B.x);
+	roi.height = abs(A.y-B.y);
+	
+	IplImage * mask = reshape(hsv, roi);
+	
+	
+  	CvScalar scalar;
+  	
+	int h =0;
+	int s = 0;
+	int v = 0;
+	int nbPx =0;
+
+	uchar *p, *line;
+
+  	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
+  	{
+    		for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+    			{h+= *p;   nbPx ++;}
+		for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+			s+= *p;   
+		for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+   			v+= *p;   	
+  	}  
+	cvReleaseImage(&mask);
+	scalar.val[0] = h /nbPx;
+	scalar.val[1] = s /nbPx ;
+	scalar.val[2] = v /nbPx ;
+  	return scalar;
+}
+
+/*------------------------------------------------------------------------------
+			    Miscellaneous Functions
+------------------------------------------------------------------------------*/
+
+CvPoint center(CvPoint A, CvPoint B)
+{
+	CvPoint center;
+	center.x = (A.x + B.x)/2;
+	center.y = (A.y + B.y)/2;
+	return center;
+}
+
+
+IplImage * reshape(IplImage * source, CvRect roi)
+{
+	IplImage* templ = cvCreateImage(cvSize(roi.width,roi.height), source->depth, source->nChannels);
+	cvSetImageROI(source, roi);
+
+	cvCopy(source, templ);
+	cvResetImageROI(source);
+
+	return templ;
+}
+
 int setNewCoord(Cursor * oldPix)
 {
 	if(oldPix->mask->nChannels != 1 )
@@ -130,192 +319,4 @@ int setNewCoord(Cursor * oldPix)
 	}
 	
 	return 0;
-}
-
-
-
-
-/*
-Track la nouvelle position du curseur sur l'image par couleur par moyenne de pixel
-Entrée: Une image et un curseur
-Retour: une int (et maj le curseur)
-*/
-int colorTrack(IplImage * source, Cursor * oldCursor)
-{
-	int res = binarisation(source, oldCursor);
-	if (res == 0) 
-	{
-		int res2 = setNewCoord(oldCursor);
-		return res2;
-	}
-	else {return -1;}
-}
-
-/*
-//Initialise la structure de suivi naif par Couleur
-Cursor initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
-{
-	Cursor * cursor;
-	CvPoint points;
-	cursor->cornerA= A;
-	cursor->cornerB= B;
-	cursor->center = center(A,B);
-	IplImage * hsv;
-	hsv = cvCloneImage(source);
-	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
-									
-	CvScalar color = colorAverage(hsv,A,B);
-	cvReleaseImage(&hsv);
-	cursor->center = points;
-	cursor->color = color;
-	blobTrack(source,cursor); 
-	return cursor;
-}
-
-
-//Met à jour la structure de suivi
-int blobTrack(IplImage * source, Cursor * oldPix)
-{
-	cvb::CvBlobs blobs;
-	IplImage *labelImg=cvCreateImage(cvGetSize(source), IPL_DEPTH_LABEL, 1);
-	unsigned int result=cvLabel(oldPix->mask,labelImg,blobs);
-	cvRenderBlobs(labelImg,blobs,source,source);
-	if ( blobs.begin() != blobs.end())
-	{
-	int max = blobs.begin()->second->area;
-	for (cvb::CvBlobs::const_iterator it=blobs.begin(); it!=blobs.end(); ++it)
-	{
-		if (it->second->area >= max)
-		{
-			max = it->second->area;
-			if (max > 150 &&  (it->second->centroid.x > oldPix->coord.x+10 || it->second->centroid.x < oldPix->coord.x-10) || (it->second->centroid.y > oldPix->coord.y+10 || it->second->centroid.y < oldPix->coord.y-10) )
-			{
-				oldPix->coord.x = it->second->centroid.x;
-				oldPix->coord.y = it->second->centroid.y;
-			}
-			std::cout << "Blob #" << it->second->label << ": Area=" << it->second->area << ", Centroid=(" << it->second->centroid.x << ", " << it->second->centroid.y << ")" << std::endl;
-		}
-  		
-	}
-	
-	}
-	return 0;
-}
-*/
-
-Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B) 
-{
-	Cursor * curs = new Cursor;
-	curs->flag = TRACK_SHAPE;
-	curs->cornerA = A;
-	curs->cornerB = B;
-	curs->threshold = 10;
-
-	curs->center = center(A,B);
-	CvRect roi;
-	roi.x = A.x;
-	roi.y = A.y;
-	
-	roi.width = abs(A.x-B.x);
-	roi.height = abs(A.y-B.y);
-	
-	IplImage * mask = reshape(source, roi);
-	curs->mask = mask;		
-	
-	shapeTrack(source,curs);
-	return curs;
-}
-
-
-/*
-Track la nouvelle position du curseur sur l'image par forme
-Entrée: Une image et un curseur
-Retour: une int (et maj le curseur)
-*/
-int shapeTrack(IplImage * source, Cursor * cursor)
-{
-	IplImage * result; // If image is W * H and templ is w * h then result must be (W-w+1)* (H-h+1) 
-	// Allocate Output Images:
-	int iwidth = source->width - cursor->mask->width + 1;
-	int iheight = source->height - cursor->mask->height + 1;
-	result= cvCreateImage( cvSize( iwidth, iheight ), 32, 1 );
-	cvMatchTemplate(source, cursor->mask ,result, /*CV_TM_CCORR*/CV_TM_CCORR_NORMED);
-	cvNormalize( result, result, 1, 0, CV_MINMAX );
-	
-	double minVal, maxVal;
-	CvPoint maxLoc, minLoc;
-	cvMinMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, NULL); 
-	cvReleaseImage(&result);
-	int x = maxLoc.x ;
-	int y= maxLoc.y ;
-	
-	//recentrage
-	x += (int)(cursor->mask->width /2);
-	y += (int)(cursor->mask->height /2);
-	
-	cursor->center.x =x;
-	cursor->center.y =y;
-	return 0;
-}
-
-//Average color
-CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
-{
-	CvRect roi;
-	roi.x = A.x;
-	roi.y = A.y;
-	
-	roi.width = abs(A.x-B.x);
-	roi.height = abs(A.y-B.y);
-	
-	IplImage * mask = reshape(hsv, roi);
-	
-	
-  	CvScalar scalar;
-  	
-	int h =0;
-	int s = 0;
-	int v = 0;
-	int nbPx =0;
-
-	uchar *p, *line;
-
-  for (line =  (uchar*) mask->imageData;
-       line <  (uchar*) mask->imageData + mask->imageSize;
-       line += mask->widthStep)
-  {
-    for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-    	{h+= *p;   nbPx ++;}
-    for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-    	s+= *p;   
-    for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-   		v+= *p;   
-   		
-  }  
-  cvReleaseImage(&mask);
-  scalar.val[0] = h /nbPx;
-  scalar.val[1] = s /nbPx ;
-  scalar.val[2] = v /nbPx ;
-  
-  return scalar;
-}
-
-IplImage * reshape(IplImage * source, CvRect roi)
-{
-	IplImage* templ = cvCreateImage(cvSize(roi.width,roi.height), source->depth, source->nChannels);
-	cvSetImageROI(source, roi);
-
-	cvCopy(source, templ);
-	cvResetImageROI(source);
-
-	return templ;
-}
-
-//Center between A & B
-CvPoint center(CvPoint A, CvPoint B)
-{
-	CvPoint center;
-	center.x = (A.x + B.x)/2;
-	center.y = (A.y + B.y)/2;
-	return center;
 }

@@ -8,56 +8,76 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
-enum Type_Track {TRACK_COLOR, TRACK_SHAPE, TRACK_BLOB};
+enum TYPE_TRACK {TRACK_COLOR, TRACK_SHAPE, TRACK_BLOB};
 
 typedef struct Cursor
 {
 	CvPoint center; // center position
 	CvPoint cornerA; //Up-Left position
 	CvPoint cornerB; // Down-Right
-
+	
 	CvScalar color; //HSV color of binarisation
 	IplImage *mask; // mask or template used for tracking.
 	unsigned int threshold;
 
-	Type_Track flag; // type of tracking
+	TYPE_TRACK flag; // type of tracking
 }Cursor; 
 
-Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, Type_Track flag);
 
+/*------------------------------------------------------------------------------
+				Envelopes Functions
+------------------------------------------------------------------------------*/
+
+/* Initialise a TYPE_TRACK Tracking
+ * Return : A Cursor * structure containing the track informations*/				
+Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE_TRACK flag);
+
+/* Initialise a TYPE_TRACK Tracking
+ * Return : 0 if success, -1 if failure. Also update oldCursor.*/				
 int track(IplImage * source, Cursor * oldCursor);
 
-// Update the mask in oldCursor with the source IplImage
-int binarisation(IplImage * source, Cursor * oldCursor);
-
-/* Met à jour le Cursor représentant le barycentre du curseur à tracker.
- * 0 en cas de succès
- * -1 en cas d'erreur : à définir
- */
-int setNewCoord(const IplImage* binaryImg, Cursor * oldPix);
-
-//Initialise la structure de suivi naif par Couleur
+/*------------------------------------------------------------------------------
+				Init Functions
+------------------------------------------------------------------------------*/
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B);
-
+Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B);
 Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B);
 
-//Met à jour la structure de suivi naif par Couleur en fonction de l'image passée en param.
-int colorTrack(IplImage * source, Cursor * oldPix);
 
-//Initialise la structure de suivi par matching de forme&couleur
-//IplImage initShapeTrack(IplImage * source, CvPoint a, CvPoint b); //TODO
+/*------------------------------------------------------------------------------
+				Tracking Functions
+------------------------------------------------------------------------------*/
+int colorTrack(IplImage * source, Cursor * oldCursor);
+int blobTrack(IplImage *source, Cursor * oldCursor);
+int shapeTrack(IplImage *source, Cursor * oldCursor);
 
-//Met à jour la structure de suivi par forme
-int shapeTrack(IplImage *source, Cursor * cursor);
+/*------------------------------------------------------------------------------
+				Colors Functions
+------------------------------------------------------------------------------*/
+/*Update the mask in oldCursor with the source IplImage
+Return : 0 if success, -1 if failure. Also update oldCursor.*/		
+int binarisation(IplImage * source, Cursor * oldCursor);
 
 //Average color
 CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B);
 
-//Center between A & B
+/*------------------------------------------------------------------------------
+			    Miscellaneous Functions
+------------------------------------------------------------------------------*/
+/* Compute the center beteween point A and B
+ * CvPoint center
+ */
 CvPoint center(CvPoint A, CvPoint B);
 
-Cursor * cloneCursor(Cursor * C);
-
+/* Return source cropped by cvrect roi
+ * IplImage * cropped
+ */
 IplImage * reshape(IplImage * source, CvRect roi);
+
+/* Update the center variable in oldCursor
+ * 0 success
+ * -1 failure
+ */
+int setNewCoord(const IplImage* binaryImg, Cursor * oldPix);
 
 #endif
