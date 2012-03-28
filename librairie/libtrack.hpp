@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include <cvblob.h>
 
 enum TYPE_TRACK {TRACK_COLOR, TRACK_SHAPE, TRACK_BLOB};
 
@@ -15,7 +16,7 @@ typedef struct Cursor
 	CvPoint center; // center position
 	CvPoint cornerA; //Up-Left position
 	CvPoint cornerB; // Down-Right
-	
+	unsigned int area; // area of the cursor
 	CvScalar color; //HSV color of binarisation
 	IplImage *mask; // mask or template used for tracking.
 	unsigned int threshold;
@@ -69,6 +70,10 @@ CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B);
  */
 CvPoint center(CvPoint A, CvPoint B);
 
+/* Update the center of the cursor by blob founding
+ * CvPoint center
+ */
+int blobFounding(IplImage * source,Cursor * oldCursor);
 /* Return source cropped by cvrect roi
  * IplImage * cropped
  */
@@ -78,6 +83,6 @@ IplImage * reshape(IplImage * source, CvRect roi);
  * 0 success
  * -1 failure
  */
-int setNewCoord(Cursor * oldPix);
+int setNewCoord(Cursor * oldCursor);
 
 #endif
