@@ -53,19 +53,23 @@ Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->flag = TRACK_BLOB;
 	curs->cornerA = A;
 	curs->cornerB = B;
-	cout << abs(A.x-B.x)*abs(A.y-B.y) << endl;
 	curs->area = abs(A.x-B.x)*abs(A.y-B.y);
+	cout << curs->area << endl;
 	curs->threshold = 10;
 
 	curs->center = center(A,B);
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
-	CvScalar color = colorAverage(hsv,A,B);
+	//CvScalar color = colorAverage(hsv,A,B);
+	CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
 	cvReleaseImage(&hsv);
 	curs->color = color;
 
-	blobTrack(source,curs);
+	IplImage * clone;
+	clone = cvCloneImage(source);
+	blobTrack(clone,curs);
+	cvReleaseImage(&clone);
 
 	return curs;
 }
@@ -83,7 +87,9 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
-	CvScalar color = colorAverage(hsv,A,B);
+
+	CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
+	//CvScalar color = colorAverage(hsv,A,B);
 	cvReleaseImage(&hsv);
 
 	curs->color = color;
@@ -125,6 +131,7 @@ Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B)
 
 int blobTrack(IplImage *source, Cursor * oldCursor)
 {
+	
 	int res = binarisation(source, oldCursor);
 	if (res == 0) 
 	{
@@ -222,7 +229,6 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 	
 	IplImage * mask = reshape(hsv, roi);
 	
-	
   	CvScalar scalar;
   	
 	int h =0;
@@ -271,24 +277,28 @@ int blobFounding(IplImage *source, Cursor * oldCursor)
 	cvb::CvBlobs::const_iterator closest;
 	cvb::CvBlobs::const_iterator it;
 	
-	int max = blobs.begin()->second->area;
-	int count = 0;
+	unsigned int difference;
+	unsigned int reference = abs(blobs.begin()->second->area - oldCursor->area);
+	
+	
+	closest = blobs.begin();
 	for (it=blobs.begin(); it!=blobs.end(); ++it)
 	{
-		if (abs(it->second->area - oldCursor->area) <= abs(max - oldCursor->area))
+		difference = abs(it->second->area - oldCursor->area);
+		cout << difference << endl;
+		if (difference < reference)
 		{
-			max = it->second->area;
+			reference = difference;
 			closest = it;
 		}
-		count++;
   		
 	}
-
-	it = closest;
-	if ((it->second->centroid.x > oldCursor->center.x+10 || it->second->centroid.x < oldCursor->center.x-10) || (it->second->centroid.y > oldCursor->center.y+10 || it->second->centroid.y < oldCursor->center.y-10) )
+	
+	if ((closest->second->centroid.x > oldCursor->center.x+MARGE || closest->second->centroid.x < oldCursor->center.x-MARGE) || (closest->second->centroid.y > oldCursor->center.y+MARGE || closest->second->centroid.y < oldCursor->center.y-MARGE) )
 	{
-		oldCursor->center.x = it->second->centroid.x;
-		oldCursor->center.y = it->second->centroid.y;
+		oldCursor->center.x = closest->second->centroid.x;
+		oldCursor->center.y = closest->second->centroid.y;
+		oldCursor->area = closest->second->area;
 	}
 	
 	
