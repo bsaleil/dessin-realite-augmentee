@@ -98,6 +98,8 @@ void Calibration::loadSettingsStep(int oldStep)
 	{
 		CvPoint a; a.x = pointChoisiA->x(); a.y = pointChoisiA->y();
 		CvPoint b; b.x = pointChoisiB->x(); b.y = pointChoisiB->y();
+		
+		// Choix du track
 		curseur = calibration(imageCapturee, a, b, TRACK_COLOR);
 		
 		clearLayout(layoutCentral);
