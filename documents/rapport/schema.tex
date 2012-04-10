@@ -31,11 +31,11 @@ Elle contient principalement une fonction d'étalonnage qui permet de signifier 
 Ce schéma présente un déroulement des opérations lors d'une connexion et d'un dessin en utilisant les fonctionnalités réseaux.\\
 
 \begin{itemize}
-	\item Le client effectue son étalonnage
 	\item Le client se connecte
+	\item Le client effectue son étalonnage
 	\item Le serveur l'enregistre, et lui envoie le tableau courant (vide ou non)
 	\item Le client stocke le tableau et commence à détecter un mouvement
-	\item Il envoie son le mouvement détecté
+	\item Il envoie le mouvement détecté
 	\item Le serveur reçoit le mouvement, dessine en local et renvoie à tous les clients l'ordre de dessin
 	\item Le client reçoit l'ordre et dessine en local
 \end{itemize}
@@ -44,6 +44,7 @@ Ce schéma présente un déroulement des opérations lors d'une connexion et d'u
 	\includegraphics[scale=0.5]{../uml/sequence_reseau.png}
 \end{center}
 
+% TODO : expliquer l'architecture côté client pour gérer local/réseau
 
 \end{document}
 

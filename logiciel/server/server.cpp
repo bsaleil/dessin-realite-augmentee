@@ -21,13 +21,12 @@ void Server::newConnection()
 	// On lit la socket au slot approprié
 	connect(client, SIGNAL(readyRead()), this, SLOT(readData()));
 
+	// Récupération de la pixmap depuis la scène
 	QPixmap pixmap = QPixmap::grabWidget(graphics);
 
 	// Envoi de la scène sérialisée
 	QDataStream stream(client);
-	stream << QString("item");
-	stream << QString("qpixmap");
-	stream << pixmap;
+	PackageManager::sendPixmap(stream, pixmap);
 }
 
 void Server::sendPoint(QPoint point)
@@ -35,16 +34,9 @@ void Server::sendPoint(QPoint point)
 	for(int i=0; i <clients.size(); ++i)
 	{
 		QDataStream stream(clients.at(i));
-		QString command("order");
-		QString type("qpoint");
-		stream << command << type;
-		stream << point;
+		
+		PackageManager::sendPoint(stream, point);
 	}
-}
-
-void Server::messageTo(QTcpSocket* s, QObject* o)
-{
-	
 }
 
 void Server::readData()
@@ -52,6 +44,7 @@ void Server::readData()
 	// Cherche qui a émit le signal
 	QTcpSocket *client = qobject_cast<QTcpSocket*>(sender());
 	
+	// Si on ne trouve pas, on quitte
 	if(client == 0)
 		return;
 	

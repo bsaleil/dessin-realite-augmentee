@@ -10,6 +10,7 @@ using namespace std;
 #include <QtNetwork>
 
 #include "servergraphics.hpp"
+#include "packagemanager.hpp"
 
 class Server : QObject
 {
@@ -25,7 +26,6 @@ class Server : QObject
 		Server();
 		
 		void sendPoint(QPoint);		// Envoi à tous les clients la commande du point spécifiées
-		void messageTo(QTcpSocket* s, QObject* o);// Envoi au client spécifié	
 		
 	private slots :
 		void newConnection();
