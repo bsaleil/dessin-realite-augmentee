@@ -20,6 +20,7 @@ typedef struct Cursor
 	CvScalar color; //HSV color of binarisation
 	IplImage *mask; // mask or template used for tracking.
 	unsigned int threshold;
+	bool active;
 
 	TYPE_TRACK flag; // type of tracking
 }Cursor; 

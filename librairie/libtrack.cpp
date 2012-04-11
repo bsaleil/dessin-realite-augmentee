@@ -56,7 +56,7 @@ Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->area = abs(A.x-B.x)*abs(A.y-B.y);
 	cout << curs->area << endl;
 	curs->threshold = 10;
-
+	curs->active = false;
 	curs->center = center(A,B);
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
@@ -277,31 +277,36 @@ int blobFounding(IplImage *source, Cursor * oldCursor)
 	cvb::CvBlobs::const_iterator closest;
 	cvb::CvBlobs::const_iterator it;
 	
-	unsigned int difference;
-	unsigned int reference = abs(blobs.begin()->second->area - oldCursor->area);
-	
-	
+	int difference = 0;
+	int reference = abs(oldCursor->area - blobs.begin()->second->m00);
+
 	closest = blobs.begin();
 	for (it=blobs.begin(); it!=blobs.end(); ++it)
 	{
-		difference = abs(it->second->area - oldCursor->area);
-		cout << difference << endl;
+		difference = abs(oldCursor->area - it->second->m00);
+		
 		if (difference < reference)
 		{
 			reference = difference;
 			closest = it;
 		}
-  		
 	}
+
 	
 	if ((closest->second->centroid.x > oldCursor->center.x+MARGE || closest->second->centroid.x < oldCursor->center.x-MARGE) || (closest->second->centroid.y > oldCursor->center.y+MARGE || closest->second->centroid.y < oldCursor->center.y-MARGE) )
 	{
 		oldCursor->center.x = closest->second->centroid.x;
 		oldCursor->center.y = closest->second->centroid.y;
-		oldCursor->area = closest->second->area;
+		//oldCursor->area = closest->second->area;
 	}
-	
-	
+	if (closest->second->m00 > (oldCursor->area+(oldCursor->area/10)))
+	{
+		oldCursor->active = true;
+	}
+	else
+	{
+		oldCursor->active = false;
+	}
 	}
 	return 0;
 }
