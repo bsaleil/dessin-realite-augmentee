@@ -58,9 +58,17 @@ int WebcamManager::getNumberOfWebcams()
 	return nbCams;
 }
 
-void WebcamManager::runWebcam()
+int WebcamManager::runWebcam()
 {
 	capture = cvCaptureFromCAM(webcam);
+	
+	if(capture == 0)
+	{
+		cout << "Échec à l'ouverture de la caméra";
+		return -1;
+	}
+	
+	return 0;
 }
 
 void WebcamManager::setWebcam(int w)

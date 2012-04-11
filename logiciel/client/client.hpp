@@ -42,7 +42,7 @@ class Client : public QMainWindow
 		void init(int, IplImage*, Cursor);			// Initialisation commune local-distant
 	
 		Ui::Client *ui;			// Interface graphique
-		QMdiArea *mdiArea;		// Zone multi fenetre
+		QMdiArea *mdiArea;		// Zone multi fenêtres
 		
 		DrawingBoard *drawingBoard;	// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams

@@ -6,5 +6,14 @@
  * 	découpé en amont, et le PackageManager agit suivant la commande
  */
 
+using namespace std;
+
+class PackageManager
+{
+	
+
+
+
+};
 
 #endif

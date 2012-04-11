@@ -29,7 +29,8 @@ class Server : QObject
 		
 	private slots :
 		void newConnection();
-		void readData();						// Lit les données envoyées par le client
+		void readData();		// Lit les données envoyées par le client
+		void disconnection();		// Un client se déconnecte
 };
 
 

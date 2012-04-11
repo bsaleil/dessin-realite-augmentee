@@ -21,8 +21,7 @@ class WebcamManager
 		IplImage* getImage();		// Retourne une image du flux
 		IplImage* getImageInit(int);	// Retourne l'image donnée par la webcam
 		int getNumberOfWebcams();	// Retourne le nombre de webcams disponibles
-		// TODO : éventuellement un retour
-		void runWebcam();		// Ouvre la webcam
+		int runWebcam();		// Ouvre la webcam, retourne -1 si erreur, 0 sinon
 		void setWebcam(int);		// Défini la webcam à utiliser
 		void stopWebcam();
 		

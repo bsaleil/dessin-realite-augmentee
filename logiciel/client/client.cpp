@@ -12,6 +12,7 @@ Client::Client(int w, IplImage* i, Cursor c, QString h, int p) : ui(new Ui::Clie
 {	
 	// Utilisation de drawingboard en réseau
 	drawingBoard = new NetworkDrawingBoard(h, p);
+	
 	// Initialisation commune
 	init(w,i,c);
 }
@@ -26,6 +27,7 @@ void Client::init(int w, IplImage *i, Cursor c)
 	ui->setupUi(this);
 	mdiArea = new QMdiArea();
 	this->setCentralWidget(mdiArea);
+	this->setWindowTitle("Tableau virtuel interactif");
 
 	// Classes utilisées
 	camManager = new WebcamManager();
@@ -40,7 +42,7 @@ void Client::init(int w, IplImage *i, Cursor c)
 
 	// Lancement du widget de dessin
 	mdiArea->addSubWindow(camWidget);
-
+	
 	// Démarrage du timer
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
@@ -51,9 +53,11 @@ void Client::tick()
 {		
 	// Récupération de la nouvelle image
 	image = camManager->getImage();
-	cvFlip(image, image,1);
+	cvFlip(image, image, 1);
+	
 	// Calcul de la position de l'objet suivi
 	QPoint p = camWidget->getNewPosition(image,curseur);
+	
 	// Dessin du point
 	drawingBoard->drawQPoint(p);
 }

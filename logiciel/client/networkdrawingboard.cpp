@@ -68,8 +68,6 @@ void NetworkDrawingBoard::connectionActive()
 
 void NetworkDrawingBoard::dataIncoming()
 {
-	qDebug() << "Réception de données";
-	
 	// On regarde le message
 	QString command;
 	QString type;
@@ -84,8 +82,8 @@ void NetworkDrawingBoard::dataIncoming()
 			// Synchronisation de la scène avec le serveur
 			QPixmap pixmap;
 			
+			// TODO : corriger le warning 
 			stream >> pixmap;
-			pixmap.save("image.png");
 			
 			// On mets le pixmap dans la scène locale
 			scene->addPixmap(pixmap);

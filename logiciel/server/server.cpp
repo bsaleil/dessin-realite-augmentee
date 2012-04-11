@@ -20,6 +20,7 @@ void Server::newConnection()
 	
 	// On lit la socket au slot approprié
 	connect(client, SIGNAL(readyRead()), this, SLOT(readData()));
+	connect(client, SIGNAL(disconnected()), this, SLOT(disconnection()));
 
 	// Récupération de la pixmap depuis la scène
 	QPixmap pixmap = QPixmap::grabWidget(graphics);
@@ -37,6 +38,23 @@ void Server::sendPoint(QPoint point)
 		
 		PackageManager::sendPoint(stream, point);
 	}
+}
+
+/* SLOTS */
+void Server::disconnection()
+{
+	// Cherche qui a émit le signal
+	QTcpSocket *client = qobject_cast<QTcpSocket*>(sender());
+	
+	// Si on ne trouve pas, on quitte
+	if(client == 0)
+		return;
+
+	// On retire le client de la liste
+	qDebug() << "Un client se déconnecte";
+	clients.removeOne(client);
+	
+	qDebug() << clients;
 }
 
 void Server::readData()
@@ -64,7 +82,6 @@ void Server::readData()
 		{
 			QPoint p;	
 			stream >> p;
-			qDebug() << command << "    " << type << "Point " << p;
 			
 			graphics->addPoint(p);
 			
