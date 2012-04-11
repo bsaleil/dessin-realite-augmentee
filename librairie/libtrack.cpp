@@ -1,5 +1,6 @@
 #include "libtrack.hpp"
 #define MARGE 5
+#define GROW 6
 using namespace std;
 
 
@@ -299,7 +300,7 @@ int blobFounding(IplImage *source, Cursor * oldCursor)
 		oldCursor->center.y = closest->second->centroid.y;
 		//oldCursor->area = closest->second->area;
 	}
-	if (closest->second->m00 > (oldCursor->area+(oldCursor->area/10)))
+	if (closest->second->m00 > (oldCursor->area+(oldCursor->area/GROW)))
 	{
 		oldCursor->active = true;
 	}
@@ -308,6 +309,8 @@ int blobFounding(IplImage *source, Cursor * oldCursor)
 		oldCursor->active = false;
 	}
 	}
+	cvReleaseImage(&labelImg);
+	cvReleaseBlobs(blobs);
 	return 0;
 }
 
