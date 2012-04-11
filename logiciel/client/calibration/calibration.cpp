@@ -3,9 +3,12 @@
 Calibration::Calibration() : QWidget()
 {
 	step = 1;
+	
 	// Etat de l'étalonnage :
 	webcamChoisie = -1;
+	tracking = ""; 
 	choixWebcams = NULL;
+	trackingChoice = NULL;
 
 	// Layout principal
 	QVBoxLayout *layoutPrincipal = new QVBoxLayout();
@@ -20,6 +23,7 @@ Calibration::Calibration() : QWidget()
 			boutonPrecedent = new QPushButton("<- Precedent");
 			boutonSuivant = new QPushButton("Suivant ->");
 	
+	// Boutons suivants et précédents
 	layoutBas->addItem(espaceBasGauche,0,0,1,1);
 	layoutBas->addWidget(boutonPrecedent,0,1,1,1);
 	layoutBas->addWidget(boutonSuivant,0,2,1,1);
@@ -51,7 +55,20 @@ void Calibration::loadWebcamsStep(int oldStep)
 	int nb = wm.getNumberOfWebcams();
 	for (int i=0; i<nb; i++)
 		choixWebcams->addItem("Webcam " + QString::number(i));
+		
+	// Choix de la méthode de Tracking
+	QLabel *labelTracking = new QLabel("Choisissez le type de suivi :");
+	trackingChoice = new QComboBox();
 	
+	layoutCentral->addWidget(labelTracking);
+	layoutCentral->addWidget(trackingChoice);
+	
+	// Types de trackings : couleur, forme, blob
+	trackingChoice->addItem("Couleur");
+	trackingChoice->addItem("Forme");
+	trackingChoice->addItem("Blob");
+	
+	// Empêcher de revenir en arrière
 	boutonPrecedent->setEnabled(false);
 }
 
@@ -59,10 +76,15 @@ void Calibration::loadClicksStep(int oldStep)
 {
 	pointChoisiA = new QPoint(-1,-1);
 	pointChoisiB = new QPoint(-1,-1);
-	// Si l'on vient de choisir la webcam
-	if (oldStep == 1)
-		webcamChoisie = choixWebcams->currentIndex();
 	
+	// Si l'on vient de choisir la webcam et le track
+	if(oldStep == 1)
+	{
+		// Sauvegarde des valeurs
+		webcamChoisie = choixWebcams->currentIndex();
+		tracking = trackingChoice->currentText();
+	}
+			
 	clearLayout(layoutCentral);
 	
 	QLabel *labelClicks = new QLabel("Cliquez deux fois pour selectionner votre objet :");
@@ -99,8 +121,15 @@ void Calibration::loadSettingsStep(int oldStep)
 		CvPoint a; a.x = pointChoisiA->x(); a.y = pointChoisiA->y();
 		CvPoint b; b.x = pointChoisiB->x(); b.y = pointChoisiB->y();
 		
-		// Choix du track
-		curseur = calibration(imageCapturee, a, b, TRACK_COLOR);
+		// Choix de l'étalonnage
+		if(tracking == "Couleur")
+			curseur = calibration(imageCapturee, a, b, TRACK_COLOR);
+		
+		if(tracking == "Forme")
+			curseur = calibration(imageCapturee, a, b, TRACK_SHAPE);
+			
+		if(tracking == "Blob")
+			curseur = calibration(imageCapturee, a, b, TRACK_BLOB);
 		
 		clearLayout(layoutCentral);
 	
@@ -150,9 +179,11 @@ void Calibration::slotSliderSettings(int value)
 {
 	// Modification de la valeur affichée
 	labelSlider->setText("Seuil : " + QString::number(value));
+	
 	// Appel de la fonction pour la nouvelle image
 	curseur->threshold = value;
 	binarisation(imageCapturee,curseur);
+	
 	// Modification de l'image affichée
 	imageSettings->setPixmap(QPixmap::fromImage(iplToQimage(curseur->mask)));
 }

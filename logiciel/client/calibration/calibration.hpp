@@ -34,6 +34,7 @@ class Calibration : public QWidget
 	private :
 		// Etat de l'étalonnage :
 		int webcamChoisie;
+		QString tracking;
 		QPoint *pointChoisiA;
 		QPoint *pointChoisiB;
 		
@@ -42,6 +43,7 @@ class Calibration : public QWidget
 		Cursor *curseur;
 		
 		QComboBox *choixWebcams;
+		QComboBox *trackingChoice;	// Choisir le type de suivi
 		QVBoxLayout *layoutCentral;
 		QPushButton *boutonPrecedent;
 		QPushButton *boutonSuivant;
