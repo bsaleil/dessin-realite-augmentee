@@ -30,16 +30,6 @@ void Server::newConnection()
 	PackageManager::sendPixmap(stream, pixmap);
 }
 
-void Server::sendPoint(QPoint point)
-{
-	for(int i=0; i <clients.size(); ++i)
-	{
-		QDataStream stream(clients.at(i));
-		
-		PackageManager::sendPoint(stream, point);
-	}
-}
-
 /* SLOTS */
 void Server::disconnection()
 {
@@ -70,24 +60,13 @@ void Server::readData()
 	QDataStream stream(client);
 	
 	QString command;
-	QString type;
-	
 	stream >> command;
-	stream >> type;
-	
-	// TODO : factoriser
+
+	// Commandes possibles
 	if(command == "order")
 	{
-		if(type == "qpoint")
-		{
-			QPoint p;	
-			stream >> p;
-			
-			graphics->addPoint(p);
-			
-			// Envoi à tous les clients du point à dessiner
-			sendPoint(p);
-		}
+		// On délègue le traitement du paquet
+		PackageManager::order(stream, clients, graphics);
 	}
 }
  
