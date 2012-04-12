@@ -55,7 +55,7 @@ Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->cornerA = A;
 	curs->cornerB = B;
 	curs->area = abs(A.x-B.x)*abs(A.y-B.y);
-	cout << curs->area << endl;
+
 	curs->threshold = 10;
 	curs->active = false;
 	curs->center = center(A,B);
@@ -271,8 +271,7 @@ int blobFounding(IplImage *source, Cursor * oldCursor)
 {
 	cvb::CvBlobs blobs;
 	IplImage *labelImg=cvCreateImage(cvGetSize(source), IPL_DEPTH_LABEL, 1);
-	unsigned int result=cvLabel(oldCursor->mask,labelImg,blobs);
-	cvRenderBlobs(labelImg,blobs,source,source);
+	cvLabel(oldCursor->mask,labelImg,blobs);
 	if ( blobs.begin() != blobs.end())
 	{
 	cvb::CvBlobs::const_iterator closest;
@@ -292,24 +291,30 @@ int blobFounding(IplImage *source, Cursor * oldCursor)
 			closest = it;
 		}
 	}
-
-	
+	if (closest->second->m00 < oldCursor->area * 10 && closest->second->m00 > oldCursor->area/10)
+	{
+	cvRenderBlob(labelImg,closest->second,source,source);
 	if ((closest->second->centroid.x > oldCursor->center.x+MARGE || closest->second->centroid.x < oldCursor->center.x-MARGE) || (closest->second->centroid.y > oldCursor->center.y+MARGE || closest->second->centroid.y < oldCursor->center.y-MARGE) )
 	{
+
 		oldCursor->center.x = closest->second->centroid.x;
 		oldCursor->center.y = closest->second->centroid.y;
-		//oldCursor->area = closest->second->area;
+
+		//oldCursor->area = closest->second->m00;
 	}
 	if (closest->second->m00 > (oldCursor->area+(oldCursor->area/GROW)))
 	{
 		oldCursor->active = true;
 	}
-	else
+
+	else if (closest->second->m00 < (oldCursor->area+(oldCursor->area/(GROW*2))))
 	{
 		oldCursor->active = false;
 	}
 	}
+	}
 	cvReleaseImage(&labelImg);
+	
 	cvReleaseBlobs(blobs);
 	return 0;
 }
