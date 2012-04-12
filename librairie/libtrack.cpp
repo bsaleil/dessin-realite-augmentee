@@ -1,7 +1,7 @@
 #include "libtrack.hpp"
 #define MARGE 5
 #define GROW 6
-#define RATIO 4
+#define RATIO 2
 using namespace std;
 
 
@@ -195,12 +195,11 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
 	//int v = (int)pixel.val[2];
-	cout << h << ":" << s << endl;
 	int tolerance = oldCursor->threshold;
 	
 	IplImage * mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
-	cvInRangeS(hsv, cvScalar(h - tolerance/RATIO -1, s - tolerance, 0,0), cvScalar(h + tolerance -1, s + tolerance, 255,0), mask);
+	cvInRangeS(hsv, cvScalar(h - (tolerance/RATIO) -1, s - tolerance, 0,0), cvScalar(h + (tolerance/RATIO) -1, s + tolerance, 255,0), mask);
 	
 	//Il convient ensuite d'appliquer une fermeture (érosion puis dilatation) à notre image, 
 	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
