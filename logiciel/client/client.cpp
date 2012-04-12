@@ -59,7 +59,7 @@ void Client::tick()
 	QPoint p = camWidget->getNewPosition(image,curseur);
 	
 	// Dessin du point
-	if (curseur->active)
+	if(curseur->active)
 		drawingBoard->drawQPoint(p);
 }
 

@@ -12,6 +12,7 @@
 #include <QTcpSocket>
 
 #include "drawingboard.hpp"
+#include "packagemanager.hpp"
 
 class NetworkDrawingBoard : public DrawingBoard
 {

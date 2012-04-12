@@ -27,33 +27,19 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 
 void NetworkDrawingBoard::drawPoint(int x, int y)
 {
-	// Envoie l'ordre de dessin au serveur
-	QString command("order");
-	QString type("point");
-	QString point;
-	
-	// Sérialisation du point
-	point = x + ":" + y;
-	
-	stream << command;
-	stream << type;
-	stream << point;
+	// Délègue au package manager
+	QPoint point(x, y);
+	PackageManager::sendPoint(stream, point);
 }		
 		
 void NetworkDrawingBoard::drawQPoint(QPoint p)
-{	
-	// Envoie l'ordre de dessin au serveur
-	QString command("order");
-	QString type("qpoint");
-	
-	stream << command;
-	stream << type;
-	stream << p;
+{
+	PackageManager::sendPoint(stream, p);		
 }
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 {
-	// TODO : envoyer l'odre de dessiner une ligne
+	// TODO : envoyer l'ordre de dessiner une ligne
 	qDebug() << "Dessiner ligne : " << "de (" << fromX << "," << fromY << ") à ("
 		 << toX << "," << toY << ")";
 }
@@ -68,39 +54,20 @@ void NetworkDrawingBoard::connectionActive()
 
 void NetworkDrawingBoard::dataIncoming()
 {
-	// On regarde le message
+	// On regarde la commande
 	QString command;
-	QString type;
-	
 	stream >> command;
-	stream >> type;
 	
+	// Réception d'un objet
 	if(command == "item")
 	{	
-		if(type == "qpixmap")
-		{
-			// Synchronisation de la scène avec le serveur
-			QPixmap pixmap;
-			
-			// TODO : corriger le warning 
-			stream >> pixmap;
-			
-			// On mets le pixmap dans la scène locale
-			scene->addPixmap(pixmap);
-		}
+		PackageManager::item(stream, scene);
 	}
 	
 	// Ordre de dessin
 	if(command == "order")
 	{		
-		if(type == "qpoint")
-		{
-			QPoint p;
-			stream >> p;
-			
-			// Dessiner sur le tableau local
-			scene->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
-		}
+		PackageManager::order(stream, scene);
 	}
 }
 
