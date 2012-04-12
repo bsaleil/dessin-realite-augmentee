@@ -83,7 +83,7 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	curs->cornerA = A;
 	curs->cornerB = B;
 	curs->threshold = 10;
-
+	curs->active = true;
 	curs->center = center(A,B);
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
