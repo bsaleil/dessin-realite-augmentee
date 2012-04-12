@@ -232,15 +232,15 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 	IplImage * mask = reshape(hsv, roi);
 	
 	//création sous image pour la zone "pertinente" de l'objet
-	int ratio = 20;
-	CvRect underRect = underROI(roi, ratio); // ratio a determiner/fixer : 20% ?
-	IplImage * suitableZone = reshape(hsv, underRect);
+	//int ratio = 20;
+	//CvRect underRect = underROI(roi, ratio); // ratio a determiner/fixer : 20% ?
+	//IplImage * suitableZone = reshape(hsv, underRect);
 	
 	//puis on on fait la moyenne sur un échantillonage de cette sous-zone, afin de servir de seuil
-	 int nbPixels = 10;
-	CvScalar underAvg =  sampledColorAverage (suitableZone, nbPixels); // nbPixels a determiner/fixer : 10/20 pixels.
+	// int nbPixels = 10;
+	//CvScalar underAvg =  sampledColorAverage (suitableZone, nbPixels); // nbPixels a determiner/fixer : 10/20 pixels.
 	//puis on peut libérer cette sous image
-	cvReleaseImage(&suitableZone);
+	//cvReleaseImage(&suitableZone);
 	
   	CvScalar scalar;
   	
