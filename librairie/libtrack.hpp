@@ -63,6 +63,8 @@ int binarisation(IplImage * source, Cursor * oldCursor);
 //Average color
 CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B);
 
+CvScalar sampledColorAverage (IplImage *udrImg, int nbPixels);
+
 /*------------------------------------------------------------------------------
 			    Miscellaneous Functions
 ------------------------------------------------------------------------------*/
@@ -79,6 +81,8 @@ int blobFounding(IplImage * source,Cursor * oldCursor);
  * IplImage * cropped
  */
 IplImage * reshape(IplImage * source, CvRect roi);
+
+CvRect underROI (CvRect fullRect, int ratio);
 
 /* Update the center variable in oldCursor
  * 0 success

@@ -90,8 +90,8 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 
-	CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
-	//CvScalar color = colorAverage(hsv,A,B);
+	//CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
+	CvScalar color = colorAverage(hsv,A,B);
 	cvReleaseImage(&hsv);
 
 	curs->color = color;
@@ -206,8 +206,8 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	IplConvKernel *structurant;
 /*	structurants possibles : 
 	-CV_SHAPE_RECT
-    	-CV_SHAPE_CROSS
-    	-CV_SHAPE_ELLIPSE
+    -CV_SHAPE_CROSS
+    -CV_SHAPE_ELLIPSE
    	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
 	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
@@ -231,6 +231,17 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 	
 	IplImage * mask = reshape(hsv, roi);
 	
+	//création sous image pour la zone "pertinente" de l'objet
+	int ratio = 20;
+	CvRect underRect = underROI(roi, ratio); // ratio a determiner/fixer : 20% ?
+	IplImage * suitableZone = reshape(hsv, underRect);
+	
+	//puis on on fait la moyenne sur un échantillonage de cette sous-zone, afin de servir de seuil
+	 int nbPixels = 10;
+	CvScalar underAvg =  sampledColorAverage (suitableZone, nbPixels); // nbPixels a determiner/fixer : 10/20 pixels.
+	//puis on peut libérer cette sous image
+	cvReleaseImage(&suitableZone);
+	
   	CvScalar scalar;
   	
 	int h =0;
@@ -242,8 +253,8 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 
   	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
   	{
-    		for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-    			{h+= *p;   nbPx ++;}
+    	for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+    		{h+= *p;   nbPx ++;}
 		for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
 			s+= *p;   
 		for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
@@ -254,6 +265,34 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 	scalar.val[1] = s /nbPx ;
 	scalar.val[2] = v /nbPx ;
   	return scalar;
+}
+
+CvScalar sampledColorAverage (IplImage *udrImg, int nbPixels)
+{
+	CvScalar moy;
+
+	int h =0;
+	int s = 0;
+	int v = 0;
+	
+	srand ( time(NULL) );
+	
+	int x,y;
+	CvScalar randPx;
+	for (int i =0 ; i < nbPixels ; i++)
+	{
+		x = rand() % udrImg->width;
+		y = rand() % udrImg->height;
+		randPx = cvGet2D(udrImg, x,y);
+		h += randPx.val[0];
+		s += randPx.val[1];
+		v += randPx.val[2];
+	}
+
+	moy.val[0] = h /nbPixels;
+	moy.val[1] = s /nbPixels ;
+	moy.val[2] = v /nbPixels ;
+  	return moy;
 }
 
 /*------------------------------------------------------------------------------
@@ -329,6 +368,17 @@ IplImage * reshape(IplImage * source, CvRect roi)
 	cvResetImageROI(source);
 
 	return templ;
+}
+
+CvRect underROI (CvRect fullRect, int ratio)
+{
+	CvRect underRect;
+	underRect.x = fullRect.x + fullRect.width/2 - (ratio / 200)* fullRect.width;
+	underRect.y = fullRect.y + fullRect.height/2 - (ratio / 200)* fullRect.height;
+	underRect.width = (ratio / 100)* fullRect.width;
+	underRect.height = (ratio / 100)* fullRect.height;
+	
+	return underRect;
 }
 
 int setNewCoord(Cursor * oldCursor)
