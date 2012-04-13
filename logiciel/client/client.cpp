@@ -4,6 +4,7 @@ Client::Client(int w, IplImage* i, Cursor c) : ui(new Ui::Client)
 {
 	// Utilisation de drawingboard en local
 	drawingBoard = new LocalDrawingBoard();
+	
 	// Initialisation commune
 	init(w,i,c);
 }
@@ -43,10 +44,26 @@ void Client::init(int w, IplImage *i, Cursor c)
 	// Lancement du widget de dessin
 	mdiArea->addSubWindow(camWidget);
 	
+	// Connexion à la fonction d'exportation
+	connect(ui->actionExporter, SIGNAL(triggered()), this, SLOT(exportDraw()));
+	
 	// Démarrage du timer
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
 	timer->start(40);
+}
+
+void Client::exportDraw()
+{
+	// Filtre sur les extensions possibles
+	QString filter;
+	filter += "Images (*.png, *.jpg, *.jpeg)";
+	
+	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", QString(), filter);
+	
+	// Exporter en pixmap d'abord
+	QPixmap pixmap = QPixmap::grabWidget(drawingBoard);
+	pixmap.save(fichier);
 }
 
 void Client::tick()

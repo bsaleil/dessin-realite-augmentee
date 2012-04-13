@@ -39,6 +39,8 @@
      <string>Fichier</string>
     </property>
     <addaction name="actionQuitter"/>
+    <addaction name="separator"/>
+    <addaction name="actionExporter"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
@@ -73,6 +75,17 @@
   <action name="actionArr_ter">
    <property name="text">
     <string>Arrêter</string>
+   </property>
+  </action>
+  <action name="actionExporter">
+   <property name="text">
+    <string>Exporter</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="softKeyRole">
+    <enum>QAction::NoSoftKey</enum>
    </property>
   </action>
  </widget>

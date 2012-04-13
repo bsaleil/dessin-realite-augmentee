@@ -10,6 +10,7 @@
 #include <iostream>
 #include <QAction>
 #include <QDebug>
+#include <QFileDialog>
 #include <QLabel>
 #include <QMainWindow>
 #include <QMdiArea>
@@ -53,6 +54,7 @@ class Client : public QMainWindow
 		
 	private slots :
 		void tick();
+		void exportDraw();		// Exporte le dessin courant 
 		
 };
 #endif
