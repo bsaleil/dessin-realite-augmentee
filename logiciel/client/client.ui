@@ -41,6 +41,7 @@
     <addaction name="actionQuitter"/>
     <addaction name="separator"/>
     <addaction name="actionExporter"/>
+    <addaction name="actionFlushScene"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
@@ -86,6 +87,11 @@
    </property>
    <property name="softKeyRole">
     <enum>QAction::NoSoftKey</enum>
+   </property>
+  </action>
+  <action name="actionFlushScene">
+   <property name="text">
+    <string>Vider la scène</string>
    </property>
   </action>
  </widget>

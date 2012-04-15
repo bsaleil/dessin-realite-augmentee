@@ -44,6 +44,12 @@ void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 		 << toX << "," << toY << ")";
 }
 
+void NetworkDrawingBoard::flushScene()
+{
+	// Demande de vider la scène au serveur
+	PackageManager::flushScene(stream);
+}
+
 void NetworkDrawingBoard::connectionActive()
 {
 	qDebug() << "Connexion active";
@@ -66,7 +72,7 @@ void NetworkDrawingBoard::dataIncoming()
 	
 	// Ordre de dessin
 	if(command == "order")
-	{		
+	{
 		PackageManager::order(stream, scene);
 	}
 }

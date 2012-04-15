@@ -13,3 +13,8 @@ void ServerGraphics::addPoint(QPoint p)
 {
 	sceneTab->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
 }
+
+QGraphicsScene* ServerGraphics::getScene()
+{
+	return sceneTab;
+}

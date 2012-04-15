@@ -47,6 +47,9 @@ void Client::init(int w, IplImage *i, Cursor c)
 	// Connexion à la fonction d'exportation
 	connect(ui->actionExporter, SIGNAL(triggered()), this, SLOT(exportDraw()));
 	
+	// Fonction pour vider la scène
+	connect(ui->actionFlushScene, SIGNAL(triggered()), this, SLOT(flushScene()));
+	
 	// Démarrage du timer
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
@@ -59,11 +62,17 @@ void Client::exportDraw()
 	QString filter;
 	filter += "Images (*.png, *.jpg, *.jpeg)";
 	
-	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", QString(), filter);
+	QFileDialog fileDialog;
+	QString fichier = fileDialog.getSaveFileName(this, "Ouvrir un fichier", QString(), filter);
 	
 	// Exporter en pixmap d'abord
 	QPixmap pixmap = QPixmap::grabWidget(drawingBoard);
 	pixmap.save(fichier);
+}
+
+void Client::flushScene()
+{
+	drawingBoard->flushScene();
 }
 
 void Client::tick()

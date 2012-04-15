@@ -33,6 +33,16 @@ void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, Se
 		// Envoi à tous les clients du point à dessiner
 		broadcastPoint(clients, p);
 	}
+	
+	if(type == "flush")
+	{
+		// Déclenchement du signal pour vider la scène
+		emit graphics->getScene()->clear();
+		
+		// Signale aux clients de nettoyer la scène
+		stream << QString("order");
+		stream << QString("flush");
+	}
 }
 
 void PackageManager::broadcastPoint(QList<QTcpSocket *> &clients, QPoint point)

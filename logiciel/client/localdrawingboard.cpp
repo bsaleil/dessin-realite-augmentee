@@ -24,3 +24,9 @@ void LocalDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 {
 	scene->addLine(fromX, fromY, toX, toY, QPen());
 }
+
+void LocalDrawingBoard::flushScene()
+{
+	emit scene->clear();
+}
+

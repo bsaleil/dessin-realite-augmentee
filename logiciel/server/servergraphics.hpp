@@ -22,6 +22,8 @@ class ServerGraphics : public QGraphicsView
 	public :
 		ServerGraphics();
 		void addPoint(QPoint p);		// Ajoute un point sur la scene
+		
+		QGraphicsScene* getScene();
 
 };
 

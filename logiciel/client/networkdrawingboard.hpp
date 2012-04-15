@@ -23,6 +23,7 @@ class NetworkDrawingBoard : public DrawingBoard
 		void drawPoint(int x,int y);
 		void drawQPoint(QPoint);
 		void drawLine(int fromX, int fromY, int toX, int toY);
+		void flushScene(); // Vide la scène
 	
 	private :
 		QTcpSocket* socket;			// Communication avec le serveur

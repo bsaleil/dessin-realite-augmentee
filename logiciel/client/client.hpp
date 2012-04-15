@@ -55,6 +55,7 @@ class Client : public QMainWindow
 	private slots :
 		void tick();
 		void exportDraw();		// Exporte le dessin courant 
+		void flushScene();		// Réinitialise le tableau en le vidant
 		
 };
 #endif

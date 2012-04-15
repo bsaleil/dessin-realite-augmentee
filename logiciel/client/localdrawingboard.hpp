@@ -19,6 +19,7 @@ class LocalDrawingBoard : public DrawingBoard
 		void drawPoint(int x,int y);
 		void drawQPoint(QPoint);
 		void drawLine(int fromX, int fromY, int toX, int toY);
+		void flushScene(); // Vide la scène
 };
 
 #endif
