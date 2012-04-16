@@ -1,7 +1,8 @@
 #include "libtrack.hpp"
 #define MARGE 5
 #define GROW 6
-#define RATIO 2
+#define RATIO 1.5
+#define SLICESIZE 10
 using namespace std;
 
 
@@ -63,7 +64,7 @@ Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
-	CvScalar color = colorAverage(hsv,A,B);
+	CvScalar color = mainColor(hsv,A,B);
 	cvReleaseImage(&hsv);
 	//CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
 	curs->color = color;
@@ -111,8 +112,8 @@ Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B)
 
 	curs->center = center(A,B);
 	CvRect roi;
-	roi.x = A.x;
-	roi.y = A.y;
+	roi.x = min(A.x, B.x);
+	roi.y = min(A.y, B.y);
 	
 	roi.width = abs(A.x-B.x);
 	roi.height = abs(A.y-B.y);
@@ -216,6 +217,7 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	cvDilate(mask, mask, structurant, 1);
 
 	cvReleaseImage(&hsv);
+	cvReleaseStructuringElement(&structurant);
 	oldCursor->mask = mask;
 	return 0;
 }
@@ -223,8 +225,8 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 {
 	CvRect roi;
-	roi.x = A.x;
-	roi.y = A.y;
+	roi.x = min(A.x, B.x);
+	roi.y = min(A.y, B.y);
 	
 	roi.width = abs(A.x-B.x);
 	roi.height = abs(A.y-B.y);
@@ -255,18 +257,79 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
   	{
     	for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
     		{h+= *p;   nbPx ++;}
-		for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-			s+= *p;   
-		for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-   			v+= *p;   	
+	for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+		s+= *p;   
+	for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+   		v+= *p;   	
   	}  
 	cvReleaseImage(&mask);
 	scalar.val[0] = h /nbPx;
 	scalar.val[1] = s /nbPx ;
 	scalar.val[2] = v /nbPx ;
+	cout << scalar.val[0] << ":" << scalar.val[1] << endl;
   	return scalar;
 }
-
+  	
+CvScalar mainColor(IplImage *hsv, CvPoint A, CvPoint B)
+{
+	CvRect roi;
+	roi.x = min(A.x, B.x);
+	roi.y = min(A.y, B.y);
+	
+	roi.width = abs(A.x-B.x);
+	roi.height = abs(A.y-B.y);
+	
+	IplImage * mask = reshape(hsv, roi);
+	
+  	CvScalar scalar;
+  	
+  	int h =0;
+	int s = 0;
+	int v = 0;
+	
+	int histo[180/SLICESIZE]= {0};
+	int index=0;
+	int max = histo[index];
+	int nbPixels =0;
+	uchar *p, *line, *tmp;
+	
+  	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
+  	{
+    		for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+    		{
+    			histo[*p/SLICESIZE]++;
+    		} 
+	}
+	
+	for (int i =1; i<180/SLICESIZE; i++)
+	{
+		if (histo[i]>max)
+		{
+			max = histo[i];
+			index =i;
+		}	
+	}
+	
+	int val = index*SLICESIZE; // juste pour test
+	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
+  	{
+		for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+		{
+			tmp = p-1;
+			if (*tmp < val+(SLICESIZE/2) && *tmp > val-(SLICESIZE/2)) 
+			{	s+= *p;
+				h+= *tmp;
+				nbPixels ++;
+			}
+		}
+	}
+	
+	scalar.val[0] = h/nbPixels;
+	scalar.val[1] = s/nbPixels;
+	scalar.val[2] = v;
+	cout << scalar.val[0] << ":" << scalar.val[1] << endl;
+	return scalar;
+}
 CvScalar sampledColorAverage (IplImage *udrImg, int nbPixels)
 {
 	CvScalar moy;
@@ -413,4 +476,4 @@ int setNewCoord(Cursor * oldCursor)
 	}
 	
 	return 0;
-}	
+}

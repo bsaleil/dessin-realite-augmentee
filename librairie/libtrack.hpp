@@ -65,6 +65,8 @@ CvScalar colorAverage(IplImage *hsv,CvPoint A, CvPoint B);
 
 CvScalar sampledColorAverage (IplImage *udrImg, int nbPixels);
 
+CvScalar mainColor(IplImage *hsv, CvPoint A, CvPoint B);
+
 /*------------------------------------------------------------------------------
 			    Miscellaneous Functions
 ------------------------------------------------------------------------------*/
