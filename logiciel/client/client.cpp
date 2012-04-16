@@ -106,6 +106,9 @@ void Client::fullscreen()
 		scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 		camWidget->show();
 		ui->menubar->setVisible(true);
+		
+		// Passage en mode normal, puis maximisé 
+		this->showNormal();
 		this->showMaximized();
 	}
 	else
