@@ -6,7 +6,7 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 	host = h;
 	port = p;
 	
-	setFixedSize(640, 480);
+	setFixedSize(645, 485);
 	setSceneRect(0, 0, 640, 480);
 	scene = new QGraphicsScene();
 	setScene(scene);

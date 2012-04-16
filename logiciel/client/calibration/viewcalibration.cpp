@@ -45,7 +45,8 @@ void ViewCalibration::addPixmap(QPixmap p)
 	largeurImage = p.width();
 	hauteurImage = p.height();
 	
-	setFixedSize(largeurImage,hauteurImage);
+	// Ajout d'une marge pour éviter les scrollbars
+	setFixedSize(largeurImage + 5, hauteurImage + 5);
 	
 	scene->addPixmap(p);
 }

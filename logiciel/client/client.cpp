@@ -62,6 +62,7 @@ void Client::exportDraw()
 	QString filter;
 	filter += "Images (*.png, *.jpg, *.jpeg)";
 	
+	// L'option DontUseNativeDialog empêche l'apparition d'un bug grisant la fenêtre
 	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", QString(), 
 				filter, new QString(), QFileDialog::DontUseNativeDialog);
 	

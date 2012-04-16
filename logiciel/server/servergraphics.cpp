@@ -2,7 +2,7 @@
 
 ServerGraphics::ServerGraphics()
 {
-	setFixedSize(640, 480);
+	setFixedSize(645, 485);
 	setSceneRect(0, 0, 640, 480);
 	
 	sceneTab = new QGraphicsScene();
