@@ -62,8 +62,8 @@ void Client::exportDraw()
 	QString filter;
 	filter += "Images (*.png, *.jpg, *.jpeg)";
 	
-	QFileDialog fileDialog;
-	QString fichier = fileDialog.getSaveFileName(this, "Ouvrir un fichier", QString(), filter);
+	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", QString(), 
+				filter, new QString(), QFileDialog::DontUseNativeDialog);
 	
 	// Exporter en pixmap d'abord
 	QPixmap pixmap = QPixmap::grabWidget(drawingBoard);
