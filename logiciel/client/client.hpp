@@ -13,7 +13,6 @@
 #include <QFileDialog>
 #include <QLabel>
 #include <QMainWindow>
-#include <QMdiArea>
 #include <QMdiSubWindow>
 #include <QTimer>
 
@@ -43,7 +42,7 @@ class Client : public QMainWindow
 		void init(int, IplImage*, Cursor);			// Initialisation commune local-distant
 	
 		Ui::Client *ui;			// Interface graphique
-		QMdiArea *mdiArea;		// Zone multi fenêtres
+		QScrollArea *scroll;		// Zone de défilement 
 		
 		DrawingBoard *drawingBoard;	// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams
@@ -52,10 +51,14 @@ class Client : public QMainWindow
 		IplImage *image;
 		Cursor *curseur;
 		
+	protected :
+		void keyPressEvent(QKeyEvent*);
+		
 	private slots :
 		void tick();
 		void exportDraw();		// Exporte le dessin courant 
 		void flushScene();		// Réinitialise le tableau en le vidant
+		void fullscreen();		// Affiche la scene en plein écran
 		
 };
 #endif

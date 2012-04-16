@@ -1,5 +1,7 @@
 #include "client.hpp"
 
+#include <QHBoxLayout>
+
 Client::Client(int w, IplImage* i, Cursor c) : ui(new Ui::Client)
 {
 	// Utilisation de drawingboard en local
@@ -26,29 +28,39 @@ void Client::init(int w, IplImage *i, Cursor c)
 
 	// Construction de l'interface
 	ui->setupUi(this);
-	mdiArea = new QMdiArea();
-	this->setCentralWidget(mdiArea);
-	this->setWindowTitle("Tableau virtuel interactif");
 
 	// Classes utilisées
 	camManager = new WebcamManager();
 	camWidget = new WidgetWebcam();
 	
+	this->setWindowTitle("Tableau virtuel interactif");
+	
 	// Demarrage de la webcam
 	camManager->setWebcam(w);
 	camManager->runWebcam();
-
-	// Lancement du widget d'affichage de la webcam
-	mdiArea->addSubWindow(drawingBoard);
-
-	// Lancement du widget de dessin
-	mdiArea->addSubWindow(camWidget);
 	
 	// Connexion à la fonction d'exportation
 	connect(ui->actionExporter, SIGNAL(triggered()), this, SLOT(exportDraw()));
 	
 	// Fonction pour vider la scène
 	connect(ui->actionFlushScene, SIGNAL(triggered()), this, SLOT(flushScene()));
+	
+	// Connexion au plein écrans
+	connect(ui->actionPleinEcran, SIGNAL(triggered()), this, SLOT(fullscreen()));
+	
+	// Création de la zone centrale
+	scroll = new QScrollArea();
+	QWidget *mainWidget = new QWidget();
+	QHBoxLayout *layout = new QHBoxLayout();
+	mainWidget->setLayout(layout);
+	
+	// Ajout des widgets
+	layout->addWidget(drawingBoard);
+	layout->addWidget(camWidget);
+	
+	// Zone de défilement
+	scroll->setWidget(mainWidget);
+	this->setCentralWidget(scroll);
 	
 	// Démarrage du timer
 	QTimer *timer = new QTimer(this);
@@ -76,6 +88,34 @@ void Client::exportDraw()
 void Client::flushScene()
 {
 	drawingBoard->flushScene();
+}
+
+void Client::keyPressEvent(QKeyEvent *event)
+{
+	if (event->key() == Qt::Key_Escape && this->isFullScreen())
+	{
+		fullscreen();
+	}
+}
+
+void Client::fullscreen()
+{
+	if (this->isFullScreen())
+	{
+		// Passage en mode normal
+		scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+		camWidget->show();
+		ui->menubar->setVisible(true);
+		this->showMaximized();
+	}
+	else
+	{
+		// Passage en mode plein écran
+		ui->menubar->setVisible(false);
+		camWidget->hide();
+		scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		this->showFullScreen();
+	}
 }
 
 void Client::tick()
