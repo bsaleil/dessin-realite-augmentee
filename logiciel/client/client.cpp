@@ -60,10 +60,12 @@ void Client::exportDraw()
 {
 	// Filtre sur les extensions possibles
 	QString filter;
-	filter += "Images (*.png, *.jpg, *.jpeg)";
+	filter += "Images (*.png)";
+	
+	QString folder = QDir::homePath() + "/image.png";
 	
 	// L'option DontUseNativeDialog empêche l'apparition d'un bug grisant la fenêtre
-	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", QString(), 
+	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", folder, 
 				filter, new QString(), QFileDialog::DontUseNativeDialog);
 	
 	// Exporter en pixmap d'abord

@@ -93,6 +93,8 @@ void Calibration::loadClicksStep(int oldStep)
 	WebcamManager wm;
 	
 	imageCapturee = wm.getImageInit(webcamChoisie);
+	cvFlip(imageCapturee, imageCapturee, 1);
+	
 	viewImage->addPixmap(QPixmap::fromImage(iplToQimage(imageCapturee)));
 	
 	QPushButton *boutonRecommencer = new QPushButton("Reprendre photo");
