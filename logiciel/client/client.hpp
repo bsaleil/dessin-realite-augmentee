@@ -16,6 +16,9 @@
 #include <QMainWindow>
 #include <QMdiSubWindow>
 #include <QTimer>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QColorDialog>
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
@@ -45,10 +48,12 @@ class Client : public QMainWindow
 	
 		Ui::Client *ui;			// Interface graphique
 		QScrollArea *scroll;		// Zone de défilement 
+		QPushButton *buttonColor;	// Bouton de choix de couleur
 		
 		DrawingBoard *drawingBoard;	// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams
 		WidgetWebcam *camWidget;	// Widget d'affichage de la webcam
+		State *drawState;		// Etat du dessin
 		
 		IplImage *image;
 		Cursor *curseur;
@@ -61,6 +66,7 @@ class Client : public QMainWindow
 		void exportDraw();		// Exporte le dessin courant 
 		void flushScene();		// Réinitialise le tableau en le vidant
 		void fullscreen();		// Affiche la scene en plein écran
+		void clickColor();
 		
 };
 #endif

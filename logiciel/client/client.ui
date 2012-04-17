@@ -38,8 +38,27 @@
     </property>
     <addaction name="actionPleinEcran"/>
    </widget>
+   <widget class="QMenu" name="menuPinceau">
+    <property name="title">
+     <string>Pinceau</string>
+    </property>
+    <addaction name="actionDiametreP"/>
+    <addaction name="actionCouleurP"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuAffichage"/>
+   <addaction name="menuPinceau"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionQuitter">
    <property name="text">
@@ -95,6 +114,26 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionDiametre">
+   <property name="text">
+    <string>Diamètre</string>
+   </property>
+  </action>
+  <action name="actionCouleur">
+   <property name="text">
+    <string>Couleur</string>
+   </property>
+  </action>
+  <action name="actionDiametreP">
+   <property name="text">
+    <string>Diamètre</string>
+   </property>
+  </action>
+  <action name="actionCouleurP">
+   <property name="text">
+    <string>Couleur</string>
    </property>
   </action>
  </widget>
