@@ -25,6 +25,7 @@
 #include "widgetwebcam.hpp"
 #include "localdrawingboard.hpp"
 #include "networkdrawingboard.hpp"
+#include "state.hpp"
 
 namespace Ui 
 {
