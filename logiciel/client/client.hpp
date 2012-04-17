@@ -11,6 +11,7 @@
 #include <QAction>
 #include <QDebug>
 #include <QFileDialog>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QMainWindow>
 #include <QMdiSubWindow>

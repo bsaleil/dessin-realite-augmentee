@@ -1,7 +1,5 @@
 #include "client.hpp"
 
-#include <QHBoxLayout>
-
 Client::Client(int w, IplImage* i, Cursor c) : ui(new Ui::Client)
 {
 	// Utilisation de drawingboard en local
