@@ -37,6 +37,7 @@
      <string>Affichage</string>
     </property>
     <addaction name="actionPleinEcran"/>
+    <addaction name="actionBarreOutils"/>
    </widget>
    <widget class="QMenu" name="menuPinceau">
     <property name="title">
@@ -136,6 +137,17 @@
     <string>Couleur</string>
    </property>
   </action>
+  <action name="actionBarreOutils">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Barre d'outils</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -152,6 +164,38 @@
     <hint type="destinationlabel">
      <x>399</x>
      <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionBarreOutils</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>toolBar</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolBar</sender>
+   <signal>visibilityChanged(bool)</signal>
+   <receiver>actionBarreOutils</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
     </hint>
    </hints>
   </connection>
