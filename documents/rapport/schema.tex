@@ -16,20 +16,25 @@
 \maketitle
 
 \section{Introduction}
-Ce document présente une présentation de notre projet, et un aperçu sur le fonctionnement de notre application.
+Avant propos : Ce document présente une présentation de notre projet ainsi qu'un aperçu du fonctionnement de notre application.
+\paragraph{}
+Le but de l’application est de simuler une écriture ou un dessin sur un tableau virtuel. Ceci en se basant sur une
+reconnaissance de mouvements via une webcam. Le projet comporte deux parties distinctes : 
+la librairie -que nous nommeront libtrack- permettant de réaliser le suivi des objets dans le flux vidéo acquis par la webcam ; et l'application proposant une interface graphique permettant à un ou plusieurs utilisateurs de dessiner.
+
 
 \section{Schéma Global}
 Le schéma ci dessous présente de façon globale les différents modules pour une utilisation en réseau de l'application.
 	\begin{center}
 	\includegraphics[scale=0.5]{schema_global.pdf}
 	\end{center}
-Le client et le serveur sont écrits à l'aide de la librairie Qt, et le client instancie la librairie pour reconnaître les mouvements. \\
-La librairie utilise OpenCV pour le traitement de l'image et a pour but d'être réutilsable dans d'autres projets. 
+Le client et le serveur sont écrits à l'aide de la librairie Qt. Le client fait appel à la librairie libtrack pour reconnaître les mouvements. \\
+Cette dernière utilise OpenCV pour le traitement de l'image et se veut réutilisable d pour'autres projets. 
 Elle contient principalement une fonction d'étalonnage qui permet de signifier l'objet à suivre, ainsi que le type de suivi (Couleur, forme, avec cvBlob). La librairie possède ensuite un seul point d'entrée permettant d'effectuer le suivi.
 
 \newpage
 \section{Architecture de l'application}
-L'application est conçue entièrement par dessus la librairie en essayant de minimimer le nombre de fonctions appellées. 
+L'application est conçue entièrement par dessus la librairie en essayant de minimimer le nombre de fonctions appelées. 
 L'étalonnage du suivi de l'objet est effectué dans la classe $Calibration$, ensuite les appels pour suivre les mouvements sont faits
 via une seule fonction dans la classe $WidgetWebcam$ qui transmets ses mouvements au $Client$ (classe principale). \\
 
@@ -55,6 +60,29 @@ Ce schéma présente un déroulement des opérations lors d'une connexion et d'u
 \begin{center}
 	\includegraphics[scale=0.5]{../uml/sequence_reseau.png}
 \end{center}
+
+\section{Principe de la librairie}
+Comme expliqué précédemment, la librairie libtrack doit permettre de réaliser le suivi d'un objet (au sens large du terme) en temps réel.\\
+Pour cela, elle propose une structure contenant toutes les informations nécessaires à la reconnaissance de l'objet dans l'image. C'est la struct Cursor.
+Celle-ci doit être utilisée par l'utilisateur dans les deux fonctionnalités principales de la librairie : \begin{itemize}
+\item la méthode de calibration (ou étalonnage), qui permet d'initialiser la structure de suivi.
+\item la méthode de suivi à proprement parler, qui met à jour les données de la structure, ce qui permet à l'utilisateur de récupérer les données actualisée.
+\end{itemize}
+
+\paragraph{}
+L'étalonnage permet de déterminer l'objet que l'on souhaite suivre afin de dessiner. Pour cela, l'utilisateur doit fournir deux points qui permettront de définir un cadre autour de l'objet.
+Il faut aussi définir de quelle manière l'on souhaite procéder au tracking....
+
+\subsection{Différentes méthodes de suivi}
+La librairie propose différentes manières pour suivre l'objet désiré. L'utilisateur peut choisir l'une ou l'autre en le spécifiant simplement à l'aide de l'énumération suivante :\\
+TYPE\_TRACK \{ TRACK\_COLOR, TRACK\_SHAPE, TRACK\_BLOB\};
+\paragraph{}
+Il est donc possible de choisir entre 3 types de suivi : \\\begin{itemize}
+\item {\textbf{par forme} : } Ici, c'est la forme de l'objet qui est utilisée. On recherche une correspondance forte entre un pattern de l'objet recherché, et une éventuelle zone solution dans le flux vidéo. \\
+Pour cela, on pose des calques du 'modèle' à intervalle régulier sur l'image entrante, et on compare le taux de ressemblance afin d'évaluer la correspondance.\\
+\item {\textbf{par couleur} : } On s'intéresse ici aux valeurs des couleurs(des pixels) de l'objet plutôt qu'à leur disposition spatiale. Des méthodes d'échantillonage et de "histogramisation" permettent de proposer un résultat plus fin et plus souple qu'une moyenne de couleur seule, cette dernière ne pouvant supporter des variations de teinte fortes de l'objet.\\
+\item {\textbf{par blob} (binary long object) : } On fait ici appel à une librairie externe construite avec OpenCv : CvBlob. On utilise les composantes connexes pour déterminer quel ensemble de pixels forme ou non un "objet blob". Il faut ensuite mettre en correspondance les blobs trouvés dans le flux vidéo avec l'objet issu de notre initialisation.
+\end{itemize}
 
 \end{document}
 
