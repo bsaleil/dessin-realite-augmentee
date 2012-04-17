@@ -13,14 +13,14 @@ enum TYPE_TRACK {TRACK_COLOR, TRACK_SHAPE, TRACK_BLOB};
 
 typedef struct Cursor
 {
-	CvPoint center; // center position
-	CvPoint cornerA; //Up-Left position
-	CvPoint cornerB; // Down-Right
+	CvPoint center; // center pixel of the object area
+	CvPoint cornerA; //Up-Left corner of the object area
+	CvPoint cornerB; // Down-Right corner of the object area
 	unsigned int area; // area of the cursor
 	CvScalar color; //HSV color of binarisation
 	IplImage *mask; // mask or template used for tracking.
-	unsigned int threshold;
-	bool active;
+	unsigned int threshold;// value of the threshold used for calibration
+	bool active; // determine whether the paint is active or not
 
 	TYPE_TRACK flag; // type of tracking
 }Cursor; 

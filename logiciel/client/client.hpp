@@ -38,7 +38,7 @@ class Client : public QMainWindow
 	
 	public :
 		Client(int, IplImage*, Cursor);		// Pour une utilisation locale
-		Client(int, IplImage*, Cursor, QString, int);	// Pour une utilisation distante (hôte,port)
+		Client(int, IplImage*, Cursor, QString, int);	// Pour une utilisation distante (hôte, port)
 
 	private :
 		void init(int, IplImage*, Cursor);			// Initialisation commune local-distant
