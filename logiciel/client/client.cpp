@@ -30,8 +30,6 @@ void Client::init(int w, IplImage *i, Cursor c)
 	// Classes utilisées
 	camManager = new WebcamManager();
 	camWidget = new WidgetWebcam();
-	drawState = new State();
-	drawState->toString();
 	
 	this->setWindowTitle("Tableau virtuel interactif");
 	
@@ -50,7 +48,9 @@ void Client::init(int w, IplImage *i, Cursor c)
 	
 	// Création de la barre d'outils
 	QLabel *labelWidth = new QLabel("Diametre : "); 
-	QSpinBox *spinWidth = new QSpinBox(); spinWidth->setRange(1,20);
+	QSpinBox *spinWidth = new QSpinBox();
+		spinWidth->setRange(1,20);
+		spinWidth->setValue(5);
 	QLabel *labelColor = new QLabel("Color : ");
 	buttonColor = new QPushButton(); 
 		buttonColor->setStyleSheet("background-color: #000000");
@@ -58,8 +58,8 @@ void Client::init(int w, IplImage *i, Cursor c)
 	ui->toolBar->addWidget(labelColor); ui->toolBar->addWidget(buttonColor);
 	
 	// Connexion des signaux de la barre d'outils
-	connect(spinWidth, SIGNAL(valueChanged(int)), drawState, SLOT(setWidth(int)));
-	connect(buttonColor, SIGNAL(clicked()), this, SLOT(clickColor()));
+	connect(spinWidth, SIGNAL(valueChanged(int)), drawingBoard, SLOT(changeWidth(int)));
+	connect(buttonColor, SIGNAL(clicked()), this, SLOT(changeColor()));
 	
 	
 	// Création de la zone centrale
@@ -149,15 +149,17 @@ void Client::tick()
 		drawingBoard->drawQPoint(p);
 }
 
-void Client::clickColor()
+void Client::changeColor()
 {
 	// Demande de nouvelle couleur
 	QColor c = QColorDialog::getColor(QColor("#000000"));
+	
 	// Si la couleur est valide
 	if (c.isValid())
 	{
 		// On colore le bouton et on change l'état
-		buttonColor->setStyleSheet("background-color: "+c.name());
-		drawState->setColor(c);
+		buttonColor->setStyleSheet("background-color: " + c.name());
+		drawingBoard->changeColor(c);
 	}
 }
+

@@ -28,7 +28,6 @@
 #include "widgetwebcam.hpp"
 #include "localdrawingboard.hpp"
 #include "networkdrawingboard.hpp"
-#include "state.hpp"
 
 namespace Ui 
 {
@@ -53,7 +52,6 @@ class Client : public QMainWindow
 		DrawingBoard *drawingBoard;	// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams
 		WidgetWebcam *camWidget;	// Widget d'affichage de la webcam
-		State *drawState;		// Etat du dessin
 		
 		IplImage *image;
 		Cursor *curseur;
@@ -66,7 +64,7 @@ class Client : public QMainWindow
 		void exportDraw();		// Exporte le dessin courant 
 		void flushScene();		// Réinitialise le tableau en le vidant
 		void fullscreen();		// Affiche la scene en plein écran
-		void clickColor();
+		void changeColor();		// L'utilisateur veut changer de couleur
 		
 };
 #endif
