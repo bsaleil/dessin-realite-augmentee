@@ -27,9 +27,16 @@ Le client et le serveur sont écrits à l'aide de la librairie Qt, et le client 
 La librairie utilise OpenCV pour le traitement de l'image et a pour but d'être réutilsable dans d'autres projets. 
 Elle contient principalement une fonction d'étalonnage qui permet de signifier l'objet à suivre, ainsi que le type de suivi (Couleur, forme, avec cvBlob). La librairie possède ensuite un seul point d'entrée permettant d'effectuer le suivi.
 
+\newpage
 \section{Architecture de l'application}
+L'application est conçue entièrement par dessus la librairie en essayant de minimimer le nombre de fonctions appellées. 
+L'étalonnage du suivi de l'objet est effectué dans la classe $Calibration$, ensuite les appels pour suivre les mouvements sont faits
+via une seule fonction dans la classe WidgetWebcam qui transmets ses mouvements au client (classe principale). \\
+
+De plus l'application est conçue pour fonctionner de manière similaire pour une utilisation en réseau, ou en local, les classes 
+représentant le tableau en local ou en réseau ont donc la même apparence (mêmes points d'entrées) vu de l'extérieur. \\
 	\begin{center}
-	\includegraphics[scale=0.68]{../uml/classes.png}
+	\includegraphics[scale=0.7]{../uml/classes.png}
 	\end{center}
 
 \section{Schéma lors d'une utilisation en réseau}
@@ -48,8 +55,6 @@ Ce schéma présente un déroulement des opérations lors d'une connexion et d'u
 \begin{center}
 	\includegraphics[scale=0.5]{../uml/sequence_reseau.png}
 \end{center}
-
-% TODO : expliquer l'architecture côté client pour gérer local/réseau
 
 \end{document}
 
