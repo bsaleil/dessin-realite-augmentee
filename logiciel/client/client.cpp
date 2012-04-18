@@ -51,15 +51,20 @@ void Client::init(int w, IplImage *i, Cursor c)
 	QSpinBox *spinWidth = new QSpinBox();
 		spinWidth->setRange(1,20);
 		spinWidth->setValue(5);
-	QLabel *labelColor = new QLabel("Color : ");
+	QLabel *labelColor = new QLabel("Couleur : ");
 	buttonColor = new QPushButton(); 
 		buttonColor->setStyleSheet("background-color: #000000");
+	QLabel *labelEraser = new QLabel("Gomme : ");
+	QPushButton *buttonEraser = new QPushButton();
+	QPixmap pixmap("eraser.png"); QIcon icon(pixmap); buttonEraser->setIcon(icon);
 	ui->toolBar->addWidget(labelWidth); ui->toolBar->addWidget(spinWidth);
 	ui->toolBar->addWidget(labelColor); ui->toolBar->addWidget(buttonColor);
+	ui->toolBar->addWidget(labelEraser); ui->toolBar->addWidget(buttonEraser);
 	
 	// Connexion des signaux de la barre d'outils
 	connect(spinWidth, SIGNAL(valueChanged(int)), drawingBoard, SLOT(changeWidth(int)));
 	connect(buttonColor, SIGNAL(clicked()), this, SLOT(changeColor()));
+	connect(buttonEraser, SIGNAL(clicked()), this, SLOT(toolRubber()));
 	
 	
 	// Création de la zone centrale
@@ -161,5 +166,11 @@ void Client::changeColor()
 		buttonColor->setStyleSheet("background-color: " + c.name());
 		drawingBoard->changeColor(c);
 	}
+}
+
+void Client::toolRubber()
+{
+	QColor c("#FFFFFF");
+	drawingBoard->changeColor(c);
 }
 

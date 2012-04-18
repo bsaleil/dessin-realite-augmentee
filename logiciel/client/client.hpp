@@ -65,6 +65,7 @@ class Client : public QMainWindow
 		void flushScene();		// Réinitialise le tableau en le vidant
 		void fullscreen();		// Affiche la scene en plein écran
 		void changeColor();		// L'utilisateur veut changer de couleur
+		void toolRubber();		// L'utilisateur sélectionne la gomme
 		
 };
 #endif
