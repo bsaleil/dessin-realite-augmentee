@@ -1,0 +1,69 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{ifpdf}
+\usepackage{graphicx}
+\usepackage{geometry}
+\renewcommand{\familydefault}{\sfdefault}
+
+\geometry{hmargin=50pt, vmargin=50pt}
+
+\title{Rapport de projet : Tableau virtuel interactif}
+\author{Baptiste Saleil \and Geoffrey Mélia \and Julien Pagès \and Kevin Bollini}
+\date{\today}
+\ifpdf
+	\pdfinfo 
+	{
+		/Author (bsaleil,gmelia,jpages,kbollini)
+		/Title (Rapport de projet)
+		/Subject (Tableau virtuel interactif)
+		/Keywords ()
+		/CreationDate (\today)
+	}
+\fi
+
+\begin{document}
+	% Page de titre
+	\maketitle
+	\thispagestyle{empty}
+	\newpage
+	
+	% Sommaire
+	\tableofcontents
+	
+	\newpage
+	\chapter{Introduction}
+		\section{Présentation}
+		\section{Contexte}
+	
+	\chapter{Analyse et conception}
+		\section{Étude de l'existant et faisabilité}
+		\section{Gestion du projet}
+			\subsection{Choix stratégiques}
+			\subsection{Diagramme de Gantt}
+		\section{Outils utilisés}
+		\section{Analyse}
+			\subsection{Cas d'utilisations}
+			\subsection{Diagramme de classes}
+	
+	\chapter{Réalisation}
+	
+	\chapter{Résultats}
+		\section{Explications des algorithmes de suivi}
+		\section{Application}
+	
+	\chapter{Conclusion}
+		\section{Difficultés rencontrées}
+		\section{Perspectives}
+		\section{Conclusion}
+	
+	\chapter{Références}
+	\bibliographystyle{plain} 
+	\bibliography{bibli}
+	
+	\part{Annexes}
+	\appendix
+		\chapter{Documentation de la librairie}	
+\end{document}
