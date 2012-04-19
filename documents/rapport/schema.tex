@@ -16,7 +16,7 @@
 \maketitle
 
 \section{Introduction}
-Avant propos : Ce document présente une présentation de notre projet ainsi qu'un aperçu du fonctionnement de notre application.
+Avant propos : Ce document présente notre projet et donne un aperçu du fonctionnement de notre application.
 \paragraph{}
 Le but de l’application est de simuler une écriture ou un dessin sur un tableau virtuel. Ceci en se basant sur une
 reconnaissance de mouvements via une webcam. Le projet comporte deux parties distinctes : 
@@ -70,14 +70,15 @@ Celle-ci doit être utilisée par l'utilisateur dans les deux fonctionnalités p
 \end{itemize}
 
 \paragraph{}
+Il faut commencer par étalonner suivant le type de suivi voulu.
 L'étalonnage permet de déterminer l'objet que l'on souhaite suivre afin de dessiner. Pour cela, l'utilisateur doit fournir deux points qui permettront de définir un cadre autour de l'objet.
-Il faut aussi définir de quelle manière l'on souhaite procéder au tracking....
 
 \subsection{Différentes méthodes de suivi}
 La librairie propose différentes manières pour suivre l'objet désiré. L'utilisateur peut choisir l'une ou l'autre en le spécifiant simplement à l'aide de l'énumération suivante :\\
 TYPE\_TRACK \{ TRACK\_COLOR, TRACK\_SHAPE, TRACK\_BLOB\};
 \paragraph{}
-Il est donc possible de choisir entre 3 types de suivi : \\\begin{itemize}
+Il est donc possible de choisir entre 3 types de suivi : \\
+\begin{itemize}
 \item {\textbf{par forme} : } Ici, c'est la forme de l'objet qui est utilisée. On recherche une correspondance forte entre un pattern de l'objet recherché, et une éventuelle zone solution dans le flux vidéo. \\
 Pour cela, on pose des calques du 'modèle' à intervalle régulier sur l'image entrante, et on compare le taux de ressemblance afin d'évaluer la correspondance.\\
 \item {\textbf{par couleur} : } On s'intéresse ici aux valeurs des couleurs(des pixels) de l'objet plutôt qu'à leur disposition spatiale. Des méthodes d'échantillonage et de "histogramisation" permettent de proposer un résultat plus fin et plus souple qu'une moyenne de couleur seule, cette dernière ne pouvant supporter des variations de teinte fortes de l'objet.\\
