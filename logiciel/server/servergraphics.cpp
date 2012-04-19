@@ -9,9 +9,9 @@ ServerGraphics::ServerGraphics()
 	setScene(sceneTab);
 }
 
-void ServerGraphics::addPoint(QPoint p)
+void ServerGraphics::addPoint(QPoint p, QPen pen)
 {
-	sceneTab->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
+	sceneTab->addEllipse(p.x(), p.y(), 5, 5, pen, QBrush(Qt::SolidPattern));
 }
 
 QGraphicsScene* ServerGraphics::getScene()

@@ -11,6 +11,10 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 	scene = new QGraphicsScene();
 	setScene(scene);
 	
+	pen = new QPen();
+	pen->setWidth(5);
+	pen->setColor(QColor("#000000"));
+	
 	// Connexion au serveur
 	socket->abort();
 	socket->connectToHost(host, port);
@@ -29,12 +33,12 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 {
 	// Délègue au package manager
 	QPoint point(x, y);
-	PackageManager::sendPoint(stream, point);
+	PackageManager::sendPoint(stream, point, *pen);
 }		
 		
 void NetworkDrawingBoard::drawQPoint(QPoint p)
 {
-	PackageManager::sendPoint(stream, p);		
+	PackageManager::sendPoint(stream, p, *pen);		
 }
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)

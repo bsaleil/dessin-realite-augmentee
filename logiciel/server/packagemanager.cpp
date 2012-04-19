@@ -7,13 +7,14 @@ void PackageManager::sendPixmap(QDataStream &stream, QPixmap pixmap)
 	stream << pixmap;
 }
 
-void PackageManager::sendPoint(QDataStream &stream, QPoint point)
+void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
 {
 	QString command("order");
 	QString type("qpoint");
 	
 	stream << command << type;
 	stream << point;
+	stream << pen;
 }
 
 void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, ServerGraphics* graphics)
@@ -24,14 +25,18 @@ void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, Se
 	
 	if(type == "qpoint")
 	{
-		QPoint p;	
-		stream >> p;
+		QPoint point;	
+		stream >> point;
+		
+		// Récupération des options
+		QPen pen;
+		stream >> pen;
 			
 		// Ajout du point sur la scène
-		graphics->addPoint(p);
+		graphics->addPoint(point, pen);
 			
 		// Envoi à tous les clients du point à dessiner
-		broadcastPoint(clients, p);
+		broadcastPoint(clients, point, pen);
 	}
 	
 	if(type == "flush")
@@ -45,14 +50,14 @@ void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, Se
 	}
 }
 
-void PackageManager::broadcastPoint(QList<QTcpSocket *> &clients, QPoint point)
+void PackageManager::broadcastPoint(QList<QTcpSocket *> &clients, QPoint point, QPen pen)
 {
 	for(int i=0; i <clients.size(); ++i)
 	{
 		QDataStream stream(clients.at(i));
 		
 		// Envoi du point à un client
-		sendPoint(stream, point);
+		sendPoint(stream, point, pen);
 	}
 }
 

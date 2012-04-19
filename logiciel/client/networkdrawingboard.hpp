@@ -9,6 +9,7 @@
 */
 
 #include <QDebug>
+#include <QPen>
 #include <QTcpSocket>
 
 #include "drawingboard.hpp"

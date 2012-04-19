@@ -11,6 +11,7 @@ using namespace std;
 #include <QDataStream>
 #include <QList>
 #include <QPixmap>
+#include <QPen>
 #include <QString>
 #include <QtNetwork>
 #include "servergraphics.hpp"
@@ -19,10 +20,10 @@ class PackageManager
 {
 	public :		
 		// Envoi d'un point à tous les clients
-		static void broadcastPoint(QList<QTcpSocket *> &clients, QPoint point);
+		static void broadcastPoint(QList<QTcpSocket *> &clients, QPoint point, QPen pen);
 
 		// Envoi d'un point à un seul client
-		static void sendPoint(QDataStream &stream, QPoint point);
+		static void sendPoint(QDataStream &stream, QPoint point, QPen pen);
 
 		// Envoi au client un objet pixmap
 		static void sendPixmap(QDataStream &stream, QPixmap pixmap);

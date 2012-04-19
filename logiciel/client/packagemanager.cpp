@@ -1,6 +1,6 @@
 #include "packagemanager.hpp"
 
-void PackageManager::sendPoint(QDataStream &stream, QPoint p)
+void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
 {
 	// Envoie l'ordre de dessin au serveur
 	QString command("order");
@@ -8,7 +8,8 @@ void PackageManager::sendPoint(QDataStream &stream, QPoint p)
 	
 	stream << command;
 	stream << type;
-	stream << p;
+	stream << point;
+	stream << pen;
 }
 
 void PackageManager::flushScene(QDataStream &stream)
@@ -50,11 +51,13 @@ void PackageManager::order(QDataStream &stream, QGraphicsScene* scene)
 	{
 		QPoint p;
 		stream >> p;
+		
+		// Récupération des options
+		QPen pen;
+		stream >> pen;
 	
 		// Dessiner sur le tableau local
-		scene->addEllipse(p.x(), p.y(), 5, 5, QPen(), QBrush(Qt::SolidPattern));
-		
-		// TODO : gérer les outils
+		scene->addEllipse(p.x(), p.y(), pen.width(), pen.width(), pen, QBrush(Qt::SolidPattern));
 	}
 	
 	if(type == "flush")

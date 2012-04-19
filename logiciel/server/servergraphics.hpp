@@ -11,6 +11,7 @@ using namespace std;
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QDebug>
+#include <QPen>
 
 class ServerGraphics : public QGraphicsView
 {
@@ -21,7 +22,7 @@ class ServerGraphics : public QGraphicsView
 	
 	public :
 		ServerGraphics();
-		void addPoint(QPoint p);		// Ajoute un point sur la scene
+		void addPoint(QPoint p, QPen pen);		// Ajoute un point sur la scene
 		
 		QGraphicsScene* getScene();
 

@@ -10,13 +10,14 @@ using namespace std;
 
 #include <QDataStream>
 #include <QGraphicsScene>
+#include <QPen>
 #include <QPoint>
 
 class PackageManager
 {
 	public :
 		// Envoi d'un ordre de dessin au serveur
-		static void sendPoint(QDataStream &stream, QPoint p);
+		static void sendPoint(QDataStream &stream, QPoint point, QPen pen);
 
 		// Envoie une demande de vidage de scène
 		static void flushScene(QDataStream &stream);
