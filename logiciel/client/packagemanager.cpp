@@ -12,6 +12,18 @@ void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
 	stream << pen;
 }
 
+void PackageManager::sendLine(QDataStream &stream, QLine line, QPen pen)
+{
+	// Envoie l'ordre de dessin au serveur
+	QString command("order");
+	QString type("qline");
+	
+	stream << command;
+	stream << type;
+	stream << line;
+	stream << pen;
+}
+
 void PackageManager::flushScene(QDataStream &stream)
 {
 	// Envoie d'une demande de vidage de scène
@@ -58,6 +70,18 @@ void PackageManager::order(QDataStream &stream, QGraphicsScene* scene)
 	
 		// Dessiner sur le tableau local
 		scene->addEllipse(p.x(), p.y(), pen.width(), pen.width(), pen, QBrush(Qt::SolidPattern));
+	}
+	
+	if(type == "qline")
+	{
+		QLine line;
+		stream >> line;
+	
+		QPen pen;
+		stream >> pen;
+		
+		// Dessin d'une ligne en local
+		scene->addLine(line, pen);
 	}
 	
 	if(type == "flush")

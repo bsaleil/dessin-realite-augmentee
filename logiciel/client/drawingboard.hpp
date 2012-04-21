@@ -36,6 +36,8 @@ class DrawingBoard : public QGraphicsView
 	protected :
 		QGraphicsScene *scene;	// Représente le dessin lui même
 		QPen *pen;		// Représente l'état du pinceau
+		QPoint *precedent;	// Représente le point précédemment tracé
+		bool firstPoint;	// Premier point (utilisé pour les lignes)
 };
 
 #endif

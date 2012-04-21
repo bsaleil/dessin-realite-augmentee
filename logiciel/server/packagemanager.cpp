@@ -7,6 +7,16 @@ void PackageManager::sendPixmap(QDataStream &stream, QPixmap pixmap)
 	stream << pixmap;
 }
 
+void PackageManager::sendLine(QDataStream &stream, QLine line, QPen pen)
+{
+	QString command("order");
+	QString type("qline");
+	
+	stream << command << type;
+	stream << line;
+	stream << pen;
+}
+
 void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
 {
 	QString command("order");
@@ -39,6 +49,22 @@ void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, Se
 		broadcastPoint(clients, point, pen);
 	}
 	
+	if(type == "qline")
+	{
+		QLine line;	
+		stream >> line;
+		
+		// Récupération des options
+		QPen pen;
+		stream >> pen;
+			
+		// Ajout de la ligne la scène
+		graphics->addLine(line, pen);
+			
+		// Envoi à tous les clients de la ligne à dessiner
+		broadcastLine(clients, line, pen);	
+	}
+	
 	if(type == "flush")
 	{
 		// Déclenchement du signal pour vider la scène
@@ -60,4 +86,15 @@ void PackageManager::broadcastPoint(QList<QTcpSocket *> &clients, QPoint point, 
 		sendPoint(stream, point, pen);
 	}
 }
+
+void PackageManager::broadcastLine(QList<QTcpSocket *> &clients, QLine line, QPen pen)
+{
+	for(int i=0; i <clients.size(); ++i)
+	{
+		QDataStream stream(clients.at(i));
+	
+		sendLine(stream, line, pen);
+	}
+}
+
 

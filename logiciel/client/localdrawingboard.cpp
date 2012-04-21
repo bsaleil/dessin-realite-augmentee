@@ -11,17 +11,42 @@ LocalDrawingBoard::LocalDrawingBoard()
 	setSceneRect(0, 0, 640, 480);
 	scene = new QGraphicsScene();
 	setScene(scene);
+	
+	// Savoir si c'est le premier point
+	firstPoint = true;
 }
 
 void LocalDrawingBoard::drawPoint(int x, int y)
 {
-	scene->addEllipse(x, y, pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
+	if(firstPoint == true)
+	{
+		scene->addEllipse(x, y, pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
+		precedent = new QPoint(x, y);
+		firstPoint = false;
+	}
+	else
+	{
+		drawLine(precedent->x(), precedent->y(), x, y);
+		precedent->setX(x);
+		precedent->setY(y);
+	}
 }
 
 // Dessine un point sur le tableau
 void LocalDrawingBoard::drawQPoint(QPoint p)
 {
-	scene->addEllipse(p.x(), p.y(), pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
+	if(firstPoint == true)
+	{
+		scene->addEllipse(p.x(), p.y(), pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
+		precedent = new QPoint(p);
+		firstPoint = false;
+	}
+	else
+	{
+		drawLine(precedent->x(), precedent->y(), p.x(), p.y());
+		precedent->setX(p.x());
+		precedent->setY(p.y());	
+	}
 }
 
 // Dessine une ligne à partir de deux points (deux mouvements successifs)

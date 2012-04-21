@@ -14,8 +14,7 @@
 #include "drawingboard.hpp"
 
 class LocalDrawingBoard : public DrawingBoard
-{
-	
+{	
 	public :
 		LocalDrawingBoard();
 		void drawPoint(int x,int y);

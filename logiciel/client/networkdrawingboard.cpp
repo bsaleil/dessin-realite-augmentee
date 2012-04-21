@@ -15,6 +15,8 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 	pen->setWidth(5);
 	pen->setColor(QColor("#000000"));
 	
+	firstPoint = true;
+	
 	// Connexion au serveur
 	socket->abort();
 	socket->connectToHost(host, port);
@@ -33,19 +35,46 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 {
 	// Délègue au package manager
 	QPoint point(x, y);
-	PackageManager::sendPoint(stream, point, *pen);
+	if(firstPoint == true)
+	{
+		PackageManager::sendPoint(stream, point, *pen);		
+		firstPoint = false;
+		precedent = new QPoint(point);
+	}
+	else
+	{
+		// Envoi d'une ligne à partir du point précédent et courant
+		QLine line(*precedent, point);
+		PackageManager::sendLine(stream, line, *pen);
+		precedent->setX(point.x());
+		precedent->setY(point.y());
+	}
 }		
 		
-void NetworkDrawingBoard::drawQPoint(QPoint p)
+void NetworkDrawingBoard::drawQPoint(QPoint point)
 {
-	PackageManager::sendPoint(stream, p, *pen);		
+	if(firstPoint == true)
+	{
+		PackageManager::sendPoint(stream, point, *pen);		
+		firstPoint = false;
+		precedent = new QPoint(point);
+	}
+	else
+	{
+		QLine line(*precedent, point);
+		PackageManager::sendLine(stream, line, *pen);
+		precedent->setX(point.x());
+		precedent->setY(point.y());
+	}
 }
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 {
-	// TODO : envoyer l'ordre de dessiner une ligne
-	qDebug() << "Dessiner ligne : " << "de (" << fromX << "," << fromY << ") à ("
-		 << toX << "," << toY << ")";
+	QPoint pointFrom(fromX, fromY);
+	QPoint pointTo(toX, toY);
+	QLine line(pointFrom, pointTo);
+	
+	PackageManager::sendLine(stream, line, *pen);
 }
 
 void NetworkDrawingBoard::flushScene()

@@ -16,6 +16,9 @@ using namespace std;
 class PackageManager
 {
 	public :
+		// Envoi d'un ordre de dessin d'une ligne au serveur
+		static void sendLine(QDataStream &stream, QLine line, QPen pen);
+		
 		// Envoi d'un ordre de dessin au serveur
 		static void sendPoint(QDataStream &stream, QPoint point, QPen pen);
 
