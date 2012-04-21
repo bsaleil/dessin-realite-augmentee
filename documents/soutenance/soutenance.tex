@@ -1,0 +1,177 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lmodern}
+
+% Pour enlever le \institute du bas de page
+% Rapetisser les noms et date etc dans le footer
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+   \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\AtBeginSection[]
+{
+	\begin{frame}
+		\tableofcontents[currentsection,hideallsubsections]
+	\end{frame}
+}
+
+\title{Soutenance Projet TER}
+\author{Baptiste Saleil, Geoffrey Mélia, Julien Pagès, Kevin Bollini}
+\date{25 avril 2012}
+
+\begin{document}
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+	%Plan
+	\begin{frame}{Plan}
+		\tableofcontents
+	\end{frame}
+
+	\section{Introduction}
+		\begin{frame}{Introduction}
+				
+		\end{frame}
+
+		
+	\section{Analyse et Conception}
+	\subsection{Gestion de projet}
+		\begin{frame}{Gestion de projet}
+		Organisation :
+			\begin{itemize}
+				\item{Réunions}
+				\item{Partage des tâches}
+				\item{Choix groupés}
+			\end{itemize}
+			Collaboration :
+			\begin{itemize}
+				\item{Gestionnaire de version}
+				\item{Partage de documents}
+				\item{Discussions (Mails / Instantanée)}
+				\item{Édition collaborative}
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}{Gestion de projet}
+		Rétroplanning (Diagramme de gantt) :
+		\begin{center}
+			
+		\end{center}
+		\end{frame}
+	
+	\subsection{Analyse}
+		\begin{frame}{Analyse}
+				\begin{exampleblock}{Objectifs}
+				\begin{itemize}
+					\item{Identifier et comprendre les besoins}
+					\item{Distinguer et classer les fonctionnalités}
+					\item{Etablir un schéma de conception}
+					\item{Faciliter le développement}
+				\end{itemize}
+				\end{exampleblock}
+		\end{frame}
+	
+	\section{Librairie}
+		
+		\begin{frame}{Librairie}
+				\begin{itemize}
+					\item{Traçage par couleur}
+					\item{Traçage par forme}
+				\end{itemize}
+		\end{frame}
+
+		\subsection{Traçage par Couleur}
+		\begin{frame}{Etalonnage}
+				\begin{itemize}
+					\item{Selection de l'objet}
+					\item{Detection de couleur}
+				\end{itemize}
+		\end{frame}
+
+		\begin{frame}{Traçage}
+				\begin{itemize}
+					\item{Centre de gravité de l'image binaire}
+					\item{Librairie CVBlob}
+				\end{itemize}
+		\end{frame}
+
+		\subsection{Traçage par Forme}
+		\begin{frame}{Etalonnage}
+				\begin{itemize}
+					\item{Selection de l'objet}
+					\item{Sous-image Template}
+				\end{itemize}
+		\end{frame}
+
+		\begin{frame}{Traçage}
+				\begin{itemize}
+					\item{Recherche du Template}
+				\end{itemize}
+		\end{frame}
+	
+	
+	\section{Logiciel}
+		\begin{frame}{Logiciel}
+			\begin{itemize}
+			\item Local
+			\item Reseau
+			\end{itemize}
+			
+		\end{frame}
+		
+	\subsection{Module Local}
+		\begin{frame}{Etalonnage}
+		\end{frame}
+		\begin{frame}{Dessin}
+		\end{frame}
+
+	\subsection{Module Reseau}
+		\begin{frame}{Client}
+		\end{frame}
+		\begin{frame}{Serveur}
+		\end{frame}
+
+	\section{Conclusion}
+		\begin{frame}{Conclusion}
+			\begin{alertblock}{Difficultés}
+				- Collaboration \\
+				- Formation \\
+				- Technique 
+			\end{alertblock}
+			\pause
+			\begin{exampleblock}{Objectifs atteints}
+				- Solution fonctionnelle \\
+				- Respect du cahier des charges \\
+				- Découverte (Objet, Technologies,...) 
+			\end{exampleblock}
+			\pause
+			\begin{block}{Ouverture}
+				- Diversifier les methodes de tracking\\
+				- Optimiser les IHM \\
+			\end{block}
+		\end{frame}
+	
+	\begin{frame}
+		\begin{center}
+			\huge{Merci pour votre attention.} \\
+		\end{center}
+	\end{frame}
+
+\end{document}
