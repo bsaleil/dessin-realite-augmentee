@@ -24,9 +24,9 @@
  * \brief Used to chose the tracking method.
  */
 enum TYPE_TRACK {	TRACK_COLOR,/**< For a track based on the object color.*/
-					TRACK_SHAPE,/**< For a track based on the object shape.*/
-					TRACK_BLOB/**< For a track based on the object.*/
-				};
+			TRACK_SHAPE,/**< For a track based on the object shape.*/
+			TRACK_BLOB/**< For a track based on the object.*/
+		};
 
 /** 
  * \struct Cursor

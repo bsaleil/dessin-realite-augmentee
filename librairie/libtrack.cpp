@@ -96,8 +96,16 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	cvReleaseImage(&hsv);
 
 	curs->color = color;
+	curs->area =0;
 
 	colorTrack(source,curs);
+
+	for(int x = 0; x < curs->mask->width; x++)
+		for(int y = 0; y < curs->mask->height; y++)
+			if(((uchar *)(curs->mask->imageData + y*curs->mask->widthStep))[x] == 255)
+			{
+				curs->area++;
+			}
 
 	return curs;
 }
@@ -463,6 +471,7 @@ int setNewCoord(Cursor * oldCursor)
 				sommeY += y;
 				nbPixels++;
 			}
+
 	if (nbPixels > 0)
 	{
 		int x = (int)(sommeX / nbPixels);
@@ -473,6 +482,16 @@ int setNewCoord(Cursor * oldCursor)
 			oldCursor->center.x = (int)(sommeX / nbPixels);
 		if (y>oldCursor->center.y+MARGE || y<oldCursor->center.y-MARGE)
 			oldCursor->center.y = (int)(sommeY / nbPixels);
+	}
+
+	if (nbPixels > (oldCursor->area+(oldCursor->area/GROW)))
+	{
+		oldCursor->active = true;
+	}
+
+	else if (nbPixels < (oldCursor->area+(oldCursor->area/(GROW*2))))
+	{
+		oldCursor->active = false;
 	}
 	
 	return 0;
