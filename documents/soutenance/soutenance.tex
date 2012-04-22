@@ -82,6 +82,7 @@
 				\item{Partage des tâches au sein des groupes}
 				\item{Choix groupés (à quatre)}
 			\end{itemize}
+		\ \\
 		
 		Collaboration :
 			\begin{itemize}
@@ -216,11 +217,18 @@
 			
 			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
 			
-			% TODO : écrire les fonctionnalités voulues
+			Les fonctionnalités implémentées sont les suivantes :
+			\begin{itemize}
+			\item Un outil pour changer la couleur et la forme du pinceau
+			\item Un outil gomme
+			\item Fonctionnalité permettant d'exporter le dessin
+			\item Mode plein-écran avec le dessin pour le projeter
+			\item Utilisation simultanée par plusieurs utilisateurs
+			\end{itemize}
 		\end{frame}
 		
 	\subsection{Module Local}
-		\begin{frame}{Aperçu}
+		\begin{frame}{Fonctionnemment global}
 			\begin{block}{Fonctionnement en local}
 				\begin{itemize}
 				\item Étalonnage selon la méthode voulue, choix du mode local
@@ -230,23 +238,43 @@
 		\end{frame}
 		
 		\begin{frame}{Étalonnage}
+			L'étalonnage se déroule en plusieurs phases.
+			\begin{itemize}
+			\item Choix de la webcam et de méthode de suivi
+			\item Choix de l'objet à suivre à partir d'une photo, en l'entourant d'un rectangle
+			\item Réglage du seuil de tolérance à partir du retour de l'étalonnage
+			\item Choix du mode : réseau ou local
+			\end{itemize}
 		\end{frame}
-		\begin{frame}{Dessin}
+		
+		% TODO : compléter ou supprimer cette frame
+		\begin{frame}{Utilisation de l'application}
+		L'interface permets de visualiser le flux vidéo, et le dessin.
+		
+		Les mouvements sont détectés, et le dessin est effectué à partir de ces mouvements.
 		\end{frame}
 
 	\subsection{Module Reseau}
-		\begin{frame}{Aperçu}
-		\begin{block}{Fonctionnement en réseau}
-			\begin{itemize}
-			\item Étalonnage selon la méthode voulue, choix du mode réseau
-			\item Récupération du dessin actuel par le client
-			\item Détection d'un mouvement
-			\item Envoi au serveur de ce mouvement (et des options) en respectant le protocole
-			\item Réception du paquet côté serveur, dessin du serveur
-			\item Envoi aux clients de ce point déssiné avec les options
-			\item Réception côté client, et dessin en local
-			\end{itemize}
-		\end{block}
+		\begin{frame}{Fonctionnement global}
+			\begin{block}{Fonctionnement en réseau}
+				\begin{itemize}
+				\item Étalonnage selon la méthode voulue, choix du mode réseau
+				\item Récupération du dessin actuel par le client
+				\item Détection d'un mouvement
+				\item Envoi au serveur de ce mouvement (et des options) en respectant le protocole
+				\item Réception du paquet côté serveur, dessin du serveur
+				\item Envoi aux clients de ce point, avec les options (épaisseur, couleur)
+				\item Réception côté client, et dessin en local
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}{Fonctionnemment global : schéma}
+		
+		Déroulement du fonctionnement en réseau de l'application :
+			\begin{center}
+			\includegraphics[scale=0.40]{../uml/sequence_reseau.png}
+			\end{center}
 		\end{frame}
 		
 		\begin{frame}{Client}
