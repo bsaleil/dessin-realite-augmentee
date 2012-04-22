@@ -115,7 +115,7 @@
 				\begin{itemize}
 					\item{Identifier les besoins et envies potentiels des utilisateurs}
 					\item{Distinguer et classer les fonctionnalités de l'application}
-					\item{Etablir un schéma de conception dans le temps}
+					\item{Établir un schéma de conception dans le temps}
 					\item{Faciliter le développement, avoir des buts concrets}
 				\end{itemize}
 				\end{exampleblock}
@@ -160,14 +160,15 @@
 		\end{frame}
 
 		\begin{frame}{Traçages}
-		Deux types de suivis ont été développés : \\
+		Trois types de suivis ont été développés : \\
 				\begin{itemize}
 					\item{Traçage par couleur}
 					\item{Traçage par forme}
+					\item{Traçage par blob}
 				\end{itemize}
 		\end{frame}
 
-		\subsection{Traçage par Couleur}
+		\subsection{Suivi par Couleur}
 		\begin{frame}{Étalonnage par couleur}
 				\begin{itemize}
 					\item{Sélection de l'objet}
@@ -176,24 +177,40 @@
 				\end{itemize}
 		\end{frame}
 
-		\begin{frame}{Traçage par couleur}
+		\begin{frame}{Suivi par couleur}
 				\begin{itemize}
-					\item{Calcul du centre de gravité de l'image binaire}
-					\item{Detection de Blob (Librairie CVBlob)}
+					\item{Binarisation selon le seuil et le cursor}
+					\item{MAJ du barycentre des points ainsi révélés}
 				\end{itemize}
 		\end{frame}
 
-		\subsection{Traçage par Forme}
+		\subsection{Suivi par Forme}
 		\begin{frame}{Étalonnage par forme}
 				\begin{itemize}
-					\item{Sélection de l'objet}
-					\item{Sous-image Template}
+					\item{Sélection de la zone-objet}
+					\item{Création d'une sous-image Template}
 				\end{itemize}
 		\end{frame}
 
-		\begin{frame}{Traçage par forme}
+		\begin{frame}{Suivi par forme}
 				\begin{itemize}
-					\item{Recherche du Template}
+					\item{Recherche du template dans l'image}
+					\item{Selection de la zone avec la meilleure correspondance}
+				\end{itemize}
+		\end{frame}
+	
+		\subsection{Suivi par Composante connexe (Blob)}
+		\begin{frame}{Étalonnage par Blob}
+				\begin{itemize}
+					\item{Sélection de l'objet}
+					\item{Détermination de ses composantes connexes}
+				\end{itemize}
+		\end{frame}
+
+		\begin{frame}{Suivi par Blob}
+				\begin{itemize}
+					\item{Recherche des composantes connexes de l'image}
+					\item{Selection du blob le plus en adéquation.}
 				\end{itemize}
 		\end{frame}
 	
@@ -215,8 +232,8 @@
 			\includegraphics[scale=0.45]{../uml/classes.png}
 			\end{center}
 		\end{frame}
-		
-	cd 		\begin{frame}{Application}
+
+	\begin{frame}{Application}
 			
 			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
 			
