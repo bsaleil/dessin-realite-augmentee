@@ -122,8 +122,40 @@
 		\end{frame}
 	
 	\section{Librairie}
-		
+		\begin{frame}{Librairie de traçage d'objets}
+			\begin{block}{Objectifs de la librairie conçue}
+				\begin{itemize}
+				\item{Distinguer complètement le traçage d'objet de l'application}
+				\item{Avoir une utilisation simple sans connaissance en traitement d'image}
+				\item{Proposer un maximum de solutions de traçage}
+				\item{Permettre une detection d'action}
+				\end{itemize}
+			\end{block}
+		\end{frame}
+
 		\begin{frame}{Librairie}
+
+		Une Structure de données : \\
+		struct Cursor \{
+		\begin{itemize}
+			\item{CvPoint center}
+			\item{CvPoint cornerA}
+			\item{CvPoint cornerB}
+			\item{...}
+			\item{IplImage *mask}
+			\item{Bool active}
+		\end{itemize}
+		\} \\
+		Deux fonctions enveloppe : \\
+				\begin{itemize}
+					\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE TRACK flag)}
+					\item{int track(IplImage * source, Cursor * oldCursor)}
+				\end{itemize}
+		
+		
+		\end{frame}
+
+		\begin{frame}{Traçages}
 		Deux types de suivis ont été développés : \\
 				\begin{itemize}
 					\item{Traçage par couleur}
@@ -132,29 +164,30 @@
 		\end{frame}
 
 		\subsection{Traçage par Couleur}
-		\begin{frame}{Étalonnage}
+		\begin{frame}{Étalonnage par couleur}
 				\begin{itemize}
 					\item{Sélection de l'objet}
 					\item{Détection de couleur}
+					\item{Réglage du seuil de la binarisation}
 				\end{itemize}
 		\end{frame}
 
-		\begin{frame}{Traçage}
+		\begin{frame}{Traçage par couleur}
 				\begin{itemize}
-					\item{Centre de gravité de l'image binaire}
-					\item{Librairie CVBlob}
+					\item{Calcul du centre de gravité de l'image binaire}
+					\item{Detection de Blob (Librairie CVBlob)}
 				\end{itemize}
 		\end{frame}
 
 		\subsection{Traçage par Forme}
-		\begin{frame}{Etalonnage}
+		\begin{frame}{Etalonnage par forme}
 				\begin{itemize}
 					\item{Sélection de l'objet}
 					\item{Sous-image Template}
 				\end{itemize}
 		\end{frame}
 
-		\begin{frame}{Traçage}
+		\begin{frame}{Traçage par forme}
 				\begin{itemize}
 					\item{Recherche du Template}
 				\end{itemize}
