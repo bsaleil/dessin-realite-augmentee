@@ -9,19 +9,19 @@
 % Rapetisser les noms et date etc dans le footer
 \setbeamertemplate{footline}
 {
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-    \
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-    \usebeamerfont{title in head/foot}\insertshorttitle
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-   \end{beamercolorbox}}%
-  \vskip0pt%
+	\leavevmode%
+	\hbox{%
+	\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+	\
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+	\usebeamerfont{title in head/foot}\insertshorttitle
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+	\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+	\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+	\end{beamercolorbox}}%
+	\vskip0pt%
 }
 
 \AtBeginSection[]
@@ -47,43 +47,76 @@
 
 	\section{Introduction}
 		\begin{frame}{Introduction}
-				
+		\begin{center}
+		\LARGE{Ter de Master 1 : Tableau virtuel interactif}
+		\end{center}
+		
+		But du projet :
+		\begin{itemize}
+		\item Concevoir une application avec une interface naturelle (mouvements)
+		\item Librairie de reconnaissance de mouvements
+		\item Application pour exploiter cette librairie pour dessiner ou écrire
+		\end{itemize}
+		
 		\end{frame}
 
 		
 	\section{Analyse et Conception}
+	\subsection{Choix de conceptions}
+		\begin{frame}{Choix de conceptions}
+			
+			\begin{block}{Choix principal}
+				- Découper en deux parties distinctes le projet \\
+				- Librairie réutilisable \\
+				- Application sur une interface naturelle exploitant cette librairie \\
+			\end{block}
+			
+		\end{frame}
+		
 	\subsection{Gestion de projet}
 		\begin{frame}{Gestion de projet}
 		Organisation :
 			\begin{itemize}
 				\item{Réunions}
-				\item{Partage des tâches}
-				\item{Choix groupés}
+				\item{Deux sous-groupes}
+				\item{Partage des tâches au sein des groupes}
+				\item{Choix groupés (à quatre)}
 			\end{itemize}
-			Collaboration :
+		
+		Collaboration :
 			\begin{itemize}
-				\item{Gestionnaire de version}
-				\item{Partage de documents}
+				\item{Gestionnaire de version (Subversion)}
+				\item{Partage de documents (Mail et Subversion)}
 				\item{Discussions (Mails / Instantanée)}
-				\item{Édition collaborative}
+				\item{Édition collaborative pour le travail à distance (Gobby)}
 			\end{itemize}
 		\end{frame}
 		
 		\begin{frame}{Gestion de projet}
-		Rétroplanning (Diagramme de gantt) :
-		\begin{center}
-			
-		\end{center}
+			Objectif :
+			\begin{itemize}
+			\item Se renseigner, faire une bonne architecture
+			\item Développer rapidement un prototype
+			\item Développement incrémental en ajoutant des fonctionnalités
+			\end{itemize} 
+		\end{frame}
+		
+		\begin{frame}{Rétroplanning}	
+			Rétroplanning (Diagramme de gantt) :
+			\begin{center}
+			% TODO : mettre à jour le rétroplanning
+			\includegraphics[scale=0.25]{../feuille-route/retroplanning.pdf}
+			\end{center}
 		\end{frame}
 	
 	\subsection{Analyse}
 		\begin{frame}{Analyse}
 				\begin{exampleblock}{Objectifs}
 				\begin{itemize}
-					\item{Identifier et comprendre les besoins}
-					\item{Distinguer et classer les fonctionnalités}
-					\item{Etablir un schéma de conception}
-					\item{Faciliter le développement}
+					\item{Identifier les besoins et envies potentielles des utilisateurs}
+					\item{Distinguer et classer les fonctionnalités de l'application}
+					\item{Etablir un schéma de conception dans le temps}
+					\item{Faciliter le développement, permets d'avoir des buts concrets}
 				\end{itemize}
 				\end{exampleblock}
 		\end{frame}
@@ -91,6 +124,7 @@
 	\section{Librairie}
 		
 		\begin{frame}{Librairie}
+		Deux types de suivis ont été développés : \\
 				\begin{itemize}
 					\item{Traçage par couleur}
 					\item{Traçage par forme}
@@ -98,10 +132,10 @@
 		\end{frame}
 
 		\subsection{Traçage par Couleur}
-		\begin{frame}{Etalonnage}
+		\begin{frame}{Étalonnage}
 				\begin{itemize}
-					\item{Selection de l'objet}
-					\item{Detection de couleur}
+					\item{Sélection de l'objet}
+					\item{Détection de couleur}
 				\end{itemize}
 		\end{frame}
 
@@ -115,7 +149,7 @@
 		\subsection{Traçage par Forme}
 		\begin{frame}{Etalonnage}
 				\begin{itemize}
-					\item{Selection de l'objet}
+					\item{Sélection de l'objet}
 					\item{Sous-image Template}
 				\end{itemize}
 		\end{frame}
@@ -127,22 +161,61 @@
 		\end{frame}
 	
 	
-	\section{Logiciel}
-		\begin{frame}{Logiciel}
-			\begin{itemize}
-			\item Local
-			\item Reseau
-			\end{itemize}
+	\section{Application}
+		\begin{frame}{Architecture}
+			\begin{block}{Objectifs de l'architecture conçue}
+				\begin{itemize}
+				\item{Avoir une application modulable et facilement extensible}
+				\item{Fonctionnement identique pour les classes principales en réseau ou en local}
+				\item{Pouvoir rajouter facilement des outils}
+				\item{Séparer le traitement du rendu}
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}{Diagramme de classes}
+			\begin{center}		
+			\includegraphics[scale=0.45]{../uml/classes.png}
+			\end{center}
+		\end{frame}
+		
+		\begin{frame}{Application}
 			
+			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
+			
+			% TODO : écrire les fonctionnalités voulues
 		\end{frame}
 		
 	\subsection{Module Local}
-		\begin{frame}{Etalonnage}
+		\begin{frame}{Aperçu}
+			\begin{block}{Fonctionnement en local}
+				\begin{itemize}
+				\item Étalonnage selon la méthode voulue, choix du mode local
+				\item Détection d'un mouvement, dessin directement sur le tableau en respectant les options
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}{Étalonnage}
 		\end{frame}
 		\begin{frame}{Dessin}
 		\end{frame}
 
 	\subsection{Module Reseau}
+		\begin{frame}{Aperçu}
+		\begin{block}{Fonctionnement en réseau}
+			\begin{itemize}
+			\item Étalonnage selon la méthode voulue, choix du mode réseau
+			\item Récupération du dessin actuel par le client
+			\item Détection d'un mouvement
+			\item Envoi au serveur de ce mouvement (et des options) en respectant le protocole
+			\item Réception du paquet côté serveur, dessin du serveur
+			\item Envoi aux clients de ce point déssiné avec les options
+			\item Réception côté client, et dessin en local
+			\end{itemize}
+		\end{block}
+		\end{frame}
+		
 		\begin{frame}{Client}
 		\end{frame}
 		\begin{frame}{Serveur}
