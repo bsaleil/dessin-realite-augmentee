@@ -81,7 +81,7 @@ Il est donc possible de choisir entre 3 types de suivi : \\
 \begin{itemize}
 \item {\textbf{par forme} : } Ici, c'est la forme de l'objet qui est utilisée. On recherche une correspondance forte entre un pattern de l'objet recherché, et une éventuelle zone solution dans le flux vidéo. \\
 Pour cela, on pose des calques du 'modèle' à intervalle régulier sur l'image entrante, et on compare le taux de ressemblance afin d'évaluer la correspondance.\\
-\item {\textbf{par couleur} : } On s'intéresse ici aux valeurs des couleurs(des pixels) de l'objet plutôt qu'à leur disposition spatiale. Des méthodes d'échantillonage et de "histogramisation" permettent de proposer un résultat plus fin et plus souple qu'une moyenne de couleur seule, cette dernière ne pouvant supporter des variations de teinte fortes de l'objet.\\
+\item {\textbf{par couleur} : } On s'intéresse ici aux valeurs des couleurs (des pixels) de l'objet plutôt qu'à leur disposition spatiale. Des méthodes d'échantillonage et de seuillage permettent de proposer un résultat plus fin et plus souple qu'une moyenne de couleur seule. Cette dernière ne peut en effet supporter des variations de teinte fortes au sein de l'objet.\\
 \item {\textbf{par blob} (binary long object) : } On fait ici appel à une librairie externe construite avec OpenCv : CvBlob. On utilise les composantes connexes pour déterminer quel ensemble de pixels forme ou non un "objet blob". Il faut ensuite mettre en correspondance les blobs trouvés dans le flux vidéo avec l'objet issu de notre initialisation.
 \end{itemize}
 
