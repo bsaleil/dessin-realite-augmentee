@@ -135,7 +135,11 @@ void Calibration::loadSettingsStep(int oldStep)
 		
 		clearLayout(layoutCentral);
 	
-		QLabel *labelSettings = new QLabel("Ajustez le reperage de l'objet :");
+		QLabel *labelSettings;
+		if (tracking == "Forme")
+			labelSettings = new QLabel("Objet choisi :");
+		else
+			labelSettings = new QLabel("Ajustez le reperage de l'objet :");
 		imageSettings = new QLabel("");
 			imageSettings->setPixmap(QPixmap::fromImage(iplToQimage(curseur->mask)));
 			labelSlider = new QLabel("Seuil : " + QString::number(curseur->threshold));
@@ -145,8 +149,11 @@ void Calibration::loadSettingsStep(int oldStep)
 		layoutCentral->addWidget(labelSettings);
 		layoutCentral->addWidget(imageSettings);
 		
-		layoutCentral->addWidget(labelSlider);
-		layoutCentral->addWidget(sliderSettings);
+		if (tracking != "Forme")
+		{
+			layoutCentral->addWidget(labelSlider);
+			layoutCentral->addWidget(sliderSettings);
+		}
 	
 		connect(sliderSettings,SIGNAL(valueChanged(int)),this,SLOT(slotSliderSettings(int)));
 	}
