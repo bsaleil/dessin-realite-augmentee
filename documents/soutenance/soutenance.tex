@@ -64,13 +64,11 @@
 	\section{Analyse et Conception}
 	\subsection{Choix de conceptions}
 		\begin{frame}{Choix de conceptions}
-			
 			\begin{block}{Choix principaux}
 				Découper le projet en deux parties distinctes : \\
 				- une librairie réutilisable \\
 				- une application avec une interface naturelle exploitant cette librairie \\
 			\end{block}
-			
 		\end{frame}
 		
 	\subsection{Gestion de projet}
@@ -111,21 +109,21 @@
 	
 	\subsection{Analyse}
 		\begin{frame}{Analyse}
-				\begin{exampleblock}{Objectifs}
+			\begin{exampleblock}{Objectifs}
 				\begin{itemize}
 					\item{Identifier les besoins et envies potentiels des utilisateurs}
 					\item{Distinguer et classer les fonctionnalités de l'application}
 					\item{Établir un schéma de conception dans le temps}
 					\item{Faciliter le développement, avoir des buts concrets}
 				\end{itemize}
-				\end{exampleblock}
+			\end{exampleblock}
 		\end{frame}
 	
 	\section{Librairie}
-		\begin{frame}{Librairie de traçage d'objets}
+		\begin{frame}{Librairie de suivi d'objets}
 			\begin{block}{Objectifs de la librairie conçue}
 				\begin{itemize}
-				\item{Distinguer complètement le traçage d'objet de l'application}
+				\item{Distinguer complètement le suivi d'objet de l'application}
 				\item{Avoir une utilisation simple sans connaissance en traitement d'image}
 				\item{Permettre une détection d'action}
 				\item{Proposer un maximum de solutions de traçage}
@@ -151,67 +149,65 @@
 		
 		\begin{frame}{Librairie}
 		Deux fonctions enveloppes : \\
-				\begin{itemize}
-					\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE TRACK flag)}
-					\item{int track(IplImage * source, Cursor * oldCursor)}
-				\end{itemize}
-		
-		
+			\begin{itemize}
+				\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE TRACK flag)}
+				\item{int track(IplImage * source, Cursor * oldCursor)}
+			\end{itemize}		
 		\end{frame}
 
 		\begin{frame}{Traçages}
 		Trois types de suivis ont été développés : \\
-				\begin{itemize}
-					\item{Traçage par couleur}
-					\item{Traçage par forme}
-					\item{Traçage par blob}
-				\end{itemize}
+			\begin{itemize}
+				\item{Traçage par couleur}
+				\item{Traçage par forme}
+				\item{Traçage par blob}
+			\end{itemize}
 		\end{frame}
 
 		\subsection{Suivi par Couleur}
 		\begin{frame}{Étalonnage par couleur}
-				\begin{itemize}
-					\item{Sélection de l'objet}
-					\item{Détection de couleur}
-					\item{Réglage du seuil de la binarisation}
-				\end{itemize}
+			\begin{itemize}
+				\item{Sélection de l'objet}
+				\item{Détection de couleur}
+				\item{Réglage du seuil de la binarisation}
+			\end{itemize}
 		\end{frame}
 
 		\begin{frame}{Suivi par couleur}
-				\begin{itemize}
-					\item{Binarisation selon le seuil et le cursor}
-					\item{MAJ du barycentre des points ainsi révélés}
-				\end{itemize}
+			\begin{itemize}
+				\item{Binarisation selon le seuil et le cursor}
+				\item{MAJ du barycentre des points ainsi révélés}
+			\end{itemize}
 		\end{frame}
 
 		\subsection{Suivi par Forme}
 		\begin{frame}{Étalonnage par forme}
-				\begin{itemize}
-					\item{Sélection de la zone-objet}
-					\item{Création d'une sous-image Template}
-				\end{itemize}
+			\begin{itemize}
+				\item{Sélection de la zone-objet}
+				\item{Création d'une sous-image Template}
+			\end{itemize}
 		\end{frame}
 
 		\begin{frame}{Suivi par forme}
-				\begin{itemize}
-					\item{Recherche du template dans l'image}
-					\item{Selection de la zone avec la meilleure correspondance}
-				\end{itemize}
+			\begin{itemize}
+				\item{Recherche du template dans l'image}
+				\item{Selection de la zone avec la meilleure correspondance}
+			\end{itemize}
 		\end{frame}
 	
 		\subsection{Suivi par Composante connexe (Blob)}
 		\begin{frame}{Étalonnage par Blob}
-				\begin{itemize}
-					\item{Sélection de l'objet}
-					\item{Détermination de ses composantes connexes}
-				\end{itemize}
+			\begin{itemize}
+				\item{Sélection de l'objet}
+				\item{Détermination de ses composantes connexes}
+			\end{itemize}
 		\end{frame}
 
 		\begin{frame}{Suivi par Blob}
-				\begin{itemize}
-					\item{Recherche des composantes connexes de l'image}
-					\item{Selection du blob le plus en adéquation.}
-				\end{itemize}
+			\begin{itemize}
+				\item{Recherche des composantes connexes de l'image}
+				\item{Selection du blob le plus en adéquation.}
+			\end{itemize}
 		\end{frame}
 	
 	
@@ -242,7 +238,7 @@
 			\item Un outil pour changer la couleur et la forme du pinceau
 			\item Un outil gomme
 			\item Fonctionnalité permettant d'exporter le dessin
-			\item Mode plein-écran avec le dessin pour le projeter
+			\item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
 			\item Utilisation simultanée par plusieurs utilisateurs
 			\end{itemize}
 		\end{frame}
@@ -305,20 +301,20 @@
 	\section{Conclusion}
 		\begin{frame}{Conclusion}
 			\begin{alertblock}{Difficultés}
-				- Collaboration \\
-				- Formation \\
-				- Technique 
+				- Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
+				- Formation : Traitement de l'image \\
+				- Techniques : Architecture, Fuites de mémoire ...\\
 			\end{alertblock}
 			\pause
 			\begin{exampleblock}{Objectifs atteints}
 				- Solution fonctionnelle \\
 				- Respect du cahier des charges \\
-				- Découverte (Objet, Technologies,...) 
+				- Découverte (Objet, Technologies,...) \\ 
 			\end{exampleblock}
 			\pause
 			\begin{block}{Ouverture}
-				- Diversifier les methodes de tracking\\
-				- Optimiser les IHM \\
+				- Diversifier et optimiser les méthodes de suivi\\
+				- Rajouter des fonctionnalités côté application \\
 			\end{block}
 		\end{frame}
 	
