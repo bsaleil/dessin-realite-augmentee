@@ -187,6 +187,8 @@ int shapeTrack(IplImage * source, Cursor * oldCursor)
 	x += (int)(oldCursor->mask->width /2);
 	y += (int)(oldCursor->mask->height /2);
 	
+	// TODO : valider ou pas le curseur
+	oldCursor->active = true;
 	oldCursor->center.x =x;
 	oldCursor->center.y =y;
 	return 0;
