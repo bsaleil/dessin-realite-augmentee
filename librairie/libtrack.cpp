@@ -53,6 +53,7 @@ int track(IplImage * source, Cursor * oldCursor)
 Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 {
 	Cursor * curs = new Cursor;
+	curs->mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	curs->flag = TRACK_BLOB;
 	curs->cornerA = A;
 	curs->cornerB = B;
@@ -81,6 +82,7 @@ Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
 	Cursor * curs = new Cursor;
+	curs->mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	curs->flag = TRACK_COLOR;
 	curs->cornerA = A;
 	curs->cornerB = B;
@@ -113,6 +115,7 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
 	Cursor * curs = new Cursor;
+	curs->mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	curs->flag = TRACK_SHAPE;
 	curs->cornerA = A;
 	curs->cornerB = B;
@@ -226,7 +229,10 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 
 	cvReleaseImage(&hsv);
 	cvReleaseStructuringElement(&structurant);
+	
+	cvReleaseImage(&oldCursor->mask);
 	oldCursor->mask = mask;
+	
 	return 0;
 }
 
