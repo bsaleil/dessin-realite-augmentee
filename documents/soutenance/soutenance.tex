@@ -190,8 +190,8 @@
 		\begin{frame}{Suivi par couleur : Composante connexe}
 			\begin{itemize}
 				\item{Calcul des différentes composantes connexes sur l'image binaire}
-				\item{Sélection de la composante correspondante au curseur}
-				\item{Récuperation de son barycentre} 
+				\item{Sélection de la composante correspondant au curseur}
+				\item{Récupération de son barycentre} 
 			\end{itemize}
 		\end{frame}
 
@@ -210,34 +210,36 @@
 			\end{itemize}
 		\end{frame}
 		\subsection{Comparatifs}
-		\begin{frame}{Comparatifs Couleur/Forme}
+		\begin{frame}{Comparatif Couleur/Forme}
 		\pause
 			\begin{block}{Couleur}
 				Avantages \\
 				- Traçage rapide \\
 				- Diversité possible de curseurs \\
 				Faiblesses \\
-				- Sensibilité à l'environnement \\
+				- Sensibilité à l'environnement\\
 				- Dépendance de la qualité du dispositif d'acquisition\\
 			\end{block}
 			\pause
 			\begin{block}{Forme}
 				Avantages \\
 				- Traçage moins dépendant de la qualité de l'environnement \\
-				- Étallonnage plus simple \\
+				- Étalonnage plus simple \\
+				- Efficace sur des objets 'complexes'\\
 				Faiblesses \\
 				- Traçage lent \\
-				- Sensible à la qualité du curseur\\
+				- Très sensible aux variations du curseur\\
+				- Importance d'un étalonnage bien fait
 			\end{block}
 		\end{frame}
-		\begin{frame}{Comparatifs Simple/composante connexe}
+		\begin{frame}{Comparatif Simple/composante connexe}
 		\pause
 			\begin{block}{Barycentre simple}
 				Avantages \\
 				- Traçage rapide \\
 				Faiblesses \\
-				- Sensibilité aux parasites \\
-				- Précision dépendante fortement de l'environnement\\
+				- Sensibilité aux parasites (fausses détections)\\
+				- Précision fortement dépendante de l'environnement\\
 			\end{block}
 			\pause
 			\begin{block}{Barycentre composante connexe}
@@ -246,6 +248,7 @@
 				- Résistance aux parasites \\
 				Faiblesses \\
 				- Traçage plus lent \\
+				- Perte occasionnelle du curseur
 			\end{block}
 		\end{frame}
 	
