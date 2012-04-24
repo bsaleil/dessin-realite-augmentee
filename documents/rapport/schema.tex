@@ -5,6 +5,7 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{tikz}
 
 \geometry{hmargin=30pt, vmargin=30pt}
 
@@ -22,12 +23,21 @@ Le but de l’application est de simuler une écriture ou un dessin sur un table
 reconnaissance de mouvements via une webcam. Le projet comporte deux parties distinctes : 
 la librairie -que nous nommeront libtrack- permettant de réaliser le suivi des objets dans le flux vidéo acquis par la webcam ; et l'application proposant une interface graphique permettant à un ou plusieurs utilisateurs de dessiner.
 
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[scale=0.4]{capture.png}
+	\caption{Utilisation du logiciel}
+\end{center}
+\end{figure}
 
 \section{Schéma Global}
 Le schéma ci dessous présente de façon globale les différents modules pour une utilisation en réseau de l'application.
+	\begin{figure}[h]
 	\begin{center}
 	\includegraphics[scale=0.5]{schema_global.pdf}
+	\caption{Différents modules du projet}
 	\end{center}
+	\end{figure}
 Le client et le serveur sont écrits à l'aide de la librairie Qt. Le client fait appel à la librairie libtrack pour reconnaître les mouvements. \\
 Cette dernière utilise OpenCV pour le traitement de l'image et se veut réutilisable d pour'autres projets. 
 Elle contient principalement une fonction d'étalonnage qui permet de signifier l'objet à suivre, ainsi que le type de suivi (Couleur, forme, avec cvBlob). La librairie possède ensuite un seul point d'entrée permettant d'effectuer le suivi.
@@ -41,7 +51,7 @@ via une seule fonction dans la classe $WidgetWebcam$ qui transmets ses mouvement
 De plus l'application est conçue pour fonctionner de manière similaire pour une utilisation en réseau, ou en local, les classes 
 représentant le tableau en local ou en réseau ont donc la même apparence (mêmes points d'entrées) vu de l'extérieur. \\
 	\begin{center}
-	\includegraphics[scale=0.7]{../uml/classes.png}
+		\includegraphics[scale=0.7]{../uml/classes.png}
 	\end{center}
 
 \section{Schéma lors d'une utilisation en réseau}
@@ -57,9 +67,12 @@ Ce schéma présente un déroulement des opérations lors d'une connexion et d'u
 	\item Le client reçoit l'ordre et dessine en local
 \end{itemize}
 
-\begin{center}
-	\includegraphics[scale=0.5]{../uml/sequence_reseau.png}
-\end{center}
+\begin{figure}[h]
+	\begin{center}
+		\input{../uml/sequence_reseau.tex}
+		\caption{Diagramme de séquence pour le réseau}
+	\end{center}
+\end{figure}
 
 \section{Principe de la librairie}
 Comme expliqué précédemment, la librairie libtrack doit permettre de réaliser le suivi d'un objet (au sens large du terme) en temps réel.\\
