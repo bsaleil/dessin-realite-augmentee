@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <QGraphicsView>
+#include <QGraphicsItem>
 #include <QPen>
 
 class DrawingBoard : public QGraphicsView
@@ -32,8 +33,23 @@ class DrawingBoard : public QGraphicsView
 		{
 			pen->setColor(color);
 		}
+		
+		virtual void initCursor()
+		{
+			QPixmap p("curseur.png");
+			cursor  = new QGraphicsPixmapItem(p);
+			
+			scene->addItem(cursor);
+			cursor->setPos(100,100);
+		}
+		
+		virtual void moveCursor(int x, int y)
+		{
+			cursor->setPos(x,y);
+		}
 
 	protected :
+		QGraphicsPixmapItem *cursor; // Représente le curseur
 		QGraphicsScene *scene;	// Représente le dessin lui même
 		QPen *pen;		// Représente l'état du pinceau
 		QPoint *precedent;	// Représente le point précédemment tracé

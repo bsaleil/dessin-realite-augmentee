@@ -2,6 +2,7 @@
 
 LocalDrawingBoard::LocalDrawingBoard()
 {
+
 	// Création du pinceau par défaut
 	pen = new QPen();
 		pen->setWidth(5);
@@ -14,10 +15,15 @@ LocalDrawingBoard::LocalDrawingBoard()
 	
 	// Savoir si c'est le premier point
 	firstPoint = true;
+	
+	// On initialise le curseur
+	initCursor();
 }
 
 void LocalDrawingBoard::drawPoint(int x, int y)
 {
+	moveCursor(x,y);	
+	
 	if(firstPoint == true)
 	{
 		scene->addEllipse(x, y, pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
@@ -35,6 +41,8 @@ void LocalDrawingBoard::drawPoint(int x, int y)
 // Dessine un point sur le tableau
 void LocalDrawingBoard::drawQPoint(QPoint p)
 {
+	moveCursor(p.x(),p.y());	
+	
 	if(firstPoint == true)
 	{
 		scene->addEllipse(p.x(), p.y(), pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
