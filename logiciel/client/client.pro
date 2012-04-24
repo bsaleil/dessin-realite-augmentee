@@ -8,6 +8,7 @@ DEPENDPATH += . calibration
 INCLUDEPATH += . calibration
 QT += network
 TRANSLATIONS = client_en.ts
+QT += opengl
 
 # Input
 HEADERS += client.hpp \

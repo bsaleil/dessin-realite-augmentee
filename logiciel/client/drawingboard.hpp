@@ -12,6 +12,7 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QPen>
+#include <QGLWidget>
 
 class DrawingBoard : public QGraphicsView
 {	
@@ -37,15 +38,17 @@ class DrawingBoard : public QGraphicsView
 		virtual void initCursor()
 		{
 			QPixmap p("curseur.png");
-			cursor = new QGraphicsPixmapItem(p);
+			setViewport(new QGLWidget);
+			cursor = scene->addPixmap(p);  
 			
-			scene->addItem(cursor);
+			
+			//scene->addItem(cursor);
 			cursor->setPos(100,100);
 		}
 		
 		virtual void moveCursor(int x, int y)
 		{
-			cursor->setPos(x,y);
+			cursor->setPos(x-10,y-10);
 		}
 
 	protected :

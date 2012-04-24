@@ -34,8 +34,7 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 }		
 
 void NetworkDrawingBoard::drawPoint(int x, int y)
-{
-	moveCursor(x,y);	
+{	
 	
 	// Délègue au package manager
 	QPoint point(x, y);
@@ -56,8 +55,7 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 }		
 		
 void NetworkDrawingBoard::drawQPoint(QPoint point)
-{
-	moveCursor(point.x(),point.y());	
+{	
 	
 	if(firstPoint == true)
 	{

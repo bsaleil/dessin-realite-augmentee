@@ -21,9 +21,7 @@ LocalDrawingBoard::LocalDrawingBoard()
 }
 
 void LocalDrawingBoard::drawPoint(int x, int y)
-{
-	moveCursor(x,y);	
-	
+{	
 	if(firstPoint == true)
 	{
 		scene->addEllipse(x, y, pen->width(), pen->width(), *pen, QBrush(Qt::SolidPattern));
@@ -40,8 +38,7 @@ void LocalDrawingBoard::drawPoint(int x, int y)
 
 // Dessine un point sur le tableau
 void LocalDrawingBoard::drawQPoint(QPoint p)
-{
-	moveCursor(p.x(),p.y());	
+{	
 	
 	if(firstPoint == true)
 	{

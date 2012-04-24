@@ -128,7 +128,7 @@ void Client::fullscreen()
 		
 		// Revenir à la bonne taille de fenêtre
 		drawingBoard->setFixedSize(camWidget->width()+5, camWidget->height()+5);
-		mainWidget->setFixedHeight(camWidget->height());
+		mainWidget->setFixedHeight(camWidget->height()+10);
 		drawingBoard->scale((float)1/finalRatio, (float)1/finalRatio);
 		
 		// Passage en mode normal, puis maximisé 
@@ -172,6 +172,8 @@ void Client::tick()
 	// Dessin du point
 	if(curseur->active)
 		drawingBoard->drawQPoint(p);
+	
+	drawingBoard->moveCursor(p.x(),p.y());
 }
 
 void Client::changeColor()
