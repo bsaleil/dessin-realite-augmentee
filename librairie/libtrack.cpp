@@ -234,16 +234,6 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
 
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
-	cvErode(mask, mask, structurant, 1);
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
-	cvErode(mask, mask, structurant, 1);
-
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
-	cvDilate(mask, mask, structurant, 1);
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
-	cvDilate(mask, mask, structurant, 1);
-
 	cvReleaseImage(&hsv);
 	cvReleaseStructuringElement(&structurant);
 	
