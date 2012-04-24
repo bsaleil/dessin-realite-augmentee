@@ -56,6 +56,13 @@ class Client : public QMainWindow
 		IplImage *image;
 		Cursor *curseur;
 		
+		QWidget *mainWidget;
+		QHBoxLayout *layout;
+		
+		// Ratio entre affichage normal et plein écran
+		float finalRatio;
+		
+		
 	protected :
 		void keyPressEvent(QKeyEvent*);
 		

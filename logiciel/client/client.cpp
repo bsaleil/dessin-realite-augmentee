@@ -69,8 +69,8 @@ void Client::init(int w, IplImage *i, Cursor c)
 	
 	// Création de la zone centrale
 	scroll = new QScrollArea();
-	QWidget *mainWidget = new QWidget();
-	QHBoxLayout *layout = new QHBoxLayout();
+	mainWidget = new QWidget();
+	layout = new QHBoxLayout();
 	mainWidget->setLayout(layout);
 	
 	// Ajout des widgets
@@ -126,6 +126,11 @@ void Client::fullscreen()
 		camWidget->show();
 		ui->menubar->setVisible(true);
 		
+		// Revenir à la bonne taille de fenêtre
+		drawingBoard->setFixedSize(camWidget->width()+5, camWidget->height()+5);
+		mainWidget->setFixedHeight(camWidget->height());
+		drawingBoard->scale((float)1/finalRatio, (float)1/finalRatio);
+		
 		// Passage en mode normal, puis maximisé 
 		this->showNormal();
 		this->showMaximized();
@@ -137,6 +142,21 @@ void Client::fullscreen()
 		camWidget->hide();
 		scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		this->showFullScreen();
+				
+		// Calcul des ratios
+		float widthRatio = (float)this->width() / (float)drawingBoard->width();
+		float heightRatio = (float)this->height() / (float)drawingBoard->height();
+		
+		// On conserve le ratio minimum
+		if (widthRatio > heightRatio) 	finalRatio = heightRatio;
+		else				finalRatio = widthRatio;
+		
+		// Nouvelle taille de la vue
+		mainWidget->setFixedSize(this->size());
+		drawingBoard->setFixedSize((float)drawingBoard->width()*finalRatio, (float)drawingBoard->height()*finalRatio);
+		
+		// Mise à l'échelle
+		drawingBoard->scale(finalRatio, finalRatio);
 	}
 }
 
