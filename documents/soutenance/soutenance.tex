@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{tikz}
 
 % Pour enlever le \institute du bas de page
 % Rapetisser les noms et date etc dans le footer
@@ -111,7 +112,7 @@
 		\begin{frame}{Analyse}
 			\begin{exampleblock}{Objectifs}
 				\begin{itemize}
-					\item{Identifier les besoins et envies potentiels des utilisateurs}
+					\item{Identifier les besoins et envies des utilisateurs}
 					\item{Distinguer et classer les fonctionnalités de l'application}
 					\item{Établir un schéma de conception dans le temps}
 					\item{Faciliter le développement, avoir des buts concrets}
@@ -190,12 +191,11 @@
 				\item{Calcul du barycentre de l'image binaire}
 			\end{itemize}
 			\begin{center}
-				% TODO : mettre à jour le rétroplanning
 				\includegraphics[scale=0.25]{capture1.jpg}
 			\end{center}
 		\end{frame}
 
-		\begin{frame}{Suivi par couleur : Composante connexe}
+		\begin{frame}{Suivi par couleur : Composantes connexes}
 			\begin{itemize}
 				\item{Calcul des différentes composantes connexes sur l'image binaire}
 				\item{Sélection de la composante correspondant au curseur}
@@ -214,7 +214,7 @@
 		\begin{frame}{Suivi par forme}
 			\begin{itemize}
 				\item{Recherche du template dans l'image}
-				\item{Selection de la zone avec la meilleure correspondance}
+				\item{Sélection de la zone avec la meilleure correspondance}
 			\end{itemize}
 		\end{frame}
 		\subsection{Comparatifs}
@@ -224,15 +224,17 @@
 				Avantages \\
 				- Traçage rapide \\
 				- Diversité possible de curseurs \\
+				\ \\
 				Faiblesses \\
 				- Sensibilité à l'environnement\\
-				- Dépendance de la qualité du dispositif d'acquisition\\
+				- Dépendant de la qualité du dispositif d'acquisition\\
 			\end{block}
 			\pause
 			\begin{block}{Forme}
 				Avantages \\
 				- Traçage moins dépendant de la qualité de l'environnement \\
 				- Efficace sur des objets 'complexes'\\
+				\ \\
 				Faiblesses \\
 				- Traçage lent \\
 				- Très sensible aux variations du curseur\\
@@ -243,6 +245,7 @@
 			\begin{block}{Barycentre simple}
 				Avantages \\
 				- Traçage rapide \\
+				\ \\
 				Faiblesses \\
 				- Sensibilité aux parasites (fausses détections)\\
 				- Précision fortement dépendante de l'environnement\\
@@ -252,6 +255,7 @@
 				Avantages \\
 				- Traçage plus précis \\
 				- Résistance aux parasites \\
+				\ \\
 				Faiblesses \\
 				- Traçage plus lent \\
 				- Perte occasionnelle du curseur
@@ -263,15 +267,15 @@
 				\begin{itemize}
 				\item Librairie utilisable proposant plusieurs solution de traçage
 				\item Détection d'action implémentée dans deux des trois solutions
-				\item Utilisation simple sans connaissance en traitement des images
+				\item Utilisation simple sans connaissances en traitement des images
 				\end{itemize}
 			\end{exampleblock}
 			\pause
 			\begin{alertblock}{Difficultés et ouverture}
 				\begin{itemize}
 				\item Exploitation des librairies OpenCv et CvBlob 
-				\item Implémentation de la détection pour le track par forme
-				\item Ajout à la librairie de nouvelles fonctions de track
+				\item Implémentation de la détection pour le suivi par forme
+				\item Ajout à la librairie de nouvelles fonctions de suivi
 				\end{itemize}
 			\end{alertblock}
 		\end{frame}
@@ -294,7 +298,7 @@
 			\end{center}
 		\end{frame}
 
-	\begin{frame}{Application}
+		\begin{frame}{Application}
 			
 			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
 			
@@ -303,6 +307,7 @@
 			\item Un outil pour changer la couleur et la forme du pinceau
 			\item Un outil gomme
 			\item Fonctionnalité permettant d'exporter le dessin
+			\item Possibilité de nettoyer complètement le tableau
 			\item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
 			\item Utilisation simultanée par plusieurs utilisateurs
 			\end{itemize}
@@ -372,7 +377,7 @@
 		
 		Déroulement du fonctionnement en réseau de l'application :
 			\begin{center}
-			\includegraphics[scale=0.40]{../uml/sequence_reseau.png}
+			\scalebox{0.5}{\input{../uml/sequence_reseau.tex}} 
 			\end{center}
 		\end{frame}
 		
@@ -382,7 +387,7 @@
 				\begin{itemize}
 				\item Architecture identique au fonctionnement en local
 				\item Application fonctionnelle en mode réseau malgré la difficulté
-				\item Tous les outils marchent et sont implémentés
+				\item Tous les outils fonctionnent
 				\end{itemize}
 			\end{exampleblock}
 			\pause
@@ -396,20 +401,20 @@
 
 	\section{Conclusion}
 		\begin{frame}{Conclusion}
-			\begin{alertblock}{Difficultés}
-				- Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
-				- Formation : Traitement de l'image \\
-				- Techniques : Architecture, Fuites de mémoire ...\\
-			\end{alertblock}
-			\pause
 			\begin{exampleblock}{Objectifs atteints}
 				- Solution fonctionnelle \\
 				- Respect du cahier des charges \\
-				- Découverte (Objet, Technologies,...) \\ 
+				- Découverte (Technologies, gestion de projet...) \\ 
 			\end{exampleblock}
 			\pause
+			\begin{alertblock}{Difficultés}
+				- Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
+				- Formation : Traitement de l'image \\
+				- Techniques : Architecture, Fuites de mémoire...\\
+			\end{alertblock}
+			\pause
 			\begin{block}{Ouverture}
-				- Diversifier et optimiser les méthodes de suivi\\
+				- Diversifier et optimiser les méthodes de suivi \\
 				- Rajouter des fonctionnalités côté application \\
 			\end{block}
 		\end{frame}
