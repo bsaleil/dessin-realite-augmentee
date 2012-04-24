@@ -12,6 +12,8 @@ using namespace std;
 #include <QGraphicsScene>
 #include <QPen>
 #include <QPoint>
+#include <QPen>
+#include "drawingboard.hpp"
 
 class PackageManager
 {
@@ -29,7 +31,7 @@ class PackageManager
 		static void item(QDataStream &stream, QGraphicsScene* scene);
 		
 		// Reçoit un ordre du serveur
-		static void order(QDataStream &stream, QGraphicsScene* scene);
+		static void order(QDataStream &stream, QGraphicsScene* scene, DrawingBoard* view);
 };
 
 #endif

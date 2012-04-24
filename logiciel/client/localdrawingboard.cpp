@@ -63,4 +63,5 @@ void LocalDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 void LocalDrawingBoard::flushScene()
 {
 	emit scene->clear();
+	initCursor();
 }

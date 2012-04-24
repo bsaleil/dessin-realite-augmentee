@@ -53,7 +53,7 @@ void PackageManager::item(QDataStream &stream, QGraphicsScene* scene)
 	}
 }
 
-void PackageManager::order(QDataStream &stream, QGraphicsScene* scene)
+void PackageManager::order(QDataStream &stream, QGraphicsScene* scene, DrawingBoard* view)
 {
 	// Type de l'objet reçu
 	QString type;
@@ -87,6 +87,9 @@ void PackageManager::order(QDataStream &stream, QGraphicsScene* scene)
 	if(type == "flush")
 	{
 		emit scene->clear();
+		
+		// Refaire le curseur lors du flush
+		view->initCursor();		
 	}
 }
 

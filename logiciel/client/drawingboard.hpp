@@ -39,10 +39,10 @@ class DrawingBoard : public QGraphicsView
 		{
 			QPixmap p("curseur.png");
 			setViewport(new QGLWidget);
+			
 			cursor = scene->addPixmap(p);  
 			
-			
-			//scene->addItem(cursor);
+			scene->addItem(cursor);
 			cursor->setPos(100,100);
 		}
 		

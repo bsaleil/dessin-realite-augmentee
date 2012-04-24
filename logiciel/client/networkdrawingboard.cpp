@@ -2,8 +2,6 @@
 
 NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 {
-	initCursor();
-
 	socket = new QTcpSocket(this);
 	host = h;
 	port = p;
@@ -56,7 +54,6 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 		
 void NetworkDrawingBoard::drawQPoint(QPoint point)
 {	
-	
 	if(firstPoint == true)
 	{
 		PackageManager::sendPoint(stream, point, *pen);		
@@ -105,12 +102,13 @@ void NetworkDrawingBoard::dataIncoming()
 	if(command == "item")
 	{	
 		PackageManager::item(stream, scene);
+		initCursor();
 	}
-	
+		
 	// Ordre de dessin
 	if(command == "order")
 	{
-		PackageManager::order(stream, scene);
+		PackageManager::order(stream, scene, this);
 	}
 }
 
