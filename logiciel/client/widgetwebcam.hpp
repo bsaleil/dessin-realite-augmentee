@@ -17,6 +17,7 @@
 #include <QGraphicsView>
 
 #include <opencv/cv.h>
+#include <math.h>
 
 #include "../../librairie/libtrack.hpp"
 
