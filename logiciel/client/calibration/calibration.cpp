@@ -68,6 +68,10 @@ void Calibration::loadWebcamsStep(int oldStep)
 	trackingChoice->addItem("Forme");
 	trackingChoice->addItem("Blob");
 	
+	if (tracking == "Couleur") trackingChoice->setCurrentIndex(0);
+	else if (tracking == "Forme") trackingChoice->setCurrentIndex(1);
+	else if (tracking == "Blog") trackingChoice->setCurrentIndex(2);
+	
 	// Empêcher de revenir en arrière
 	boutonPrecedent->setEnabled(false);
 }
