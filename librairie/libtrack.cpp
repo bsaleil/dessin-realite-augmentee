@@ -2,7 +2,7 @@
 #define MARGE 5
 #define GROW 6
 #define RATIO 1.5
-#define SLICESIZE 10
+#define SLICESIZE 5
 using namespace std;
 
 
@@ -224,9 +224,24 @@ int binarisation(IplImage *source, Cursor *oldCursor)
     -CV_SHAPE_ELLIPSE
    	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
-	structurant = cvCreateStructuringElementEx(3, 3, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
 	cvErode(mask, mask, structurant, 1);
-	structurant = cvCreateStructuringElementEx(4, 4, 1, 1, CV_SHAPE_ELLIPSE, NULL);
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
+	cvErode(mask, mask, structurant, 1);
+
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
+	cvDilate(mask, mask, structurant, 1);
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
+	cvDilate(mask, mask, structurant, 1);
+
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
+	cvErode(mask, mask, structurant, 1);
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
+	cvErode(mask, mask, structurant, 1);
+
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
+	cvDilate(mask, mask, structurant, 1);
+	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
 
 	cvReleaseImage(&hsv);
