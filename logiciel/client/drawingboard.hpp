@@ -50,6 +50,11 @@ class DrawingBoard : public QGraphicsView
 		{
 			cursor->setPos(x-10,y-10);
 		}
+		
+		virtual void setFirstPoint(bool f)
+		{
+			firstPoint = f;
+		}
 
 	protected :
 		QGraphicsPixmapItem *cursor; // Représente le curseur

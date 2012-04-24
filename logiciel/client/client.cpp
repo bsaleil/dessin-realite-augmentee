@@ -172,6 +172,8 @@ void Client::tick()
 	// Dessin du point
 	if(curseur->active)
 		drawingBoard->drawQPoint(p);
+	else
+		drawingBoard->setFirstPoint(true);
 	
 	drawingBoard->moveCursor(p.x(),p.y());
 }
