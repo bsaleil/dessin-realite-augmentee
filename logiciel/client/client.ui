@@ -39,16 +39,8 @@
     <addaction name="actionPleinEcran"/>
     <addaction name="actionBarreOutils"/>
    </widget>
-   <widget class="QMenu" name="menuPinceau">
-    <property name="title">
-     <string>Pinceau</string>
-    </property>
-    <addaction name="actionDiametreP"/>
-    <addaction name="actionCouleurP"/>
-   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuAffichage"/>
-   <addaction name="menuPinceau"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">

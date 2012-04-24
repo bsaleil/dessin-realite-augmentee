@@ -47,14 +47,14 @@ void Client::init(int w, IplImage *i, Cursor c)
 	connect(ui->actionPleinEcran, SIGNAL(triggered()), this, SLOT(fullscreen()));
 	
 	// Création de la barre d'outils
-	QLabel *labelWidth = new QLabel("Diametre : "); 
+	QLabel *labelWidth = new QLabel(tr("Diametre : ")); 
 	QSpinBox *spinWidth = new QSpinBox();
 		spinWidth->setRange(1,20);
 		spinWidth->setValue(5);
-	QLabel *labelColor = new QLabel("Couleur : ");
+	QLabel *labelColor = new QLabel(tr("Couleur : "));
 	buttonColor = new QPushButton(); 
 		buttonColor->setStyleSheet("background-color: #000000");
-	QLabel *labelEraser = new QLabel("Gomme : ");
+	QLabel *labelEraser = new QLabel(tr("Gomme : "));
 	QPushButton *buttonEraser = new QPushButton();
 	QPixmap pixmap("eraser.png"); QIcon icon(pixmap); buttonEraser->setIcon(icon);
 	ui->toolBar->addWidget(labelWidth); ui->toolBar->addWidget(spinWidth);
@@ -96,7 +96,7 @@ void Client::exportDraw()
 	QString folder = QDir::homePath() + "/image.png";
 	
 	// L'option DontUseNativeDialog empêche l'apparition d'un bug grisant la fenêtre
-	QString fichier = QFileDialog::getSaveFileName(this, "Ouvrir un fichier", folder, 
+	QString fichier = QFileDialog::getSaveFileName(this, tr("Ouvrir un fichier"), folder, 
 				filter, new QString(), QFileDialog::DontUseNativeDialog);
 	
 	// Exporter en pixmap d'abord

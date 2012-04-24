@@ -7,6 +7,7 @@ TARGET =
 DEPENDPATH += . calibration
 INCLUDEPATH += . calibration
 QT += network
+TRANSLATIONS = client_en.ts
 
 # Input
 HEADERS += client.hpp \

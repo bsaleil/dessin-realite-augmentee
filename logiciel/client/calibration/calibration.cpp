@@ -12,7 +12,7 @@ Calibration::Calibration() : QWidget()
 
 	// Layout principal
 	QVBoxLayout *layoutPrincipal = new QVBoxLayout();
-		QLabel *labelPrincipal = new QLabel(QString::fromUtf8("Configuration :"));
+		QLabel *labelPrincipal = new QLabel(tr("Configuration :"));
 			QFont font; font.setPointSize(20); labelPrincipal->setFont(font);
         		labelPrincipal->setAlignment(Qt::AlignCenter);
 		QSpacerItem *espaceHaut = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -20,8 +20,8 @@ Calibration::Calibration() : QWidget()
 		QSpacerItem *espaceBas = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 		QGridLayout *layoutBas = new QGridLayout();
 			QSpacerItem *espaceBasGauche = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
-			boutonPrecedent = new QPushButton("<- Precedent");
-			boutonSuivant = new QPushButton("Suivant ->");
+			boutonPrecedent = new QPushButton(tr("<- Precedent"));
+			boutonSuivant = new QPushButton(tr("Suivant ->"));
 	
 	// Boutons suivants et précédents
 	layoutBas->addItem(espaceBasGauche,0,0,1,1);
@@ -45,7 +45,7 @@ void Calibration::loadWebcamsStep(int oldStep)
 {
 	clearLayout(layoutCentral);
 	
-	QLabel *labelWebcams = new QLabel("Choisissez une webcam :");
+	QLabel *labelWebcams = new QLabel(tr("Choisissez une webcam :"));
 	choixWebcams = new QComboBox();
 	
 	layoutCentral->addWidget(labelWebcams);
@@ -54,23 +54,23 @@ void Calibration::loadWebcamsStep(int oldStep)
 	WebcamManager wm;
 	int nb = wm.getNumberOfWebcams();
 	for (int i=0; i<nb; i++)
-		choixWebcams->addItem("Webcam " + QString::number(i));
+		choixWebcams->addItem(tr("Webcam ") + QString::number(i));
 		
 	// Choix de la méthode de Tracking
-	QLabel *labelTracking = new QLabel("Choisissez le type de suivi :");
+	QLabel *labelTracking = new QLabel(tr("Choisissez le type de suivi :"));
 	trackingChoice = new QComboBox();
 	
 	layoutCentral->addWidget(labelTracking);
 	layoutCentral->addWidget(trackingChoice);
 	
 	// Types de trackings : couleur, forme, blob
-	trackingChoice->addItem("Couleur");
-	trackingChoice->addItem("Forme");
-	trackingChoice->addItem("Blob");
+	trackingChoice->addItem(tr("Couleur"));
+	trackingChoice->addItem(tr("Forme"));
+	trackingChoice->addItem(tr("Blob"));
 	
-	if (tracking == "Couleur") trackingChoice->setCurrentIndex(0);
-	else if (tracking == "Forme") trackingChoice->setCurrentIndex(1);
-	else if (tracking == "Blog") trackingChoice->setCurrentIndex(2);
+	if (tracking == tr("Couleur")) trackingChoice->setCurrentIndex(0);
+	else if (tracking == tr("Forme")) trackingChoice->setCurrentIndex(1);
+	else if (tracking == tr("Blob")) trackingChoice->setCurrentIndex(2);
 	
 	// Empêcher de revenir en arrière
 	boutonPrecedent->setEnabled(false);
@@ -91,7 +91,7 @@ void Calibration::loadClicksStep(int oldStep)
 			
 	clearLayout(layoutCentral);
 	
-	QLabel *labelClicks = new QLabel("Cliquez deux fois pour selectionner votre objet :");
+	QLabel *labelClicks = new QLabel(tr("Cliquez deux fois pour selectionner votre objet :"));
 	
 	ViewCalibration *viewImage = new ViewCalibration(pointChoisiA,pointChoisiB);
 	WebcamManager wm;
@@ -101,14 +101,14 @@ void Calibration::loadClicksStep(int oldStep)
 	
 	viewImage->addPixmap(QPixmap::fromImage(iplToQimage(imageCapturee)));
 	
-	QPushButton *boutonRecommencer = new QPushButton("Reprendre photo");
+	QPushButton *boutonRecommencer = new QPushButton(tr("Reprendre photo"));
 	connect(boutonRecommencer, SIGNAL(clicked()), this, SLOT(slotNewPhoto()));
 	
 	layoutCentral->addWidget(labelClicks);
 	layoutCentral->addWidget(viewImage);
 	layoutCentral->addWidget(boutonRecommencer);
 	
-	boutonSuivant->setText("Suivant ->");
+	boutonSuivant->setText(tr("Suivant ->"));
 	boutonPrecedent->setEnabled(true);
 }
 
@@ -117,7 +117,7 @@ void Calibration::loadSettingsStep(int oldStep)
 	// Si étalonnage pas fait/pas fini
 	if (pointChoisiA->x() == -1 || pointChoisiB->x() == -1)
 	{
-		QMessageBox::critical(this, "Erreur", "L'étalonnage n'est pas effectué. Cliquez deux fois pour encadrer votre objet.");
+		QMessageBox::critical(this, tr("Erreur"), tr("L'étalonnage n'est pas effectué. Cliquez deux fois pour encadrer votre objet."));
 		step = 2;
 		loadClicksStep(2);
 	}
@@ -128,32 +128,32 @@ void Calibration::loadSettingsStep(int oldStep)
 		CvPoint b; b.x = pointChoisiB->x(); b.y = pointChoisiB->y();
 		
 		// Choix de l'étalonnage
-		if(tracking == "Couleur")
+		if(tracking == tr("Couleur"))
 			curseur = calibration(imageCapturee, a, b, TRACK_COLOR);
 		
-		if(tracking == "Forme")
+		if(tracking == tr("Forme"))
 			curseur = calibration(imageCapturee, a, b, TRACK_SHAPE);
 			
-		if(tracking == "Blob")
+		if(tracking == tr("Blob"))
 			curseur = calibration(imageCapturee, a, b, TRACK_BLOB);
 		
 		clearLayout(layoutCentral);
 	
 		QLabel *labelSettings;
-		if (tracking == "Forme")
-			labelSettings = new QLabel("Objet choisi :");
+		if (tracking == tr("Forme"))
+			labelSettings = new QLabel(tr("Objet choisi :"));
 		else
-			labelSettings = new QLabel("Ajustez le reperage de l'objet :");
+			labelSettings = new QLabel(tr("Ajustez le reperage de l'objet :"));
 		imageSettings = new QLabel("");
 			imageSettings->setPixmap(QPixmap::fromImage(iplToQimage(curseur->mask)));
-			labelSlider = new QLabel("Seuil : " + QString::number(curseur->threshold));
+			labelSlider = new QLabel(tr("Seuil : ") + QString::number(curseur->threshold));
 			QSlider *sliderSettings = new QSlider(Qt::Horizontal);
 				sliderSettings->setMinimum(0); sliderSettings->setMaximum(50); sliderSettings->setValue(10);
 		
 		layoutCentral->addWidget(labelSettings);
 		layoutCentral->addWidget(imageSettings);
 		
-		if (tracking != "Forme")
+		if (tracking != tr("Forme"))
 		{
 			layoutCentral->addWidget(labelSlider);
 			layoutCentral->addWidget(sliderSettings);
@@ -167,12 +167,12 @@ void Calibration::loadNetworkStep(int oldStep)
 {
 	clearLayout(layoutCentral);
 	
-	QRadioButton *boutonLocal = new QRadioButton("Je veux dessiner seul."); boutonLocal->toggle();
-	boutonDistant = new QRadioButton("Je veux dessiner avec d'autres personnes : ");
+	QRadioButton *boutonLocal = new QRadioButton(tr("Je veux dessiner seul.")); boutonLocal->toggle();
+	boutonDistant = new QRadioButton(tr("Je veux dessiner avec d'autres personnes : "));
 	
-	QLabel *labelAdresse = new QLabel("Adresse/Nom du serveur : ");
+	QLabel *labelAdresse = new QLabel(tr("Adresse/Nom du serveur : "));
 	editAdresse = new QLineEdit("localhost");
-	QLabel *labelPort = new QLabel("Port : ");
+	QLabel *labelPort = new QLabel(tr("Port : "));
 	spinPort = new QSpinBox(); spinPort->setMaximum(65535); spinPort->setValue(34000);
 	QSpacerItem *espaceReseau = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 	
@@ -185,13 +185,13 @@ void Calibration::loadNetworkStep(int oldStep)
 	layoutCentral->addWidget(boutonDistant);
 	layoutCentral->addLayout(layoutReseau);
 	
-	boutonSuivant->setText("Demarrer");
+	boutonSuivant->setText(tr("Demarrer"));
 }
 
 void Calibration::slotSliderSettings(int value)
 {
 	// Modification de la valeur affichée
-	labelSlider->setText("Seuil : " + QString::number(value));
+	labelSlider->setText(tr("Seuil : ") + QString::number(value));
 	
 	// Appel de la fonction pour la nouvelle image
 	curseur->threshold = value;
