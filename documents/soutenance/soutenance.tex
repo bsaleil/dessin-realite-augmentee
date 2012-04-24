@@ -134,7 +134,7 @@
 
 		\begin{frame}{Librairie}
 
-		Création d'une nouvelle structure de données : Cursor\\
+		Création d'une structure de données : Cursor\\
 		struct Cursor \{
 		\begin{itemize}
 			\item{CvPoint center}
@@ -150,17 +150,16 @@
 		\begin{frame}{Librairie}
 		Deux fonctions enveloppes : \\
 			\begin{itemize}
-				\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE TRACK flag)}
+				\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE-TRACK flag)}
 				\item{int track(IplImage * source, Cursor * oldCursor)}
 			\end{itemize}		
 		\end{frame}
 
 		\begin{frame}{Traçages}
-		Trois types de suivis ont été développés : \\
+		Deux types de suivis ont été développés : \\
 			\begin{itemize}
 				\item{Traçage par couleur}
 				\item{Traçage par forme}
-				\item{Traçage par blob}
 			\end{itemize}
 		\end{frame}
 
@@ -170,13 +169,29 @@
 				\item{Sélection de l'objet}
 				\item{Détection de couleur}
 				\item{Réglage du seuil de la binarisation}
+				\item{Binarisation selon le seuil}
 			\end{itemize}
 		\end{frame}
 
 		\begin{frame}{Suivi par couleur}
+			Deux méthodes de détection de position :
 			\begin{itemize}
-				\item{Binarisation selon le seuil et le cursor}
-				\item{MAJ du barycentre des points ainsi révélés}
+				\item{Calcul du barycentre de l'image binaire}
+				\item{Recherche par composantes connexes sur l'image}
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}{Suivi par couleur : Barycentre}
+			\begin{itemize}
+				\item{Calcul du barycentre de l'image binaire}
+			\end{itemize}
+		\end{frame}
+
+		\begin{frame}{Suivi par couleur : Composante connexe}
+			\begin{itemize}
+				\item{Calcul des différentes composantes connexes sur l'image binaire}
+				\item{Sélection de la composante correspondante au curseur}
+				\item{Récuperation de son barycentre} 
 			\end{itemize}
 		\end{frame}
 
@@ -194,22 +209,45 @@
 				\item{Selection de la zone avec la meilleure correspondance}
 			\end{itemize}
 		\end{frame}
-	
-		\subsection{Suivi par Composante connexe (Blob)}
-		\begin{frame}{Étalonnage par Blob}
-			\begin{itemize}
-				\item{Sélection de l'objet}
-				\item{Détermination de ses composantes connexes}
-			\end{itemize}
+		\subsection{Comparatifs}
+		\begin{frame}{Comparatifs Couleur/Forme}
+		\pause
+			\begin{block}{Couleur}
+				Avantages \\
+				- Traçage rapide \\
+				- Diversité possible de curseurs \\
+				Faiblesses \\
+				- Sensibilité à l'environnement \\
+				- Dépendance de la qualité du dispositif d'acquisition\\
+			\end{block}
+			\pause
+			\begin{block}{Forme}
+				Avantages \\
+				- Traçage moins dépendant de la qualité de l'environnement \\
+				- Étallonnage plus simple \\
+				Faiblesses \\
+				- Traçage lent \\
+				- Sensible à la qualité du curseur\\
+			\end{block}
 		\end{frame}
-
-		\begin{frame}{Suivi par Blob}
-			\begin{itemize}
-				\item{Recherche des composantes connexes de l'image}
-				\item{Selection du blob le plus en adéquation.}
-			\end{itemize}
+		\begin{frame}{Comparatifs Simple/composante connexe}
+		\pause
+			\begin{block}{Barycentre simple}
+				Avantages \\
+				- Traçage rapide \\
+				Faiblesses \\
+				- Sensibilité aux parasites \\
+				- Précision dépendante fortement de l'environnement\\
+			\end{block}
+			\pause
+			\begin{block}{Barycentre composante connexe}
+				Avantages \\
+				- Traçage plus précis \\
+				- Résistance aux parasites \\
+				Faiblesses \\
+				- Traçage plus lent \\
+			\end{block}
 		\end{frame}
-	
 	
 	\section{Application}
 		\begin{frame}{Architecture}
