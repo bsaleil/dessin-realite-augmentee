@@ -38,6 +38,7 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 	QPoint point(x, y);
 	if(firstPoint == true)
 	{
+		initCursor();
 		PackageManager::sendPoint(stream, point, *pen);		
 		firstPoint = false;
 		precedent = new QPoint(point);
@@ -56,6 +57,7 @@ void NetworkDrawingBoard::drawQPoint(QPoint point)
 {	
 	if(firstPoint == true)
 	{
+		initCursor();
 		PackageManager::sendPoint(stream, point, *pen);		
 		firstPoint = false;
 		precedent = new QPoint(point);
