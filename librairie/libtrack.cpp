@@ -16,7 +16,6 @@ Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE_TRACK flag)
 	{
 		return initColorTrack(source, A, B);
 	}
-
 	else if (flag == TRACK_SHAPE)
 	{
 		return initShapeTrack(source, A, B);
@@ -43,62 +42,62 @@ int track(IplImage * source, Cursor * oldCursor)
 	{
 		return blobTrack(source, oldCursor);
 	}
-	else return -2;
+	else return -1;
 }
 
 /*------------------------------------------------------------------------------
 				Init Functions
 ------------------------------------------------------------------------------*/
-
-Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
+Cursor * initCursor (IplImage * source, CvPoint A, CvPoint B) 
 {
 	Cursor * curs = new Cursor;
+	
 	curs->mask = cvCreateImage(cvGetSize(source), source->depth, 1);
-	curs->flag = TRACK_BLOB;
 	curs->cornerA = A;
 	curs->cornerB = B;
-	curs->area = abs(A.x-B.x)*abs(A.y-B.y);
-
 	curs->threshold = 10;
 	curs->active = false;
 	curs->center = center(A,B);
+	curs->area =0;
+	CvScalar scal;
+	curs->color = scal;
+	
+	return curs;
+}
+
+
+Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
+{
+	Cursor * curs = initCursor(source, A, B);
+	curs->flag = TRACK_BLOB;
+	curs->area = abs(A.x-B.x)*abs(A.y-B.y);
+	
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
+	
 	CvScalar color = mainColor(hsv,A,B);
 	cvReleaseImage(&hsv);
-	//CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
 	curs->color = color;
 
-	IplImage * clone;
-	clone = cvCloneImage(source);
-	blobTrack(clone,curs);
-	cvReleaseImage(&clone);
-
+	blobTrack(source,curs);
+	
 	return curs;
 }
 
 
 Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
-	Cursor * curs = new Cursor;
-	curs->mask = cvCreateImage(cvGetSize(source), source->depth, 1);
+	Cursor * curs = initCursor(source, A, B);
 	curs->flag = TRACK_COLOR;
-	curs->cornerA = A;
-	curs->cornerB = B;
-	curs->threshold = 10;
-	curs->active = true;
-	curs->center = center(A,B);
+	
 	IplImage * hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 
-	//CvScalar color = cvGet2D(hsv,curs->center.y,curs->center.x);
 	CvScalar color = colorAverage(hsv,A,B);
 	cvReleaseImage(&hsv);
-
 	curs->color = color;
-	curs->area =0;
 
 	colorTrack(source,curs);
 
@@ -114,18 +113,12 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 
 Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B) 
 {
-	Cursor * curs = new Cursor;
-	curs->mask = cvCreateImage(cvGetSize(source), source->depth, 1);
-	curs->flag = TRACK_SHAPE;
-	curs->cornerA = A;
-	curs->cornerB = B;
-	curs->threshold = 10;
-
-	curs->center = center(A,B);
+	Cursor * curs = initCursor(source, A, B);
+	curs->active = true;
+	
 	CvRect roi;
 	roi.x = min(A.x, B.x);
 	roi.y = min(A.y, B.y);
-	
 	roi.width = abs(A.x-B.x);
 	roi.height = abs(A.y-B.y);
 	
@@ -137,33 +130,24 @@ Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B)
 }
 
 
-
-
 /*------------------------------------------------------------------------------
 				Tracking Functions
 ------------------------------------------------------------------------------*/
 
 int blobTrack(IplImage *source, Cursor * oldCursor)
 {
-	
-	int res = binarisation(source, oldCursor);
-	if (res == 0) 
-	{
-		int res2 = blobFounding(source,oldCursor);
-		return res2;
-	}
-	else {return -1;}
+	if (binarisation(source, oldCursor) == 0)
+		return (blobFounding(source,oldCursor));
+	else
+		return -1;
 }
 
 int colorTrack(IplImage * source, Cursor * oldCursor)
 {
-	int res = binarisation(source, oldCursor);
-	if (res == 0) 
-	{
-		int res2 = setNewCoord(oldCursor);
-		return res2;
-	}
-	else {return -1;}
+	if (binarisation(source, oldCursor) == 0)
+		return (setNewCoord(oldCursor));
+	else
+		return -1;
 }
 
 int shapeTrack(IplImage * source, Cursor * oldCursor)
@@ -186,9 +170,7 @@ int shapeTrack(IplImage * source, Cursor * oldCursor)
 	//recentrage
 	x += (int)(oldCursor->mask->width /2);
 	y += (int)(oldCursor->mask->height /2);
-	
-	// TODO : valider ou pas le curseur
-	oldCursor->active = true;
+
 	oldCursor->center.x =x;
 	oldCursor->center.y =y;
 	return 0;
@@ -204,7 +186,8 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	IplImage *hsv;
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); // on travaille sur l'image en hsv => permet d'ignorer la luminosité
-	CvScalar pixel =  oldCursor->color; // permet de récupérer la couleur à traquer.
+	
+	CvScalar pixel =  oldCursor->color; //on récup la couleur qui servira à la binarisation
 	
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
@@ -215,23 +198,20 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
 	cvInRangeS(hsv, cvScalar(h - (tolerance/RATIO) -1, s - tolerance, 0,0), cvScalar(h + (tolerance/RATIO) -1, s + tolerance, 255,0), mask);
 	
-	//Il convient ensuite d'appliquer une fermeture (érosion puis dilatation) à notre image, 
-	//afin d'éliminer les zones non pertinentes tout en améliorant la perception de l'objet
+	//On applique une/plsr fermetures à l'image afin d'éliminer le bruit.
 	IplConvKernel *structurant;
 /*	structurants possibles : 
 	-CV_SHAPE_RECT
-    -CV_SHAPE_CROSS
-    -CV_SHAPE_ELLIPSE
-   	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
+	-CV_SHAPE_CROSS
+	-CV_SHAPE_ELLIPSE
+	-CV_SHAPE_CUSTOM ==> int* à passer dans le paramètre value (dernier param) 
 */    
 	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
+	//structurant2 = cvCreateStructuringElementEx(4, , 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvErode(mask, mask, structurant, 1);
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL); // cvCreateStructuringElementEx(w,h,x,y,custom)
 	cvErode(mask, mask, structurant, 1);
 
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
-	structurant = cvCreateStructuringElementEx(2, 2, 1, 1, CV_SHAPE_ELLIPSE, NULL);
 	cvDilate(mask, mask, structurant, 1);
 
 	cvReleaseImage(&hsv);
@@ -276,47 +256,47 @@ CvScalar colorAverage(IplImage *hsv, CvPoint A, CvPoint B)
 
   	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
   	{
-    	for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-    		{h+= *p;   nbPx ++;}
-	for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-		s+= *p;   
-	for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
-   		v+= *p;   	
-  	}  
+		for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+			{h+= *p;   nbPx ++;}
+		for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+			s+= *p;
+		for (p = line+2; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+			v+= *p;
+  	}
 	cvReleaseImage(&mask);
 	scalar.val[0] = h /nbPx;
-	scalar.val[1] = s /nbPx ;
-	scalar.val[2] = v /nbPx ;
+	scalar.val[1] = s /nbPx;
+	scalar.val[2] = v /nbPx;
 	cout << scalar.val[0] << ":" << scalar.val[1] << endl;
   	return scalar;
 }
-  	
+
 CvScalar mainColor(IplImage *hsv, CvPoint A, CvPoint B)
 {
 	CvRect roi;
 	roi.x = min(A.x, B.x);
 	roi.y = min(A.y, B.y);
-	
+
 	roi.width = abs(A.x-B.x);
 	roi.height = abs(A.y-B.y);
 	
 	IplImage * mask = reshape(hsv, roi);
-	
+
   	CvScalar scalar;
-  	
+
   	int h =0;
 	int s = 0;
 	int v = 0;
-	
+
 	int histo[180/SLICESIZE]= {0};
 	int index=0;
 	int max = histo[index];
 	int nbPixels =0;
 	uchar *p, *line, *tmp;
 	
-  	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
-  	{
-    		for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
+	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
+	{
+		for (p = line; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
     		{
     			histo[*p/SLICESIZE]++;
     		} 
