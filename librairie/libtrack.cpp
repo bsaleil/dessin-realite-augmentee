@@ -80,7 +80,10 @@ Cursor * initBlobTrack(IplImage * source, CvPoint A, CvPoint B)
 	cvReleaseImage(&hsv);
 	curs->color = color;
 
-	blobTrack(source,curs);
+	IplImage *init;
+	init = cvCloneImage(source); // évite de modifier la source avec le renderingBlob
+	blobTrack(init,curs);
+	cvReleaseImage(&init);
 	
 	return curs;
 }
@@ -95,7 +98,7 @@ Cursor * initColorTrack(IplImage * source, CvPoint A, CvPoint B)
 	hsv = cvCloneImage(source);
 	cvCvtColor(source, hsv, CV_BGR2HSV); //on cree une image hsv copie de source
 
-	CvScalar color = colorAverage(hsv,A,B);
+	CvScalar color = mainColor(hsv,A,B);
 	cvReleaseImage(&hsv);
 	curs->color = color;
 
@@ -191,12 +194,13 @@ int binarisation(IplImage *source, Cursor *oldCursor)
 	
 	int h = (int)pixel.val[0];
 	int s = (int)pixel.val[1];
-	//int v = (int)pixel.val[2];
+	int v = (int)pixel.val[2];
 	int tolerance = oldCursor->threshold;
 	
 	IplImage * mask = NULL;
 	mask = cvCreateImage(cvGetSize(source), source->depth, 1);
-	cvInRangeS(hsv, cvScalar(h - (tolerance/RATIO) -1, s - tolerance, 0,0), cvScalar(h + (tolerance/RATIO) -1, s + tolerance, 255,0), mask);
+	float rate = 1/RATIO;
+	cvInRangeS(hsv, cvScalar(h - (tolerance*rate), s - tolerance, 0,0), cvScalar(h + (tolerance*rate), s + tolerance, 255,0), mask);
 	
 	//On applique une/plsr fermetures à l'image afin d'éliminer le bruit.
 	IplConvKernel *structurant;
@@ -292,7 +296,7 @@ CvScalar mainColor(IplImage *hsv, CvPoint A, CvPoint B)
 	int index=0;
 	int max = histo[index];
 	int nbPixels =0;
-	uchar *p, *line, *tmp;
+	uchar *p, *line, *tmp, *v1;
 	
 	for (line = (uchar*) mask->imageData; line <  (uchar*) mask->imageData + mask->imageSize; line += mask->widthStep)
 	{
@@ -317,9 +321,11 @@ CvScalar mainColor(IplImage *hsv, CvPoint A, CvPoint B)
 		for (p = line+1; p < line + mask->width * mask->nChannels; p+= mask->nChannels)
 		{
 			tmp = p-1;
+			v1 = p+1; 
 			if (*tmp < val+(SLICESIZE/2) && *tmp > val-(SLICESIZE/2)) 
 			{	s+= *p;
 				h+= *tmp;
+				v+= *v1;
 				nbPixels ++;
 			}
 		}
@@ -327,8 +333,8 @@ CvScalar mainColor(IplImage *hsv, CvPoint A, CvPoint B)
 	
 	scalar.val[0] = h/nbPixels;
 	scalar.val[1] = s/nbPixels;
-	scalar.val[2] = v;
-	cout << scalar.val[0] << ":" << scalar.val[1] << endl;
+	scalar.val[2] = v/nbPixels;
+	cout << scalar.val[0] << ":" << scalar.val[1] << ":" << scalar.val[2] << endl;
 	return scalar;
 }
 CvScalar sampledColorAverage (IplImage *udrImg, int nbPixels)
