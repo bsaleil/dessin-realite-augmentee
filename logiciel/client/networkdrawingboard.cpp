@@ -24,40 +24,33 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 
 void NetworkDrawingBoard::drawPoint(int x, int y)
 {	
-	
-	// Délègue au package manager
-	QPoint point(x, y);
-	if(firstPoint == true)
+	bool canDraw = !(x > gestureWidget->pos().x() && x < gestureWidget->size().width() &&
+			y > gestureWidget->pos().y() && y < gestureWidget->size().height());
+			
+	if (canDraw)
 	{
-		PackageManager::sendPoint(stream, point, *pen);		
-		firstPoint = false;
-		precedent = new QPoint(point);
-	}
-	else
-	{
-		// Envoi d'une ligne à partir du point précédent et courant
-		QLine line(*precedent, point);
-		PackageManager::sendLine(stream, line, *pen);
-		precedent->setX(point.x());
-		precedent->setY(point.y());
+		// Délègue au package manager
+		QPoint point(x, y);
+		if(firstPoint == true)
+		{
+			PackageManager::sendPoint(stream, point, *pen);		
+			firstPoint = false;
+			precedent = new QPoint(point);
+		}
+		else
+		{
+			// Envoi d'une ligne à partir du point précédent et courant
+			QLine line(*precedent, point);
+			PackageManager::sendLine(stream, line, *pen);
+			precedent->setX(point.x());
+			precedent->setY(point.y());
+		}
 	}
 }		
 		
 void NetworkDrawingBoard::drawQPoint(QPoint point)
 {	
-	if(firstPoint == true)
-	{
-		PackageManager::sendPoint(stream, point, *pen);		
-		firstPoint = false;
-		precedent = new QPoint(point);
-	}
-	else
-	{
-		QLine line(*precedent, point);
-		PackageManager::sendLine(stream, line, *pen);
-		precedent->setX(point.x());
-		precedent->setY(point.y());
-	}
+	drawPoint(point.x(),point.y());
 }
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
