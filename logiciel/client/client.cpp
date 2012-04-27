@@ -82,8 +82,10 @@ void Client::exportDraw()
 				filter, new QString(), QFileDialog::DontUseNativeDialog);
 	
 	// Exporter en pixmap d'abord
+	drawingBoard->showGestureWidget(false);
 	QPixmap pixmap = QPixmap::grabWidget(drawingBoard);
 	pixmap.save(fichier);
+	drawingBoard->showGestureWidget(true);
 }
 
 void Client::flushScene()

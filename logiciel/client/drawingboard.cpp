@@ -33,6 +33,11 @@ void DrawingBoard::init()
 	initGestureUI();	
 }
 
+void DrawingBoard::showGestureWidget(bool b)
+{
+	proxyGestureWidget->setVisible(b);
+}
+
 void DrawingBoard::initGestureUI()
 {
 	// On créé l'interface

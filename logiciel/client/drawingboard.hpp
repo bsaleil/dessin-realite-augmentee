@@ -34,6 +34,7 @@ class DrawingBoard : public QGraphicsView
 		virtual void moveCursor(int x, int y);	// Met a jour la position du curseur
 		
 		virtual void init();			// Initialise l'ensemble du tableau
+		virtual void showGestureWidget(bool);
 	
 	public slots :
 		virtual void changeWidth(int width);	// Change l'épaisseur du curseur
