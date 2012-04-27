@@ -21,12 +21,9 @@ using namespace std;
 
 class PackageManager
 {
-	public :		
-		// Envoi d'un point à tous les clients
-		static void broadcastPoint(QList<QTcpSocket *> &clients, QPoint point, QPen pen);
-
-		// Envoi d'une ligne à tous les clients
-		static void broadcastLine(QList<QTcpSocket *> &clients, QLine line, QPen pen);
+	public :
+		// Broadcast d'un paquet déjà découpé
+		static void broadcast(QList<QTcpSocket *> &clients, QStringList list);
 		
 		// Envoi d'un point à un seul client
 		static void sendPoint(QDataStream &stream, QPoint point, QPen pen);
@@ -38,7 +35,7 @@ class PackageManager
 		static void sendPixmap(QDataStream &stream, QPixmap pixmap);
 		
 		// Traite une commande de type ordre, en agissant sur la scène
-		static void order(QDataStream &stream, QList<QTcpSocket *> &clients, ServerGraphics* graphics);
+		static void order(QStringList list, QList<QTcpSocket *> &clients, ServerGraphics* graphics);
 };
 
 

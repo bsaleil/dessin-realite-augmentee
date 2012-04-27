@@ -33,7 +33,7 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 		QPoint point(x, y);
 		if(firstPoint == true)
 		{
-			PackageManager::sendPoint(stream, point, *pen);		
+			oldCommand = PackageManager::sendPoint(stream, point, *pen, oldCommand);		
 			firstPoint = false;
 			precedent = new QPoint(point);
 		}
@@ -41,7 +41,7 @@ void NetworkDrawingBoard::drawPoint(int x, int y)
 		{
 			// Envoi d'une ligne à partir du point précédent et courant
 			QLine line(*precedent, point);
-			PackageManager::sendLine(stream, line, *pen);
+			oldCommand = PackageManager::sendLine(stream, line, *pen, oldCommand);
 			precedent->setX(point.x());
 			precedent->setY(point.y());
 		}
@@ -55,11 +55,8 @@ void NetworkDrawingBoard::drawQPoint(QPoint point)
 
 void NetworkDrawingBoard::drawLine(int fromX, int fromY, int toX, int toY)
 {
-	QPoint pointFrom(fromX, fromY);
-	QPoint pointTo(toX, toY);
-	QLine line(pointFrom, pointTo);
-	
-	PackageManager::sendLine(stream, line, *pen);
+	// Vide car doit etre présente, mais non utilisée sur le mode réseau
+	// car la ligne est envoyée directement au serveur
 }
 
 void NetworkDrawingBoard::flushScene()
@@ -83,6 +80,8 @@ void NetworkDrawingBoard::dataIncoming()
 	QString command;
 	stream >> command;
 	
+	QStringList list = command.split(":");
+	
 	// Réception d'un objet
 	if(command == "item")
 	{	
@@ -92,9 +91,9 @@ void NetworkDrawingBoard::dataIncoming()
 	}
 		
 	// Ordre de dessin
-	if(command == "order")
+	if(list[0] == "order")
 	{
-		PackageManager::order(stream, scene, this);
+		PackageManager::order(list, scene, this);
 	}
 }
 

@@ -22,10 +22,10 @@ class PackageManager
 {
 	public :
 		// Envoi d'un ordre de dessin d'une ligne au serveur
-		static void sendLine(QDataStream &stream, QLine line, QPen pen);
+		static QString sendLine(QDataStream &stream, QLine line, QPen pen, QString old);
 		
 		// Envoi d'un ordre de dessin au serveur
-		static void sendPoint(QDataStream &stream, QPoint point, QPen pen);
+		static QString sendPoint(QDataStream &stream, QPoint point, QPen pen, QString old);
 
 		// Envoie une demande de vidage de scène
 		static void flushScene(QDataStream &stream);
@@ -34,7 +34,7 @@ class PackageManager
 		static void item(QDataStream &stream, QGraphicsScene* scene);
 		
 		// Reçoit un ordre du serveur
-		static void order(QDataStream &stream, QGraphicsScene* scene, DrawingBoard* view);
+		static void order(QStringList list, QGraphicsScene* scene, DrawingBoard* view);
 };
 
 #endif

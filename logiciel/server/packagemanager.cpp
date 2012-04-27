@@ -33,74 +33,45 @@ void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
 	stream.writeRawData(packet.c_str(), strlen(packet.c_str()));
 }
 
-void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, ServerGraphics* graphics)
-{
-	// Type de l'ordre
-	QString type;
-	stream >> type;
-	
-	if(type == "point")
+void PackageManager::order(QStringList list, QList<QTcpSocket *> &clients, ServerGraphics* graphics)
+{	
+	if(list[1] == "point")
 	{
-		QPoint point;	
-		stream >> point;
-		
-		// Récupération des options
-		QPen pen;
-		stream >> pen;
-			
 		// Ajout du point sur la scène
-		graphics->addPoint(point, pen);
+		QPen pen(list[4]); pen.setWidth(list[5].toInt());
+		graphics->addPoint(QPoint(list[2].toInt(),list[3].toInt()), pen);
 			
 		// Envoi à tous les clients du point à dessiner
-		broadcastPoint(clients, point, pen);
+		broadcast(clients, list);
 	}
 	
-	if(type == "qline")
-	{
-		QLine line;	
-		stream >> line;
-		
-		// Récupération des options
-		QPen pen;
-		stream >> pen;
-			
+	else if(list[1] == "line")
+	{	
 		// Ajout de la ligne la scène
-		graphics->addLine(line, pen);
+		QPen pen(list[6]); pen.setWidth(list[7].toInt());
+		graphics->addLine(QLine(list[2].toInt(),list[3].toInt(),
+					list[4].toInt(),list[5].toInt()), pen);
 			
 		// Envoi à tous les clients de la ligne à dessiner
-		broadcastLine(clients, line, pen);	
+		broadcast(clients, list);	
 	}
 	
-	if(type == "flush")
+	else if(list[1] == "flush")
 	{
 		// Déclenchement du signal pour vider la scène
 		emit graphics->getScene()->clear();
 		
 		// Signale aux clients de nettoyer la scène
-		stream << QString("order");
-		stream << QString("flush");
+		broadcast(clients, list);
 	}
 }
 
-void PackageManager::broadcastPoint(QList<QTcpSocket *> &clients, QPoint point, QPen pen)
+void PackageManager::broadcast(QList<QTcpSocket *> &clients, QStringList list)
 {
 	for(int i=0; i <clients.size(); ++i)
 	{
 		QDataStream stream(clients.at(i));
 		
-		// Envoi du point à un client
-		sendPoint(stream, point, pen);
+		stream << list.join(":");
 	}
 }
-
-void PackageManager::broadcastLine(QList<QTcpSocket *> &clients, QLine line, QPen pen)
-{
-	for(int i=0; i <clients.size(); ++i)
-	{
-		QDataStream stream(clients.at(i));
-	
-		sendLine(stream, line, pen);
-	}
-}
-
-

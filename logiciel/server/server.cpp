@@ -9,6 +9,7 @@ Server::Server()
 		
 	// Réagir à chaque connexion entrante
 	connect(tcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
+	qDebug() << "Serveur en ecoute sur le port 34000";
 }
 
 void Server::newConnection()
@@ -41,7 +42,7 @@ void Server::disconnection()
 		return;
 
 	// On retire le client de la liste
-	qDebug() << "Un client se déconnecte";
+	qDebug() << "Un client se deconnecte.";
 	clients.removeOne(client);
 	
 	qDebug() << clients;
@@ -58,15 +59,16 @@ void Server::readData()
 	
 	// Traiter le message
 	QDataStream stream(client);
-	
 	QString command;
 	stream >> command;
+	
+	QStringList list = command.split(":");
 
 	// Commandes possibles
-	if(command == "order")
+	if(list[0] == "order")
 	{
 		// On délègue le traitement du paquet
-		PackageManager::order(stream, clients, graphics);
+		PackageManager::order(list, clients, graphics);
 	}
 }
  
