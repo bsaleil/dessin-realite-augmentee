@@ -3,6 +3,16 @@
 LocalDrawingBoard::LocalDrawingBoard()
 {		
 	init();
+	
+	QPoint p;
+	QDataStream s; s << p;
+	
+	QString sb = "10:40:10:#000000";
+	QDataStream ssb; ssb << sb;
+	
+	qDebug() << sizeof(s);
+	qDebug() << sizeof(sb);
+	
 }
 
 void LocalDrawingBoard::drawPoint(int x, int y)

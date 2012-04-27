@@ -13,6 +13,8 @@ using namespace std;
 #include <QPen>
 #include <QPoint>
 #include <QPen>
+#include <iostream>
+#include <string>
 #include "drawingboard.hpp"
 
 class PackageManager
