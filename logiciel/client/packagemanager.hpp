@@ -8,6 +8,7 @@
 
 using namespace std;
 
+#include <string>
 #include <QDataStream>
 #include <QGraphicsScene>
 #include <QPen>

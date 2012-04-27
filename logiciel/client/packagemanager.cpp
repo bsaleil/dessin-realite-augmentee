@@ -9,7 +9,7 @@ void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
 	packet += pen.color().name().toStdString() + ":";
 	packet += QString::number(pen.width()).toStdString();
 	
-	stream.writeRawData(packet.c_str(),strlen(packet.c_str()));
+	stream.writeRawData(packet.c_str(), strlen(packet.c_str()));
 }
 
 void PackageManager::sendLine(QDataStream &stream, QLine line, QPen pen)
@@ -23,7 +23,7 @@ void PackageManager::sendLine(QDataStream &stream, QLine line, QPen pen)
 	packet += pen.color().name().toStdString() + ":";
 	packet += QString::number(pen.width()).toStdString();
 	
-	stream.writeRawData(packet.c_str(),strlen(packet.c_str()));
+	stream.writeRawData(packet.c_str(), strlen(packet.c_str()));
 }
 
 void PackageManager::flushScene(QDataStream &stream)
@@ -61,7 +61,7 @@ void PackageManager::order(QDataStream &stream, QGraphicsScene* scene, DrawingBo
 	QString type;
 	stream >> type;
 
-	if(type == "qpoint")
+	if(type == "point")
 	{
 		QPoint p;
 		stream >> p;
@@ -74,7 +74,7 @@ void PackageManager::order(QDataStream &stream, QGraphicsScene* scene, DrawingBo
 		scene->addEllipse(p.x(), p.y(), pen.width(), pen.width(), pen, QBrush(Qt::SolidPattern));
 	}
 	
-	if(type == "qline")
+	if(type == "line")
 	{
 		QLine line;
 		stream >> line;

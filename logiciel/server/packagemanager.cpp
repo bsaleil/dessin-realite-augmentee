@@ -9,22 +9,28 @@ void PackageManager::sendPixmap(QDataStream &stream, QPixmap pixmap)
 
 void PackageManager::sendLine(QDataStream &stream, QLine line, QPen pen)
 {
-	QString command("order");
-	QString type("qline");
+	// "order:line:x1:y1:x2:y3:color:size"
+	string packet = "order:line:";
+	packet += QString::number(line.x1()).toStdString() + ":";
+	packet += QString::number(line.y1()).toStdString() + ":";
+	packet += QString::number(line.x2()).toStdString() + ":";
+	packet += QString::number(line.y2()).toStdString() + ":";
+	packet += pen.color().name().toStdString() + ":";
+	packet += QString::number(pen.width()).toStdString();
 	
-	stream << command << type;
-	stream << line;
-	stream << pen;
+	stream.writeRawData(packet.c_str(), strlen(packet.c_str()));
 }
 
 void PackageManager::sendPoint(QDataStream &stream, QPoint point, QPen pen)
-{
-	QString command("order");
-	QString type("qpoint");
+{	
+	// "order:point:x:y:color:size"
+	string packet = "order:point:";
+	packet += QString::number(point.x()).toStdString() + ":";
+	packet += QString::number(point.y()).toStdString() + ":";
+	packet += pen.color().name().toStdString() + ":";
+	packet += QString::number(pen.width()).toStdString();
 	
-	stream << command << type;
-	stream << point;
-	stream << pen;
+	stream.writeRawData(packet.c_str(), strlen(packet.c_str()));
 }
 
 void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, ServerGraphics* graphics)
@@ -33,7 +39,7 @@ void PackageManager::order(QDataStream &stream, QList<QTcpSocket *> &clients, Se
 	QString type;
 	stream >> type;
 	
-	if(type == "qpoint")
+	if(type == "point")
 	{
 		QPoint point;	
 		stream >> point;

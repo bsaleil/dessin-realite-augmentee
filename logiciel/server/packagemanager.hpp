@@ -8,6 +8,8 @@ using namespace std;
 *
 */
 
+#include <iostream>
+#include <string>
 #include <QDataStream>
 #include <QLine>
 #include <QList>
