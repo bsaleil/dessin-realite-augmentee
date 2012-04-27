@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+
+\geometry{hmargin=50pt, vmargin=50pt}
+\title{Bilan mi-parcours : IHM Ecriture sur Tableau Virtuel}
+\author{Bollini Kevin, Mélia Geoffrey, Pagès Julien, Saleil Baptiste}
+
+\date{\today}
+
+\begin{document}
+	\maketitle
+	Nom du groupe : \textbf{PouerMouer}
+	
+	\section{Composition du groupe et contact}
+	
+	\begin{itemize}
+	\item Kevin Bollini : kevin.bollini@etud.univ-montp2.fr \\
+	\item Geoffrey Mélia : geoffrey.melia@etud.univ-montp2.fr \\
+	\item Julien Pagès : julien.pages01@etud.univ-montp2.fr \\
+	\item Baptiste Saleil : baptiste.saleil@etud.univ-montp2.fr \\
+	\end{itemize}
+	
+	Pour rappel, nous travaillons en deux sous-groupe basés sur nos compétences, Kevin Bollini et Geoffrey Mélia travaillent
+	sur la partie biliothèque de suivi d'objet car ils sont tous les deux en IMAGINA. \\
+	La partie IHM et l'application qui utilise cette librairie est réalisée par Julien Pagès et Baptiste Saleil, tous les deux en AIGLE. \\
+	\section{Tâches effectuées avec succès}
+		\subsection{Partie bibliothèque}
+		\begin{itemize}
+		\item Développement d'une méthode de suivi avec la librairie cvBlob.
+		\item Suivi par forme fonctionnel.
+		\item Amélioration de l'étalonnage (basée sur une moyenne de couleur).
+		\item Amélioration du suivi par couleur.
+		\item Détection d'action lorsque on rapproche un objet.
+		\item Optimisation de code et documentation.
+		\end{itemize}
+		
+		\subsection{Application d'écriture virtuelle}
+		\begin{itemize}
+		\item Nouvelle interface d'étalonnage, avec possibilité de choisir la caméra, de faire un carré autour de l'objet, 
+		puis de régler le seuil, et enfin choisir le mode réseau ou local.
+		\item Mise en place du module réseau de l'application, plusieurs utilisateurs peuvent maintenant l'utiliser en même temps.
+		\item Développement d'outils pour l'application tels que une gomme, le changement de couleur, choisir la taille
+		du pinceau, exporter le dessin et mettre l'application en mode plein écran.
+		\item Interface naturelle (reconnaissance de mouvements) pour changer d'outils, couleur etc.
+		\item Grandes optimisation du code. 
+		\item Refonte de l'interface de l'application.
+		\end{itemize}
+		
+	\section{Problème rencontrés}
+		\subsection{Partie librairie}
+		\begin{itemize}
+		\item Problèmes avec la gestion mémoire de la librairie OpenCV, qui n'est pas très claire et qui est implicite.
+		\end{itemize}
+		
+		\subsection{Partie application}
+	
+\end{document}
+

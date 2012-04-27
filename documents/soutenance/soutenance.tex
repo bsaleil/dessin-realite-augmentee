@@ -33,8 +33,8 @@
 }
 
 \title{Tableau virtuel interactif}
-\author{Baptiste Saleil, Geoffrey Mélia, Julien Pagès, Kevin Bollini}
-\date{25 avril 2012}
+\author{Baptiste Saleil, Geoffrey Mélia, Julien Pagès, Kevin Bollini \\ \ \\Tuteur : M. Puech}
+\date{30 avril 2012}
 
 \begin{document}
 	\begin{frame}
@@ -58,7 +58,7 @@
 		\begin{itemize}
 		\item Concevoir une application avec une interface naturelle (mouvements)
 		\item Librairie de reconnaissance de mouvements
-		\item Application pour exploiter cette librairie pour dessiner ou écrire
+		\item Application exploitant cette librairie qui propose différents outils de dessins
 		\end{itemize}
 		
 		\end{frame}
@@ -68,8 +68,8 @@
 		\begin{frame}{Choix de conceptions}
 			\begin{block}{Choix principaux}
 				Découper le projet en deux parties distinctes : \\
-				- une librairie réutilisable \\
-				- une application avec une interface naturelle exploitant cette librairie \\
+				- une bibliothèque de suivi d'objets réutilisable \\
+				- une application avec une interface naturelle exploitant cette bibliothèque \\
 			\end{block}
 		\end{frame}
 		
@@ -79,7 +79,7 @@
 			Objectif :
 			\begin{itemize}
 			\item Se renseigner, réaliser une architecture de qualité
-			\item Travailler en groupe suivant les compétences
+			\item Répartition du travail en fonction des compétences
 			\item Développer rapidement un prototype
 			\item Développement incrémental en ajoutant des fonctionnalités
 			\end{itemize} 
@@ -127,24 +127,24 @@
 		\end{frame}
 	
 	% Geoffrey
-	\section{Librairie}
-		\begin{frame}{Librairie de suivi d'objets}
-			\begin{block}{Objectifs de la librairie conçue}
+	\section{Bibliothèque}
+		\begin{frame}{Bibliothèque de suivi d'objets}
+			\begin{block}{Objectifs de la bibliothèque conçue}
 				\begin{itemize}
 				\item{Distinguer complètement le suivi d'objet de l'application}
 				\item{Avoir une utilisation simple sans connaissance en traitement d'image}
 				\item{Permettre une détection d'action}
-				\item{Proposer un maximum de solutions de traçage}
+				\item{Proposer un maximum de solutions de suivi}
 				\item{Évaluer et comparer ces solutions}
 				\end{itemize}
 			\end{block}
 		\end{frame}
 
-		\begin{frame}{Librairie}
+		\begin{frame}{Bibliothèque}
 			\includegraphics[scale=0.40]{schema-librairie.pdf}
 		\end{frame}
 
-		\begin{frame}{Librairie}
+		\begin{frame}{Bibliothèque}
 
 		Création d'une structure de données : Cursor\\
 		struct Cursor \{
@@ -159,7 +159,7 @@
 		\} \\
 		\end{frame}
 		
-		\begin{frame}{Librairie}
+		\begin{frame}{Bibliothèque}
 		Deux fonctions enveloppes : \\
 			\begin{itemize}
 				\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE-TRACK flag)}
@@ -167,11 +167,11 @@
 			\end{itemize}		
 		\end{frame}
 
-		\begin{frame}{Traçages}
+		\begin{frame}{Suivis}
 		Deux types de suivis ont été développés : \\
 			\begin{itemize}
-				\item{Traçage par couleur}
-				\item{Traçage par forme}
+				\item{Suivi par couleur}
+				\item{Suivi par forme}
 			\end{itemize}
 		\end{frame}
 
