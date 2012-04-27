@@ -95,6 +95,7 @@ void NetworkDrawingBoard::dataIncoming()
 	{	
 		PackageManager::item(stream, scene);
 		initCursor();
+		initGestureUI();
 	}
 		
 	// Ordre de dessin

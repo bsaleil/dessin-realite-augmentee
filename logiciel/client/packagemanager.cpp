@@ -88,8 +88,9 @@ void PackageManager::order(QDataStream &stream, QGraphicsScene* scene, DrawingBo
 	{
 		emit scene->clear();
 		
-		// Refaire le curseur lors du flush
-		view->initCursor();		
+		// Refaire le curseur et l'interface gestuelle
+		view->initCursor();
+		view->initGestureUI();
 	}
 }
 

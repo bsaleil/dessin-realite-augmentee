@@ -98,8 +98,7 @@ void GestureWidget::mousePosition(int x, int y)
 				pen->setWidth(pen->width() + 1);
 				labelWidth->setText(QString::number(pen->width()));
 			}
-		}
-			
+		}	
 	}
 }
 
