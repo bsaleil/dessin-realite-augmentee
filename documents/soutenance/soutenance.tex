@@ -50,10 +50,11 @@
 		
 		But du projet :
 		\begin{itemize}
-		\item Concevoir une application utilisable avec des seuls gestes (sans souris)
-		\item Développer une librairie de détection d'objet dans une image
-		\item Exploiter cette librairie pour reconnaitre les mouvements de l'utilisateur
-		\item Pouvoir écrire ou dessiner à plusieurs sur un tableau virtuel.
+      \item Proposer un sujet en lien avec nos deux formations
+		\item Concevoir une application utilisant les mouvements de l'utilisateur (sans souris)
+		\item Développer une bibliothèque de détection d'objet dans une image
+		\item Exploiter cette bibliothèque pour reconnaitre les mouvements de l'utilisateur
+		\item Pouvoir écrire ou dessiner à plusieurs sur un tableau virtuel
 		\end{itemize}
 		
 		\end{frame}
@@ -62,8 +63,7 @@
 		inclure la vidéo?
 	\end{frame}
 
-	%Baptiste
-	%Plan
+%Plan
 	\begin{frame}{Plan}
 		\tableofcontents
 	\end{frame}
@@ -108,6 +108,7 @@
 				\item{Discussions (Mails / Instantanée)}
 				\item{Édition collaborative pour le travail à distance (Gobby)}
 			\end{itemize}
+         \end{block}
 		\end{frame}
 		
 	% Partie de Kevin
@@ -236,7 +237,7 @@
 		\pause
 			\begin{block}{Couleur}
 				Avantages \\
-				- Traçage rapide \\
+				- Suivi rapide \\
 				- Diversité possible de curseurs \\
 				Faiblesses \\
 				- Sensibilité à l'environnement\\
@@ -245,10 +246,10 @@
 			\pause
 			\begin{block}{Forme}
 				Avantages \\
-				- Traçage moins dépendant de la qualité de l'environnement \\
+				- Suivi moins dépendant de la qualité de l'environnement \\
 				- Efficace sur des objets 'complexes'\\
 				Faiblesses \\
-				- Traçage lent \\
+				- Suivi  lent \\
 				- Très sensible aux variations du curseur\\
 			\end{block}
 		\end{frame}
@@ -256,7 +257,7 @@
 		\pause
 			\begin{block}{Barycentre simple}
 				Avantages \\
-				- Traçage rapide \\
+				- Suivi rapide \\
 				Faiblesses \\
 				- Sensibilité aux parasites (fausses détections)\\
 				- Précision fortement dépendante de l'environnement\\
@@ -264,10 +265,10 @@
 			\pause
 			\begin{block}{Barycentre composante connexe}
 				Avantages \\
-				- Traçage plus précis \\
+				- Suivi plus précis \\
 				- Résistance aux parasites \\
 				Faiblesses \\
-				- Traçage plus lent \\
+				- Suivi plus lent \\
 				- Perte occasionnelle du curseur
 			\end{block}
 		\end{frame}
@@ -275,17 +276,17 @@
 		\begin{frame}{Bilan}
 			\begin{exampleblock}{Objectifs atteints}
 				\begin{itemize}
-				\item Librairie utilisable proposant plusieurs solution de traçage
+				\item Bibliothèque utilisable et proposant plusieurs solutions de suivi
 				\item Détection d'action implémentée dans deux des trois solutions
-				\item Utilisation simple sans connaissances en traitement des images
+				\item Utilisation simple sans connaissances en traitement d'images
 				\end{itemize}
 			\end{exampleblock}
 			\pause
 			\begin{alertblock}{Difficultés et ouverture}
 				\begin{itemize}
-				\item Exploitation des librairies OpenCv et CvBlob 
+				\item Exploitation des bibliothèques OpenCv et CvBlob 
 				\item Implémentation de la détection pour le suivi par forme
-				\item Ajout à la librairie de nouvelles fonctions de suivi
+				\item Ajout à la bibliothèque de nouvelles fonctions de suivi
 				\end{itemize}
 			\end{alertblock}
 		\end{frame}
@@ -298,7 +299,7 @@
 				\begin{itemize}
 				\item{Avoir une application modulable et facilement extensible}
 				\item{Fonctionnement identique pour les classes principales en réseau ou en local}
-				\item{Pouvoir rajouter facilement des outils}
+				\item{Pouvoir rajouter facilement des outils (pinceaux, gomme, etc.)}
 				\item{Séparer le traitement du rendu}
 				\end{itemize}
 			\end{block}
@@ -315,10 +316,11 @@
 			
 			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
 			
-			Les fonctionnalités implémentées sont les suivantes :
+			Le dessin virtuel interactif propose différents outils :
 			\begin{itemize}
-			\item Un outil pour changer la couleur et la forme du pinceau
-			\item Un outil gomme
+			\item La possibilité de changer la couleur du pinceau
+      \item Celle d'ajuster la taille du pinceau
+			\item Une gomme
 			\item Fonctionnalité permettant d'exporter le dessin
 			\item Possibilité de nettoyer complètement le tableau
 			\item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
@@ -414,7 +416,6 @@
 			\end{alertblock}
 		\end{frame}
 
-	% Geoffrey pour la conclusion avec Kevin éventuellement
 	\section{Conclusion}
 		\begin{frame}{Conclusion}
 			\begin{exampleblock}{Objectifs atteints}
@@ -435,10 +436,12 @@
 			\end{block}
 		\end{frame}
 	
-	\begin{frame}
-		\begin{center}
-			\huge{Merci pour votre attention.} \\
-		\end{center}
+	\begin{frame}{Sources et bibliographie}
+  http://www.sciencedirect.com.www.ezp.biu-montpellier.fr/science/article/pii/S026288561100120X \\
+  http://www.irit.fr/recherches/SAMOVA/pageAnalysis.html\\
+  http://www.irit.fr/~Philippe.Joly/Teaching/L3SI/ti.html\\
+  http://opencv.willowgarage.com/wiki/\\
+  code.google.com/p/cvblob/ 
 	\end{frame}
 
 \end{document}
