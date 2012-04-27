@@ -46,26 +46,8 @@ void Client::init(int w, IplImage *i, Cursor c)
 	// Connexion au plein écrans
 	connect(ui->actionPleinEcran, SIGNAL(triggered()), this, SLOT(fullscreen()));
 	
-	// Création de la barre d'outils
-	QLabel *labelWidth = new QLabel(tr("Diametre : ")); 
-	QSpinBox *spinWidth = new QSpinBox();
-		spinWidth->setRange(1,20);
-		spinWidth->setValue(5);
-	QLabel *labelColor = new QLabel(tr("Couleur : "));
-	buttonColor = new QPushButton(); 
-		buttonColor->setStyleSheet("background-color: #000000");
-	QLabel *labelEraser = new QLabel(tr("Gomme : "));
-	QPushButton *buttonEraser = new QPushButton();
-	QPixmap pixmap("eraser.png"); QIcon icon(pixmap); buttonEraser->setIcon(icon);
-	ui->toolBar->addWidget(labelWidth); ui->toolBar->addWidget(spinWidth);
-	ui->toolBar->addWidget(labelColor); ui->toolBar->addWidget(buttonColor);
-	ui->toolBar->addWidget(labelEraser); ui->toolBar->addWidget(buttonEraser);
-	
-	// Connexion des signaux de la barre d'outils
-	connect(spinWidth, SIGNAL(valueChanged(int)), drawingBoard, SLOT(changeWidth(int)));
-	connect(buttonColor, SIGNAL(clicked()), this, SLOT(changeColor()));
-	connect(buttonEraser, SIGNAL(clicked()), this, SLOT(toolRubber()));
-	
+	// Connecion au changement de couleur
+	connect(ui->actioncouleur, SIGNAL(triggered()), this, SLOT(changeColor()));	
 	
 	// Création de la zone centrale
 	scroll = new QScrollArea();
@@ -186,8 +168,6 @@ void Client::changeColor()
 	// Si la couleur est valide
 	if (c.isValid())
 	{
-		// On colore le bouton et on change l'état
-		buttonColor->setStyleSheet("background-color: " + c.name());
 		drawingBoard->changeColor(c);
 	}
 }

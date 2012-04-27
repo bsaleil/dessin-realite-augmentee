@@ -27,31 +27,21 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionQuitter"/>
     <addaction name="separator"/>
     <addaction name="actionExporter"/>
-    <addaction name="actionFlushScene"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menuAffichage">
     <property name="title">
-     <string>Affichage</string>
+     <string>Options</string>
     </property>
+    <addaction name="actionFlushScene"/>
     <addaction name="actionPleinEcran"/>
-    <addaction name="actionBarreOutils"/>
+    <addaction name="actioncouleur"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuAffichage"/>
-  </widget>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <action name="actionQuitter">
    <property name="text">
@@ -87,7 +77,7 @@
   </action>
   <action name="actionExporter">
    <property name="text">
-    <string>Exporter</string>
+    <string>Enregistrer...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -140,6 +130,11 @@
     <string>Barre d'outils</string>
    </property>
   </action>
+  <action name="actioncouleur">
+   <property name="text">
+    <string>Couleur...</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -156,38 +151,6 @@
     <hint type="destinationlabel">
      <x>399</x>
      <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionBarreOutils</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>toolBar</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>31</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolBar</sender>
-   <signal>visibilityChanged(bool)</signal>
-   <receiver>actionBarreOutils</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>260</x>
-     <y>31</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>-1</x>
-     <y>-1</y>
     </hint>
    </hints>
   </connection>

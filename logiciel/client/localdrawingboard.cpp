@@ -1,23 +1,8 @@
 #include "localdrawingboard.hpp"
 
 LocalDrawingBoard::LocalDrawingBoard()
-{
-
-	// Création du pinceau par défaut
-	pen = new QPen();
-		pen->setWidth(5);
-		pen->setColor(QColor("#000000"));
-		
-	setFixedSize(645, 485);
-	setSceneRect(0, 0, 640, 480);
-	scene = new QGraphicsScene();
-	setScene(scene);
-	
-	// Savoir si c'est le premier point
-	firstPoint = true;
-	
-	// On initialise le curseur
-	initCursor();
+{		
+	init();
 }
 
 void LocalDrawingBoard::drawPoint(int x, int y)
@@ -64,4 +49,5 @@ void LocalDrawingBoard::flushScene()
 {
 	emit scene->clear();
 	initCursor();
+	initGestureUI();
 }

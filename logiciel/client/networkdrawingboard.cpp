@@ -6,18 +6,7 @@ NetworkDrawingBoard::NetworkDrawingBoard(QString h, int p)
 	host = h;
 	port = p;
 	
-	setFixedSize(645, 485);
-	setSceneRect(0, 0, 640, 480);
-	scene = new QGraphicsScene();
-	setScene(scene);
-	
-	pen = new QPen();
-	pen->setWidth(5);
-	pen->setColor(QColor("#000000"));
-	
-	firstPoint = true;
-	
-	initCursor();
+	init();
 	
 	// Connexion au serveur
 	socket->abort();
@@ -84,6 +73,7 @@ void NetworkDrawingBoard::flushScene()
 {
 	// Demande de vider la scène au serveur
 	PackageManager::flushScene(stream);
+	initGestureUI();
 }
 
 void NetworkDrawingBoard::connectionActive()

@@ -13,6 +13,10 @@
 #include <QGraphicsItem>
 #include <QPen>
 #include <QGLWidget>
+#include <QDebug>
+#include <QGraphicsProxyWidget>
+
+#include "gesturewidget.hpp"
 
 class DrawingBoard : public QGraphicsView
 {	
@@ -23,38 +27,17 @@ class DrawingBoard : public QGraphicsView
 		virtual void drawPoint(int x,int y) = 0;			// Dessine un point
 		virtual void drawLine(int fromX,int fromY,int toX,int toY) = 0;	// Dessine une ligne entre deux points
 		virtual void flushScene() = 0;					// Vide la scène
+		
+		virtual void setFirstPoint(bool f);	// Change l'état du pooint à dessiner
+		virtual void initCursor();		// Initialise le curseur
+		virtual void initGestureUI();		// Initialise l'interface gestuelle
+		virtual void moveCursor(int x, int y);	// Met a jour la position du curseur
+		
+		virtual void init();			// Initialise l'ensemble du tableau
 	
 	public slots :
-		virtual void changeWidth(int width)
-		{
-			pen->setWidth(width);
-		}
-		
-		virtual void changeColor(QColor color)
-		{
-			pen->setColor(color);
-		}
-		
-		virtual void initCursor()
-		{
-			QPixmap p("curseur.png");
-			setViewport(new QGLWidget);
-			
-			cursor = scene->addPixmap(p);  
-			
-			scene->addItem(cursor);
-			cursor->setPos(100,100);
-		}
-		
-		virtual void moveCursor(int x, int y)
-		{
-			cursor->setPos(x-10,y-10);
-		}
-		
-		virtual void setFirstPoint(bool f)
-		{
-			firstPoint = f;
-		}
+		virtual void changeWidth(int width);	// Change l'épaisseur du curseur
+		virtual void changeColor(QColor color);	// Change la couleur du curseur
 
 	protected :
 		QGraphicsPixmapItem *cursor; // Représente le curseur
@@ -62,6 +45,8 @@ class DrawingBoard : public QGraphicsView
 		QPen *pen;		// Représente l'état du pinceau
 		QPoint *precedent;	// Représente le point précédemment tracé
 		bool firstPoint;	// Premier point (utilisé pour les lignes)
+		GestureWidget *gestureWidget; // Interface gestuelle
+		QGraphicsProxyWidget *proxyGestureWidget; // Proxy du widget de l'IG
 };
 
 #endif

@@ -46,8 +46,7 @@ class Client : public QMainWindow
 		void init(int, IplImage*, Cursor);			// Initialisation commune local-distant
 	
 		Ui::Client *ui;			// Interface graphique
-		QScrollArea *scroll;		// Zone de défilement 
-		QPushButton *buttonColor;	// Bouton de choix de couleur
+		QScrollArea *scroll;		// Zone de défilement
 		
 		DrawingBoard *drawingBoard;	// Widget de dessin
 		WebcamManager *camManager;	// Classe gérant les webcams
