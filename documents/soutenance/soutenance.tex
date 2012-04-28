@@ -138,37 +138,29 @@
 	%Geoffrey
 	\section{Bibliothèque}
 		\subsection{Architecture}
-		\begin{frame}{Bibliothèque de suivi d'objets}
+		\begin{frame}{Bibliothèque de suivi d'objets : libtrack}
 			\begin{block}{Objectifs de la bibliothèque conçue}
 				\begin{itemize}
 				\item{Distinguer complètement le suivi d'objet de l'application}
 				\item{Avoir une utilisation simple sans connaissance en traitement d'image}
-				\item{Permettre une détection d'action}
+				\item{Permettre la détection d'actions}
 				\item{Proposer un maximum de solutions de suivi}
 				\item{Évaluer et comparer ces solutions}
 				\end{itemize}
 			\end{block}
 		\end{frame}
 
-		\begin{frame}{Bibliothèque}
+		\begin{frame}{Bibliothèque libtrack}
 			\includegraphics[scale=0.40]{schema-librairie.pdf}
 		\end{frame}
 
 		\begin{frame}{Bibliothèque}
 
 		Création d'une structure de données : Cursor\\
-		struct Cursor \{
-		\begin{itemize}
-			\item{CvPoint center}
-			\item{CvPoint cornerA}
-			\item{CvPoint cornerB}
-			\item{...}
-			\item{IplImage *mask}
-			\item{Bool active}
-		\end{itemize}
-		\} \\
+    inclure graphique de la structure + énum
 		\end{frame}
 		
+      %TODO frame a supprimer
 		\begin{frame}{Bibliothèque}
 		Deux fonctions enveloppes : \\
 			\begin{itemize}
@@ -177,7 +169,7 @@
 			\end{itemize}		
 		\end{frame}
 
-		\subsection{Comparatifs}
+		\subsection{Comparatifs des méthodes de suivi}
 		\begin{frame}{Comparatif Couleur/Forme}
 		\pause
 			\begin{block}{Couleur}
@@ -219,8 +211,8 @@
 		\end{frame}
 
 		%Kevin
-		\subsection{Fonctionement}
-		\begin{frame}{Scénario type d'usage de la bibliothèque}
+		\subsection{Fonctionnement}
+		\begin{frame}{Scénario type d'utilisation de la bibliothèque}
 			La bibliothèque s'utilise en deux grandes étapes :
 			\begin{itemize}
 				\item{Calibration, engendrant une struture Cursor}
@@ -232,11 +224,11 @@
 		\begin{frame}{Calibration : Source d'images et TYPE\_TRACK}
 			\begin{center}
 				\includegraphics[scale=0.25]{Capture6.png}\\
-				Écran de selection du Type\_TRACK et de la source d'images
+				Écran de sélection du Type\_TRACK et de la source d'images
 			\end{center}
 		\end{frame}
 
-		\begin{frame}{Calibration : Selection du curseur}
+		\begin{frame}{Calibration : Sélection du curseur}
 			\begin{itemize}
 				\item{Extrait la position de l'objet à suivre}
 			\end{itemize}
@@ -331,18 +323,24 @@
 			
 			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
 			
-			Le dessin virtuel interactif propose différents outils :
-			\begin{itemize}
-			\item La possibilité de changer la couleur du pinceau
-      \item Celle d'ajuster la taille du pinceau
-			\item Une gomme
-			\item Fonctionnalité permettant d'exporter le dessin
-			\item Possibilité de nettoyer complètement le tableau
-			\item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
-			\item Utilisation simultanée par plusieurs utilisateurs
-			\item Application traduite et packagée (en .deb)
-			\end{itemize}
+			Le dessin virtuel interactif propose différents outils et fonctionnalités:
+       \begin{itemize}
+        \item Changer la couleur du pinceau
+        \item Ajuster la taille du pinceau
+        \item Une gomme
+        \item Nettoyer complètement le tableau
+        \item Sauvegarder le dessin
+      \end{itemize}
 		\end{frame}
+      
+      \begin{frame}{Application suite}
+        \begin{itemize}
+          \item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
+          \item Utilisation simultanée par plusieurs utilisateurs
+          \item Application traduite et packagée (en .deb)
+        \end{itemize}
+      \end{frame}
+      
 		
 	\subsection{Module Local}
 		\begin{frame}{Fonctionnemment global}
@@ -390,7 +388,7 @@
 		\end{frame}
 
 	% Julien
-	\subsection{Module Reseau}
+	\subsection{Module Réseau}
 		\begin{frame}{Fonctionnement global}
 			\begin{block}{Fonctionnement en réseau}
 				\begin{itemize}
@@ -452,11 +450,13 @@
 		\end{frame}
 	
 	\begin{frame}{Sources et bibliographie}
+   %need tiny{}??
   http://www.sciencedirect.com.www.ezp.biu-montpellier.fr/science/article/pii/S026288561100120X \\
   http://www.irit.fr/recherches/SAMOVA/pageAnalysis.html\\
   http://www.irit.fr/~Philippe.Joly/Teaching/L3SI/ti.html\\
   http://opencv.willowgarage.com/wiki/\\
-  code.google.com/p/cvblob/ 
+  code.google.com/p/cvblob/ \\
+  lien du projet : http://code.google.com/p/dessin-realite-augmentee/ \\
 	\end{frame}
 
 \end{document}
