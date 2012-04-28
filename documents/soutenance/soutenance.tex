@@ -298,132 +298,126 @@
 	% Baptiste et Julien
 	% Baptiste
 	\section{Application}
-		\begin{frame}{Architecture}
-			\begin{block}{Objectifs de l'architecture conçue}
+	
+		\subsection{Objectifs}
+		\begin{frame}{Objectifs}
+			\begin{itemize}
+				\item Interface intuitive
+				\item Modulable, Extensible
+				\item Fonctionnement transparent mode local / mode réseau
+				\item Séparer le traitement du rendu
+				\item Etablir un protocole simple et rapide
+			\end{itemize}
+		\end{frame}
+	
+		\subsection{Architecture}
+		\begin{frame}{Architecture - Modules}
+			\pause
+			\begin{block}{Etalonnage}
 				\begin{itemize}
-				\item{Avoir une application modulable et facilement extensible}
-				\item{Fonctionnement identique pour les classes principales en réseau ou en local}
-				\item{Pouvoir rajouter facilement des outils (pinceaux, gomme, etc.)}
-				\item{Séparer le traitement du rendu}
+					\item Choix principaux
+					\item Réglages
+				\end{itemize}
+			\end{block}
+			\pause
+			\begin{block}{Client}
+				\begin{itemize}
+					\item Interface graphique
+					\item Liens entre les modules
+				\end{itemize}
+			\end{block}
+			\pause
+			\begin{block}{Tableau}
+				\begin{itemize}
+					\item Dessin / Interface gestuelle
+					\item Réseau
+				\end{itemize}
+			\end{block}
+			\pause
+			\begin{block}{Serveur}
+				\begin{itemize}
+					\item Communication entre clients
+					\item Synchronisatoin du tableau
 				\end{itemize}
 			\end{block}
 		\end{frame}
-		
-		\begin{frame}{Diagramme de classes}
+	
+		\begin{frame}{Architecture - Classes}
 			\begin{center}		
-			\includegraphics[scale=0.45]{../uml/classes.png}
+				\includegraphics[scale=0.45]{../uml/classes.png}
 			\end{center}
 		\end{frame}
 		
-		\begin{frame}{Application}
-			
-			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
-			
-			Le dessin virtuel interactif propose différents outils et fonctionnalités:
-       \begin{itemize}
-        \item Changer la couleur du pinceau
-        \item Ajuster la taille du pinceau
-        \item Une gomme
-        \item Nettoyer complètement le tableau
-        \item Sauvegarder le dessin
-      \end{itemize}
+		\subsection{Fonctionnalités}
+		\begin{frame}{Fonctionnalités - Outils}
+			Schéma des outils + colorpicker
 		\end{frame}
-      
-      \begin{frame}{Application suite}
-        \begin{itemize}
-          \item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
-          \item Utilisation simultanée par plusieurs utilisateurs
-          \item Application traduite et packagée (en .deb)
-        \end{itemize}
-      \end{frame}
-      
+		\begin{frame}{Fonctionnalités - Actions}
+			Schéma sauvegarde dessin + vidage tableau + plein ecran
+		\end{frame}
 		
-	\subsection{Module Local}
-		\begin{frame}{Fonctionnemment global}
-			\begin{block}{Fonctionnement en local}
+		\subsection{Fonctionnement}
+		\begin{frame}{Fonctionnement - Interface intuitive}
+			capture + explications
+		\end{frame}
+		
+		\begin{frame}{Fonctionnement - Etalonnage}
+			\begin{block}{Technique}
 				\begin{itemize}
-				\item Étalonnage selon la méthode voulue, choix du mode local
-				\item Détection d'un mouvement, dessin directement sur le tableau en respectant les options
+					\item Interface "Suivant - Précédent"
+					\item Etalonnage obligatoire
+				\end{itemize}
+			\end{block}
+			\begin{block}{Utilisation}
+				\begin{enumerate}
+					\item Choix webcam / Type de suivi
+					\item Sélection de l'objet
+					\item Réglage de la détection
+					\item Choix mode local / réseau
+				\end{enumerate}
+			\end{block}
+			
+		\end{frame}
+		
+		\begin{frame}{Fonctionnement - Local}
+			Pseudo-séquence + explications
+		\end{frame}
+		
+		\begin{frame}{Fonctionnement - Réseau}
+			Pseudo-séquence + explications
+		\end{frame}
+		
+		\subsection{Mise en production}
+		\begin{frame}{Mise en production}
+			\begin{block}{Pourquoi?}
+				\begin{itemize}
+					\item Généralement oubliée
+					\item Première expérience
+					\item Application aboutie
+				\end{itemize}
+			\end{block}
+			\begin{block}{Eléments}
+				\begin{itemize}
+					\item Traduction
+					\item Packaging
+					\item Documentation
+					\item Portabilité
+					\item Dépôt accessible
+					\item Code propre
 				\end{itemize}
 			\end{block}
 		\end{frame}
 		
-		\begin{frame}{Étalonnage}
-			L'étalonnage se déroule en plusieurs phases.
+		\subsection{Ouverture}
+		\begin{frame}{Ouverture}
 			\begin{itemize}
-			\item Choix de la webcam et de méthode de suivi
-			\item Choix de l'objet à suivre à partir d'une photo, en l'entourant d'un rectangle
-			\item Réglage du seuil de tolérance à partir du retour de l'étalonnage
-			\item Choix du mode : réseau ou local
+				\item Amélioration du réseau
+				\item Amélioration des performances
+				\item Possibilité de relancer l'étalonnage
 			\end{itemize}
 		\end{frame}
 		
-		% TODO : compléter ou supprimer cette frame
-		\begin{frame}{Utilisation de l'application}
-		L'interface permets de visualiser le flux vidéo, et le dessin.
-		
-		Les mouvements sont détectés, et le dessin est effectué à partir de ces mouvements.
-		\end{frame}
-		
-		% Bilan du projet côté interface
-		\begin{frame}{Bilan}
-			\begin{exampleblock}{Objectifs atteints}
-				\begin{itemize}
-				\item Application fonctionnelle et utilisable
-				\item Beaucoup d'outils voulus implémentés
-				\end{itemize}
-			\end{exampleblock}
-			\pause
-			\begin{alertblock}{Difficultés et ouverture}
-				\begin{itemize}
-				\item Faire une interface gestuelle pour sélectionner gomme, couleur et forme
-				\item Améliorer la gestion du dessin
-				\item Relancer l'étalonnage sans relancer l'application
-				\end{itemize}
-			\end{alertblock}
-		\end{frame}
-
-	% Julien
-	\subsection{Module Réseau}
-		\begin{frame}{Fonctionnement global}
-			\begin{block}{Fonctionnement en réseau}
-				\begin{itemize}
-				\item Étalonnage selon la méthode voulue, choix du mode réseau
-				\item Récupération du dessin actuel par le client
-				\item Détection d'un mouvement
-				\item Envoi au serveur de ce mouvement (et des options) en respectant le protocole
-				\item Réception du paquet côté serveur, dessin du serveur
-				\item Envoi aux clients de ce point, avec les options (épaisseur, couleur)
-				\item Réception côté client, et dessin en local
-				\end{itemize}
-			\end{block}
-		\end{frame}
-		
-		\begin{frame}{Fonctionnemment global : schéma}
-		
-		Déroulement du fonctionnement en réseau de l'application :
-			\begin{center}
-			\scalebox{0.5}{\input{../uml/sequence_reseau.tex}} 
-			\end{center}
-		\end{frame}
-		
-		% Bilan de l'application côté réseau
-		\begin{frame}{Bilan}
-			\begin{exampleblock}{Objectifs atteints}
-				\begin{itemize}
-				\item Architecture identique au fonctionnement en local
-				\item Application fonctionnelle en mode réseau malgré la difficulté
-				\item Tous les outils fonctionnent
-				\end{itemize}
-			\end{exampleblock}
-			\pause
-			\begin{alertblock}{Difficultés et ouverture}
-				\begin{itemize}
-				\item Optimiser fortement le mode réseau pour réduire les problèmes de lenteur
-				\item Mettre par défaut une couleur à chaque utilisateur
-				\end{itemize}
-			\end{alertblock}
-		\end{frame}
+		% \scalebox{0.5}{\input{../uml/sequence_reseau.tex}} 
 
 	\section{Conclusion}
 		\begin{frame}{Conclusion}
