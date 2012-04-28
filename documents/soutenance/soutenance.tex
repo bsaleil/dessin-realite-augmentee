@@ -37,6 +37,7 @@
 \date{30 avril 2012}
 
 \begin{document}
+	%Kevin
 	\begin{frame}
 		\titlepage
 	\end{frame}
@@ -78,7 +79,6 @@
 			\end{block}
 		\end{frame}
 		
-	% Julien
 	\subsection{Gestion de projet}
 		\begin{frame}{Gestion de projet}
 			\begin{block}{Méthodologie :}
@@ -111,7 +111,7 @@
          \end{block}
 		\end{frame}
 		
-	% Partie de Kevin
+	% Partie de Geoffrey
 	\subsection{Analyse}
 		\begin{frame}{Analyse}
 			\begin{exampleblock}{Objectifs}
@@ -134,8 +134,8 @@
 			\end{center}
 		\end{frame}
 	
-	% Geoffrey
 	\section{Bibliothèque}
+		\subsection{Architecture}
 		\begin{frame}{Bibliothèque de suivi d'objets}
 			\begin{block}{Objectifs de la bibliothèque conçue}
 				\begin{itemize}
@@ -175,61 +175,72 @@
 			\end{itemize}		
 		\end{frame}
 
-		\begin{frame}{Suivis}
-		Deux types de suivis ont été développés : \\
+		\subsection{Fonctionement}
+		\begin{frame}{Scénario type d'usage de la bibliothèque}
+			La bibliothèque s'utilise en deux grandes étapes :
 			\begin{itemize}
-				\item{Suivi par couleur}
-				\item{Suivi par forme}
+				\item{Calibration, engendrant une struture Cursor}
+				\item{Track, mettant à jour les informations de la structure}
 			\end{itemize}
 		\end{frame}
 
-		\subsection{Suivi par Couleur}
-		\begin{frame}{Étalonnage par couleur}
-			\begin{itemize}
-				\item{Sélection de l'objet}
-				\item{Détection de couleur}
-				\item{Réglage du seuil de la binarisation}
-				\item{Binarisation selon le seuil}
-			\end{itemize}
-		\end{frame}
-
-		\begin{frame}{Suivi par couleur}
-			Deux méthodes de détection de position :
-			\begin{itemize}
-				\item{Calcul du barycentre de l'image binaire}
-				\item{Recherche par composantes connexes sur l'image}
-			\end{itemize}
-		\end{frame}
-
-		\begin{frame}{Suivi par couleur : Barycentre}
-			\begin{itemize}
-				\item{Calcul du barycentre de l'image binaire}
-			\end{itemize}
+		\subsubsection{Calibration}
+		\begin{frame}{Calibration : Source d'images et TYPE\_TRACK}
 			\begin{center}
-				\includegraphics[scale=0.25]{capture1.jpg}
+				\includegraphics[scale=0.25]{Capture6.png}\\
+				Écran de selection du Type\_TRACK et de la source d'images
 			\end{center}
 		\end{frame}
 
-		\begin{frame}{Suivi par couleur : Composantes connexes}
+		\begin{frame}{Calibration : Selection du curseur}
 			\begin{itemize}
-				\item{Calcul des différentes composantes connexes sur l'image binaire}
-				\item{Sélection de la composante correspondant au curseur}
-				\item{Récupération de son barycentre} 
+				\item{Extrait la position de l'objet à suivre}
 			\end{itemize}
+			\begin{center}
+				\includegraphics[scale=0.25]{Capture1.png}\\
+				Sélection de l'objet
+			\end{center}
+		
 		\end{frame}
 
-		\subsection{Suivi par Forme}
-		\begin{frame}{Étalonnage par forme}
+		\begin{frame}{Calibration couleur : Réglage du seuil}
 			\begin{itemize}
-				\item{Sélection de la zone-objet}
-				\item{Création d'une sous-image Template}
+				\item{Modifie l'attribut "threshold" de la structure Cursor.}
 			\end{itemize}
+			\begin{center}
+				\includegraphics[scale=0.25]{Capture2.png}\\
+				Écran de réglage du seuil
+			\end{center}
+		\end{frame}
+		
+		\subsubsection{Suivi}
+		\begin{frame}{Suivi par couleur : Barycentre}
+			\begin{center}
+				\includegraphics[scale=0.25]{Capture4.png}\\
+				Calcul du barycentre de l'image binaire
+			\end{center}
 		\end{frame}
 
+		\begin{frame}{Suivi par Blob : Composantes connexes}
+			\begin{center}
+				\includegraphics[scale=0.25]{Capture5.png}\\
+				Recherche et isolement de la composante connexe pertinante
+			\end{center}
+		\end{frame}
+
+		\begin{frame}{Suivi par couleur/Blob : Détection d'action}
+			\begin{itemize}
+				\item{Détection d'action par approchement du curseur}
+			\end{itemize}
+			\begin{center}
+				\includegraphics[scale=0.25]{Capture3.png}\\
+				Retour image de l'objet suivi
+			\end{center}
+		\end{frame}
+		%Kevin
 		\begin{frame}{Suivi par forme}
 			\begin{itemize}
 				\item{Recherche du template dans l'image}
-				\item{Sélection de la zone avec la meilleure correspondance}
 			\end{itemize}
 		\end{frame}
 		\subsection{Comparatifs}
@@ -292,7 +303,7 @@
 		\end{frame}
 	
 	% Baptiste et Julien
-	% Julien
+	% Baptiste
 	\section{Application}
 		\begin{frame}{Architecture}
 			\begin{block}{Objectifs de l'architecture conçue}
@@ -311,7 +322,6 @@
 			\end{center}
 		\end{frame}
 		
-	% Baptiste
 		\begin{frame}{Application}
 			
 			L'application est utilisable en local et en réseau, avec un fonctionnement identique.
