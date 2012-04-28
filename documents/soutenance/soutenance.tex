@@ -10,26 +10,26 @@
 % Rapetisser les noms et date etc dans le footer
 \setbeamertemplate{footline}
 {
-	\leavevmode%
-	\hbox{%
-	\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-	\
-	\end{beamercolorbox}%
-	\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-	\usebeamerfont{title in head/foot}\insertshorttitle
-	\end{beamercolorbox}%
-	\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-	\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-	\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-	\end{beamercolorbox}}%
-	\vskip0pt%
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+      \
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+      \end{beamercolorbox}}%
+      \vskip0pt%
 }
 
 \AtBeginSection[]
 {
-	\begin{frame}
-		\tableofcontents[currentsection,hideallsubsections]
-	\end{frame}
+      \begin{frame}
+            \tableofcontents[currentsection,hideallsubsections]
+      \end{frame}
 }
 
 \title{Tableau virtuel interactif}
@@ -46,407 +46,426 @@
 		\begin{frame}{Introduction}
 		
 		But du projet :
-		\begin{itemize}
-      \item Proposer un sujet en lien avec nos deux formations
-		\item Concevoir une application utilisant les mouvements de l'utilisateur (sans souris)
-		\item Développer une bibliothèque de détection d'objet dans une image
-		\item Exploiter cette bibliothèque pour reconnaitre les mouvements de l'utilisateur
-		\item Pouvoir écrire ou dessiner à plusieurs sur un tableau virtuel
-		\end{itemize}
-		
-		\end{frame}
+            \begin{itemize}
+			\item Proposer un sujet en lien avec nos deux formations
+            \item Concevoir une application utilisant les mouvements de l'utilisateur (sans souris)
+            \item Développer une bibliothèque de détection d'objet dans une image
+            \item Exploiter cette bibliothèque pour reconnaitre les mouvements de l'utilisateur
+            \item Pouvoir écrire ou dessiner à plusieurs sur un tableau virtuel
+            \end{itemize}
+            
+            \end{frame}
 
-	\begin{frame}{Vidéo de présentation}
-		%\movie{\includegraphics[width=.65\textwidth]{demo}}{demo.ogv}
-	\end{frame}
+      \begin{frame}{Vidéo de présentation}
+            %\movie{\includegraphics[width=.65\textwidth]{demo}}{demo.ogv}
+      \end{frame}
 
 %Plan
-	\begin{frame}{Plan}
-		\tableofcontents
-	\end{frame}
-		
-	\section{Analyse et Conception}
-	\subsection{Choix de conceptions}
-		\begin{frame}{Choix de conceptions}
-			\begin{block}{Choix principaux}
-				Découper le projet en deux parties distinctes : \\
-				- une bibliothèque de suivi d'objets réutilisable \\
-				- une application avec une interface naturelle exploitant cette bibliothèque \\
-			\end{block}
-		\end{frame}
-		
-	\subsection{Gestion de projet}
-		\begin{frame}{Gestion de projet}
-			\begin{block}{Méthodologie :}
-			\begin{itemize}
-			\item Se renseigner, réaliser une architecture de qualité
-			\item Répartir le travail en fonction des compétences et formations de chacun
-			\item Développer rapidement un prototype
-			\item Développement incrémental en ajoutant des fonctionnalités
-			\end{itemize}
-			\end{block}
-		\end{frame}
-		
-		\begin{frame}{Gestion de projet}
-			\begin{block}{Organisation :}
-			\begin{itemize}
-				\item{Réunions}
-				\item{Deux sous-groupes}
-				\item{Partage des tâches au sein des groupes}
-				\item{Décisions communes (à quatre)}
-			\end{itemize}
-			\end{block}
-		
-		\begin{block}{Collaboration :}
-			\begin{itemize}
-				\item{Gestionnaire de version (Subversion)}
-				\item{Partage de documents (Mail et Subversion)}
-				\item{Discussions (Mails / Instantanée)}
-				\item{Édition collaborative pour le travail à distance (Gobby)}
-			\end{itemize}
+      \begin{frame}{Plan}
+            \tableofcontents
+      \end{frame}
+            
+      \section{Analyse et Conception}
+      \subsection{Choix de conceptions}
+            \begin{frame}{Choix de conceptions}
+                  \begin{block}{Choix principaux}
+                        Découper le projet en deux parties distinctes : \\
+                        - une bibliothèque de suivi d'objets réutilisable \\
+                        - une application avec une interface naturelle exploitant cette bibliothèque \\
+                  \end{block}
+            \end{frame}
+            
+      \subsection{Gestion de projet}
+            \begin{frame}{Gestion de projet}
+                  \begin{block}{Méthodologie :}
+                  \begin{itemize}
+                  \item Se renseigner, réaliser une architecture de qualité
+                  \item Répartir le travail en fonction des compétences et formations de chacun
+                  \item Développer rapidement un prototype
+                  \item Développement incrémental en ajoutant des fonctionnalités
+                  \end{itemize}
+                  \end{block}
+            \end{frame}
+            
+            \begin{frame}{Gestion de projet}
+                  \begin{block}{Organisation :}
+                  \begin{itemize}
+                        \item{Réunions}
+                        \item{Deux sous-groupes}
+                        \item{Partage des tâches au sein des groupes}
+                        \item{Décisions communes (à quatre)}
+                  \end{itemize}
+                  \end{block}
+            
+            \begin{block}{Collaboration :}
+                  \begin{itemize}
+                        \item{Gestionnaire de versions (Subversion)}
+                        \item{Partage de documents (Mail et Subversion)}
+                        \item{Discussions (Mails / Instantanées)}
+                        \item{Édition collaborative pour le travail à distance (Gobby)}
+                  \end{itemize}
          \end{block}
-		\end{frame}
-		
-	% Partie de Geoffrey
-	\subsection{Analyse}
-		\begin{frame}{Analyse}
-			\begin{exampleblock}{Objectifs}
-				\begin{itemize}
-					\item{Identifier les besoins et envies des utilisateurs}
-					\item{Distinguer et classer les fonctionnalités de l'application}
-					\item{Établir un schéma de conception dans le temps}
-					\item{Faciliter le développement, avoir des buts concrets}
-					\item{Produire une application réellement aboutie}
-				\end{itemize}
-			\end{exampleblock}
-		\end{frame}
-	
-	\subsection{Planning}
-		\begin{frame}{Rétroplanning}	
-			Rétroplanning (Diagramme de gantt) :
-			\begin{center}
-			% TODO : mettre à jour le rétroplanning
-			\includegraphics[scale=0.25]{../feuille-route/retroplanning.pdf}
-			\end{center}
-		\end{frame}
+            \end{frame}
+            
+      % Partie de Geoffrey
+      \subsection{Analyse}
+            \begin{frame}{Analyse}
+                  \begin{exampleblock}{Objectifs}
+                        \begin{itemize}
+                              \item{Identifier les besoins et envies des utilisateurs}
+                              \item{Distinguer et classer les fonctionnalités de l'application}
+                              \item{Établir un schéma de conception dans le temps}
+                              \item{Faciliter le développement, avoir des buts concrets}
+                              \item{Produire une application réellement aboutie}
+                        \end{itemize}
+                  \end{exampleblock}
+            \end{frame}
+      
+      \subsection{Planning}
+            \begin{frame}{Rétroplanning}      
+                  Rétroplanning (Diagramme de gantt) :
+                  \begin{center}
+                  % TODO : mettre à jour le rétroplanning
+                  \includegraphics[scale=0.25]{../feuille-route/retroplanning.pdf}
+                  \end{center}
+            \end{frame}
 
-	%Partie de Kevin Et Geoffrey
-	%Geoffrey
-	\section{Bibliothèque}
-		\subsection{Architecture}
-		\begin{frame}{Bibliothèque de suivi d'objets : libtrack}
-			\begin{block}{Objectifs de la bibliothèque conçue}
-				\begin{itemize}
-				\item{Distinguer complètement le suivi d'objet de l'application}
-				\item{Avoir une utilisation simple sans connaissance en traitement d'image}
-				\item{Permettre la détection d'actions}
-				\item{Proposer un maximum de solutions de suivi}
-				\item{Évaluer et comparer ces solutions}
-				\end{itemize}
-			\end{block}
-		\end{frame}
+      %Partie de Kevin Et Geoffrey
+      %Geoffrey
+      \section{Bibliothèque}
+            \subsection{Architecture}
+            \begin{frame}{Bibliothèque de suivi d'objets : libtrack}
+                  \begin{block}{Objectifs de la bibliothèque conçue}
+                        \begin{itemize}
+                        \item{Distinguer complètement le suivi d'objet de l'application}
+                        \item{Avoir une utilisation simple sans connaissance en traitement d'image}
+                        \item{Permettre la détection d'actions}
+                        \item{Proposer un maximum de solutions de suivi}
+                        \item{Évaluer et comparer ces solutions}
+                        \end{itemize}
+                  \end{block}
+            \end{frame}
 
-		\begin{frame}{Bibliothèque libtrack}
-			\includegraphics[scale=0.40]{schema-librairie.pdf}
-		\end{frame}
+            \begin{frame}{Bibliothèque libtrack}
+                  \includegraphics[scale=0.40]{schema-librairie.pdf}
+            \end{frame}
 
-		\begin{frame}{Bibliothèque}
+            \begin{frame}{Bibliothèque}
 
-		Création d'une structure de données : Cursor\\
+            Création d'une structure de données : Cursor\\
     inclure graphique de la structure + énum
-		\end{frame}
-		
+            \end{frame}
+            
       %TODO frame a supprimer
-		\begin{frame}{Bibliothèque}
-		Deux fonctions enveloppes : \\
-			\begin{itemize}
-				\item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE-TRACK flag)}
-				\item{int track(IplImage * source, Cursor * oldCursor)}
-			\end{itemize}		
-		\end{frame}
+            \begin{frame}{Bibliothèque}
+            Deux fonctions enveloppes : \\
+                  \begin{itemize}
+                        \item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE-TRACK flag)}
+                        \item{int track(IplImage * source, Cursor * oldCursor)}
+                  \end{itemize}            
+            \end{frame}
 
-		\subsection{Comparatifs des méthodes de suivi}
-		\begin{frame}{Comparatif Couleur/Forme}
-		\pause
-			\begin{block}{Couleur}
-				Avantages \\
-				- Suivi rapide \\
-				- Diversité possible de curseurs \\
-				Faiblesses \\
-				- Sensibilité à l'environnement\\
-				- Dépendant de la qualité du dispositif d'acquisition\\
-			\end{block}
-			\pause
-			\begin{block}{Forme}
-				Avantages \\
-				- Suivi moins dépendant de la qualité de l'environnement \\
-				- Efficace sur des objets 'complexes'\\
-				Faiblesses \\
-				- Suivi  lent \\
-				- Très sensible aux variations du curseur\\
-			\end{block}
-		\end{frame}
-		\begin{frame}{Comparatif Simple/composante connexe}
-		\pause
-			\begin{block}{Barycentre simple}
-				Avantages \\
-				- Suivi rapide \\
-				Faiblesses \\
-				- Sensibilité aux parasites (fausses détections)\\
-				- Précision fortement dépendante de l'environnement\\
-			\end{block}
-			\pause
-			\begin{block}{Barycentre composante connexe}
-				Avantages \\
-				- Suivi plus précis \\
-				- Résistance aux parasites \\
-				Faiblesses \\
-				- Suivi plus lent \\
-				- Perte occasionnelle du curseur
-			\end{block}
-		\end{frame}
+            \subsection{Comparatifs des méthodes de suivi}
+            \begin{frame}{Comparatif Couleur/modèle}
+            \pause
+                  \begin{block}{Couleur}
+                        Avantages \\
+                        - Suivi rapide \\
+                        - Diversité possible de curseurs \\
+                        Faiblesses \\
+                        - Sensibilité à l'environnement\\
+                        - Dépendant de la qualité du dispositif d'acquisition\\
+                  \end{block}
+                  \pause
+                  \begin{block}{modèle}
+                        Avantages \\
+                        - Suivi moins dépendant de la qualité de l'environnement \\
+                        - Efficace sur des objets 'complexes'\\
+                        Faiblesses \\
+                        - Suivi lent \\
+                        - Très sensible aux variations du curseur\\
+                  \end{block}
+            \end{frame}
+            \begin{frame}{Comparatif Simple/composante connexe}
+            \pause
+                  \begin{block}{Barycentre simple}
+                        Avantages \\
+                        - Suivi rapide \\
+                        Faiblesses \\
+                        - Sensibilité aux parasites (fausses détections)\\
+                        - Précision fortement dépendante de l'environnement\\
+                  \end{block}
+                  \pause
+                  \begin{block}{Barycentre composante connexe}
+                        Avantages \\
+                        - Suivi plus précis \\
+                        - Résistance aux parasites \\
+                        Faiblesses \\
+                        - Suivi plus lent \\
+                        - Perte occasionnelle du curseur
+                  \end{block}
+            \end{frame}
 
-		%Kevin
-		\subsection{Fonctionnement}
-		\begin{frame}{Scénario type d'utilisation de la bibliothèque}
-			La bibliothèque s'utilise en deux grandes étapes :
-			\begin{itemize}
-				\item{Calibration, engendrant une struture Cursor}
-				\item{Track, mettant à jour les informations de la structure}
-			\end{itemize}
-		\end{frame}
+            %Kevin
+            \subsection{Fonctionnement}
+            \begin{frame}{Scénario type d'utilisation de la bibliothèque}
+                  La bibliothèque s'utilise en deux grandes étapes :
+                  \begin{itemize}
+                        \item{Calibration, engendrant une struture Cursor}
+                        \item{Track, mettant à jour les informations de la structure}
+                  \end{itemize}
+            \end{frame}
 
-		\subsubsection{Calibration}
-		\begin{frame}{Calibration : Source d'images et TYPE\_TRACK}
-			\begin{center}
-				\includegraphics[scale=0.25]{Capture6.png}\\
-				Écran de sélection du Type\_TRACK et de la source d'images
-			\end{center}
-		\end{frame}
+            \subsubsection{Calibration}
+            \begin{frame}{Calibration : Source d'images et TYPE\_TRACK}
+                  \begin{center}
+                        \includegraphics[scale=0.25]{Capture6.png}\\
+                        Écran de sélection du Type\_TRACK et de la source d'images
+                  \end{center}
+            \end{frame}
 
-		\begin{frame}{Calibration : Sélection du curseur}
-			\begin{itemize}
-				\item{Extrait la position de l'objet à suivre}
-			\end{itemize}
-			\begin{center}
-				\includegraphics[scale=0.25]{Capture1.png}\\
-				Sélection de l'objet
-			\end{center}
-		
-		\end{frame}
+            \begin{frame}{Calibration : Sélection du curseur}
+                  \begin{itemize}
+                        \item{Extrait la position de l'objet à suivre}
+                  \end{itemize}
+                  \begin{center}
+                        \includegraphics[scale=0.25]{Capture1.png}\\
+                        Sélection de l'objet
+                  \end{center}
+            
+            \end{frame}
 
-		\begin{frame}{Calibration couleur : Réglage du seuil}
-			\begin{itemize}
-				\item{Modifie l'attribut "threshold" de la structure Cursor.}
-			\end{itemize}
-			\begin{center}
-				\includegraphics[scale=0.25]{Capture2.png}\\
-				Écran de réglage du seuil
-			\end{center}
-		\end{frame}
-		
-		\subsubsection{Suivi}
-		\begin{frame}{Suivi par couleur : Barycentre}
-			\begin{center}
-				\includegraphics[scale=0.25]{Capture4.png}\\
-				Calcul du barycentre de l'image binaire
-			\end{center}
-		\end{frame}
+            \begin{frame}{Calibration couleur : Réglage du seuil}
+                  \begin{itemize}
+                        \item{Modifie l'attribut "threshold" de la structure Cursor.}
+                  \end{itemize}
+                  \begin{center}
+                        \includegraphics[scale=0.25]{Capture2.png}\\
+                        Écran de réglage du seuil
+                  \end{center}
+            \end{frame}
+            
+            \subsubsection{Suivi}
+            \begin{frame}{Suivi par couleur : Barycentre}
+                  \begin{center}
+                        \includegraphics[scale=0.25]{Capture4.png}\\
+                        Calcul du barycentre de l'image binaire
+                  \end{center}
+            \end{frame}
 
-		\begin{frame}{Suivi par Blob : Composantes connexes}
-			\begin{center}
-				\includegraphics[scale=0.25]{Capture5.png}\\
-				Recherche et isolement de la composante connexe pertinante
-			\end{center}
-		\end{frame}
+            \begin{frame}{Suivi par Blob : Composantes connexes}
+                  \begin{center}
+                        \includegraphics[scale=0.25]{Capture5.png}\\
+                        Recherche et isolement de la composante connexe pertinante
+                  \end{center}
+            \end{frame}
 
-		\begin{frame}{Suivi par couleur/Blob : Détection d'action}
-			\begin{itemize}
-				\item{Détection d'action par approchement du curseur}
-			\end{itemize}
-			\begin{center}
-				\includegraphics[scale=0.25]{Capture3.png}\\
-				Retour image de l'objet suivi
-			\end{center}
-		\end{frame}
-		%Kevin
-		\begin{frame}{Suivi par forme}
-			\begin{itemize}
-				\item{Recherche du template dans l'image}
-			\end{itemize}
-		\end{frame}
-		
+            \begin{frame}{Suivi par couleur/Blob : Détection d'action}
+                  \begin{itemize}
+                        \item{Détection d'action par approchement du curseur}
+                  \end{itemize}
+                  \begin{center}
+                        \includegraphics[scale=0.25]{Capture3.png}\\
+                        Retour image de l'objet suivi
+                  \end{center}
+            \end{frame}
+            %Kevin
+            \begin{frame}{Suivi par modèle}
+                  \begin{itemize}
+                        \item{Recherche du template dans l'image}
+                  \end{itemize}
+            \end{frame}
+            
 
-		\begin{frame}{Bilan}
-			\begin{exampleblock}{Objectifs atteints}
-				\begin{itemize}
-				\item Bibliothèque utilisable et proposant plusieurs solutions de suivi
-				\item Détection d'action implémentée dans deux des trois solutions
-				\item Utilisation simple sans connaissances en traitement d'images
-				\end{itemize}
-			\end{exampleblock}
-			\pause
-			\begin{alertblock}{Difficultés et ouverture}
-				\begin{itemize}
-				\item Temps d'adaptation aux bibliothèques OpenCv et CvBlob volumineux
-				\item Implémentation de la détection pour le suivi par forme
-				\item Ajout à la bibliothèque de nouvelles fonctions de suivi
-				\end{itemize}
-			\end{alertblock}
-		\end{frame}
-	
-	% Baptiste et Julien
-	% Baptiste
-	\section{Application}
-	
-		\subsection{Objectifs}
-		\begin{frame}{Objectifs}
-			\begin{itemize}
-				\item Interface intuitive
-				\item Modulable, Extensible
-				\item Fonctionnement transparent mode local / mode réseau
-				\item Séparer le traitement du rendu
-				\item Etablir un protocole simple et rapide
-			\end{itemize}
-		\end{frame}
-	
-		\subsection{Architecture}
-		\begin{frame}{Architecture - Modules}
-			\pause
-			\begin{block}{Etalonnage}
-				\begin{itemize}
-					\item Choix principaux
-					\item Réglages
-				\end{itemize}
-			\end{block}
-			\pause
-			\begin{block}{Client}
-				\begin{itemize}
-					\item Interface graphique
-					\item Liens entre les modules
-				\end{itemize}
-			\end{block}
-			\pause
-			\begin{block}{Tableau}
-				\begin{itemize}
-					\item Dessin / Interface gestuelle
-					\item Réseau
-				\end{itemize}
-			\end{block}
-			\pause
-			\begin{block}{Serveur}
-				\begin{itemize}
-					\item Communication entre clients
-					\item Synchronisatoin du tableau
-				\end{itemize}
-			\end{block}
-		\end{frame}
-	
-		\begin{frame}{Architecture - Classes}
-			\begin{center}		
-				\includegraphics[scale=0.45]{../uml/classes.png}
-			\end{center}
-		\end{frame}
-		
-		\subsection{Fonctionnalités}
-		\begin{frame}{Fonctionnalités - Outils}
-			Schéma des outils + colorpicker
-		\end{frame}
-		\begin{frame}{Fonctionnalités - Actions}
-			Schéma sauvegarde dessin + vidage tableau + plein ecran
-		\end{frame}
-		
-		\subsection{Fonctionnement}
-		\begin{frame}{Fonctionnement - Interface intuitive}
-			capture + explications
-		\end{frame}
-		
-		\begin{frame}{Fonctionnement - Etalonnage}
-			\begin{block}{Technique}
-				\begin{itemize}
-					\item Interface "Suivant - Précédent"
-					\item Etalonnage obligatoire
-				\end{itemize}
-			\end{block}
-			\begin{block}{Utilisation}
-				\begin{enumerate}
-					\item Choix webcam / Type de suivi
-					\item Sélection de l'objet
-					\item Réglage de la détection
-					\item Choix mode local / réseau
-				\end{enumerate}
-			\end{block}
-			
-		\end{frame}
-		
-		\begin{frame}{Fonctionnement - Local}
-			Pseudo-séquence + explications
-		\end{frame}
-		
-		\begin{frame}{Fonctionnement - Réseau}
-			Pseudo-séquence + explications
-		\end{frame}
-		
-		\subsection{Mise en production}
-		\begin{frame}{Mise en production}
-			\begin{block}{Pourquoi?}
-				\begin{itemize}
-					\item Généralement oubliée
-					\item Première expérience
-					\item Application aboutie
-				\end{itemize}
-			\end{block}
-			\begin{block}{Eléments}
-				\begin{itemize}
-					\item Traduction
-					\item Packaging
-					\item Documentation
-					\item Portabilité
-					\item Dépôt accessible
-					\item Code propre
-				\end{itemize}
-			\end{block}
-		\end{frame}
-		
-		\subsection{Ouverture}
-		\begin{frame}{Ouverture}
-			\begin{itemize}
-				\item Amélioration du réseau
-				\item Amélioration des performances
-				\item Possibilité de relancer l'étalonnage
-			\end{itemize}
-		\end{frame}
-		
-		% \scalebox{0.5}{\input{../uml/sequence_reseau.tex}} 
+            \begin{frame}{Bilan}
+                  \begin{exampleblock}{Objectifs atteints}
+                        \begin{itemize}
+                        \item Bibliothèque utilisable et proposant plusieurs solutions de suivi
+                        \item Détection d'action implémentée dans deux des trois solutions
+                        \item Utilisation simple sans connaissances en traitement d'images
+                        \end{itemize}
+                  \end{exampleblock}
+                  \pause
+                  \begin{alertblock}{Difficultés et ouverture}
+                        \begin{itemize}
+                        \item Temps d'adaptation aux bibliothèques OpenCv et CvBlob volumineux
+                        \item Implémentation de la détection pour le suivi par modèle
+                        \item Ajout à la bibliothèque de nouvelles fonctions de suivi
+                        \end{itemize}
+                  \end{alertblock}
+				  
+                  \begin{block}{Ouverture}
+                        - Diversifier et optimiser les méthodes de suivi \\
+                        - Rajouter des fonctionnalités côté application \\
+                  \end{block}				  
+            \end{frame}
+      
+      % Baptiste et Julien
+      % Baptiste
+      \section{Application}
+            \begin{frame}{Architecture}
+                  \begin{block}{Objectifs de l'architecture conçue}
+                        \begin{itemize}
+                        \item{Avoir une application modulable et facilement extensible}
+                        \item{Fonctionnement identique pour les classes principales en réseau ou en local}
+                        \item{Pouvoir rajouter facilement des outils (pinceaux, gomme, etc.)}
+                        \item{Séparer le traitement du rendu}
+                        \end{itemize}
+                  \end{block}
+            \end{frame}
+            
+            \begin{frame}{Diagramme de classes}
+                  \begin{center}            
+                  \includegraphics[scale=0.45]{../uml/classes.png}
+                  \end{center}
+            \end{frame}
+            
+            \begin{frame}{Application}
+                  
+                  L'application est utilisable en local et en réseau, avec un fonctionnement identique.
+                  
+                  Le dessin virtuel interactif propose différents outils et fonctionnalités:
+       \begin{itemize}
+        \item Changer la couleur du pinceau
+        \item Ajuster la taille du pinceau
+        \item Une gomme
+        \item Nettoyer complètement le tableau
+        \item Sauvegarder le dessin
+      \end{itemize}
+            \end{frame}
+      
+      \begin{frame}{Application suite}
+        \begin{itemize}
+          \item Mode plein-écran avec le dessin uniquement (vidéoprojecteur)
+          \item Utilisation simultanée par plusieurs utilisateurs
+          \item Application traduite et packagée (en .deb)
+        \end{itemize}
+      \end{frame}
+      
+            
+      \subsection{Module Local}
+            \begin{frame}{Fonctionnemment global}
+                  \begin{block}{Fonctionnement en local}
+                        \begin{itemize}
+                        \item Étalonnage selon la méthode voulue, choix du mode local
+                        \item Détection d'un mouvement, dessin directement sur le tableau en respectant les options
+                        \end{itemize}
+                  \end{block}
+            \end{frame}
+            
+            \begin{frame}{Étalonnage}
+                  L'étalonnage se déroule en plusieurs phases.
+                  \begin{itemize}
+                  \item Choix de la webcam et de méthode de suivi
+                  \item Choix de l'objet à suivre à partir d'une photo, en l'entourant d'un rectangle
+                  \item Réglage du seuil de tolérance à partir du retour de l'étalonnage
+                  \item Choix du mode : réseau ou local
+                  \end{itemize}
+            \end{frame}
+            
+            % TODO : compléter ou supprimer cette frame
+            \begin{frame}{Utilisation de l'application}
+            L'interface permets de visualiser le flux vidéo, et le dessin.
+            
+            Les mouvements sont détectés, et le dessin est effectué à partir de ces mouvements.
+            \end{frame}
+            
+            % Bilan du projet côté interface
+            \begin{frame}{Bilan}
+                  \begin{exampleblock}{Objectifs atteints}
+                        \begin{itemize}
+                        \item Application fonctionnelle et utilisable
+                        \item Beaucoup des outils envisagés sont présents
+                        \end{itemize}
+                  \end{exampleblock}
+                  \pause
+                  \begin{alertblock}{Difficultés et ouverture}
+                        \begin{itemize}
+                        \item Faire une interface gestuelle pour sélectionner gomme, couleur et forme
+                        \item Améliorer la gestion du dessin
+                        \item Relancer l'étalonnage sans relancer l'application
+                        \end{itemize}
+                  \end{alertblock}
+            \end{frame}
 
-	\section{Conclusion}
-		\begin{frame}{Conclusion}
-			\begin{exampleblock}{Objectifs atteints}
-				- Solution fonctionnelle \\
-				- Respect du cahier des charges \\
-				- Découverte (Technologies, gestion de projet...) \\ 
-			\end{exampleblock}
-			\pause
-			\begin{alertblock}{Difficultés}
-				- Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
-				- Formation : Traitement de l'image, Conception d'architectures \\
-				- Techniques : Architecture, Fuites de mémoire...\\
-			\end{alertblock}
-			\pause
-			\begin{block}{Ouverture}
-				- Diversifier et optimiser les méthodes de suivi \\
-				- Rajouter des fonctionnalités côté application \\
-			\end{block}
-		\end{frame}
-	
-	\begin{frame}{Sources et bibliographie}
-   %need tiny{}??
-  http://www.sciencedirect.com.www.ezp.biu-montpellier.fr/science/article/pii/S026288561100120X \\
-  http://www.irit.fr/recherches/SAMOVA/pageAnalysis.html\\
-  http://www.irit.fr/~Philippe.Joly/Teaching/L3SI/ti.html\\
-  http://opencv.willowgarage.com/wiki/\\
-  code.google.com/p/cvblob/ \\
-  lien du projet : http://code.google.com/p/dessin-realite-augmentee/ \\
-	\end{frame}
+      % Julien
+      \subsection{Module Réseau}
+            \begin{frame}{Fonctionnement global}
+                  \begin{block}{Fonctionnement en réseau}
+                        \begin{itemize}
+                        \item Étalonnage selon la méthode voulue, choix du mode réseau
+                        \item Récupération du dessin actuel par le client
+                        \item Détection d'un mouvement
+                        \item Envoi au serveur de ce mouvement (et des options) en respectant le protocole
+                        \item Réception du paquet côté serveur, dessin du serveur
+                        \item Envoi aux clients de ce point, avec les options (épaisseur, couleur)
+                        \item Réception côté client, et dessin en local
+                        \end{itemize}
+                  \end{block}
+            \end{frame}
+            
+            \begin{frame}{Fonctionnemment global : pseudo-diagramme de séquence}
+            
+            Déroulement du fonctionnement en réseau de l'application :
+                  \begin{center}
+                  \scalebox{0.5}{\input{../uml/sequence_reseau.tex}} 
+                  \end{center}
+            \end{frame}
+            
+            % Bilan de l'application côté réseau
+            \begin{frame}{Bilan}
+                  \begin{exampleblock}{Objectifs atteints}
+                        \begin{itemize}
+                        \item Architecture identique au fonctionnement en local
+                        \item Application fonctionnelle en mode réseau malgré la difficulté
+                        \item Tous les outils fonctionnent
+                        \end{itemize}
+                  \end{exampleblock}
+                  \pause
+                  \begin{alertblock}{Difficultés et ouverture}
+                        \begin{itemize}
+                        \item Optimiser fortement le mode réseau pour réduire les problèmes de lenteur
+                        \item Mettre par défaut une couleur à chaque utilisateur
+                        \end{itemize}
+                  \end{alertblock}
+            \end{frame}
+
+      \section{Conclusion}
+            \begin{frame}{Conclusion}
+                  \begin{exampleblock}{Objectifs atteints}
+					\begin{itemize}
+                        \item Solution fonctionnelle \\
+                        \item Respect du cahier des charges \\
+                        \item Découverte (Technologies, gestion de projet...) \\ 
+					\end{itemize}
+                  \end{exampleblock}
+                  \pause
+                  \begin{alertblock}{Difficultés}
+					\begin{itemize}
+                        \item Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
+                        \item Formation : Traitement de l'image, Conception d'architectures \\
+                        \item Techniques : Architecture, Fuites de mémoire...\\
+					\end{itemize}
+                  \end{alertblock}
+                  \pause
+                  \begin{block}{Ouverture}
+					\begin{itemize}
+                        \item Diversifier et optimiser les méthodes de suivi \\
+                        \item Rajouter des fonctionnalités côté application \\
+					\end{itemize}
+                  \end{block}
+            \end{frame}
+      
+      \begin{frame}{Sources et bibliographie}
+   %need tiny{}
+   \begin{itemize}
+	\item{\url{http://www.sciencedirect.com.www.ezp.biu-montpellier.fr/science/article/pii/S026288561100120X}}
+	\item{\url{http://www.irit.fr/recherches/SAMOVA/pageAnalysis.html}}
+	\item{\url{http://www.irit.fr/~Philippe.Joly/Teaching/L3SI/ti.html}}
+	\item{\url{http://opencv.willowgarage.com/wiki/}}
+	\item{\url{code.google.com/p/cvblob/} }
+	\end{itemize}
+  lien du projet : \url{http://code.google.com/p/dessin-realite-augmentee/}
+      \end{frame}
 
 \end{document}
