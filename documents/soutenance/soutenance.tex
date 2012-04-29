@@ -4,7 +4,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{lmodern}
-\usepackage{movie15}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{slashbox}
@@ -60,10 +59,10 @@
             
 	\end{frame}
 
-      \begin{frame}{Vidéo de présentation}
-		% TODO : Tests pour inclure une vidéo : ça marche !
-		% \includemovie[poster, text={\small(Exemple d'utilisation)}]{6cm}{6cm}{demo.mp4}
-            %\movie{\includegraphics[width=.65\textwidth]{demo}}{demo.ogv}
+      \begin{frame}{Aperçu du projet}
+      		\begin{center}
+      		\includegraphics[scale=0.25]{capture-intro.png}
+      		\end{center}
       \end{frame}
 
 %Plan
@@ -133,7 +132,6 @@
             \begin{frame}{Rétroplanning}      
                  % Rétroplanning (Diagramme de gantt) :
                   %\begin{center}
-                  % TODO : mettre à jour le rétroplanning
                   \includegraphics[scale=0.40]{./retro-planning.pdf}
                   %\end{center}
             \end{frame}
@@ -313,7 +311,9 @@
 	% Baptiste
 	
 	\section{Application}
-	
+		\subsection{Aperçu}
+		% TODO : screen avec très très rapides explications
+		
 		\subsection{Objectifs}
 		\begin{frame}{Objectifs}
 			\begin{itemize}
@@ -324,28 +324,28 @@
 				\item Etablir un protocole simple et rapide
 			\end{itemize}
 		\end{frame}
-	
+		
 		\subsection{Architecture}
 		\begin{frame}{Architecture - Modules}
 			\pause
 			\begin{block}{Etalonnage}
 				\begin{itemize}
-					\item Choix principaux
-					\item Réglages
+					\item Choix principaux pour l'application
+					\item Réglages (tolérance, mode réseau...)
 				\end{itemize}
 			\end{block}
 			\pause
 			\begin{block}{Client}
 				\begin{itemize}
 					\item Interface graphique
-					\item Liens entre les modules
+					\item Liens entre les différents modules
 				\end{itemize}
 			\end{block}
 			\pause
 			\begin{block}{Tableau}
 				\begin{itemize}
 					\item Dessin / Interface gestuelle
-					\item Réseau
+					\item Module réseau
 				\end{itemize}
 			\end{block}
 			\pause
@@ -370,7 +370,7 @@
 			\begin{itemize}
 				\item Couleur
 				\item Gomme
-				\item Taille
+				\item Taille du pinceau
 				\item Affichage
 			\end{itemize}
 		\end{frame}
@@ -393,7 +393,7 @@
 			\end{center}
 		\end{frame}
 		
-		\begin{frame}{Fonctionnement - Etalonnage}
+		\begin{frame}{Fonctionnement - Étalonnage}
 			\begin{block}{Technique}
 				\begin{itemize}
 					\item Interface "Suivant - Précédent"
@@ -450,6 +450,7 @@
 					\item Application aboutie
 				\end{itemize}
 			\end{block}
+			\pause
 			\begin{block}{Eléments}
 				\begin{itemize}
 					\item Traduction
