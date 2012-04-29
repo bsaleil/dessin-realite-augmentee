@@ -49,7 +49,7 @@
         
 	\begin{block}{But du projet :}
                \begin{itemize}
-			\item Lier les compétences AIGLE/IMAGINA
+			\item Lier les compétences \textcolor{blue}{AIGLE}/\textcolor{cyan}{IMAGINA}
 			\item Lier recherche et développement
 			\item Concevoir une application incluant une IHM gestuelle
 			%\item Fournir des fonctionnalités sociales %Ju et Geo : pas clair du tout
@@ -115,7 +115,7 @@
                               \item{Identifier les besoins et envies des utilisateurs}
                               \item{Traduire ces besoins en fonctionnalités}
                               \item{Faciliter le développement}
-			      \item{Produire une application réellement aboutie}
+			      \item{Produire une application aboutie }
                         \end{itemize}
                   \end{exampleblock}
             \end{frame}
@@ -133,11 +133,11 @@
       \section{Bibliothèque}
             \subsection{Architecture}
             \begin{frame}{Bibliothèque de suivi d'objets : libtrack}
-                  \begin{block}{Objectifs de la bibliothèque conçue}
+                  \begin{block}{Objectifs de la bibliothèque}
                         \begin{itemize}
                         	\item{Utilisation simple sans connaissance en traitement d'image}
                         	\item{Détection d'actions}
-                        	\item{Solutions de suivi diverses}
+                        	\item{Diverses solutions de suivi}
                         	\item{Évaluer et comparer ces solutions}
                         \end{itemize}
                   \end{block}
@@ -174,14 +174,7 @@
 				\label{tableau comparatif}
 				\end{table}
 			\end{frame}
-      %TODO frame a supprimer
-            \begin{frame}{Bibliothèque}
-            Deux fonctions enveloppes : \\
-                  \begin{itemize}
-                        \item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE-TRACK flag)}
-                        \item{int track(IplImage * source, Cursor * oldCursor)}
-                  \end{itemize}            
-            \end{frame}
+
 
             %Kevin
             \subsection{Fonctionnement}
@@ -214,7 +207,7 @@
 
             \begin{frame}{Calibration couleur : Réglage du seuil}
                   \begin{itemize}
-                        \item{Attribut "threshold"}
+                        \item{Attributs "threshold" et "mask"}
                   \end{itemize}
                   \begin{center}
                         \includegraphics[scale=0.25]{Capture2.png}\\
@@ -256,8 +249,7 @@
                         Retour image de l'objet suivi
                   \end{center}
             \end{frame}
-            
-            %Kevin
+
             \begin{frame}{Suivi par modèle}
                   \begin{itemize}
                         \item{Recherche du template dans l'image}
@@ -268,49 +260,7 @@
                   \end{center}
             \end{frame}
             
-
-            \begin{frame}{Résultats}
-                  \begin{exampleblock}{Objectifs atteints}
-                        \begin{itemize}
-                        \item Bibliothèque fonctionelle
-                        \item Détection d'actions
-                        \item Simplicité d'utilisation
-                        \end{itemize}
-                  \end{exampleblock}
-                  \pause
-                  \begin{alertblock}{Difficultés}
-                        \begin{itemize}
-                        \item Bibliothèques OpenCv/CvBlob
-                        \item Détection d'action par modèle
-                        \end{itemize}
-                  \end{alertblock}
-                  \pause		  
-                  \begin{block}{Ouverture}
-			 \begin{itemize}
-                        \item Diversifier
-                        \item Optimiser
-			\end{itemize}
-                  \end{block}				  
-            \end{frame}
-      
- 	% Baptiste et Julien
-	% Baptiste
-	
-	\section{Application}
-		\subsection{Aperçu}
-		% TODO : screen avec très très rapides explications
-		
-		\subsection{Objectifs}
-		\begin{frame}{Objectifs}
-			\begin{itemize}
-				\item Interface intuitive
-				\item Modulable, Extensible
-				\item Fonctionnement transparent mode local / mode réseau
-				\item Séparer le traitement du rendu
-				\item Etablir un protocole simple et rapide
-			\end{itemize}
-		\end{frame}
-		
+		\section{Application}
 		\subsection{Architecture}
 		\begin{frame}{Architecture - Modules}
 			\pause
@@ -347,6 +297,27 @@
 			\begin{center}		
 				\includegraphics[scale=0.45]{../uml/classes.png}
 			\end{center}
+		\end{frame}
+		
+		\begin{frame}{Architecture - Protocole réseau}
+			\begin{block}{Types de données}
+				\begin{itemize}
+					\item Objet "dessin"
+					\item Chaine de caractères
+				\end{itemize}
+			\end{block}
+			\pause
+			\begin{block}{Exemple}
+				\begin{center}"order:line:100:100:200:200:00FF00:10"\end{center}
+			\end{block}
+			\pause
+			\begin{block}{Points forts}
+				\begin{itemize}
+					\item Rapidité
+					\item Légèreté
+					\item Accessible
+				\end{itemize}
+			\end{block}
 		\end{frame}
 		
 		\subsection{Fonctionnalités}
@@ -449,42 +420,33 @@
 			\end{block}
 		\end{frame}
 		
-		\subsection{Ouverture}
-		\begin{frame}{Ouverture}
-			\begin{itemize}
-				\item Amélioration du réseau
-				\item Amélioration des performances
+	\section{Conclusion}
+		\begin{frame}{Conclusion}
+			\begin{exampleblock}{Objectifs atteints}
+				\begin{itemize}
+				\item Projet fonctionnel
+				\item Respect du cahier des charges
+				\item Découverte
+				\end{itemize}
+			\end{exampleblock}
+			\pause
+			
+			\begin{alertblock}{Difficultés}
+				\begin{itemize}
+				\item Synchronisation 	
+				\item Techniques : réseau, suivi par forme
+				\end{itemize}
+			\end{alertblock}
+			\pause
+			
+			\begin{block}{Ouverture}
+				\begin{itemize}
+				\item Amélioration des performances (suivi, réseau)
 				\item Possibilité de relancer l'étalonnage
-			\end{itemize}
+				\end{itemize}
+			\end{block}
 		\end{frame}
-
-	
-      \section{Conclusion}
-            \begin{frame}{Conclusion}
-                  \begin{exampleblock}{Objectifs atteints}
-			\begin{itemize}
-                        \item Solution fonctionnelle \\
-                        \item Respect du cahier des charges \\
-                        \item Découverte (Technologies, gestion de projet...) \\ 
-			\end{itemize}
-                  \end{exampleblock}
-                  \pause
-                  \begin{alertblock}{Difficultés}
-			\begin{itemize}
-                        \item Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
-                        \item Formation : Traitement de l'image, Conception d'architectures \\
-                        \item Techniques : Architecture, gestion mémoire\\
-			\end{itemize}
-                  \end{alertblock}
-                  \pause
-                  \begin{block}{Ouverture}
-			\begin{itemize}
-                        \item Diversifier et optimiser les méthodes de suivi \\
-                        \item Rajouter des fonctionnalités côté application \\
-			\end{itemize}
-                  \end{block}
-	\end{frame}
-      
+                 
 	\begin{frame}{Sources et bibliographie}
    
 		%need tiny{}
@@ -495,7 +457,7 @@
 		\item{\url{http://opencv.willowgarage.com/wiki/}}
 		\item{\url{code.google.com/p/cvblob/} }
 		\end{itemize}
-		lien du projet : \url{http://code.google.com/p/dessin-realite-augmentee/}
+		Site du projet : \url{http://code.google.com/p/dessin-realite-augmentee/}
 	\end{frame}
 
 \end{document}
