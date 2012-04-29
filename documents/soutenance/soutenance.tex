@@ -7,6 +7,7 @@
 \usepackage{movie15}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{slashbox}
 
 % Pour enlever le \institute du bas de page
 % Rapetisser les noms et date etc dans le footer
@@ -160,6 +161,33 @@
 	inclure graphique de la structure + énum
             \end{frame}
             
+            \begin{frame}{Tableau Comparatif}
+		        \begin{table}[h]
+				%\begin{center}
+				\begin{tabular}{|l|c|c|c|}
+				\hline
+				\backslashbox{Caractéristique}{Méthode}& Modèle  &C. connexes& Barycentre  \\
+				\hline
+				Vitesse & -& + & ++ \\
+				\hline
+				Précision &++&++&+\\
+				\hline
+				Linéarité &-&+&+\\
+				\hline
+				Variété curseur &++&+&++\\
+				\hline
+				Souplesse, adaptation & - - & + &+\\
+				\hline
+				Sensibilité environnement &++&-&- -\\
+				\hline
+				Action &Non & Oui & Oui \\
+				\hline
+				\end{tabular}
+				%\end{center}
+				\caption{Comparatif des différentes solutions de suivi}
+				\label{tableau comparatif}
+				\end{table}
+			\end{frame}
       %TODO frame a supprimer
             \begin{frame}{Bibliothèque}
             Deux fonctions enveloppes : \\
@@ -167,47 +195,6 @@
                         \item{Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE-TRACK flag)}
                         \item{int track(IplImage * source, Cursor * oldCursor)}
                   \end{itemize}            
-            \end{frame}
-
-            \subsection{Comparatifs des méthodes de suivi}
-            \begin{frame}{Comparatif Couleur/modèle}
-            \pause
-                  \begin{block}{Couleur}
-                        Avantages \\
-                        - Suivi rapide \\
-                        - Diversité possible de curseurs \\
-                        Faiblesses \\
-                        - Sensibilité à l'environnement\\
-                        - Dépendant de la qualité du dispositif d'acquisition\\
-                  \end{block}
-                  \pause
-                  \begin{block}{modèle}
-                        Avantages \\
-                        - Suivi moins dépendant de la qualité de l'environnement \\
-                        - Efficace sur des objets 'complexes'\\
-                        Faiblesses \\
-                        - Suivi lent \\
-                        - Très sensible aux variations du curseur\\
-                  \end{block}
-            \end{frame}
-            \begin{frame}{Comparatif Simple/composante connexe}
-            \pause
-                  \begin{block}{Barycentre simple}
-                        Avantages \\
-                        - Suivi rapide \\
-                        Faiblesses \\
-                        - Sensibilité aux parasites (fausses détections)\\
-                        - Précision fortement dépendante de l'environnement\\
-                  \end{block}
-                  \pause
-                  \begin{block}{Barycentre composante connexe}
-                        Avantages \\
-                        - Suivi plus précis \\
-                        - Résistance aux parasites \\
-                        Faiblesses \\
-                        - Suivi plus lent \\
-                        - Perte occasionnelle du curseur
-                  \end{block}
             \end{frame}
 
             %Kevin
