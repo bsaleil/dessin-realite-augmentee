@@ -216,7 +216,7 @@
 
             \begin{frame}{Calibration : Sélection du curseur}
                   \begin{itemize}
-                        \item{Extrait la position de l'objet à suivre}
+                        \item{Position de l'objet}
                   \end{itemize}
                   \begin{center}
                         \includegraphics[scale=0.25]{Capture1.png}\\
@@ -227,7 +227,7 @@
 
             \begin{frame}{Calibration couleur : Réglage du seuil}
                   \begin{itemize}
-                        \item{Modifie l'attribut "threshold" de la structure Cursor.}
+                        \item{Attribut "threshold"}
                   \end{itemize}
                   \begin{center}
                         \includegraphics[scale=0.25]{Capture2.png}\\
@@ -237,7 +237,7 @@
 
 	    \begin{frame}{Calibration Forme : Extraction du modèle}
                   \begin{itemize}
-                        \item{Modifie l'attribut "mask" de la structure Cursor.}
+                        \item{Attribut "mask"}
                   \end{itemize}
                   \begin{center}
                         \includegraphics[scale=0.25]{Capture7.png}\\
@@ -256,7 +256,7 @@
             \begin{frame}{Suivi par Blob : Composantes connexes}
                   \begin{center}
                         \includegraphics[scale=0.25]{Capture5.png}\\
-                        Recherche et isolement de la composante connexe pertinante
+                        Exploitation des composantes connexes
                   \end{center}
             \end{frame}
 
@@ -277,31 +277,31 @@
                   \end{itemize}
 		  \begin{center}
                         \includegraphics[scale=0.25]{Capture8.png}\\
-                        Localisation par recherche de modèle.
+                        Recherche de modèle.
                   \end{center}
             \end{frame}
             
 
-            \begin{frame}{Bilan}
+            \begin{frame}{Résultats}
                   \begin{exampleblock}{Objectifs atteints}
                         \begin{itemize}
-                        \item Bibliothèque utilisable et proposant plusieurs solutions de suivi
-                        \item Détection d'action implémentée dans deux des trois solutions
-                        \item Utilisation simple sans connaissances en traitement d'images
+                        \item Bibliothèque fonctionelle
+                        \item Détection d'actions
+                        \item Simplicité d'utilisation
                         \end{itemize}
                   \end{exampleblock}
                   \pause
                   \begin{alertblock}{Difficultés}
                         \begin{itemize}
-                        \item Temps d'adaptation aux bibliothèques OpenCv et CvBlob volumineux
-                        \item Implémentation de la détection pour le suivi par modèle 
+                        \item Bibliothèques OpenCv/CvBlob
+                        \item Détection d'action par modèle
                         \end{itemize}
                   \end{alertblock}
                   \pause		  
                   \begin{block}{Ouverture}
 			 \begin{itemize}
-                        \item Diversifier et optimiser les méthodes de suivi
-                        \item Rajouter des fonctionnalités côté application
+                        \item Diversifier
+                        \item Optimiser
 			\end{itemize}
                   \end{block}				  
             \end{frame}
