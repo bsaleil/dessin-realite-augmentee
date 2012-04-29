@@ -45,16 +45,16 @@
 	\section{Introduction}
 		\begin{frame}{Introduction}
 		
-		But du projet :
-            \begin{itemize}
-			\item Proposer un sujet en lien avec nos deux formations
-            \item Concevoir une application utilisant les mouvements de l'utilisateur (sans souris)
-            \item Développer une bibliothèque de détection d'objet dans une image
-            \item Exploiter cette bibliothèque pour reconnaitre les mouvements de l'utilisateur
-            \item Pouvoir écrire ou dessiner à plusieurs sur un tableau virtuel
-            \end{itemize}
+	But du projet :
+        \begin{itemize}
+	\item Proposer un sujet en lien avec nos deux formations
+	\item Concevoir une application utilisant les mouvements de l'utilisateur (sans souris)
+	\item Développer une bibliothèque de détection d'objet dans une image
+	\item Exploiter cette bibliothèque pour reconnaître les mouvements de l'utilisateur
+	\item Pouvoir écrire ou dessiner à plusieurs sur un tableau virtuel
+	\end{itemize}
             
-            \end{frame}
+	\end{frame}
 
       \begin{frame}{Vidéo de présentation}
             %\movie{\includegraphics[width=.65\textwidth]{demo}}{demo.ogv}
@@ -97,14 +97,14 @@
                   \end{itemize}
                   \end{block}
             
-            \begin{block}{Collaboration :}
-                  \begin{itemize}
-                        \item{Gestionnaire de versions (Subversion)}
-                        \item{Partage de documents (Mail et Subversion)}
-                        \item{Discussions (Mails / Instantanées)}
-                        \item{Édition collaborative pour le travail à distance (Gobby)}
-                  \end{itemize}
-         \end{block}
+		\begin{block}{Collaboration :}
+			\begin{itemize}
+			\item{Gestionnaire de versions (Subversion)}
+			\item{Partage de documents (Mail et Subversion)}
+			\item{Discussions (Mails / Instantanées)}
+			\item{Édition collaborative pour le travail à distance (Gobby)}
+			\end{itemize}
+		\end{block}
             \end{frame}
             
       % Partie de Geoffrey
@@ -153,7 +153,7 @@
             \begin{frame}{Bibliothèque}
 
             Création d'une structure de données : Cursor\\
-    inclure graphique de la structure + énum
+	inclure graphique de la structure + énum
             \end{frame}
             
       %TODO frame a supprimer
@@ -269,6 +269,7 @@
                         Retour image de l'objet suivi
                   \end{center}
             \end{frame}
+            
             %Kevin
             \begin{frame}{Suivi par modèle}
                   \begin{itemize}
@@ -293,7 +294,7 @@
                         \item Ajout à la bibliothèque de nouvelles fonctions de suivi
                         \end{itemize}
                   \end{alertblock}
-				  
+                  \pause		  
                   \begin{block}{Ouverture}
                         - Diversifier et optimiser les méthodes de suivi \\
                         - Rajouter des fonctionnalités côté application \\
@@ -343,7 +344,7 @@
 			\begin{block}{Serveur}
 				\begin{itemize}
 					\item Communication entre clients
-					\item Synchronisatoin du tableau
+					\item Synchronisation du tableau entre les clients
 				\end{itemize}
 			\end{block}
 		\end{frame}
@@ -371,8 +372,8 @@
 				\includegraphics[scale=0.2]{export.png}
 			\end{center}
 			\begin{itemize}
-				\item Sauvegarde
-				\item Vider le dessin
+				\item Sauvegarde du dessin
+				\item Vider le tableau
 				\item Mode plein écran
 			\end{itemize}
 		\end{frame}
@@ -388,14 +389,14 @@
 			\begin{block}{Technique}
 				\begin{itemize}
 					\item Interface "Suivant - Précédent"
-					\item Etalonnage obligatoire
+					\item Étalonnage obligatoire
 				\end{itemize}
 			\end{block}
 			\begin{block}{Utilisation}
 				\begin{enumerate}
 					\item Choix webcam / Type de suivi
 					\item Sélection de l'objet
-					\item Réglage de la détection
+					\item Réglage de la tolérance
 					\item Choix mode local / réseau
 				\end{enumerate}
 			\end{block}
@@ -409,8 +410,8 @@
 				\end{column}
 				\begin{column}{3cm}
 					\begin{itemize}
-						\item Etalonnage
-						\item Détection
+						\item Étalonnage
+						\item Détection de l'objet
 						\item Dessin
 					\end{itemize}
 				\end{column}
@@ -424,8 +425,8 @@
 				\end{column}
 				\begin{column}{5cm}
 					\begin{itemize}
-						\item Etalonnage
-						\item Détection
+						\item Étalonnage
+						\item Détection de l'objet
 						\item Dessin
 					\end{itemize}
 				\end{column}
@@ -444,7 +445,7 @@
 			\begin{block}{Eléments}
 				\begin{itemize}
 					\item Traduction
-					\item Packaging
+					\item Packaging (.deb)
 					\item Documentation
 					\item Portabilité
 					\item Dépôt accessible
@@ -461,46 +462,45 @@
 				\item Possibilité de relancer l'étalonnage
 			\end{itemize}
 		\end{frame}
-		
-		% \scalebox{0.5}{\input{../uml/sequence_reseau.tex}} 
 
 	
       \section{Conclusion}
             \begin{frame}{Conclusion}
                   \begin{exampleblock}{Objectifs atteints}
-					\begin{itemize}
+			\begin{itemize}
                         \item Solution fonctionnelle \\
                         \item Respect du cahier des charges \\
                         \item Découverte (Technologies, gestion de projet...) \\ 
-					\end{itemize}
+			\end{itemize}
                   \end{exampleblock}
                   \pause
                   \begin{alertblock}{Difficultés}
-					\begin{itemize}
+			\begin{itemize}
                         \item Collaboration : Développement incrémental qui oblige à beaucoup communiquer \\
                         \item Formation : Traitement de l'image, Conception d'architectures \\
                         \item Techniques : Architecture, Fuites de mémoire...\\
-					\end{itemize}
+			\end{itemize}
                   \end{alertblock}
                   \pause
                   \begin{block}{Ouverture}
-					\begin{itemize}
+			\begin{itemize}
                         \item Diversifier et optimiser les méthodes de suivi \\
                         \item Rajouter des fonctionnalités côté application \\
-					\end{itemize}
+			\end{itemize}
                   \end{block}
-            \end{frame}
+	\end{frame}
       
-      \begin{frame}{Sources et bibliographie}
-   %need tiny{}
-   \begin{itemize}
-	\item{\url{http://www.sciencedirect.com.www.ezp.biu-montpellier.fr/science/article/pii/S026288561100120X}}
-	\item{\url{http://www.irit.fr/recherches/SAMOVA/pageAnalysis.html}}
-	\item{\url{http://www.irit.fr/~Philippe.Joly/Teaching/L3SI/ti.html}}
-	\item{\url{http://opencv.willowgarage.com/wiki/}}
-	\item{\url{code.google.com/p/cvblob/} }
-	\end{itemize}
-  lien du projet : \url{http://code.google.com/p/dessin-realite-augmentee/}
-      \end{frame}
+	\begin{frame}{Sources et bibliographie}
+   
+		%need tiny{}
+		\begin{itemize}
+		\item{\url{http://www.sciencedirect.com.www.ezp.biu-montpellier.fr/science/article/pii/S026288561100120X}}
+		\item{\url{http://www.irit.fr/recherches/SAMOVA/pageAnalysis.html}}
+		\item{\url{http://www.irit.fr/~Philippe.Joly/Teaching/L3SI/ti.html}}
+		\item{\url{http://opencv.willowgarage.com/wiki/}}
+		\item{\url{code.google.com/p/cvblob/} }
+		\end{itemize}
+		lien du projet : \url{http://code.google.com/p/dessin-realite-augmentee/}
+	\end{frame}
 
 \end{document}
