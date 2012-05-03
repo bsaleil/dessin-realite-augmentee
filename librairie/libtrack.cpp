@@ -118,6 +118,7 @@ Cursor * initShapeTrack(IplImage * source, CvPoint A, CvPoint B)
 {
 	Cursor * curs = initCursor(source, A, B);
 	curs->active = true;
+	curs->flag = TRACK_SHAPE;
 	
 	CvRect roi;
 	roi.x = min(A.x, B.x);

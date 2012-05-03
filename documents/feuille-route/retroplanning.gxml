@@ -27,7 +27,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-01-23T08:00:00</Start>
-      <Finish>2012-02-10T17:00:00</Finish>
+      <Finish>2012-02-10T15:30:00</Finish>
       <OutlineNumber>1</OutlineNumber>
       <color>2</color>
     </Task>
@@ -42,7 +42,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-01T08:00:00</Start>
-      <Finish>2012-02-17T17:00:00</Finish>
+      <Finish>2012-02-17T16:00:00</Finish>
       <OutlineNumber>2</OutlineNumber>
       <color>2</color>
     </Task>
@@ -57,7 +57,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-06T08:00:00</Start>
-      <Finish>2012-04-06T17:00:00</Finish>
+      <Finish>2012-04-06T13:30:00</Finish>
       <OutlineNumber>3</OutlineNumber>
       <color>2</color>
     </Task>
@@ -72,7 +72,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-06T08:00:00</Start>
-      <Finish>2012-02-29T17:00:00</Finish>
+      <Finish>2012-02-29T15:00:00</Finish>
       <OutlineNumber>3.1</OutlineNumber>
       <color>2</color>
     </Task>
@@ -87,7 +87,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-20T08:00:00</Start>
-      <Finish>2012-04-06T17:00:00</Finish>
+      <Finish>2012-04-06T13:30:00</Finish>
       <OutlineNumber>3.2</OutlineNumber>
       <color>2</color>
     </Task>
@@ -102,7 +102,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-06T08:00:00</Start>
-      <Finish>2012-04-06T17:00:00</Finish>
+      <Finish>2012-04-06T13:30:00</Finish>
       <OutlineNumber>4</OutlineNumber>
       <color>2</color>
     </Task>
@@ -117,7 +117,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-06T08:00:00</Start>
-      <Finish>2012-02-29T17:00:00</Finish>
+      <Finish>2012-02-29T15:00:00</Finish>
       <OutlineNumber>4.1</OutlineNumber>
       <color>2</color>
     </Task>
@@ -132,7 +132,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-20T08:00:00</Start>
-      <Finish>2012-04-06T17:00:00</Finish>
+      <Finish>2012-04-06T13:30:00</Finish>
       <OutlineNumber>4.2</OutlineNumber>
       <color>2</color>
     </Task>
@@ -147,7 +147,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-20T08:00:00</Start>
-      <Finish>2012-04-19T17:00:00</Finish>
+      <Finish>2012-04-19T11:30:00</Finish>
       <OutlineNumber>5</OutlineNumber>
       <color>2</color>
     </Task>
@@ -162,7 +162,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-06T08:00:00</Start>
-      <Finish>2012-05-01T17:00:00</Finish>
+      <Finish>2012-05-01T16:30:00</Finish>
       <OutlineNumber>6</OutlineNumber>
       <color>2</color>
     </Task>
@@ -177,7 +177,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-02-06T08:00:00</Start>
-      <Finish>2012-05-01T17:00:00</Finish>
+      <Finish>2012-05-01T10:00:00</Finish>
       <OutlineNumber>6.1</OutlineNumber>
       <color>2</color>
     </Task>
@@ -192,7 +192,7 @@
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
       <Start>2012-04-23T08:00:00</Start>
-      <Finish>2012-05-01T17:00:00</Finish>
+      <Finish>2012-05-01T16:30:00</Finish>
       <OutlineNumber>6.2</OutlineNumber>
       <color>2</color>
     </Task>
@@ -206,8 +206,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
-      <Start>2012-01-23T08:00:00</Start>
-      <Finish>2012-01-23T08:00:00</Finish>
+      <Start>2012-01-20T17:00:00</Start>
+      <Finish>2012-01-20T17:00:00</Finish>
       <OutlineNumber>7</OutlineNumber>
       <color>2</color>
     </Task>
@@ -221,8 +221,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
-      <Start>2012-03-02T08:00:00</Start>
-      <Finish>2012-03-02T08:00:00</Finish>
+      <Start>2012-03-01T17:00:00</Start>
+      <Finish>2012-03-01T17:00:00</Finish>
       <OutlineNumber>8</OutlineNumber>
       <color>2</color>
     </Task>
@@ -236,8 +236,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
-      <Start>2012-04-27T08:00:00</Start>
-      <Finish>2012-04-27T08:00:00</Finish>
+      <Start>2012-04-26T17:00:00</Start>
+      <Finish>2012-04-26T17:00:00</Finish>
       <OutlineNumber>9</OutlineNumber>
       <color>2</color>
     </Task>
@@ -251,23 +251,23 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
-      <Start>2012-04-30T08:00:00</Start>
-      <Finish>2012-04-30T08:00:00</Finish>
+      <Start>2012-04-27T17:00:00</Start>
+      <Finish>2012-04-27T17:00:00</Finish>
       <OutlineNumber>10</OutlineNumber>
       <color>2</color>
     </Task>
     <Task>
       <ID>B2F8423E-1AF8-0DEB-231E-0FE0E03F793C</ID>
       <UID>B2F8423E-1AF8-0DEB-231E-0FE0E03F793C</UID>
-      <Name/>
-      <Critical>0</Critical>
+      <Name>Rendu final</Name>
+      <Critical>1</Critical>
       <Milestone>1</Milestone>
       <Summary>0</Summary>
-      <IsNull>1</IsNull>
+      <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes></Notes>
-      <Start>2012-01-24T15:21:30</Start>
-      <Finish>2012-01-24T15:21:30</Finish>
+      <Start>2012-05-14T08:00:00</Start>
+      <Finish>2012-05-14T08:00:00</Finish>
       <OutlineNumber>11</OutlineNumber>
       <color>2</color>
     </Task>
@@ -1006,22 +1006,35 @@
       <OutlineNumber>60</OutlineNumber>
       <color>2</color>
     </Task>
+    <Task>
+      <ID>9D83DB37-DE4A-2FA1-6BE9-00004C25EEB8</ID>
+      <UID>9D83DB37-DE4A-2FA1-6BE9-00004C25EEB8</UID>
+      <Name/>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>0</Summary>
+      <IsNull>1</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-04-29T23:27:28</Start>
+      <Finish>2012-04-29T23:27:28</Finish>
+      <OutlineNumber>61</OutlineNumber>
+      <color>2</color>
+    </Task>
   </Tasks>
   <Resources/>
   <Assignments/>
   <ViewState>
-    <VisibleStartTime>2012-01-11T01:18:54</VisibleStartTime>
-    <VisibleEndTime>2012-05-13T23:41:05</VisibleEndTime>
+    <VisibleStartTime>2011-10-23T22:59:44</VisibleStartTime>
+    <VisibleEndTime>2012-08-04T13:23:44</VisibleEndTime>
     <ScrollPosition>0</ScrollPosition>
-    <HorizontalZoom>17.698628523478835</HorizontalZoom>
-    <VerticalZoom>13</VerticalZoom>
+    <HorizontalZoom>40.8</HorizontalZoom>
+    <VerticalZoom>12</VerticalZoom>
     <ShowCurrentDay>0</ShowCurrentDay>
+    <CriticalPath>1</CriticalPath>
     <DGColumnsState>1</DGColumnsState>
     <Exists>1</Exists>
     <OpenNodes>
-      <OpenNode>
-        <OpenTaskID>7167702F-A411-875E-750E-0FEEB946AA3F</OpenTaskID>
-      </OpenNode>
       <OpenNode>
         <OpenTaskID>D0669EB5-7586-946F-53E5-0FF1D8A83A2F</OpenTaskID>
       </OpenNode>
@@ -1034,7 +1047,10 @@
         <DGSize>30</DGSize>
       </DataGridSize>
       <DataGridSize>
-        <DGSize>198</DGSize>
+        <DGSize>198.1</DGSize>
+      </DataGridSize>
+      <DataGridSize>
+        <DGSize>75</DGSize>
       </DataGridSize>
       <DataGridSize>
         <DGSize>75</DGSize>
@@ -1055,9 +1071,67 @@
         <DGSize>90</DGSize>
       </DataGridSize>
       <DataGridSize>
-        <DGSize>228</DGSize>
+        <DGSize>814</DGSize>
       </DataGridSize>
     </DataGridSizes>
+    <DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+      <DataGridVisible>
+        <visible>1</visible>
+      </DataGridVisible>
+    </DataGridVisible>
+    <DataGridDataField>
+      <DataGridDataField>
+        <dataField>0</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>1</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>2</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>8</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>3</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>4</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>5</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>6</dataField>
+      </DataGridDataField>
+      <DataGridDataField>
+        <dataField>7</dataField>
+      </DataGridDataField>
+    </DataGridDataField>
   </ViewState>
   <Pivotal>
     <email/>
@@ -1077,6 +1151,12 @@
       <dayEnd>5</dayEnd>
       <timeStart>46800000</timeStart>
       <timeEnd>61200000</timeEnd>
+    </Interval>
+    <Interval>
+      <dayStart>3</dayStart>
+      <dayEnd>3</dayEnd>
+      <timeStart>8100000</timeStart>
+      <timeEnd>9900000</timeEnd>
     </Interval>
   </WorkCalendar>
   <Overall>
