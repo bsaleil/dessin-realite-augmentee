@@ -32,6 +32,9 @@
 	
 	% Sommaire
 	\tableofcontents
+
+	%Table des figures
+	\listoffigures
 	
 	\newpage
 	\chapter{Introduction}
@@ -52,11 +55,26 @@
 			\subsection{Diagramme de classes}
 	
 	\chapter{Réalisation}
-		\section{Librairie}
+		\section{Bibliothèque de suivi}
+			La Bibliothèque de suivi sert à réaliser le suivi d'un objet, que nous appelerons ici Curseur, avec un minimum de connaissance en traitement des images.\\
+			\subsection{Architecture}
+					La bibliothèque fonctionne grâce à deux choses, une structure de données et deux fonctions enveloppe. \\
+					Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
+					Cette structure de données est engendrée par la fonction "calibration" de la librairie, et est utilisée par la suite par l'autre fonction, la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image.
+					\begin{figure}[!h]
+						\centering
+						\includegraphics[scale=0.55]{../soutenance/schema-librairie.pdf}\\
+						\caption{Architrecture de la bibliothèque}
+						\label{Architrecture de la bibliothèque}
+					\end{figure}
+				\newpage
+				\subsubsection{Structure de données}
+				\subsubsection{Fonctions}
+			\subsection{}
 		\section{Application}
 	
 	\chapter{Résultats}
-		\section{Explications des algorithmes de suivi}
+		\section{Bibliothèque}
 		\section{Application}
 	
 	\chapter{Conclusion}
