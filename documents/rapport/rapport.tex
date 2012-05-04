@@ -36,6 +36,11 @@
 	%Table des figures
 	\listoffigures
 	
+	\newpage 
+	Remerciements : \\
+	
+	William Puech (Professeur de traitement de l'image, responsable IMAGINA) pour avoir accepté de nous encadrer lors de ce TER. \\
+	Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au long du projet. \\
 	\newpage
 	\chapter{Introduction}
 		\section{Présentation}
@@ -48,6 +53,7 @@
 	\chapter{Analyse et conception}
 		\section{Étude de l'existant et faisabilité}
 		\subsubsection{Faisabilité}
+		% TODO : expliquer si ça nous parait possible 
 		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.\\
 Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
 Nous allons nous concentrer notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposons d'aucun financement et n'allons utiliser que des outils gratuits. \\
@@ -76,18 +82,46 @@ Le projet sera décomposé en deux parties majeures que sont la bibliothèque de
 			\end{itemize}
 			\newpage
 			\subsection{Diagramme de Gantt}
+			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un cahier des charges pour définir ce que nous voulions faire et comment. \\
+			Après ceci, nous avons commencé à effectuer des recherches du côté bibliothèque et application, pour savoir quels outils et techniques utiliser pour arriver à nos fins. 
+			Nous avons réservés plusieurs semaines pour effectuer uniquement des recherches et pouvoir développer efficacement une fois que ça serait le moment. Nous avons donc lus des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'analyse sert aussi à penser l'application en faisant des diagrammes de classes et des cas d'utilisations. \\
+			
+			Ensuite la majeure partie du temps est réservée au développement lui même, avec une date butoir de fin avril environ qui correspond au moment où nous devions faire la pré-soutenance, et la soutenance devant le grand jury quelques jours après. \\  
+			Bien entendu ces temps de développements s'accompagnent de réunions avec tout le groupe de projet ainsi que de travail pour lier nos deux sous-parties et les tester ensemble. \\
+			Le rapport et la soutenance ont été commencés tôt pour ne pas avoir trop de choses à faire au dernier moment. Voici le rétroplanning qui illustre le déroulement chronologique du projet : \\
 				\begin{figure}[!h]
-						\centering
-						\includegraphics[scale=0.6]{../soutenance/retro-planning.pdf}\\
-						\caption{Retroplanning}
-						\label{Retroplanning}
+					\centering
+					\includegraphics[scale=0.6]{../soutenance/retro-planning.pdf}\\
+					\caption{Rétroplanning}
+					\label{Rétroplanning}
 				\end{figure}
 		\newpage
 		\section{Outils utilisés}
-			\includegraphics[scale=0.25]{../logos/qt_logo.png}\\
-			\includegraphics[scale=1.5]{../logos/OpenCV_Logo.png}\\
-			\includegraphics[scale=2.5]{../logos/subversion-logo.png}\\
-			\includegraphics[scale=0.5]{../logos/Gobby-logo.png}\\
+		Durant la période de recherche et au cours du projet nous avons utilisé différent outils (au sens large) pour nous aider dans la réalisation. Nous les détaillons ici dans cette section. \\
+		
+			\subsubsection{Outils collaboratifs}
+			Tout d'abord nous avons utilisés des outils pour nous aider à synchroniser notre travail entre les deux sous-groupes. \\ \ \\
+			\includegraphics[scale=1]{../logos/subversion-logo.png} 
+			Subversion : Un gestionnaire de versions qui nous permettait de synchroniser notre travail, de partager le code source et de s'échanger quelques documents complexes (ce rapport par exemple).  \\
+		
+			\includegraphics[scale=0.25]{../logos/Gobby-logo.png} 
+			Gobby :
+			Logiciel libre pour l'édition collaborative, qui nous permets de développer à distance sur le même document simultanément. \\
+			Bien sûr ces outils ne sont pas suffisants, nous avons donc fait des réunions régulières pour organiser le travail et décider des orientations, par ailleurs, nous avons fais beaucoup d'échanges pour que tout le monde soit toujours au courant des différentes communications importantes. \\
+			
+			\subsubsection{Outils techniques}
+			
+			Langage C pour la bibliothèque : ce langage est bien adapté pour écrire une bibliothèque car il nous permets de faire des fonctions, ce qui était dans notre idée ce qu'il fallait pour cette bibliothèque. Par ailleurs c'est un langage bien adapté pour faire du traitement de l'image car il est de bas niveau, et très rapide. De plus nous avons utilisé par la suite des librairies (OpenCV par exemple) qui ont été écrites initialement en C. \\
+			Langage C++ pour l'application : c'est un langage objet ce qui nous aidait pour la conception, il est également très rapide et c'est un langage avec lequel nous sommes à l'aise et nous avons de l'expérience, ça nous évitait donc de dévoir réapprendre et donc de perdre du temps précieux.\\
+			
+			Pour ce projet nous utilisons plusieurs librairies pour nous aider : \\
+			
+			\includegraphics[scale=0.15]{../logos/qt_logo.png}
+			Qt : librairie d'IHM (et bien plus) en C++, nous aide pour faire les interfaces graphiques, pour la partie réseau également où elle offre des abstractions agréables. \\
+			
+			\includegraphics[scale=1]{../logos/OpenCV_Logo.png}
+			OpenCV : librairie de traitement de l'image, nous aide à exploiter la webcam et pour le traitement de l'image avec plusieurs fonctionnalités. \\
+		
 		\newpage
 		\section{Analyse}
 			\subsection{Cas d'utilisations}
@@ -145,16 +179,16 @@ Le projet sera décomposé en deux parties majeures que sont la bibliothèque de
 	
 	\chapter{Réalisation}
 		\section{Bibliothèque de suivi}
-			Cette partie du développement a pour objectif de fournir un ensemble de fonctiionnalités permettant la reconnaissance et le suivi d'un objet, que nous appelerons ici Curseur, à partir d'images. \\
+			Cette partie du développement a pour objectif de fournir un ensemble de fonctionnalités permettant la reconnaissance et le suivi d'un objet, que nous appelerons ici Curseur, à partir d'images. \\
 			L'objectif est de développer notre propre bibliothèque pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
 			Un certain nombre de librairies existantes proposent des moyens nous facilitant la tâche, notamment grâce à des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. 
 			Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser.
 			Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointes dans le but de faire notre propre bibliothèque. \\
 			La Bibliothèque de suivi sert à réaliser le suivi d'un objet, que nous appelerons ici Curseur, avec un minimum de connaissance en traitement des images.\\
 			
-					La bibliothèque fonctionne grâce à une structure de données manipulée par deux fonctions enveloppes. \\
-					Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
-					Cette structure de données est engendrée par la fonction "calibration" de la librairie. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relativess au curseur.
+			La bibliothèque fonctionne grâce à une structure de données manipulée par deux fonctions enveloppes. \\
+			Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
+			Cette structure de données est engendrée par la fonction "calibration" de la librairie. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relativess au curseur.
 					
 				\newpage
 				\subsubsection{Structure de données}
