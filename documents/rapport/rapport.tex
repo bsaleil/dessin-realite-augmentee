@@ -52,11 +52,6 @@
 Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
 Nous allons nous concentrer notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposons d'aucun financement et n'allons utiliser que des outils gratuits. \\
 Le projet sera décomposé en deux parties majeures que sont la bibliothèque de suivi et l'application de dessin virtuel (dont les contenus seront détaillés dans des sections qui leur sont propres).
-			\paragraph{Bibliothèque :\\}
-				Cette partie du développement a pour objectif de fournir un ensemble de fonctiionnalités permettant la reconnaissance et le suivi d'un objet à partir d'images. 
-				L'objectif est de développer notre propre bibliothèque pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
-				Un certain nombre de librairies existantes proposent des moyens nous facilitant la tâche, notamment grâce à des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. 
-				Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointes dans le but de faire notre propre bibliothèque. \\
 			\paragraph{Application :\\}
 L'application doit exploiter le plus efficacement possible la librairie de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
 Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
@@ -120,27 +115,46 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 
 			\newpage
 			\subsection{Diagramme de classes}
+				La bibliothèque fonctionne grâce à deux choses, une structure de données et deux fonctions enveloppe. \\
+				Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
+				Cette structure de données est engendrée par la fonction "calibration" de la librairie, et est utilisée par la suite par l'autre fonction, la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
+				\begin{figure}[!h]
+						\centering
+						\includegraphics[scale=0.8]{../soutenance/libtrack-uml.png}\\
+						\caption{Architrecture de la bibliothèque}
+						\label{Architrecture de la bibliothèque}
+				\end{figure}
+
+				La bibliothèque dépend de deux bibliothèques externes:
+				\begin{itemize}
+					\item OpenCV, Spécialisée dans le traitement des images
+					\item CvBlob, librairie issue d'OpenCV utlisée pour la recherche d'objet dans des images binaires
+				\end{itemize}
+
+				\newpage			
+
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../uml/classes.png}\\
 						\caption{Diagramme de classe de l'application}
 						\label{Diagramme de classe de l'application}
 				\end{figure}
+
 				
 	
 	\chapter{Réalisation}
 		\section{Bibliothèque de suivi}
+			Cette partie du développement a pour objectif de fournir un ensemble de fonctiionnalités permettant la reconnaissance et le suivi d'un objet, que nous appelerons ici Curseur, à partir d'images. \\
+			L'objectif est de développer notre propre bibliothèque pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
+			Un certain nombre de librairies existantes proposent des moyens nous facilitant la tâche, notamment grâce à des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. 
+			Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser.
+			Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointes dans le but de faire notre propre bibliothèque. \\
 			La Bibliothèque de suivi sert à réaliser le suivi d'un objet, que nous appelerons ici Curseur, avec un minimum de connaissance en traitement des images.\\
-			\subsection{Architecture}
+			
 					La bibliothèque fonctionne grâce à deux choses, une structure de données et deux fonctions enveloppe. \\
 					Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
 					Cette structure de données est engendrée par la fonction "calibration" de la librairie, et est utilisée par la suite par l'autre fonction, la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image.
-					\begin{figure}[!h]
-						\centering
-						\includegraphics[scale=0.8]{../soutenance/libtrack-uml.png}\\
-						\caption{Architrecture de la bibliothèque}
-						\label{Architrecture de la bibliothèque}
-					\end{figure}
+					
 				\newpage
 				\subsubsection{Structure de données}
 				\subsubsection{Fonctions}
