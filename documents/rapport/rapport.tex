@@ -52,9 +52,7 @@
 Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
 Nous allons nous concentrer notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposons d'aucun financement et n'allons utiliser que des outils gratuits. \\
 Le projet sera décomposé en deux parties majeures que sont la bibliothèque de suivi et l'application de dessin virtuel (dont les contenus seront détaillés dans des sections qui leur sont propres).
-			\paragraph{Application :\\}
-L'application doit exploiter le plus efficacement possible la librairie de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
-Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
+
 		\subsubsection{Existant}
 		La vision par ordinateur et particulièrement le suivi d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la librairie OpenCV.\\
 			\begin{itemize}
@@ -86,7 +84,10 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\end{figure}
 		\newpage
 		\section{Outils utilisés}
-
+			\includegraphics[scale=0.25]{../logos/qt_logo.png}\\
+			\includegraphics[scale=1.5]{../logos/OpenCV_Logo.png}\\
+			\includegraphics[scale=2.5]{../logos/subversion-logo.png}\\
+			\includegraphics[scale=0.5]{../logos/Gobby-logo.png}\\
 		\newpage
 		\section{Analyse}
 			\subsection{Cas d'utilisations}
@@ -115,9 +116,9 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 
 			\newpage
 			\subsection{Diagramme de classes}
-				La bibliothèque fonctionne grâce à deux choses, une structure de données et deux fonctions enveloppe. \\
+				La bibliothèque fonctionne grâce à une structure de données utilisée par deux fonctions enveloppes. \\
 				Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
-				Cette structure de données est engendrée par la fonction "calibration" de la librairie, et est utilisée par la suite par l'autre fonction, la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
+				Cette structure de données est engendrée par la fonction "calibration" de la librairie. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.8]{../soutenance/libtrack-uml.png}\\
@@ -151,16 +152,18 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 			Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointes dans le but de faire notre propre bibliothèque. \\
 			La Bibliothèque de suivi sert à réaliser le suivi d'un objet, que nous appelerons ici Curseur, avec un minimum de connaissance en traitement des images.\\
 			
-					La bibliothèque fonctionne grâce à deux choses, une structure de données et deux fonctions enveloppe. \\
+					La bibliothèque fonctionne grâce à une structure de données manipulée par deux fonctions enveloppes. \\
 					Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
-					Cette structure de données est engendrée par la fonction "calibration" de la librairie, et est utilisée par la suite par l'autre fonction, la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image.
+					Cette structure de données est engendrée par la fonction "calibration" de la librairie. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relativess au curseur.
 					
 				\newpage
 				\subsubsection{Structure de données}
 				\subsubsection{Fonctions}
 			\subsection{}
 		\section{Application}
-	
+	\paragraph{Application :\\}
+L'application doit exploiter le plus efficacement possible la librairie de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
+Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
 	\chapter{Résultats}
 		\section{Méthodes de suivi}
 		\section{Application}
