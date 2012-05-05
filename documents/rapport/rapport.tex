@@ -12,6 +12,7 @@
 
 \title{Rapport de projet : Tableau virtuel interactif}
 \author{Baptiste Saleil \and Geoffrey Mélia \and Julien Pagès \and Kevin Bollini}
+%faudrai mettre une page/paraph qq part, pour marquer nos formations, que ca vienne pas comme un cheveux ds la soupe au milieu du rapport
 \date{\today}
 \ifpdf
 	\pdfinfo 
@@ -39,13 +40,14 @@
 	\newpage 
 	Remerciements : \\
 	
-	William Puech (Professeur de traitement de l'image, responsable IMAGINA) pour avoir accepté de nous encadrer lors de ce TER. \\
-	Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au long du projet. \\
+	Nous tenons à remercier tout particulièrement M. William Puech (enseignant chercheur au LIRMM à l'université Montpellier 2, responsable de la formation du Master informatique IMAGINA) sans qui ce projet n'aurait pas pu se faire, pour avoir accepter de nous encadrer, pour son aide et son implication.\\
+	Nous souhaitons aussi remercier M. Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au cours de ce projet. \\
 	\newpage
 	\chapter{Introduction}
 		\section{Présentation}
-		Le but principal du projet est de simuler une écriture ou un dessin sur un tableau virtuel interactif. \\
-		Pour cela nous utiliserons une interface basée sur la reconnaissance de mouvements.
+      %en pensez quoi? il faut qu'avec juste ces qq lignes, n'importe qui comprenne le sujet
+		L'objectif de ce projet est de créer un tableau numérique, sur lequel ou une plusieurs personnes peuvent dessiner en réalisant directement les gestes comme sur une toile réelle. \\
+		Pour cela nous utiliserons une interface basée sur la reconnaissance des mouvements detectés par la webcam.
 		
 		\section{Contexte}
 		% TODO
@@ -68,27 +70,26 @@ Le projet sera décomposé en deux parties majeures que sont la bibliothèque de
 			\end{itemize}
 		\section{Gestion du projet}
 			\subsection{Choix stratégiques}
-			Pour mener à bien ce projet nous avons décidés de découper les tâches en deux sous-parties. \\
-			La première sera une bibliothèque de suivi d'objets, et la deuxième partie une application qui utilisera
-			cette bibliothèque pour réaliser un logiciel de dessin interactif. \\
-			Ce choix présente plusieurs interêts : \\
+			Lors de ce projet, nous avons distingué deux parties majeures. \\
+			La première est une bibliothèque de suivi d'objets. La seconde, une application qui utilise cette bibliothèque pour réaliser un logiciel de dessin interactif. \\
+			Ce choix présente plusieurs intérêts : \\
 			\begin{itemize}
-				\item{Premièrement, ce découpage permet de bien différencier les tâches, le développement de la librairie requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc. Ceci correspond parfaitement à la formation de deux membres du groupe. (Formation IMAGINA Université Montpellier 2). 
-				Le développement de l'application, lui, requiert des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. 
-				Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE Université Montpellier 2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
-				\item{Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets complètement indépendants. En effet, la librairie sera développée d'un côté et permettra d'offrir un bon nombre de fonctionnalités de suivis. 
-				L'application, elle, se chargera d'utiliser les fonctionnalités de traitement d'image de la librairie en ajoutant une interface graphique, une couche réseau, une connexion aux webcams, la récupération des images etc.
-				La librairie et l'application sont donc deux projets développés en parallèles et très modulaires, notre application peut très bien utiliser une autre librairie de traitement d'images, et la librairie peut très bien être utilisée par d'autres application qui offriraient des fonctionnalités totalement différentes de la nôtre.}
+				\item{Premièrement, ce découpage permet de bien différencier les tâches. Le développement de la librairie requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc. Ceci correspond parfaitement à la formation de deux membres du groupe(formation IMAGINA à l'UM2). 
+				Le développement de l'application requiert quant à lui des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. 
+				Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE à l'UM2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
+				\item{Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets à la fois complètement indépendants et complémentaires. En effet, la librairie est développée offre des fonctionnalités de suivi utilisables par n'importe quelle application.\\
+				L'application se charger d'utiliser les fonctionnalités de traitement d'images de la librairie en ajoutant une interface graphique, une couche réseau, une connexion aux webcams, la récupération des images etc.
+				La librairie et l'application sont donc deux projets développés en parallèle et très modulaires. Notre application peut très bien utiliser une autre librairie de traitement d'images, et la librairie peut très bien être utilisée par d'autres applications qui offriraient des fonctionnalités totalement différentes de la nôtre.}
 			\end{itemize}
 			\newpage
 			\subsection{Diagramme de Gantt}
-			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un cahier des charges pour définir ce que nous voulions faire et comment. \\
-			Après ceci, nous avons commencé à effectuer des recherches du côté bibliothèque et application, pour savoir quels outils et techniques utiliser pour arriver à nos fins. 
-			Nous avons réservés plusieurs semaines pour effectuer uniquement des recherches et pouvoir développer efficacement une fois que ça serait le moment. Nous avons donc lus des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'analyse sert aussi à penser l'application en faisant des diagrammes de classes et des cas d'utilisations. \\
+			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un cahier des charges pour définir ce que nous voulions faire et de quelle manière. \\
+			Après ceci, nous avons commencé à effectuer des recherches du côté bibliothèque et application, pour savoir quels outils et techniques utiliser pour arriver à nos objectifs. 
+		  Nous avons réservé plusieurs semaines pour effectuer des recherches et perfectionner notre idée du projet. Nous avons donc lu des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'analyse et de conception sert aussi à penser l'application en imaginant des cas d'utilisations (use cases) et en réalisant le diagramme de classes. \\
 			
-			Ensuite la majeure partie du temps est réservée au développement lui même, avec une date butoir de fin avril environ qui correspond au moment où nous devions faire la pré-soutenance, et la soutenance devant le grand jury quelques jours après. \\  
-			Bien entendu ces temps de développements s'accompagnent de réunions avec tout le groupe de projet ainsi que de travail pour lier nos deux sous-parties et les tester ensemble. \\
-			Le rapport et la soutenance ont été commencés tôt pour ne pas avoir trop de choses à faire au dernier moment. Voici le rétroplanning qui illustre le déroulement chronologique du projet : \\
+			Par la suite, la majeure partie du temps est réservée au développement en lui même, en prenant en compte la date de présentation du projet pour avoir une réalisation complète. \\  
+			Bien entendu ces temps de développement s'accompagnent de réunions avec tout le groupe de projet ainsi que de travail pour lier nos deux sous-parties et les tester ensemble. \\
+			Des documents comme le rapport ou la documentation furent produit au fur et à mesure du projet, pour rester en adéquation avec le travail accompli. Voici le rétroplanning qui illustre le déroulement chronologique du projet : \\
 				\begin{figure}[!h]
 					\centering
 					\includegraphics[scale=0.6]{../soutenance/retro-planning.pdf}\\
