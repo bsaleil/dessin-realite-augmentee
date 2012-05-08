@@ -45,9 +45,8 @@
 	\newpage
 	\chapter{Introduction}
 		\section{Présentation}
-      %en pensez quoi? il faut qu'avec juste ces qq lignes, n'importe qui comprenne le sujet
-		L'objectif de ce projet est de créer un tableau numérique, sur lequel une ou plusieurs personnes peuvent intéragir en réalisant directement des gestes comme sur une toile réelle. \\
-		Pour cela nous utiliserons une interface Homme-Machine basée sur la reconnaissance des mouvements detectés par une webcam.
+		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détéction de mouvements). Cet état de faits nous a menés à réflexion sur l'application d'une de ces nouvelles façon d'intéragir.\\
+		 L'objectif du projet issu de cette reflexion est donc de créer un tableau blanc virtuel, sur lequel une ou plusieurs personnes peuvent intéragir en réalisant directement des gestes comme sur une toile réelle, par reconnaissance de mouvement detectés par une webcam. \\
 
 		\begin{figure}[!h]
 			\centering
@@ -63,6 +62,8 @@
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui à donc eu le temps de murîr et d'être au niveau d'un TER.
 			\item Deuxièmement, notre groupe viens de deux formations assez distincte, AIGLE, formation orientée génie Logiciel, et IMAGINA, spécialité du jeu vidéo et de l'image, ce projet était donc un moyen rêvé de lier les deux compétences.
+			\item Enfin, ce projet était pour nous une bonne occasion de réaliser une application fonctionelle et distribuable, et par conséquent nous permettre d'explorer une autre facette du développement d'application : la mise en production.
+
 		\end{itemize}	
 	\chapter{Analyse et conception}
 		\section{Étude de l'existant et faisabilité}
@@ -70,8 +71,7 @@
 		% TODO : expliquer si ça nous parait possible 
 		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.\\
 Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
-Nous allons nous concentrer notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposons d'aucun financement et n'allons utiliser que des outils gratuits. \\
-Le projet sera décomposé en deux parties majeures que sont la bibliothèque de suivi et l'application de dessin virtuel (dont les contenus seront détaillés dans des sections qui leur sont propres).
+Nous nous sommes concentrés notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposions d'aucun financement et n'avons donc utilisés que des outils gratuits. \\
 
 		\subsubsection{Existant}
 		La vision par ordinateur et particulièrement le suivi d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la librairie OpenCV.\\
@@ -86,9 +86,10 @@ Le projet sera décomposé en deux parties majeures que sont la bibliothèque de
 				\caption{Exemple du Kinect}
 				\label{Exemple du Kinect}
 			\end{figure}
+		\newpage
 		\section{Gestion du projet}
 			\subsection{Choix stratégiques}
-			Lors de ce projet, nous avons distingué deux parties majeures. \\
+			Lors de ce projet, nous avons distingué deux parties majeures.
 			La première est une bibliothèque de suivi d'objets. La seconde, une application qui utilise cette bibliothèque pour réaliser un logiciel de dessin interactif. \\
 			Ce choix présente plusieurs intérêts : \\
 			\begin{itemize}
