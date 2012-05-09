@@ -153,12 +153,15 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 				\end{figure}
 			\newpage
 			\subsection{Diagrammes de séquences}
+			Les diagrammes qui suivent expliquent le fonctionnement de l'application pour une utilisation locale, et une utilisation en réseau.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../soutenance/sequence_local.png}\\
 						\caption{Diagramme de séquence local}
 						\label{Diagramme de séquence local}
 				\end{figure}
+				On peut voir sur ce diagramme que le fonctionnement en local est assez basique. Dans un premier temps, l'utilisateur \textbf{étalonne} l'objet avec lequel il veut dessiner. Ensuite, lorsque l'utilisateur déplace l'objet en question, l'application \textbf{détecte} ce déplacement, et \textbf{dessine} à la nouvelle position de l'objet. Ce schéma de détection-dessin est répété jusqu'à fermeture de l'application. \\
+				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet.
 
 				\newpage
 				\begin{figure}[!h]
@@ -167,6 +170,19 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 						\caption{Diagramme de séquence réseau}
 						\label{Diagramme de séquence réseau}
 				\end{figure}
+				En réseau, l'utilisation suit le même schéma, mais un autre acteur entre en jeu, le \textbf{serveur}. \\
+				Comme pour une utilisation locale, l'utilisateur comment par \textbf{étalonner} l'objet à suivre. Puis, la connexion s'effectue auprès du serveur, qui va renvoyer le dessin courant au nouveau client. Une fois en possession du dessin, le client le stocke et peut rentrer dans la boucle de détection-dessin : \\
+				Comme en local, l'application va \textbf{détecter} le mouvement de l'objet suivi. La nouvelle position est envoyée au serveur qui va dessiner sur son propre tableau, puis renvoyer à tous les clients l'ordre de \textbf{dessiner} à cette même position. Chaque client verra donc ce que les autres clients dessinent. \\
+				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet, mais égelement ceux de tous les autres clients.
+				\\ $$$$ \\
+				On peut donc voir que pour l'utilisateur, le fonctionnement est identique qu'il dessine seul, ou avec d'autres personnes :
+				\begin{itemize}
+					\item Il étalonne l'objet
+					\item Il déplace l'objet
+					\item l'objet dessine sur le tableau
+				\end{itemize}
+				
+				Cependant, derrière, le fonctionnement n'est pas le même. En réseau, chaque mouvement passe par le serveur qui se charge de faire le lien avec tous les clients de l'application.
 
 			\newpage
 			\subsection{Diagramme de classes}
