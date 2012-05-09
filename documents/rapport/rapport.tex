@@ -44,7 +44,7 @@
 	Nous souhaitons aussi remercier M. Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au cours de ce projet. \\
 	\newpage
 	\chapter{Introduction}
-		\section{Présentation}
+		\section{Présentation}		
 		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amenés à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
 		 L'objectif du projet issu de cette réflexion est donc de créer un tableau virtuel, avec lequel une ou plusieurs personnes peuvent interagir en réalisant directement des gestes comme sur une toile réelle, par reconnaissance des mouvements detectés par une webcam. \\
 
@@ -57,7 +57,10 @@
 	\newpage
 		\section{Contexte}
 		% TODO
-		Ce projet n'est pas un simple choix dans une liste de projets, en effet, il est à l'initiative de notre groupe.\\
+		Ce projet est réalisé dans le cadre des TER (Travaux d'Étude et de Recherche) de 1ère année de Master informatique à L'Université Montpellier 2. \\
+		Le TER est un projet qui se déroule sur un semestre, généralement choisi par les étudiants parmi une liste de projets qui leurs sont proposés. \\Ce genre de projet apporte beaucoup aux étudiants. Il leur permet d'une part de travailler une longue période sur un seul et même sujet afin d'obtenir quelque chose de complet, d'abouti. \\D'autre part, le TER (comme son nom l'indique) apporte une bonne expérience dans le domaine de la recherche. En effet, un travail préalable doit être effectué sur l'existant (Est-ce que d'autres projets de ce genre existent? Si oui qu'ont-ils de différent?,...), mais également la faisabilité (Est-ce possible à faire? Quels algorithmes existent pour répondre à tel ou tel besoin?, ...). \\
+		$$$$ \\
+		La particularité de ce projet réside dans le fait que nous avons nous-même proposé ce sujet à un enseignant-chercheur.\\
 		Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui a donc eu le temps de murîr et d'être au niveau d'un TER.
@@ -185,7 +188,7 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 				Cependant, derrière, le fonctionnement n'est pas le même. En réseau, chaque mouvement passe par le serveur qui se charge de faire le lien avec tous les clients de l'application.
 
 			\newpage
-			\subsection{Diagramme de classes}
+			\subsection{Diagrammes de classes}
 				La bibliothèque fonctionne grâce à une structure de données utilisée par deux fonctions enveloppes. \\
 				Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
 				Cette structure de données est engendrée par la fonction "calibration" de la librairie. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
@@ -203,13 +206,41 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 				\end{itemize}
 
 				\newpage			
-
+				Le diagramme qui suit vous présente l'architecture de notre application. \\
+Avant de commencer l'application, nous avons décidé de passer un long moment sur la réflexion pour avoir une architecture solide et modulable.\\Nous avons dans un premier temps identifié les différents modules dont serait composée notre application et quel était précisément le ou les rôles de chacun. \\Ensuite, nous avons réfléchi à quel était le meilleur moyen dont ces différents modules pouvaient communiquer en évitant toute redondance ou communication superflue. \\Une fois cette réflexion faite, nous avons dessiné le diagramme suivant : \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../uml/classes.png}\\
 						\caption{Diagramme de classe de l'application}
 						\label{Diagramme de classe de l'application}
 				\end{figure}
+				
+				On peut identifier quatre modules principaux : \\
+				\begin{itemize}
+					\item \textbf{Le module d'étalonnage} (Calibration et ViewCalibration). Ce module sert à tout ce qui touche à l'étalonnage de l'objet. Une fois qu'il est effectué, le module va appeller le module \textit{client} pour lui signaler que l'étalonnage est fait, et lui envoyer les informations qui correspondent (objet à suivre, type de track, dessin en local ou réseau, etc...)
+					\item \textbf{Le module client} (Client). Ce module est le coeur de l'application, il a principalement deux rôles. Il va dans un premier temps construire toute l'interface graphique (tout ce qui est visuel) qui sera présentée à l'utilisateur. Ensuite, c'est ce module qui va assurer la communication entre tous les modules. Il est le seul intermédiaire entre les différents modules locaux.
+					\item \textbf{Le module de dessin} (DrawingBoard, LocalDrawingBoard et NetworkDrawingBoard). Ce module a également deux rôles. Il va s'occuper de toute la partie dessin (Stocke la couleur et taille du pinceau, dessine les points, lignes, etc...). Aussi, pour une utilisation en réseau, c'est lui qui va se charger de communiquer avec l'application serveur.
+					\item \textbf{Le module serveur} (Server, ServerGraphics). C'est ce module qui met en relation les différents client, et qui synchronise le dessin. Il recoit les ordres de dessin, les stocke, et les renvois à tous les autres clients.
+				\end{itemize}
+				\ \\
+				La classe \textbf{WebcamManager} est la seule classe qui va communiquer avec le \textbf{matériel} (ici les webcams). Lorsque l'on veut une nouvelle image de la webcam, le module client va demander à WebcamManager la nouvelle image, et l'envoyer au module qui en a besoin. \\
+				La classe \textbf{WidgetWebcam}, elle, est la seule classe qui va communiquer avec la \textbf{librairie de suivi}. \\
+				Les classes QGraphicsScene et Etat représentent respectivement le dessin et l'état actuel du pinceau. \\
+				Les classes PackageManager* servent à assembler et désassembler les paquets qui transitent sur le réseau.
+				
+				\paragraph{Scénario :} \ \\
+				Afin d'illustrer la modularité de notre application, on pourrait imaginer le scénario suivant :
+				\begin{itemize}
+					\item L'étalonnage s'effectu. Une fois terminé, le module d'étalonnage va prévenir le client, et lui donner les informations.
+					\item Chaque X millisecondes, le client va intérroger WebcamManager pour obtenir une nouvelle image.
+					\item Le client va envoyer cette image à WidgetWebcam pour obtenir la nouvelle position. (Grâce à la librairie de suivi)
+					\item Le client va maintenant envoyer cette position à DrawingBoard qui va dessiner le nouveau point en fonction de la couleur la taille, etc...
+				\end{itemize}
+				On voit ici que chaque module rempli bien son rôle et assure le bon fonctionnement général de l'application.
+				
+				$$$$ \\
+				Une fois cette phase de réflexion terminée, toute l'architecture de la librairie, et de l'application était pensée et écrite. \\
+				Nous pouvions alors débuter la phase de réalisation, programmer et imbriquer les différents modules, et s'attaquer aux problèmes plus techniques.
 
 				
 	
