@@ -77,7 +77,7 @@ Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la
 Nous nous sommes concentrés notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposions d'aucun financement et n'avons donc utilisé que des outils gratuits. \\
 
 		\subsubsection{Existant}
-		La vision par ordinateur et particulièrement le suivi d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la librairie OpenCV.\\
+		La vision par ordinateur et particulièrement le suivi d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la bibliothèque OpenCV.\\
 			\begin{itemize}
 				% TODO : détailler un peu plus l'existant
 				\item Exemples dans le jeux vidéo : Kinect, Eye-toy, CamSpace (techniques pour l'IHM, par exemple, mouvements continus ou immobilité sur une zone).
@@ -96,12 +96,12 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 			La première est une bibliothèque de suivi d'objets. La seconde, une application qui utilise cette bibliothèque pour réaliser un logiciel de dessin interactif. \\
 			Ce choix présente plusieurs intérêts : \\
 			\begin{itemize}
-				\item{Premièrement, ce découpage permet de bien différencier les tâches. Le développement de la librairie requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc. Ceci correspond parfaitement à la formation de deux membres du groupe(formation IMAGINA à l'UM2). 
+				\item{Premièrement, ce découpage permet de bien différencier les tâches. Le développement de la bibliothèque requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc. Ceci correspond parfaitement à la formation de deux membres du groupe(formation IMAGINA à l'UM2). 
 				Le développement de l'application requiert quant à lui des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. 
 				Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE à l'UM2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
-				\item{Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets à la fois complètement indépendants et complémentaires. En effet, la librairie est développée offre des fonctionnalités de suivi utilisables par n'importe quelle application.\\
-				L'application se charger d'utiliser les fonctionnalités de traitement d'images de la librairie en ajoutant une interface graphique, une couche réseau, une connexion aux webcams, la récupération des images etc.
-				La librairie et l'application sont donc deux projets développés en parallèle et très modulaires. Notre application peut très bien utiliser une autre librairie de traitement d'images, et la librairie peut très bien être utilisée par d'autres applications qui offriraient des fonctionnalités totalement différentes de la nôtre.}
+				\item{Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets à la fois complètement indépendants et complémentaires. En effet, la bibliothèque développée offre des fonctionnalités de suivi utilisables par n'importe quelle application.\\
+				L'application se charge d'utiliser les fonctionnalités de traitement d'images de la bibliothèque en ajoutant une interface graphique, une couche réseau, une connexion aux webcams ou encore la récupération des images.
+				La bibliothèque et l'application sont donc deux projets développés en parallèle et très modulaires. Notre application peut très bien utiliser une autre bibliothèque de traitement d'images, et la bibliothèque peut très bien être utilisée par d'autres applications qui offriraient des fonctionnalités totalement différentes de la nôtre.}
 			\end{itemize}
 			\newpage
 			\subsection{Diagramme de Gantt}
@@ -125,25 +125,25 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 			\subsubsection{Outils collaboratifs}
 			\paragraph{}
 			\includegraphics[scale=1]{../logos/subversion-logo.png} 
-			Subversion : Un gestionnaire de versions qui nous permettait de synchroniser notre travail, de partager le code source et de s'échanger quelques documents complexes (ce rapport par exemple).
+			Subversion : Un gestionnaire de versions qui nous permettant de synchroniser notre travail, de partager le code source et de s'échanger quelques documents complexes (ce rapport par exemple).
 			\paragraph{}
 			\includegraphics[scale=0.25]{../logos/Gobby-logo.png} 
 			Gobby :
-			Logiciel libre pour l'édition collaborative, qui nous permets de développer à distance sur le même document simultanément. \\
+			Logiciel libre pour l'édition collaborative, qui permet de développer à distance sur le même document simultanément. \\
 
-			\paragraph{} Bien sûr ces outils ne sont pas suffisants, nous avons donc fait des réunions régulières pour organiser le travail et décider des orientations, par ailleurs, nous avons fais beaucoup d'échanges pour que tout le monde soit toujours au courant des différentes communications importantes.
+			\paragraph{} Bien sûr ces outils ne sont pas suffisants, nous avons donc fait des réunions régulières pour organiser le travail et décider des orientations. Par ailleurs, nous avons beaucoup échangé pour que tout le monde soit toujours au courant des différentes informations importantes.
 			
 			\subsubsection{Outils techniques}
 			\subsubsection{Langages :}
-			\paragraph{} Langage C pour la bibliothèque : ce langage est bien adapté pour écrire une bibliothèque car il nous permets de faire des fonctions, ce qui était dans notre idée ce qu'il fallait pour cette bibliothèque. Par ailleurs c'est un langage bien adapté pour faire du traitement de l'image car il est de bas niveau, et très rapide. De plus nous avons utilisé par la suite des librairies (OpenCV par exemple) qui ont été écrites initialement en C.
-			\paragraph{} Langage C++ pour l'application : c'est un langage objet ce qui nous aidait pour la conception, il est également très rapide et c'est un langage avec lequel nous sommes à l'aise et nous avons de l'expérience, ça nous évitait donc de dévoir réapprendre et donc de perdre du temps précieux.\\
+			\paragraph{} Langage C pour la bibliothèque : ce langage est bien adapté à la réalisation d'une bibliothèque car il permet l'écriture de fonctions. Par ailleurs c'est un langage bien adapté au domaine du traitement de l'image car il est de bas niveau, et très rapide. De plus, nous avons utilisé des bibliothèques (OpenCV par exemple) qui ont été écrites initialement en C.
+			\paragraph{} Langage C++ pour l'application : c'est un langage objet ce qui nous aidait pour la conception. Il est également très rapide et c'est un langage avec lequel nous sommes à l'aise et avons de l'expérience, ce qui nous évitait de devoir apprendre un nouveau langange, et par là de perdre un temps précieux.\\
 			
 			\subsubsection{Bibliothèques :}
 			\includegraphics[scale=0.15]{../logos/qt_logo.png}
-			Qt : librairie d'IHM (et bien plus) en C++, nous aide pour faire les interfaces graphiques, pour la partie réseau également où elle offre des abstractions agréables. \\
+			Qt : bibliothèque d'IHM (et bien plus) en C++, nous aide pour faire les interfaces graphiques, pour la partie réseau également où elle offre des abstractions agréables. \\
 			\paragraph{}
 			\includegraphics[scale=1]{../logos/OpenCV_Logo.png}
-			: librairie de traitement de l'image, nous aide à exploiter la webcam et pour le traitement de l'image avec plusieurs fonctionnalités. \\
+			: bibliothèque de traitement de l'image, nous aide à exploiter la webcam et pour le traitement de l'image avec plusieurs fonctionnalités. \\
 		
 		\newpage
 		\section{Analyse}
@@ -176,22 +176,22 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 				En réseau, l'utilisation suit le même schéma, mais un autre acteur entre en jeu, le \textbf{serveur}. \\
 				Comme pour une utilisation locale, l'utilisateur comment par \textbf{étalonner} l'objet à suivre. Puis, la connexion s'effectue auprès du serveur, qui va renvoyer le dessin courant au nouveau client. Une fois en possession du dessin, le client le stocke et peut rentrer dans la boucle de détection-dessin : \\
 				Comme en local, l'application va \textbf{détecter} le mouvement de l'objet suivi. La nouvelle position est envoyée au serveur qui va dessiner sur son propre tableau, puis renvoyer à tous les clients l'ordre de \textbf{dessiner} à cette même position. Chaque client verra donc ce que les autres clients dessinent. \\
-				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet, mais égelement ceux de tous les autres clients.
+				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet, mais également ceux de tous les autres clients.
 				\\ $$$$ \\
-				On peut donc voir que pour l'utilisateur, le fonctionnement est identique qu'il dessine seul, ou avec d'autres personnes :
+				On peut donc voir que pour l'utilisateur, le fonctionnement est identique qu'il dessine seul ou avec d'autres personnes :
 				\begin{itemize}
 					\item Il étalonne l'objet
 					\item Il déplace l'objet
 					\item l'objet dessine sur le tableau
 				\end{itemize}
 				
-				Cependant, derrière, le fonctionnement n'est pas le même. En réseau, chaque mouvement passe par le serveur qui se charge de faire le lien avec tous les clients de l'application.
+				Cependant, dans la pratique, le fonctionnement n'est pas le même. En réseau, chaque mouvement passe par le serveur qui se charge de faire le lien avec tous les clients de l'application.
 
 			\newpage
 			\subsection{Diagrammes de classes}
 				La bibliothèque fonctionne grâce à une structure de données utilisée par deux fonctions enveloppes. \\
 				Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
-				Cette structure de données est engendrée par la fonction "calibration" de la librairie. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
+				Cette structure de données est engendrée par la fonction "calibration" de la bibliothèque. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.8]{../soutenance/libtrack-uml.png}\\
@@ -202,12 +202,12 @@ Nous nous sommes concentrés notamment sur les compétences techniques et de ges
 				La bibliothèque dépend de deux bibliothèques externes:
 				\begin{itemize}
 					\item OpenCV, Spécialisée dans le traitement des images
-					\item CvBlob, librairie issue d'OpenCV utlisée pour la recherche d'objet dans des images binaires
+					\item CvBlob, bibliothèque issue d'OpenCV utlisée pour la recherche d'objet dans des images binaires
 				\end{itemize}
 
 				\newpage			
 				Le diagramme qui suit vous présente l'architecture de notre application. \\
-Avant de commencer l'application, nous avons décidé de passer un long moment sur la réflexion pour avoir une architecture solide et modulable.\\Nous avons dans un premier temps identifié les différents modules dont serait composée notre application et quel était précisément le ou les rôles de chacun. \\Ensuite, nous avons réfléchi à quel était le meilleur moyen dont ces différents modules pouvaient communiquer en évitant toute redondance ou communication superflue. \\Une fois cette réflexion faite, nous avons dessiné le diagramme suivant : \\
+Avant de commencer l'application, nous avons décidé de passer un long moment sur la réflexion pour avoir une architecture solide et modulable.\\Nous avons dans un premier temps identifié les différents modules dont serait composée notre application et quel était précisément le ou les rôles de chacun. \\Ensuite, nous avons réfléchi à quel était le meilleur moyen pour que ces différents modules puissent communiquer en évitant toute redondance ou communication superflue. \\Une fois cette réflexion faite, nous avons dessiné le diagramme suivant : \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../uml/classes.png}\\
@@ -217,29 +217,29 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 				
 				On peut identifier quatre modules principaux : \\
 				\begin{itemize}
-					\item \textbf{Le module d'étalonnage} (Calibration et ViewCalibration). Ce module sert à tout ce qui touche à l'étalonnage de l'objet. Une fois qu'il est effectué, le module va appeller le module \textit{client} pour lui signaler que l'étalonnage est fait, et lui envoyer les informations qui correspondent (objet à suivre, type de track, dessin en local ou réseau, etc...)
+					\item \textbf{Le module d'étalonnage} (Calibration et ViewCalibration). Ce module sert à tout ce qui touche à l'étalonnage de l'objet. Une fois qu'il est effectué, le module va appeler le module \textit{client} pour lui signaler que l'étalonnage est fait, et lui envoyer les informations qui correspondent (objet à suivre, type de suivi, dessin en local ou réseau, etc...)
 					\item \textbf{Le module client} (Client). Ce module est le coeur de l'application, il a principalement deux rôles. Il va dans un premier temps construire toute l'interface graphique (tout ce qui est visuel) qui sera présentée à l'utilisateur. Ensuite, c'est ce module qui va assurer la communication entre tous les modules. Il est le seul intermédiaire entre les différents modules locaux.
 					\item \textbf{Le module de dessin} (DrawingBoard, LocalDrawingBoard et NetworkDrawingBoard). Ce module a également deux rôles. Il va s'occuper de toute la partie dessin (Stocke la couleur et taille du pinceau, dessine les points, lignes, etc...). Aussi, pour une utilisation en réseau, c'est lui qui va se charger de communiquer avec l'application serveur.
-					\item \textbf{Le module serveur} (Server, ServerGraphics). C'est ce module qui met en relation les différents client, et qui synchronise le dessin. Il recoit les ordres de dessin, les stocke, et les renvois à tous les autres clients.
+					\item \textbf{Le module serveur} (Server, ServerGraphics). C'est ce module qui met en relation les différents client, et qui synchronise le dessin. Il reçoit les ordres de dessin, les stocke, et les renvoie à tous les autres clients.
 				\end{itemize}
 				\ \\
 				La classe \textbf{WebcamManager} est la seule classe qui va communiquer avec le \textbf{matériel} (ici les webcams). Lorsque l'on veut une nouvelle image de la webcam, le module client va demander à WebcamManager la nouvelle image, et l'envoyer au module qui en a besoin. \\
-				La classe \textbf{WidgetWebcam}, elle, est la seule classe qui va communiquer avec la \textbf{librairie de suivi}. \\
+				La classe \textbf{WidgetWebcam}, elle, est la seule classe qui va communiquer avec la \textbf{bibliothèque de suivi}. \\
 				Les classes QGraphicsScene et Etat représentent respectivement le dessin et l'état actuel du pinceau. \\
 				Les classes PackageManager* servent à assembler et désassembler les paquets qui transitent sur le réseau.
 				
 				\paragraph{Scénario :} \ \\
 				Afin d'illustrer la modularité de notre application, on pourrait imaginer le scénario suivant :
 				\begin{itemize}
-					\item L'étalonnage s'effectu. Une fois terminé, le module d'étalonnage va prévenir le client, et lui donner les informations.
-					\item Chaque X millisecondes, le client va intérroger WebcamManager pour obtenir une nouvelle image.
-					\item Le client va envoyer cette image à WidgetWebcam pour obtenir la nouvelle position. (Grâce à la librairie de suivi)
+					\item L'étalonnage s'effectue. Une fois terminé, le module d'étalonnage va prévenir le client, et lui donner les informations.
+					\item Chaque X millisecondes, le client va interroger WebcamManager pour obtenir une nouvelle image.
+					\item Le client va envoyer cette image à WidgetWebcam pour obtenir la nouvelle position. (Grâce à la bibliothèque de suivi)
 					\item Le client va maintenant envoyer cette position à DrawingBoard qui va dessiner le nouveau point en fonction de la couleur la taille, etc...
 				\end{itemize}
 				On voit ici que chaque module rempli bien son rôle et assure le bon fonctionnement général de l'application.
 				
 				$$$$ \\
-				Une fois cette phase de réflexion terminée, toute l'architecture de la librairie, et de l'application était pensée et écrite. \\
+				Une fois cette phase de réflexion terminée, toute l'architecture de la bibliothèque, et de l'application était pensée et écrite. \\
 				Nous pouvions alors débuter la phase de réalisation, programmer et imbriquer les différents modules, et s'attaquer aux problèmes plus techniques.
 
 				
@@ -248,14 +248,14 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 		\section{Bibliothèque de suivi}
 			Cette partie du développement a pour objectif de fournir un ensemble de fonctionnalités permettant la reconnaissance et le suivi d'un objet, que nous appellerons "Curseur", à partir d'images. \\
 			L'objectif est de développer notre propre bibliothèque pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
-			Un certain nombre de librairies existantes proposent des solutions telles que des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointes dans le but de faire notre propre bibliothèque. \\	
+			Un certain nombre de bibliothèques existantes proposent des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointe dans le but de concevoir notre propre bibliothèque. \\	
 				\newpage
 				\subsubsection{Structure de données}
 				\subsubsection{Fonctions}
 			\subsection{}
 		\section{Application}
 	\paragraph{Application :\\}
-L'application doit exploiter le plus efficacement possible la librairie de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
+L'application doit exploiter le plus efficacement possible la bibliothèque de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
 Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
 	\chapter{Résultats}
 		\section{Client}
@@ -280,5 +280,5 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 	
 	\part{Annexes}
 	\appendix
-		\chapter{Documentation de la librairie}	
+		\chapter{Documentation de la bibliothèque}	
 \end{document}
