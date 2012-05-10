@@ -6,6 +6,8 @@
 \usepackage{ifpdf}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{color}
+\definecolor{orange}{rgb}{0.8, 0.4, 0.1}
 \renewcommand{\familydefault}{\sfdefault}
 
 \geometry{hmargin=50pt, vmargin=50pt}
@@ -45,7 +47,7 @@
 	\newpage
 	\chapter{Introduction}
 		\section{Présentation}		
-		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amenés à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
+		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amené à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
 
 		 L'objectif du projet issu de cette réflexion est donc de créer un \textbf{tableau virtuel}, avec lequel une ou plusieurs personnes peuvent interagir en réalisant directement des gestes comme sur une toile réelle, par \textbf{reconnaissance des mouvements} detectés par une \textbf{webcam}. \\
 		\begin{figure}[!h]
@@ -250,9 +252,23 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 			L'objectif est de développer notre propre \textbf{bibliothèque} pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
 			Un certain nombre de bibliothèques existantes proposent des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointe dans le but de concevoir notre propre bibliothèque. \\	
 				\newpage
-				\subsubsection{Structure de données}
-				\subsubsection{Fonctions}
-			\subsection{}
+				\subsection{Aspect général}
+				La structure générale de la bibliothèque est relativement simple à appréhender, ce qui permet une utilisation aisée sans connaissances particulières en traitement d'images.\\
+				\subsection{Détails techniques}
+					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
+						\paragraph{colorAverage} \paragraph{}
+						Détails sur la fonction de colorAverage.
+						\paragraph{mainColor} \paragraph{}
+						Détails sur la fonction de recherche de couleur principale.
+						\paragraph{shapeTrack} \paragraph{}
+						Détails sur la fonction de reconnaissance par modèle.
+					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
+						\paragraph{Binarisation} \paragraph{}
+							Détails sur la fonction de binarisation.
+						\paragraph{blobFounding} \paragraph{}
+						Détails sur la fonction de blobFounding.
+						\paragraph{setNewCoord} \paragraph{}
+						Détails sur la fonction de setNewCoord.
 		\section{Application}
 	\paragraph{Application :\\}
 L'application doit exploiter le plus efficacement possible la bibliothèque de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
@@ -260,9 +276,9 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 	\chapter{Résultats}
 		Dans cette section nous allons présenter le résultat tangible de ce projet, en mettant en lumière l'utilisation de la bibiothèque de suivi au travers de l'application de dessin.
 		\section{Client}
-			Comme dit précedemment, l'application est composée de deux grandes partie, la \textbf{calibration} et le \textbf{dessin}.
+			Comme dit précedemment, l'application est composée de deux grandes parties, la \textbf{calibration} et le \textbf{dessin}.
 			\subsection{Calibration}
-				La calibration est la première étape dans l'utlisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette section est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
+				La calibration est la première étape dans l'utilisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette section est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
 				\newpage
 				Le premier écran de l'application est l'interface de sélection de webcam et de méthode de suivi.\\
 				\begin{figure}[!h]
@@ -271,7 +287,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\caption{Choix webcam/type track}
 						\label{Choix webcam/type track}
 				\end{figure}\\
-				La première liste déroulante permet le choix de la webcam à utiliser pour la capture, La seconde permet la sélection de la méthode de track à utiliser parmis :
+				La première liste déroulante permet le choix de la webcam à utiliser pour la capture, la seconde la sélection de la méthode de track à parmi utiliser :
 				\begin{itemize}
 					\item Suivi par modèle
 					\item Suivi par couleur
