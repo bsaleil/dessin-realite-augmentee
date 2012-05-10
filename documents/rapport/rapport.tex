@@ -46,8 +46,8 @@
 	\chapter{Introduction}
 		\section{Présentation}		
 		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amenés à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
-		 L'objectif du projet issu de cette réflexion est donc de créer un tableau virtuel, avec lequel une ou plusieurs personnes peuvent interagir en réalisant directement des gestes comme sur une toile réelle, par reconnaissance des mouvements detectés par une webcam. \\
 
+		 L'objectif du projet issu de cette réflexion est donc de créer un \textbf{tableau virtuel}, avec lequel une ou plusieurs personnes peuvent interagir en réalisant directement des gestes comme sur une toile réelle, par \textbf{reconnaissance des mouvements} detectés par une \textbf{webcam}. \\
 		\begin{figure}[!h]
 			\centering
 			\includegraphics[scale=0.3]{../images/capture-intro.png}\\
@@ -64,7 +64,7 @@
 		Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui a donc eu le temps de murîr et d'être au niveau d'un TER.
-			\item Deuxièmement, notre groupe vient de deux formations distinctes : AIGLE, formation orientée génie Logiciel ; et IMAGINA, spécialisée dans le jeu vidéo et l'image. Ce projet représentait une manière opportune de lier ces deux spécialités
+			\item Deuxièmement, notre groupe vient de deux formations distinctes : \textbf{AIGLE}, formation orientée génie Logiciel ; et \textbf{IMAGINA}, spécialisée dans le jeu vidéo et l'image. Ce projet représentait une manière opportune de lier ces deux spécialités
 			\item Enfin, ce projet était pour nous une bonne occasion de réaliser une application fonctionnelle et distribuable, et par conséquent nous permettre d'explorer une autre facette du développement d'applications : la mise en production.
 
 		\end{itemize}	
@@ -246,8 +246,8 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 	
 	\chapter{Réalisation}
 		\section{Bibliothèque de suivi}
-			Cette partie du développement a pour objectif de fournir un ensemble de fonctionnalités permettant la reconnaissance et le suivi d'un objet, que nous appellerons "Curseur", à partir d'images. \\
-			L'objectif est de développer notre propre bibliothèque pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
+			Cette partie du développement a pour objectif de fournir un ensemble de fonctionnalités permettant la \textbf{reconnaissance} et le suivi d'un objet, que nous appellerons \textbf{Curseur}, à partir d'images. \\
+			L'objectif est de développer notre propre \textbf{bibliothèque} pour d'une part avoir un outil remplissant précisément nos objectifs et d'autre part de faire un travail de recherche et développement dans le domaine du traitement de l'image (en particulier le suivi d'objets). \\
 			Un certain nombre de bibliothèques existantes proposent des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointe dans le but de concevoir notre propre bibliothèque. \\	
 				\newpage
 				\subsubsection{Structure de données}
@@ -258,21 +258,34 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 L'application doit exploiter le plus efficacement possible la bibliothèque de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
 Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
 	\chapter{Résultats}
+		Dans cette section nous allons présenter le résultat tangible de ce projet, en mettant en lumière l'utilisation de la bibiothèque de suivi au travers de l'application de dessin.
 		\section{Client}
+			Comme dit précedemment, l'application est composée de deux grandes partie, la \textbf{calibration} et le \textbf{dessin}.
 			\subsection{Calibration}
+				La calibration est la première étape dans l'utlisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette section est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
+				\newpage
+				Le premier écran de l'application est l'interface de sélection de webcam et de méthode de suivi.\\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/Capture6.png}\\
 						\caption{Choix webcam/type track}
 						\label{Choix webcam/type track}
-				\end{figure}
+				\end{figure}\\
+				La première liste déroulante permet le choix de la webcam à utiliser pour la capture, La seconde permet la sélection de la méthode de track à utiliser parmis :
+				\begin{itemize}
+					\item Suivi par modèle
+					\item Suivi par couleur
+					\item Suivi par couleur + composantes connexes
+				\end{itemize}
 				\newpage
+				L'écran suivant permet quand à lui de sélectionner sur le retour image de la webcam l'objet à suivre, le curseur.\\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/Capture1.png}\\
 						\caption{Sélection du curseur}
 						\label{Sélection du curseur}
-				\end{figure}
+				\end{figure}\\
+				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.
 				\newpage
 				\begin{figure}[!h]
 						\centering
