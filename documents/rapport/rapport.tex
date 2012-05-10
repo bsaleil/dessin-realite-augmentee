@@ -47,7 +47,7 @@
 	\newpage
 	\chapter{Introduction}
 		\section{Présentation}		
-		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amené à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
+		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amenés à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
 
 		 L'objectif du projet issu de cette réflexion est donc de créer un \textbf{tableau virtuel}, avec lequel une ou plusieurs personnes peuvent interagir en réalisant directement des gestes comme sur une toile réelle, par \textbf{reconnaissance des mouvements} detectés par une \textbf{webcam}. \\
 		\begin{figure}[!h]
@@ -254,6 +254,16 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 				\newpage
 				\subsection{Aspect général}
 				La structure générale de la bibliothèque est relativement simple à appréhender, ce qui permet une utilisation aisée sans connaissances particulières en traitement d'images.\\
+				Comme expliqué dans la partie d'analyse, le fonctionnement de la bibliothèque de suivi repose sur l'utilisation d'une structure de données créée et manipulée respectivement par les deux fonctions d'étalonnage et de suivi. L'affinage de la recherche et le choix par l'utilisateur du type de suivi à réaliser passe par la manipulation d'une énumération, proposée par la bibliothèque. Aujourd'hui composée de 3 éléments correspondant chacun à un type de suivi particulier, cette énumération est amenée à s'agrandir avec l'ajout de nouvelles méthodes.
+				\subsubsection{\textcolor{blue}{Étalonnage}} \paragraph{}
+				Afin d'effectuer le suivi d'un objet (au sens large du terme) grâce à notre bibliothèque, il convient en premier lieu de faire appel à la fonction "calibration". Réalisant l'étalonnage, elle permet de créer et d'initialiser la struture de suivi, appelée "Cursor", contenant l'intégralité des informations qui vont permettre d'identifier l'objet et de réaliser sa localisation dans les images futures. C'est lors de cette étape que l'utilisateur doit préciser le type de suivi soubaité, par l'intermédiaire d'un simple paramètre.
+					\paragraph{Fonctionnement}\paragraph{}
+						Une fonction enveloppe à laquelle on fournit une première image modèle, la hitbox de la structure à suivre et la spécification du suivi à réaliser, grâce au type énuméré TYPE\_TRACK : \paragraph{}
+\begin{itshape}Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE\_TRACK flag) \end{itshape} \paragraph{}
+	Cette fontion, créant et initialisant la structure de suivi, n'est en réalité qu'une enveloppe faisant appel à une fonction différente selon le flag envoyé. Ces différences permettent de préparer la structure aux spécifités des fonctions de track et d'optimiser le suivi.
+				\subsubsection{\textcolor{orange}{Suivi d'un objet}} \paragraph{}
+				Une fois ces informations enregistrées, il est alors possible de faire appel autant de fois que nécessaire à la fonction "track" de suivi, afin mettre à jour la structure de données avec les modifications inhérantes au changement d'image.
+						\paragraph{Fonctionnement}\paragraph{}
 				\subsection{Détails techniques}
 					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
 						\paragraph{colorAverage} \paragraph{}
