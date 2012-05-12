@@ -294,10 +294,26 @@ L'application doit exploiter le plus efficacement possible la bibliothèque de r
 Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
 
 		\subsection{Interface graphique}
+			Nous avons fais le choix de découper notre interface graphique en deux parties. La première permet à l'utilisateur d'effectuer certaines actions à la souris, la seconde lui permet d'effectuer des actions de manière gestuelle. \\
+			Nous avons également choisi de créer une interface très intuitive, l'utilisateur ouvre l'application et sait tout de suite comment intéragir avec le programme, et quelles sont les fonctionnalités qui lui sont proposés. \\
+			Dans un premier temps, l'utilisateur est guidé par une interface de type précédent-suivant qui permet de bien l'assister pour configurer l'objet que le programme va suivre. Ensuite, l'utilisateur voit s'afficher l'application.
 			\subsubsection{Classique}
-				Le menu, boutons, dessin et webcam
+				L'interface que nous apellons "classique" désigne le genre d'interface que l'on retrouve dans toute sorte d'application bureautique. Avant de la développer, nous avons fait un schéma simple représentant une telle interface adaptée à notre programme : \\
+			\begin{figure}[!h]
+						\centering
+						\includegraphics[scale=0.4]{../images/interface.png}\\
+						\caption{Interface de dessin}
+						\label{Interface de dessin}
+			\end{figure}
+			
+			On peut voir sur la partie haute un menu tel qu'on en trouve dans tout type d'applications bureautique. Ce menu et divisé en deux catégories au nommage conventionnel (Fichier, Option). \\
+			Dans ce menu, les actions sont également familière pour l'utilisateur : Enregistrer, Quiter, ... \\
+			Toujours dans cet esprit d'intuitivité, nous avons assigné des raccourcis usuels à chacune de ces actions (Ctrl+S pour la sauvegarde, Ctrl+Q pour quitter, etc...)
+			
 			\subsubsection{Gestuelle}
-				Toute l'interface gestuelle
+				L'utilisateur qui est en train de dessiner n'a pas forcément envie de reprendre la souris pour pouvoir changer la couleur ou la taille de son pinceau. Nous avons donc imaginé une interface, toujours naturelle, qui permettrait à l'utilisateur de pouvoir agir sur son dessin directement par ses gestes. \\
+				Ainsi, l'utilisateur n'aurait qu'à reculer la main pour passer en mode "passif" et positionner l'objet sur les boutons de l'interface pour interagir avec l'application. \\
+				Le fait de ne pas proposer toutes les fonctionnalités depuis cette interface est un choix voulu. En effet, on imagine qu'il serait dommage que d'un seul geste rapide, l'utilisateur efface malencontreusement l'intégralité de son dessin. 
 		\subsection{Fonctionnalités}
 			\subsubsection{Actions}
 				Les actions : fullscreen, sauvegarde etc
