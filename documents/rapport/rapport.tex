@@ -320,8 +320,8 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		
 		\section{Client}
 			Comme dit précedemment, l'application est composée de deux grandes parties, la \textbf{calibration} et le \textbf{dessin}.
-			\subsection{Calibration}
-				La calibration est la première étape dans l'utilisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette section est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
+			\subsection{Etalonnage}
+				L'étalonnage est la première étape dans l'utilisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette partie est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
 				\newpage
 				Le premier écran de l'application est l'interface de sélection de webcam et de méthode de suivi.\\
 				\begin{figure}[!h]
@@ -364,14 +364,16 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\includegraphics[scale=0.4]{../images/Capture7.png}\\
 						\caption{Contrôle du modèle}
 						\label{Contrôle du modèle}
-				\end{figure}
-				\newpage
+				\end{figure}\\
+				Ce modèle est récupérer à partir de la boîte englobante dessinée à l'écran précédent.\\ \\
+				Enfin, le dernier écran de l'étalonnage permet de décider si la session de dessin se fera seule ou à plusieurs via réseau.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/capture_choix.png}\\
 						\caption{Sélecteur Local/Réseau}
 						\label{Sélecteur Local/Réseau}
-				\end{figure}
+				\end{figure}\\
+				Si le dessin se fait en réseau, il faut renseigner l'adresse et le port du serveur hébergeant la session.
 				\newpage
 			\subsection{Dessin}
 				\begin{figure}[!h]
