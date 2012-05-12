@@ -231,7 +231,7 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 				La classe \textbf{WidgetWebcam}, elle, est la seule classe qui va communiquer avec la \textbf{bibliothèque de suivi}. \\
 				Les classes QGraphicsScene et Etat représentent respectivement le dessin et l'état actuel du pinceau. \\
 				Les classes PackageManager* servent à assembler et désassembler les paquets qui transitent sur le réseau.
-				
+				\newpage
 				\paragraph{Scénario :} \ \\
 				Afin d'illustrer la modularité de notre application, on pourrait imaginer le scénario suivant :
 				\begin{itemize}
@@ -312,6 +312,8 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 					\item Suivi par couleur
 					\item Suivi par couleur + composantes connexes
 				\end{itemize}
+
+				Au niveau de la bibliothèque de suivi, ces listes servent à définir la sources des images servant au track, et à choisir le drapeau pour la fonction calibration.
 				\newpage
 				L'écran suivant permet quand à lui de sélectionner sur le retour image de la webcam l'objet à suivre, le curseur.\\
 				\begin{figure}[!h]
@@ -320,7 +322,8 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\caption{Sélection du curseur}
 						\label{Sélection du curseur}
 				\end{figure}\\
-				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.
+				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.\\
+				Cet écran sert à récuperer les coordonnées de la hit box nécessaire à l'isolement de l'objet pour le suivi par comparaison de modèle ou à l'extraction de la couleur et de l'aire de l'objet pour les suivis par couleur.
 				\newpage
 				\begin{figure}[!h]
 						\centering
