@@ -349,13 +349,16 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.\\
 				Cet écran sert à récuperer les coordonnées de la hit box nécessaire à l'isolement de l'objet pour le suivi par comparaison de modèle ou à l'extraction de la couleur et de l'aire de l'objet pour les suivis par couleur.
 				\newpage
+				Grâce à la précedente sélection, on affiche le masque binaire permettant de vérifier que l'objet à bien été reconnu. Les zones blanches sur l'image représente les parties reconnu par l'application, le but étant alors d'avoir une zone blanche sur le curseur.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/Capture2.png}\\
 						\caption{Réglage du seuil}
 						\label{Réglage du seuil}
-				\end{figure}
+				\end{figure}\\
+				La règlette permet de d'affiner le masque binaire en augmentant ou diminuant un seuil de tolérance sur la reconnaissance de couleur.
 				\newpage
+				Dans le cas du suivi par modèle, on affiche simplement le modèle qui sera utilisé pour le suivi.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/Capture7.png}\\
