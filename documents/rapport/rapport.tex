@@ -41,9 +41,10 @@
 	
 	\newpage
 	%TODO : grossir, centrer sur la page
-	\paragraph{Remerciements :}
+	Remerciements : \\
+	
 	Nous tenons à remercier tout particulièrement M. William Puech (enseignant chercheur au LIRMM à l'université Montpellier 2, responsable de la formation du Master informatique IMAGINA) sans qui ce projet n'aurait pas pu se faire, pour avoir accepter de nous encadrer, pour son aide et son implication.\\
-	Nous souhaitons aussi remercier M. Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au cours de ce projet.
+	Nous souhaitons aussi remercier M. Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au cours de ce projet. \\
 	\part{Rapport de projet}
 	\newpage
 	\chapter{Introduction}
@@ -291,8 +292,32 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 	\paragraph{Application :\\}
 L'application doit exploiter le plus efficacement possible la bibliothèque de reconnaissance. Nous voulons donc mettre en place un étalonnage de l'objet à suivre le plus précisément possible. Le projet doit ensuite être exploitable et utile, nous devons donc mettre en place un certain nombre d'outils tels que la possibilité de gommer, changer de forme, de couleur etc. 
 Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
+
+		\subsection{Interface graphique}
+			\subsubsection{Classique}
+				Le menu, boutons, dessin et webcam
+			\subsubsection{Gestuelle}
+				Toute l'interface gestuelle
+		\subsection{Fonctionnalités}
+			\subsubsection{Actions}
+				Les actions : fullscreen, sauvegarde etc
+			\subsubsection{Outils}
+				taille du pinceau couleur gomme
+		\subsection{Réseau}
+			\subsubsection{Protocole}
+				explication du protocole
+			\subsubsection{Architecture}
+				package manager
+		\subsection{Technique}
+			\subsubsection{Accès au matériel}
+			\subsubsection{Création de widgets}
+
 	\chapter{Résultats}
 		Dans cette section nous allons présenter le résultat tangible de ce projet, en mettant en lumière l'utilisation de la bibiothèque de suivi au travers de l'application de dessin.
+		
+		
+			
+		
 		\section{Client}
 			Comme dit précedemment, l'application est composée de deux grandes parties, la \textbf{calibration} et le \textbf{dessin}.
 			\subsection{Calibration}
