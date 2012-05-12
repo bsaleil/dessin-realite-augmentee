@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage{color}
 \definecolor{orange}{rgb}{0.8, 0.4, 0.1}
+\definecolor{vert}{rgb}{0.27, 0.57, 0.13}
 \renewcommand{\familydefault}{\sfdefault}
 
 \geometry{hmargin=50pt, vmargin=50pt}
@@ -77,15 +78,15 @@
 		\subsubsection{Faisabilité}
 		% TODO : expliquer si ça nous parait possible 
 		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.\\
-Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'incluera pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
-Nous nous sommes concentrés notamment sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposions d'aucun financement et n'avons donc utilisé que des outils gratuits. \\
+Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'inclue pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
+Nous nous sommes notamment concentrés sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposions d'aucun financement et n'avons donc utilisé que des outils gratuits. \\
 
 		\subsubsection{Existant}
 		La vision par ordinateur et particulièrement le suivi d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la bibliothèque OpenCV.\\
 			\begin{itemize}
 				% TODO : détailler un peu plus l'existant
 				\item Exemples dans le jeux vidéo : Kinect, Eye-toy, CamSpace (techniques pour l'IHM, par exemple, mouvements continus ou immobilité sur une zone).
-				\item Exemples issus de thèses et de projets de recherche (techniques de programmations).
+				\item Exemples issus de thèses et de projets de recherche (techniques de programmation).
 			\end{itemize}
 			\begin{figure}[!h]
 				\centering
@@ -255,23 +256,45 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 			Un certain nombre de bibliothèques existantes proposent des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointe dans le but de concevoir notre propre bibliothèque. \\	
 				\newpage
 				\subsection{Aspect général}
-				La structure générale de la bibliothèque est relativement simple à appréhender, ce qui permet une utilisation aisée sans connaissances particulières en traitement d'images.\\
-				Comme expliqué dans la partie d'analyse, le fonctionnement de la bibliothèque de suivi repose sur l'utilisation d'une structure de données créée et manipulée respectivement par les deux fonctions d'étalonnage et de suivi. L'affinage de la recherche et le choix par l'utilisateur du type de suivi à réaliser passe par la manipulation d'une énumération, proposée par la bibliothèque. Aujourd'hui composée de 3 éléments correspondant chacun à un type de suivi particulier, cette énumération est amenée à s'agrandir avec l'ajout de nouvelles méthodes.
-				\subsubsection{\textcolor{blue}{Étalonnage}} \paragraph{}
+				La structure générale de la bibliothèque est relativement simple à appréhender, ce qui permet une utilisation aisée sans connaissances particulières en traitement d'images. Comme expliqué dans la partie d'analyse, le fonctionnement de la bibliothèque de suivi repose sur l'utilisation d'une structure de données créée et manipulée respectivement par les deux fonctions \textcolor{blue}{d'étalonnage} et \textcolor{orange}{de suivi}.
+				\paragraph{} Notre biliothèque dispose de diverses méthodes de suivi pour enrichir l'offre disponible pour l'utilisateur. C'était évidemment aussi pour nous le moyen d'étudier différentes méthodes et de pouvoir les comparer. Il faut cependant ici faire la distinction entre le point de vue de l'utilisateur et celui du développeur. En effet, si certaines méthodes peuvent apparaitre différentes par leur utilisation ou l'expérience qu'elles procurent, elles peuvent être très proches techniquement. \\Ainsi, notre bibliothèque propose actuellement 3 types de suivi différents : par couleur simple, par composantes connexes et par modèle ; mais d'un point de vue technique, nous pouvons regrouper les deux premières car s'appuyant toutes deux sur une recherche par couleur, comme nous le verrons dans la partie fonctionnement.
+				
+				\begin{tabbing}
+				\=L'affinage de la \=recherche et le choix par l'utilisateur du type de suivi à réaliser passe par la manipulation d'une énumération,\\ \>proposée par la bibliothèque. Aujourd'hui composée de 3 éléments correspondant chacun à un type de suivi particulier, cette\\ \>énumération est amenée à s'agrandir avec l'ajout de nouvelles méthodes. \\
+				\>\>\begin{itshape}enum TYPE\_TRACK \{TRACK\_COLOR, TRACK\_SHAPE, TRACK\_BLOB\};\end{itshape}
+				\end{tabbing}
+				\quad 
+				\quad Il convient aussi de noter que l'utilisation de la biliothèque de suivi implique de fournir une image sous le format IplImage d'OpenCV, que nous avons utilisé.
+				
+				\subsubsection{\textcolor{blue}{A) Étalonnage}} \paragraph{}
 				Afin d'effectuer le suivi d'un objet (au sens large du terme) grâce à notre bibliothèque, il convient en premier lieu de faire appel à la fonction "calibration". Réalisant l'étalonnage, elle permet de créer et d'initialiser la struture de suivi, appelée "Cursor", contenant l'intégralité des informations qui vont permettre d'identifier l'objet et de réaliser sa localisation dans les images futures. C'est lors de cette étape que l'utilisateur doit préciser le type de suivi soubaité, par l'intermédiaire d'un simple paramètre.
-					\paragraph{Fonctionnement}
+					\paragraph{Utilisation}
 					\begin{tabbing}
 					\quad Du point de \=vue de l'utilisateur, une seule fonction permet de gérer la totalité de l'étalonnage, ce qui permet de simplifier\\ l'utilisation de notre bibliothèque : \\
 					\>\begin{itshape}Cursor * calibration(IplImage * source, CvPoint A, CvPoint B, TYPE\_TRACK flag);\end{itshape}
 					\end {tabbing}
-					\quad Cette fonction, créant et initialisant la structure de suivi, n'est en réalité qu'une enveloppe faisant appel à une fonction différente selon le flag envoyé. Ces différences permettent de préparer la structure aux spécifités des fonctions de track et d'optimiser le suivi.
-					\begin{tabbing}
-					\quad Il suffit donc \=de lui passer l'image où se trouve l'objet, 2 points pour définir ses contours et enfin un flag déterminant la\\ méthode à employer, parmi les objet de l'énumération suivante : \\
-\> \begin{itshape}enum TYPE\_TRACK \{TRACK\_COLOR, TRACK\_SHAPE, TRACK\_BLOB\};\end{itshape}
-					\end{tabbing}
-				\subsubsection{\textcolor{orange}{Suivi d'un objet}} \paragraph{}
-				Une fois ces informations enregistrées, il est alors possible de faire appel autant de fois que nécessaire à la fonction "track" de suivi, afin mettre à jour la structure de données avec les modifications inhérantes au changement d'image.
-						\paragraph{Fonctionnement}\paragraph{}
+					\quad Cette fonction, créant et initialisant la structure de suivi, n'est en réalité qu'une enveloppe faisant appel à une fonction différente selon le flag envoyé. Ces différences permettent de préparer la structure aux spécifités des fonctions de track et d'optimiser le suivi. Il suffit donc de lui passer l'image où se trouve l'objet, 2 points pour définir ses contours et enfin un flag déterminant la méthode à employer, à choisir parmi les objets de l'énumération.
+					\paragraph{Fonctionnement} \paragraph{}
+					Pour réaliser l'étalonnage, on commence par créer et initialiser la structure de suivi Cursor en utilisant les informations recueillies lors de l'appel de la fonction. C'est donc lors de cette étape que l'on fixe le type de suivi souhaité et que l'on détermine le masque correspondant à l'objet, son aire, son centre ou encore son seuil.\\
+					%\TODO 
+					On fait alors appel, en fonction du type de track, aux différentes sous-fonctions d'étalonnage. Celles-ci, plus complexes, utilisent des notions de traitement d'image que nous détaillerons dans la partie technique.\\
+					\begin{itemize}
+						\item{\textcolor{vert}{Couleur simple et composantes connexes} : }\\
+						Pour ces deux méthodes, on commence par transformer l'image source BGR (Blue Green Red) en HSV (Hue Saturation Value) afin de mieux traiter les problèmes d'éclairage et de saturation des couleurs. On fait ensuite appel une fonction mainColor afin de déterminer la couleur principale de l'objet à suivre. A noter qu'il serait ici possible d'utiliser une autre méthode pour déterminer la couleur à suivre, comme la couleur centrale de l'objet par exemple.
+						\\\item{\textcolor{magenta}{Forme} : }\\
+						On crée un masque contenant la sous-image que forme l'objet à suivre parmi le reste de l'image source.
+					\end{itemize}
+				\subsubsection{\textcolor{orange}{B) Suivi d'un objet}} \paragraph{}
+				Une fois ces informations enregistrées, il est alors possible de réaliser le suivi de notre objet au travers de nouvelles images. On fait ainsi appel autant de fois que nécessaire à la fonction "track" de suivi, afin mettre à jour la structure de données avec les modifications inhérantes au changement d'image, comme la nouvelle localisation de l'objet par exemple.
+						\paragraph{Fonctionnement}
+						\begin{tabbing}\quad De la même ma\=nière, cette fonction unique permet de simplifier l'utilisation de la bibliothèque : \\
+						\> \begin{itshape}int track(IplImage * source, Cursor * oldCursor)\end{itshape}
+						\end{tabbing}
+						\quad En effet, la fonction se charge de faire appel aux différentes méthodes nécessaires à la réalisation du suivi désiré de l'objet. Il suffit de lui fournir la structure de données contenant toutes les informations importantes, et le nouveau contexte avec une image. On peut noter que la fonction renvoie un entier permettant de s'assurer de son bon fonctionnement.
+											\begin{itemize}
+						\item{Couleur : }explications
+						\item{Forme : }explications
+					\end{itemize}
 				\subsection{Détails techniques}
 					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
 						\paragraph{colorAverage} \paragraph{}
