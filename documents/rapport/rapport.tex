@@ -302,30 +302,30 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 						\begin{itemize}
 							\item{\textcolor{vert}{Couleur}}\\
 							La première étape consiste à \textbf{binariser} l'image source en utilisant la valeur de seuillage portée par le Cursor, grâce à la méthode \textit{binarisation}. De cette manière, on obtient une image binaire où les points blancs correspondent aux pixels dont la couleur est proche de celle recherchée, et les noirs aux zones non pertinentes. Ensuite, l'idée est de calculer le \textbf{barycentre} des zones ainsi selectionnées comme pertinentes. C'est sur ce point que diffère les deux méthodes par couleur. La première calcule le barycentre sur la totalité de ces pixels blancs grâce à la méthode \textit{setNewCentroid}. La seconde va d'abord déterminer l'ensemble des composantes connexes de ces pixels puis effectuer le calcul du barycentre de la zone la plus importante, à priori la plus pertinente donc. Elle utilise pour cela la méthode \textit{blobFounding}.
-Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une compsante connexe étant donc un tel objet perçu sur l'image binaire.\\
+Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une composante connexe étant donc un tel objet perçu sur l'image binaire.\\
 							\item{\textcolor{marron}{Modèle}}\\
 							L'idée est de rechercher une \textbf{correspondance} forte entre le pattern de l'objet recherché et l'image source. Pour cela, on pose des calques de l'objet modèle à intervalle régulier sur l'image entrante, et on compare le taux de ressemblance afin d'évaluer la correspondance. C'est donc à l'endroit où ce taux sera le plus important que l'on pourra localiser notre objet. Il faut cependant penser à obtenir une valeur minimale pour ne pas réaliser de fausse détection. Tout cela est réalisé grâce à la fonction \textit{shapeTrack}.
 						\end{itemize}
 						\newpage
 				\subsection{Fonctionnement technique}
-					Voici le détail de fonctionnement de quelques fonctions clés de la bibliothèque, on peut ici distinguer deux types de fonctions, les fonctions d'étalonnage et celles de suivi.
+					Voici le détail de fonctionnement de quelques fonctions clés de la bibliothèque, on peut ici distinguer deux types de fonctions : les fonctions d'étalonnage et celles de suivi.
 					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
-						Pour l'utilisation des suivis par couleur, nous avons besoin d'avoir la couleur de l'objet à suivre, dans cet optique nous avons utiliser trois manières de l'extraire.
+						Pour l'utilisation des suivis par couleur, nous avons besoin d'avoir la couleur de l'objet à suivre. Dans cet optique nous avons utilisé trois manières de l'extraire.
 						\paragraph{pixel central} \paragraph{}
 						Détails sur la fonction de colorAverage.
 						\paragraph{colorAverage} \paragraph{}
 						Détails sur la fonction de colorAverage.
 						\paragraph{mainColor} \paragraph{}
 						Détails sur la fonction de recherche de couleur principale.
-						Une fois cette couleur extraite, nous pouvons l'utliser pour créer l'image binaire nécessaire au suivis par couleur.
+						Une fois cette couleur extraite, nous pouvons l'utiliser pour créer l'image binaire nécessaire au suivi par couleur.
 						\paragraph{Binarisation} \paragraph{}
 							Bien penser à parler des fermetures
 					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
 						\paragraph{setNewCoord} \paragraph{}
 						Détails sur la fonction de setNewCoord.
 						\paragraph{blobFounding} \paragraph{}
-						Le fonctionnement de cette fonction est assez similaire à celle de \textbf{setNewCoord} mais permet une détection beaucoup plus précise. On part ici aussi de l'image binaire engendrée par \textbf{Binarisation}, mais au lieu de calculer le barycentre de l'image, on va d'abord effectuer une  \textbf{recherche de composantes connexes} sur l'image. Une telle forme sur l'image binaire aura l'allure d'une tache blanche, le but étant d'\textbf{isoler} chacune de ces "tâches" de manière à pouvoir déterminer laquelle représente notre objet. Ensuite, on calcule le barycentre de cet objet, on obtient alors la nouvelle position de notre curseur.\\
-						L'avantage de cette fonction par rapport à la précedente est qu'elle permet d'\textbf{éliminer} les parasites n'ayant pas été effacés par la fermeture effectuée sur l'image binaire.
+						Le fonctionnement de cette fonction est assez similaire à celle de \textbf{setNewCoord} mais permet une détection beaucoup plus précise. On part ici aussi de l'image binaire engendrée par \textbf{Binarisation}, mais au lieu de calculer le barycentre de l'image, on va d'abord effectuer une  \textbf{recherche de composantes connexes} sur l'image. Une telle forme sur l'image binaire aura l'allure d'une tâche blanche, le but étant d'\textbf{isoler} chacune de ces "tâches" de manière à pouvoir déterminer laquelle représente notre objet. Ensuite, on calcule le barycentre de cet objet, on obtient alors la nouvelle position de notre curseur.\\
+						L'avantage de cette fonction par rapport à la précédente est qu'elle permet d'\textbf{éliminer} les parasites n'ayant pas été effacés par la fermeture effectuée sur l'image binaire.
 						\paragraph{shapeTrack} \paragraph{}
 						Détails sur la fonction de reconnaissance par modèle.
 						
@@ -335,8 +335,8 @@ L'application doit exploiter le plus efficacement possible la bibliothèque de r
 Un module réseau est aussi prévu pour une utilisation concurrente et synchronisée. Et bien sûr la fonctionnalité clé de l'application est le tableau virtuel, qui devra donc être exploitable et le dessin devra être fidèle aux mouvements reconnus.
 
 		\subsection{Interface graphique}
-			Nous avons fais le choix de découper notre interface graphique en deux parties. La première permet à l'utilisateur d'effectuer certaines actions à la souris, la seconde lui permet d'effectuer des actions de manière gestuelle. \\
-			Nous avons également choisi de créer une interface très intuitive, l'utilisateur ouvre l'application et sait tout de suite comment intéragir avec le programme, et quelles sont les fonctionnalités qui lui sont proposés. \\
+			Nous avons fait le choix de découper notre interface graphique en deux parties. La première permet à l'utilisateur d'effectuer certaines actions à la souris, la seconde lui permet d'effectuer des actions de manière gestuelle. \\
+			Nous avons également choisi de créer une interface très intuitive, l'utilisateur ouvre l'application et sait tout de suite comment interagir avec le programme, et quelles sont les fonctionnalités qui lui sont proposées. \\
 			Dans un premier temps, l'utilisateur est guidé par une interface de type précédent-suivant qui permet de bien l'assister pour configurer l'objet que le programme va suivre. Ensuite, l'utilisateur voit s'afficher l'application.
 			\subsubsection{Classique}
 				L'interface que nous apellons "classique" désigne le genre d'interface que l'on retrouve dans toute sorte d'application bureautique. Avant de la développer, nous avons fait un schéma simple représentant une telle interface adaptée à notre programme : \\
