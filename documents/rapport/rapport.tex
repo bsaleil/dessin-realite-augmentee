@@ -70,7 +70,7 @@
 		Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui a donc eu le temps de murîr et d'être au niveau d'un TER.
-			\item Deuxièmement, notre groupe vient de deux formations distinctes : \textbf{AIGLE}, formation orientée génie Logiciel ; et \textbf{IMAGINA}, spécialisée dans le jeu vidéo et l'image. Ce projet représentait une manière opportune de lier ces deux spécialités
+			\item Deuxièmement, notre groupe vient de deux formations distinctes : \textbf{AIGLE}, formation orientée génie logiciel ; et \textbf{IMAGINA}, spécialisée dans le jeu vidéo et l'image. Ce projet représentait une manière opportune de lier ces deux spécialités.
 			\item Enfin, ce projet était pour nous une bonne occasion de réaliser une application fonctionnelle et distribuable, et par conséquent nous permettre d'explorer une autre facette du développement d'applications : la mise en production.
 
 		\end{itemize}	
@@ -160,6 +160,18 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 						\caption{Cas d'utilisation dessin}
 						\label{Cas d'utilisation}
 				\end{figure}
+				
+				Ce cas d'utilisations présente rapidement les différentes fonctionnalités que nous voulions implémenter.
+				\begin{itemize}
+				\item Dessiner sur le tableau
+				\item Gommer
+				\item Choisir la couleur du pinceau
+				\item Choisir l'épaisseur du pinceau
+				\item Effacer complètement le tableau
+				\item Enregistrer le dessin
+				\end{itemize}
+				\ \\
+				Nous avions également envisagé de développer un outil permettant de revenir en arrière, nous ne l'avons pas fait dans la version finale. \\
 			\newpage
 			\subsection{Diagrammes de séquences}
 			Les diagrammes qui suivent expliquent le fonctionnement de l'application pour une utilisation locale, et une utilisation en réseau.
@@ -388,10 +400,10 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		\subsection{Réseau}
 			Pour faire fonctionner notre application en réseau, il nous fallait mettre en place une architecture et un protocole les plus robuste possible :
 			\subsubsection{Protocole}
-				Le client et le serveyr doivent échanger peu de données pour une meilleure rapidité, c'est pourquoi nous avons décidé de faire transiter seulement deux types de données : 
+				Le client et le serveur doivent échanger peu de données pour une meilleure rapidité, c'est pourquoi nous avons décidé de faire transiter seulement deux types de données : 
 				\begin{itemize}
-					\item \textbf{QGraphicsScene : } Cette classe est une classe de Qt. C'est un widget graphique qui permet d'afficher un dessin. Evidemment, cette classe représente pour nous le dessin de l'utilisateur. Cet objet transite sur le réseau lorsqu'un nouveau client arrive sur le serveur, le serveur lui envois le dessin dans son état actuel.
-					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transister uniquement des chaines de caractère pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau, et renvoit cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter, et mets à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaine de caractère.
+					\item \textbf{QPixmap : } Cette classe est une classe de Qt. C'est le coeur d'un widget graphique qui permet d'afficher un dessin. Evidemment, cette classe représente pour nous le dessin de l'utilisateur. Cet objet transite sur le réseau lorsqu'un nouveau client arrive sur le serveur, le serveur lui envoie le dessin dans son état actuel.
+					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transister uniquement des chaines de caractère pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau, et renvoit cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter, et mets à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaînes de caractères.
 					
 				\paragraph{Exemple de paquet}
 				
@@ -411,11 +423,17 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\end{itemize}
 				Le schéma reste le même quelque soit le message envoyé. Par exemple pour un dessin de point, on aurait "order:point:150:150:00FF44:15". \\
 				L'acteur qui recevra ce paquet dessinera simplement une ligne de couleur "00FF00" de taille "10" du point "x(100,100)" au point "y(200,200)". \\
-				Du fait de l'envois de chaine de caractères ainsi découpées, notre protocole reste très modulable, on peut facilement ajouter un élément à dessiner, ou ajouter un paramètre au pinceau.
+				Du fait de l'envoi de chaînes de caractères ainsi découpées, notre protocole reste très modulable, on peut facilement ajouter un élément à dessiner, ou ajouter un paramètre au pinceau. \\
+				Il y a également d'autres possibilités de messages échangés qui sont plus rarement utilisées : nous pouvons envoyer une sérialisation du tableau courant du serveur vers le client, pour ceci le premier champs du message sera \textbf{item} suivi de \textbf{pixmap} et ensuite de la sérialisation. \\
+				Nous utilisons également une autre commande lors d'une demande de vidage de scène d'un des clients, la paquet aura la forme \textit{order:flush} et n'aura pas de paramètres. \\
 				
 				\end{itemize}
 			\subsubsection{Architecture}
-				package manager
+				La classe \textbf{Package Manager} permets de gérer les paquets échangés, elle est présente sous une architecture proche côté client et côté serveur. \\
+				De chaque côté nous utilisons des sockets avec des abstractions offertes par Qt, le systèmes de slots et signaux permets de programmer facilement différentes fonctions qui seront appelées lors d'un message arrivant, de la déconnexion du pair etc.
+				Ces fonctions sont donc appellées lors d'un message entrant, ensuite elle effectue un premier découpage pour voir la première partie du message (un ordre ou un objet). \\ Ensuite le PackageManager est appellé de manière statique avec les objets dont il a besoin en paramètre selon l'ordre : par exemple le tableau si c'est un ordre de dessin. \\
+				Pour résumer l'architecture gère les connexions, et déconnexion du pair, la connexion effective, ainsi que la réception de message. \\
+				
 		\subsection{Technique}
 			\subsubsection{Accès au matériel}
 				Pour mener à bien ce projet, il nous fallait récupérer les images depuis la webcam, ou caméra. Etant donné le fait que notre librairie de suivi utilisait déjà la librairie openCV, nous l'avons encore utilisé pour accéder au matériel. \\
@@ -434,17 +452,15 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				$$$$ \\
 				\paragraph{Problème de format}
 				\ \\ \\
-				La classe WebcamManager utilise OpenCV pour lire les images depuis la webcam. Cette librairie embarque son propore format d'image, les IplImage. \\
+				La classe WebcamManager utilise OpenCV pour lire les images depuis la webcam. Cette librairie embarque son propre format d'image, les IplImage. \\
 				Notre application gère l'affichage de cette image dans l'interface graphique avec Qt, qui utilise aussi son propre format d'image, le QImage. \\
-				Après recherches sur internet, nous avons trouvé une fonction toute faite qui nous a permit de transformer une IplImage en QImage : "iplToQimage" (Disponible dans le code).
+				Après recherches sur internet, nous avons trouvé une fonction toute faite qui nous a permit de convertir une IplImage en QImage : "iplToQimage" (Disponible dans le code).
 				
 				
 			\subsubsection{Création de widgets}
 
 	\chapter{Résultats}
 		Dans cette section nous allons présenter le résultat tangible de ce projet, en mettant en lumière l'utilisation de la bibiothèque de suivi au travers de l'application de dessin.
-		
-		
 			
 		
 		\section{Client}
@@ -502,7 +518,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\end{figure}
 				\newpage
 				\paragraph{}
-				Enfin, le dernier écran de l'étalonnage permet de décider si la session de dessin se fera seule ou à plusieurs via réseau.
+				Enfin, le dernier écran de l'étalonnage permet de décider si la session de dessin est à un seul utilisateur (en local) ou à plusieurs via le mode réseau.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/capture_choix.png}\\
@@ -510,9 +526,14 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Sélecteur Local/Réseau}
 				\end{figure}
 				\paragraph{}
-				Si le dessin se fait en réseau, il faut renseigner l'adresse et le port du serveur hébergeant la session.
+				Si le dessin se fait en réseau, il faut renseigner l'adresse et le port du serveur hébergeant la session, c'est la seule différence par rapport au mode local du point de vue de l'interface.
 				\newpage
 			\subsection{Dessin}
+			L'interface de dessin est conçue pour être très simple et intuitive : l'écran à gauche représente l'état courant du dessin (le tableau donc), et à droite l'utilisateur peut voir un aperçu du flux vidéo en temps réel. \\
+			Le dessin est donc relativement facile et intuitif, on voit directement l'effet d'un mouvement de l'objet suivi. \\
+			Le menu en haut permets quant à lui de sélectionner différentes actions à la souris, tandis qu'une interface gestuelle permets d'effectuer les actions liées au dessin sans utiliser la souris. \\
+			L'interface gestuelle permets de choisir la gomme, les trois couleurs rouge, vert et bleu. Elle permets également de diminuer ou de grossir la taille du pinceau, et enfin offre un aperçu de la couleur courante. \\
+			Cette interface ne contient que des fonctionnalités très basiques pour des raisons exprimées précédemment. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/interface.png}\\
@@ -520,18 +541,23 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Interface de dessin}
 				\end{figure}
 				\newpage
+				Le sélecteur de couleur permets de choisir très précisément la couleur voulue. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/colorpicker.png}\\
 						\caption{Selecteur de couleur}
 						\label{Selecteur de couleur}
 				\end{figure}
+				
+				Le menu offre des fonctionnalités sur le dessin comme le nettoyage total du tableau, le passage en plein écran ou encore l'accès au sélecteur de couleurs. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/menu.png}\\
 						\caption{Menu}
 						\label{Menu}
 				\end{figure}
+				
+				La fenêtre d'exportation permets de sauvegarder à l'endroit voulue l'image provenant du tableau, me format de base utilisé est le PNG, le chemin d'enregistrement du fichier est par défaut dans le répertoire home/ sous LINUX. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/export.png}\\
@@ -540,12 +566,40 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\end{figure}
 				\newpage
 		\section{serveur}
-		%Julien, Baptiste : y'a t'il assez de choses a dire pour en faire une partie? TODO
-		
+		Le serveur ne possède pas d'interface graphique, les résultats présentés seront donc essentiellement textuels. \\
+		Son fonctionnement est simple, il se charge de stocker les clients, et de recevoir et traiter leur ordres.\\
+		En pratique cela est fait grâce à une classe \textbf{PackageManager} qui se charge de recevoir et découper les paquets des clients. Une fois le paquet découpé il est traité selon le schéma présenté plus haut. \\
+		Le serveur a donc essentiellement un but de synchronisation : il reçoit les paquets, s'assure que chaque client possède bien le même dessin, et partage les points dessinés avec tous les clients (y compris les nouveaux arrivants qui récupèrent toute le tableau directement). \\
 	
 	\chapter{Conclusion}
 		\section{Difficultés rencontrées}
+		Nous avons rencontrés des difficultés de plusieurs natures, pour commencer c'était un projet plutôt long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
+		De plus une grande partie des difficultés réside dans des problèmes techniques (de conception, ou de programmation). \\
+		
+		\paragraph{synchronisation}
+		Pour effectuer ce travail, nous devions nous retrouver régulièrement pour être parfaitement à jour des évolutions du projet, et pour se refixer des objectifs, pour savoir ou aller, et de plus pour avoir de la motivation et des buts concrets et atteignables. \\
+		Nous avons aussi mis en place plusieurs outils techniques pour nous permettre de mettre en commun tout le code et les documents : nous avons utilisé un gestionnaire de version, ainsi que des outils d'éditions collaborative. \\
+		Le fait d'avoir un groupe qui a déjà travaillé ensemble plusieurs fois sur des projets précédents nous a aussi aidé à etre rapidement efficace et à savoir quoi faire, c'est donc une difficulté que nous avons relativement bien surmonté. \\
+		
+		\paragraph{technique}
+		Nous avons également du nous former en parallèle au traitement de l'image par exemple, nous avons trouvé plusieurs documents qui nous présentaient les grands principes avec différentes méthodes pour suivre des objets etc. Pour la partie bibliothèque il y avait beaucoup de formation, mais le TER coincidait avec une UE traitement de l'image pour les IMAGINA, ce qui a aussi aidé. \\
+		Une autre difficulté résidait dans la conception globale, pour avoir une architecture solide et avoir une application aboutie nous avons passé du temps à penser le projet pour pouvoir avancer vite par la suite. \\ C'est une partie où nous nous en sommes plûtot bien sorti, malgré le module réseau qui souffre encore de lenteurs et qui devrait donc être optimisé. \\
+		
+		Pour des problèmes plus concrets, nous avons également eu des difficultés liés à la gestion de la mémoire, la librairie OpenCV fournit des fonctions à allocations implicite, avec une gestion de la mémoire très particulière et une documentation assez légère. Nous nous sommes donc heurtés dans plusieurs phases du projet à repenser localement l'architecture pour éviter d'avoir trop de création d'objet et d'image qui n'étaient pas libérées. \\
+		
 		\section{Perspectives}
+		Les persepctives peuvent se découper en deux parties qui seraient l'amélioration de l'existant et des fonctionnalités que nous n'avons pas pu faire, ou même auxquelles nous n'avions pas pensé avant un stade avancé du projet. \\
+		
+		\paragraph{Optimisations}
+		Pour la partie bibliothèque il faudrait implémenter la détection d'action lors d'un suivi par forme. \\
+		De manière générale il faudrait aussi réduire encore la dépendance vis à vis de l'environnement. \\
+		Côté application le principal problème réside dans les lenteurs du mode réseau, une solution serait peut être d'échanger moins de points, ou encore de faire des systèmes de mémoire tampons pour avoir un nombre d'envoi plus réduit. \\
+		
+		Pour le projet global, les performances sont assez bonnes, mais nous pourrions aussi essayer de les améliorer encore pour plus de rapidité. \\ 
+		
+		\paragraph{Nouvelles fonctionnalités}
+		Une fonctionnalité intéressante serait de suivre plusieurs objets en même temps, pour dessiner avec plusieurs curseurs et également d'avoir d'autres actions détectées. Lors de la soutenance un membre du jury parlait d'un système permettant de zommer avec deux curseurs, à la manière du zoom sur les téléphones et tablettes avec deux doigts. \\
+Ces deux fonctionnalités sont intéressantes et pourraient être ajoutées sans changements de la bibliothèque. \\		
 		\section{Conclusion}
 	
 	\chapter{Références}
