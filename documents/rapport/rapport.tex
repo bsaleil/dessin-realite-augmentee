@@ -308,7 +308,7 @@ Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une comp
 						\end{itemize}
 						\newpage
 				\subsection{Fonctionnement technique}
-					Voici le détail de fonctionnement de quelques fonctions clés de la bibliothèque, on peut ici distinguer deux types de fonctions : les fonctions d'étalonnage et celles de suivi.
+					Voici le détail de fonctionnement de quelques fonctions clés de la bibliothèque, on peut ici distinguer deux types de fonctions : les fonctions d'\textcolor{blue}{étalonnage} et celles de \textcolor{orange}{suivi}.
 					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
 						Pour l'utilisation des suivis par couleur, nous avons besoin d'avoir la couleur de l'objet à suivre. Dans cet optique nous avons utilisé trois manières de l'extraire.
 						\paragraph{pixel central} \paragraph{}
@@ -324,6 +324,7 @@ Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une comp
 							Une fois cette couleur extraite, nous pouvons l'utiliser pour créer l'\textbf{image binaire} nécessaire au suivi par couleur. Cette image est une image en noir et blanc, ou le blanc représente les zones de la couleur extraite avec les fonctions précedentes. Ces zones blanches nous permettrons ensuite de calculer la position de notre objet, par l'utilisation de methode interpretant ce type d'images.\\
 							Le principe de cette fonction est donc assez simple, on construit une nouvelle image, de la même taille que l'image source, puis pour chaque pixels, si sa couleur est assez proche de celle determinée précedement, on colore le pixel de la nouvelle en blanc, sinon en noir. La notion de "assez proche de la couleur" est parametrée par une variable de tolérance, \textbf{threshold}, pouvant être réglée par le biais de la structure Cursor.\\
 							Enfin, avant de retourner cette nouvelle image, on applique sur cette image une série de \textbf{fermeture}. Le principe de la fermeture est d'appliquer une \textbf{\textcolor{blue}{érosion}} puis une \textbf{\textcolor{red}{dilatation}} des formes blanches obtenues. L'interêt de cet action est d'éliminer les éventuells pixels blancs solitaires sur l'image, de manière à diminuer au maximum les parasites sur l'image qui viendrai fausser les opérations à venir.
+					\newpage
 					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
 						\paragraph{setNewCoord} \paragraph{}
 						Détails sur la fonction de setNewCoord.
