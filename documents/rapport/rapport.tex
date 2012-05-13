@@ -312,14 +312,18 @@ Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une comp
 					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
 						Pour l'utilisation des suivis par couleur, nous avons besoin d'avoir la couleur de l'objet à suivre. Dans cet optique nous avons utilisé trois manières de l'extraire.
 						\paragraph{pixel central} \paragraph{}
-						Détails sur la fonction de colorAverage.
+						Cette méthode est la première que nous avons utilisés, elle prend simplement la couleur du pixel au centre de l'objet suivi. Cette méthode fonctionne assez bien avec les objets ayants de grandes aires colorés avec peu de changement de saturation, ce qui n'est pas suffisant dans le cadre de notre projet.
 						\paragraph{colorAverage} \paragraph{}
-						Détails sur la fonction de colorAverage.
+						colorAverage est plus élaborée que la méthode précedente. En effet, elle calcule la couleur moyenne dans une boîte englobante autour de l'objet, ceci permet donc d'avoir une couleur plus précise. Celle-ci fonction alors sur les objets unicolores mais est moins sensible au changement de valeur des couleurs de l'image. Par contre, cette fonction ne fonctionne absolument pas avec les objets multicolores, la moyenne de couleur n'ayant pas de sens sur ceux-ci.
 						\paragraph{mainColor} \paragraph{}
-						Détails sur la fonction de recherche de couleur principale.
-						Une fois cette couleur extraite, nous pouvons l'utiliser pour créer l'image binaire nécessaire au suivi par couleur.
+						mainColor est donc la dernière fonction d'extration de couleur que nous avons dévéloppé. Celle-ci fonctionne sur les objets multicolores (Ayant tout de même de grandes aires unicolore) et est aussi peu sensible au changement de valeurs.\\
+						Elle se déroule en deux étapes, la recherche de la couleur dominante, puis la moyenne des couleurs autour de celle-ci.
+
+						
 						\paragraph{Binarisation} \paragraph{}
-							Bien penser à parler des fermetures
+							Une fois cette couleur extraite, nous pouvons l'utiliser pour créer l'\textbf{image binaire} nécessaire au suivi par couleur. Cette image est une image en noir et blanc, ou le blanc représente les zones de la couleur extraite avec les fonctions précedentes. Ces zones blanches nous permettrons ensuite de calculer la position de notre objet, par l'utilisation de methode interpretant ce type d'images.\\
+							Le principe de cette fonction est donc assez simple, on construit une nouvelle image, de la même taille que l'image source, puis pour chaque pixels, si sa couleur est assez proche de celle determinée précedement, on colore le pixel de la nouvelle en blanc, sinon en noir. La notion de "assez proche de la couleur" est parametrée par une variable de tolérance, \textbf{threshold}, pouvant être réglée par le biais de la structure Cursor.\\
+							Enfin, avant de retourner cette nouvelle image, on applique sur cette image une série de fermeture. Le principe de la fermeture est d'appliquer une érosion puis une dilatation des formes blanches obtenues. L'interêt de cet action est d'éliminer les éventuells pixels blancs solitaires sur l'image, de manière à diminuer au maximum les parasites sur l'image qui viendrai fausser les opérations à venir.
 					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
 						\paragraph{setNewCoord} \paragraph{}
 						Détails sur la fonction de setNewCoord.
