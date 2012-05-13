@@ -380,56 +380,64 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 			\subsection{Etalonnage}
 				L'étalonnage est la première étape dans l'utilisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette partie est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
 				\newpage
+				\paragraph{}
 				Le premier écran de l'application est l'interface de sélection de webcam et de méthode de suivi.\\
 				\begin{figure}[!h]
 						\centering
-						\includegraphics[scale=0.38]{../images/Capture6.png}\\
+						\includegraphics[scale=0.35]{../images/Capture6.png}\\
 						\caption{Choix webcam/type track}
 						\label{Choix webcam/type track}
-				\end{figure}\\
+				\end{figure}
+				\paragraph{}
 				La première liste déroulante permet le choix de la webcam à utiliser pour la capture, la seconde la sélection de la méthode de track à parmi utiliser :
 				\begin{itemize}
 					\item Suivi par modèle
 					\item Suivi par couleur
 					\item Suivi par couleur + composantes connexes
 				\end{itemize}
-
+				\paragraph{}
 				Au niveau de la bibliothèque de suivi, ces listes servent à définir la sources des images servant au track, et à choisir le drapeau pour la fonction calibration.
 				\newpage
+				\paragraph{}
 				L'écran suivant permet quand à lui de sélectionner sur le retour image de la webcam l'objet à suivre, le curseur.\\
 				\begin{figure}[!h]
 						\centering
-						\includegraphics[scale=0.38]{../images/Capture1.png}\\
+						\includegraphics[scale=0.35]{../images/Capture1.png}\\
 						\caption{Sélection du curseur}
 						\label{Sélection du curseur}
-				\end{figure}\\
-				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.\\
+				\end{figure}
+				\paragraph{}
+				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.
 				Cet écran sert à récuperer les coordonnées de la hit box nécessaire à l'isolement de l'objet pour le suivi par comparaison de modèle ou à l'extraction de la couleur et de l'aire de l'objet pour les suivis par couleur.
 				\newpage
+				\paragraph{}
 				Grâce à la précedente sélection, on affiche le masque binaire permettant de vérifier que l'objet à bien été reconnu. Les zones blanches sur l'image représente les parties reconnu par l'application, le but étant alors d'avoir une zone blanche sur le curseur.
 				\begin{figure}[!h]
 						\centering
-						\includegraphics[scale=0.38]{../images/Capture2.png}\\
+						\includegraphics[scale=0.35]{../images/Capture2.png}\\
 						\caption{Réglage du seuil}
 						\label{Réglage du seuil}
-				\end{figure}\\
-				La règlette permet de d'affiner le masque binaire en augmentant ou diminuant un seuil de tolérance sur la reconnaissance de couleur. \\
-				
+				\end{figure}
+				\paragraph{}
+				La règlette permet de d'affiner le masque binaire en augmentant ou diminuant un seuil de tolérance sur la reconnaissance de couleur.
+				\paragraph{}
 				Dans le cas du suivi par modèle, on affiche simplement le modèle qui sera utilisé pour le suivi.
 				\begin{figure}[!h]
 						\centering
-						\includegraphics[scale=0.38]{../images/Capture7.png}\\
+						\includegraphics[scale=0.35]{../images/Capture7.png}\\
 						\caption{Contrôle du modèle}
 						\label{Contrôle du modèle}
-				\end{figure}\\
+				\end{figure}
 				\newpage
+				\paragraph{}
 				Enfin, le dernier écran de l'étalonnage permet de décider si la session de dessin se fera seule ou à plusieurs via réseau.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/capture_choix.png}\\
 						\caption{Sélecteur Local/Réseau}
 						\label{Sélecteur Local/Réseau}
-				\end{figure}\\
+				\end{figure}
+				\paragraph{}
 				Si le dessin se fait en réseau, il faut renseigner l'adresse et le port du serveur hébergeant la session.
 				\newpage
 			\subsection{Dessin}
