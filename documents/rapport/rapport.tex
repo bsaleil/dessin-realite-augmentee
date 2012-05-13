@@ -312,12 +312,13 @@ Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une comp
 					\subsubsection{\textcolor{blue}{Fonctions d'étalonnage}}
 						Pour l'utilisation des suivis par couleur, nous avons besoin d'avoir la couleur de l'objet à suivre. Dans cet optique nous avons utilisé trois manières de l'extraire.
 						\paragraph{pixel central} \paragraph{}
-						Cette méthode est la première que nous avons utilisés, elle prend simplement la couleur du pixel au centre de l'objet suivi. Cette méthode fonctionne assez bien avec les objets ayants de grandes aires colorés avec peu de changement de saturation, ce qui n'est pas suffisant dans le cadre de notre projet.
+						Cette méthode est la première que nous avons utilisés, elle prend simplement la couleur du pixel au \textbf{centre} de l'objet suivi. Cette méthode fonctionne assez bien avec les objets ayants de grandes aires colorés avec peu de changement de saturation, ce qui n'est pas suffisant dans le cadre de notre projet.
 						\paragraph{colorAverage} \paragraph{}
-						colorAverage est plus élaborée que la méthode précedente. En effet, elle calcule la couleur moyenne dans une boîte englobante autour de l'objet, ceci permet donc d'avoir une couleur plus précise. Celle-ci fonction alors sur les objets unicolores mais est moins sensible au changement de valeur des couleurs de l'image. Par contre, cette fonction ne fonctionne absolument pas avec les objets multicolores, la moyenne de couleur n'ayant pas de sens sur ceux-ci.
+						colorAverage est plus élaborée que la méthode précedente. En effet, elle calcule la couleur \textbf{moyenne} dans une boîte englobante autour de l'objet, ceci permet donc d'avoir une couleur plus précise. Celle-ci fonction alors sur les objets unicolores mais est moins sensible au changement de valeur des couleurs de l'image. Par contre, cette fonction ne fonctionne absolument pas avec les objets multicolores, la moyenne de couleur n'ayant pas de sens sur ceux-ci.
 						\paragraph{mainColor} \paragraph{}
 						mainColor est donc la dernière fonction d'extration de couleur que nous avons dévéloppé. Celle-ci fonctionne sur les objets multicolores (Ayant tout de même de grandes aires unicolore) et est aussi peu sensible au changement de valeurs.\\
-						Elle se déroule en deux étapes, la recherche de la couleur dominante, puis la moyenne des couleurs autour de celle-ci.
+						Elle se déroule en deux étapes, la recherche de la couleur dominante, puis la moyenne des couleurs proche de celle-ci. \\Tout d'abord, on construit l'\textbf{histogramme} des couleurs dans la sous-image, par tranche de 10 degrés, puis on extrait de celui-ci la tranche la plus représentée.\\
+Ensuite, on parcours une nouvelle fois la sous-image, en faisant la \textbf{moyenne} des H, S et V des pixels appartant à la tranche de couleur prédominante.
 
 						
 						\paragraph{Binarisation} \paragraph{}
@@ -327,12 +328,14 @@ Pour rappel, une forme est connexe si elle est faite d'un seul morceau, une comp
 					\newpage
 					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
 						\paragraph{setNewCoord} \paragraph{}
-						Détails sur la fonction de setNewCoord.
+						Le fonctionement de cette méthode plutôt simple, on parcourt l'\textbf{image binaire} issu de la binarisation en faisant la somme des positions en X et en Y des pixels blanc. Par division de ces sommes par le nombre de pixels présents sur l'image, on obtient le barycentre du blanc sur celle-ci. La précision de cette position est variable en fonction de la qualité de l'image binaire, si il y a beaucoup de parasites, la position sera faussée.\\
+						D'autres part, en comparant le nombre de pixels blancs sur l'image avec le nombre de pixels blancs à l'étalonnage, on peut déduire si l'objet à été approché du tableau, en fonction de cela, on peut affecter l'état du curseur, actif ou non.
 						\paragraph{blobFounding} \paragraph{}
-						Le fonctionnement de cette fonction est assez similaire à celle de \textbf{setNewCoord} mais permet une détection beaucoup plus précise. On part ici aussi de l'image binaire engendrée par \textbf{Binarisation}, mais au lieu de calculer le barycentre de l'image, on va d'abord effectuer une  \textbf{recherche de composantes connexes} sur l'image. Une telle forme sur l'image binaire aura l'allure d'une tâche blanche, le but étant d'\textbf{isoler} chacune de ces "tâches" de manière à pouvoir déterminer laquelle représente notre objet. Ensuite, on calcule le barycentre de cet objet, on obtient alors la nouvelle position de notre curseur.\\
+						Le fonctionnement de cette fonction est assez similaire à celle de \textbf{setNewCoord} mais permet une détection beaucoup plus précise. On part ici aussi de l'image binaire engendrée par \textbf{Binarisation}, mais au lieu de calculer le barycentre de l'image, on va d'abord effectuer une  \textbf{recherche de composantes connexes} sur l'image. Une telle forme sur l'image binaire aura l'allure d'une tâche blanche, le but étant d'\textbf{isoler} chacune de ces "tâches" de manière à pouvoir déterminer laquelle représente notre objet. Ensuite, on calcule le barycentre de cet objet, on obtient alors la nouvelle position de notre curseur. D'autre part, on compare l'aire de l'objet avec son aire au "repos" (son aire à l'étalonnage), si celle-ci à suffisaement augmentée, en déduit que l'objet à été approché de la toile, et que donc, le curseur est à l'\textbf{état actif}\\
 						L'avantage de cette fonction par rapport à la précédente est qu'elle permet d'\textbf{éliminer} les parasites n'ayant pas été effacés par la fermeture effectuée sur l'image binaire.
 						\paragraph{shapeTrack} \paragraph{}
-						Détails sur la fonction de reconnaissance par modèle.
+						Cette dernière méthode utilise la comparaison de modèle. Le principe est assez simple, on dispose d'une image, ou \textbf{scène}, et d'une deuxième image, le \textbf{modèle}. A partir de ceci, la fonction va essayer de placer le modèle partout sur la scène. On récupère en sortie une image en niveau de gris, la \textbf{matrice probabiliste}. Cette image est dans les même proportions que la scène, sur cette image, chaque pixel ou case, possède une valeur entre 0 et 255. Plus un pixel est proche de 255, ou blanc, plus cela veut dire que les chances que le modèle se trouve à cet endroit de la scène est grand. Une deuxième fonction permet alors, après une remise à l'echelle, d'extraire de cette matrice la position la plus probable du modèle.
+\newpage
 						
 		\section{Application}
 	\paragraph{Application :\\}
