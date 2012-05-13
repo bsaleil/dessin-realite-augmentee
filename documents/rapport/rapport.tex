@@ -16,7 +16,6 @@
 
 \title{Rapport de projet : Tableau virtuel interactif}
 \author{Baptiste Saleil \and Geoffrey Mélia \and Julien Pagès \and Kevin Bollini}
-%faudrai mettre une page/paraph qq part, pour marquer nos formations, que ca vienne pas comme un cheveux ds la soupe au milieu du rapport
 \date{\today}
 \ifpdf
 	\pdfinfo 
@@ -45,7 +44,7 @@
 	%TODO : grossir, centrer sur la page
 	Remerciements : \\
 	
-	Nous tenons à remercier tout particulièrement M. William Puech (enseignant chercheur au LIRMM à l'université Montpellier 2, responsable de la formation du Master informatique IMAGINA) sans qui ce projet n'aurait pas pu se faire, pour avoir accepter de nous encadrer, pour son aide et son implication.\\
+	Nous tenons à remercier tout particulièrement M. William Puech (enseignant chercheur au LIRMM à l'université Montpellier 2, responsable de la formation du Master informatique IMAGINA) sans qui ce projet n'aurait pas pu se faire, pour avoir accepté de nous encadrer, pour son aide et son implication.\\
 	Nous souhaitons aussi remercier M. Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au cours de ce projet. \\
 	\part{Rapport de projet}
 	\newpage
@@ -64,9 +63,9 @@
 		\section{Contexte}
 		% TODO
 		Ce projet est réalisé dans le cadre des TER (Travaux d'Étude et de Recherche) de 1ère année de Master informatique à L'Université Montpellier 2. \\
-		Le TER est un projet qui se déroule sur un semestre, généralement choisi par les étudiants parmi une liste de projets qui leurs sont proposés. \\Ce genre de projet apporte beaucoup aux étudiants. Il leur permet d'une part de travailler une longue période sur un seul et même sujet afin d'obtenir quelque chose de complet, d'abouti. \\D'autre part, le TER (comme son nom l'indique) apporte une bonne expérience dans le domaine de la recherche. En effet, un travail préalable doit être effectué sur l'existant (Est-ce que d'autres projets de ce genre existent? Si oui qu'ont-ils de différent?,...), mais également la faisabilité (Est-ce possible à faire? Quels algorithmes existent pour répondre à tel ou tel besoin?, ...). \\
+		Le TER est un projet qui se déroule sur un semestre, généralement choisi par les étudiants parmi une liste de projets qui leurs sont proposés. \\Ce genre de projet apporte beaucoup aux étudiants. Il leur permet d'une part de travailler une longue période sur un seul et même sujet afin d'obtenir quelque chose de complet, d'abouti. \\D'autre part, le TER (comme son nom l'indique) apporte une bonne expérience dans le domaine de la recherche. En effet, un travail préalable doit être effectué sur l'existant (Est-ce que d'autres projets de ce genre existent? Si oui qu'ont-ils de différent?, etc.), mais également sur la faisabilité (Est-ce possible à faire? Quels algorithmes existent pour répondre à tel ou tel besoin?, etc.). \\
 		$$$$ \\
-		La particularité de ce projet réside dans le fait que nous avons nous-même proposé ce sujet à un enseignant-chercheur.\\
+		La particularité de ce projet réside dans le fait que l'avons nous-même proposé à un enseignant-chercheur.\\
 		Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui a donc eu le temps de murîr et d'être au niveau d'un TER.
@@ -126,7 +125,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 				\end{figure}
 		\newpage
 		\section{Outils utilisés}
-		Durant la période de recherche et au cours du projet nous avons utilisé différent outils (au sens large) pour nous aider dans la réalisation. Nous les détaillons ici dans cette section. \\
+		Durant la période de recherche et au cours du projet nous avons utilisé différent outils pour nous aider dans la réalisation. Nous les présentons dans cette section. \\
 		
 			\subsubsection{Outils collaboratifs}
 			\paragraph{}
@@ -137,7 +136,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 			Gobby :
 			Logiciel libre pour l'édition collaborative, qui permet de développer à distance sur le même document simultanément. \\
 
-			\paragraph{} Bien sûr ces outils ne sont pas suffisants, nous avons donc fait des réunions régulières pour organiser le travail et décider des orientations. Par ailleurs, nous avons beaucoup échangé pour que tout le monde soit toujours au courant des différentes informations importantes.
+			\paragraph{} Bien sûr ces outils ne sont pas suffisants, nous avons donc fait des réunions régulières pour organiser le travail et décider des orientations du projet. Par ailleurs, nous avons beaucoup échangé pour que tout le monde soit toujours au courant des différentes informations importantes.
 			
 			\subsubsection{Outils techniques}
 			\subsubsection{Langages :}
@@ -175,6 +174,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 			\newpage
 			\subsection{Diagrammes de séquences}
 			Les diagrammes qui suivent expliquent le fonctionnement de l'application pour une utilisation locale, et une utilisation en réseau.
+			\subsubsection{Fonctionnement en local}
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../images/sequence_local.png}\\
@@ -185,9 +185,10 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet.
 
 				\newpage
+				\subsubsection{Fonctionnement en réseau}
 				\begin{figure}[!h]
 						\centering
-						\includegraphics[scale=0.6]{../images/sequence_reseau.png}\\
+						\includegraphics[scale=0.62]{../images/sequence_reseau.png}\\
 						\caption{Diagramme de séquence réseau}
 						\label{Diagramme de séquence réseau}
 				\end{figure}
@@ -207,9 +208,9 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 
 			\newpage
 			\subsection{Diagrammes de classes}
-				La bibliothèque fonctionne grâce à une structure de données utilisée par deux fonctions enveloppes. \\
-				Le curseur est représenté en mémoire sous la forme d'une strucure de données "Cursor". \\
-				Cette structure de données est engendrée par la fonction "calibration" de la bibliothèque. Elle est ensuite utilisée par la fonction "track", qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
+				La bibliothèque fonctionne grâce à la manipulation d'un curseur qui correspondant en fait au curseur physique réel de l'utilisateur.\\
+				Le curseur est représenté en mémoire sous la forme d'une strucure de données \textbf{\textit{Cursor}}. On utilise donc des informations telles que la taille de ce surseur, sa position ou encore sa couleur.\\
+				Cette structure de données est engendrée par la fonction \textit{calibration} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{track}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.8]{../images/libtrack-uml.png}\\
@@ -225,7 +226,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 
 				\newpage			
 				Le diagramme qui suit vous présente l'architecture de notre application. \\
-Avant de commencer l'application, nous avons décidé de passer un long moment sur la réflexion pour avoir une architecture solide et modulable.\\Nous avons dans un premier temps identifié les différents modules dont serait composée notre application et quel était précisément le ou les rôles de chacun. \\Ensuite, nous avons réfléchi à quel était le meilleur moyen pour que ces différents modules puissent communiquer en évitant toute redondance ou communication superflue. \\Une fois cette réflexion faite, nous avons dessiné le diagramme suivant : \\
+Avant de commencer l'application, nous avons décidé de passer un long moment sur la réflexion pour avoir une architecture solide et modulable.\\Nous avons dans un premier temps identifié les différents modules dont serait composée notre application et quels étaient précisément le ou les rôles de chacun. \\Ensuite, nous avons réfléchi à quel était le meilleur moyen pour que ces différents modules puissent communiquer en évitant toute redondance ou communication superflue. \\Une fois cette réflexion faite, nous avons dessiné le diagramme suivant : \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../uml/classes.png}\\
@@ -269,7 +270,7 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 			Un certain nombre de bibliothèques existantes proposent des outils de reconnaissance de formes, de suivis de modèle ou d'évaluation de composantes connexes. Le travail consiste donc à tirer partie de ces bibliothèques en les associant de manière à proposer des méthodes efficaces et simples à utiliser. Cela implique une bonne connaissance des outils existants, de leur compréhension et de leur utilisation conjointe dans le but de concevoir notre propre bibliothèque.
 			\newpage
 				\subsection{Aspect général}
-				La structure générale de la bibliothèque est relativement \textbf{simple} à appréhender, ce qui permet une utilisation aisée sans connaissances particulières en traitement d'images. Comme expliqué dans la partie d'analyse, le fonctionnement de la bibliothèque de suivi repose sur l'utilisation d'une structure de données créée et manipulée respectivement par les deux fonctions \textcolor{blue}{d'étalonnage} et \textcolor{orange}{de suivi}.
+				La structure générale de la bibliothèque est relativement \textbf{simple} à appréhender, ce qui permet une utilisation aisée sans connaissances particulières en traitement d'images. Comme expliqué dans la partie d'analyse, le fonctionnement de la bibliothèque de suivi repose sur l'utilisation d'une structure de données \textbf{\textit{Cursor}} créée et manipulée respectivement par les deux fonctions \textcolor{blue}{d'étalonnage} et \textcolor{orange}{de suivi}.
 				\paragraph{} Notre biliothèque dispose de diverses méthodes de suivi pour \textbf{enrichir} l'offre disponible pour l'utilisateur. C'était évidemment aussi pour nous le moyen d'\textbf{étudier} différentes méthodes et de pouvoir les \textbf{comparer}. Il faut cependant ici faire la distinction entre le point de vue de l'utilisateur et celui du développeur. En effet, si certaines méthodes peuvent apparaitre différentes par leur utilisation ou l'expérience qu'elles procurent, elles peuvent être très proches techniquement.
 				\paragraph{}Ainsi, notre bibliothèque propose actuellement trois types de suivi différents : par couleur simple, par composantes connexes ou par modèle. Mais d'un point de vue technique et réalisation, nous pouvons regrouper les deux premières car s'appuyant toutes deux sur une recherche par couleur, comme nous le verrons en abordant leur fonctionnement.\\
 				\begin{itemize}
@@ -285,7 +286,7 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 				\quad Il convient aussi de noter que l'utilisation de la biliothèque de suivi implique de fournir une image sous le format IplImage d'OpenCV, que nous avons utilisé.
 				\newpage
 				\subsubsection{\textcolor{blue}{A) Étalonnage}} \paragraph{}
-				Afin d'effectuer le suivi d'un objet (au sens large du terme) grâce à notre bibliothèque, il convient en premier lieu de faire appel à la fonction \textit{calibration}. Réalisant l'étalonnage, elle permet de créer et d'initialiser la struture de suivi, appelée "Cursor", contenant l'intégralité des informations qui vont permettre d'identifier l'objet et de réaliser sa localisation dans les images futures. C'est lors de cette étape que l'utilisateur doit préciser le type de suivi soubaité, par l'intermédiaire d'un simple paramètre.
+				Afin d'effectuer le suivi d'un objet (au sens large du terme) grâce à notre bibliothèque, il convient en premier lieu de faire appel à la fonction \textit{calibration}. Réalisant l'étalonnage, elle permet de créer et d'initialiser la struture de suivi, appelée \textbf{\textit{Cursor}}, contenant l'intégralité des informations qui vont permettre d'identifier l'objet et de réaliser sa localisation dans les images futures. C'est lors de cette étape que l'utilisateur doit préciser le type de suivi soubaité, par l'intermédiaire d'un simple paramètre.
 					\paragraph{Utilisation}
 					\begin{tabbing}
 					\quad Du point de \=vue de l'utilisateur, une seule fonction permet de gérer la totalité de l'étalonnage, ce qui permet de simplifier\\ l'utilisation de notre bibliothèque : \\
@@ -335,13 +336,13 @@ Ensuite, on parcourt une nouvelle fois la sous-image en faisant la \textbf{moyen
 						
 						\paragraph{Binarisation} \paragraph{}
 							Une fois cette couleur, que nous appellerons couleur étalon, extraite, nous pouvons l'utiliser pour créer l'\textbf{image binaire} nécessaire au suivi par couleur. Cette image est une image en noir et blanc, où le blanc représente les points retenus par les fonctions précédentes. Ces zones blanches nous permettrons ensuite de calculer la position de notre objet, par l'utilisation de méthodes interprétant ce type d'images.\\
-							Le principe de cette fonction est donc assez simple. On construit d'abord une nouvelle image de la même taille que l'image source. Puis, pour chaque pixel, si sa couleur originale est assez proche de la couleur étalon, on le passe à blanc, sinon en noir. La notion de "assez proche de la couleur" est parametrée par une variable de tolérance, \textbf{threshold}, pouvant être réglée par le biais de la structure Cursor.\\
+							Le principe de cette fonction est donc assez simple. On construit d'abord une nouvelle image de la même taille que l'image source. Puis, pour chaque pixel, si sa couleur originale est assez proche de la couleur étalon, on le passe à blanc, sinon en noir. La notion de "assez proche de la couleur" est parametrée par une variable de tolérance, \textit{threshold}, pouvant être réglée par le biais de la structure \textbf{\textit{Cursor}}.\\
 							Enfin, avant de retourner cette nouvelle image binaire, on lui applique une série de \textbf{fermetures}. Le principe de la fermeture est d'appliquer une \textbf{\textcolor{blue}{érosion}} puis une \textbf{\textcolor{red}{dilatation}} des formes blanches obtenues. L'intérêt de cette action est d'éliminer les éventuels pixels blanc solitaires sur l'image, de manière à diminuer au maximum les parasites sur l'image qui viendraient fausser les opérations à venir.
 					\newpage
 					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
 						\paragraph{setNewCoord} \paragraph{}
 						Le fonctionnement de cette méthode plutôt simple, on parcourt l'\textbf{image binaire} issue de la binarisation en faisant la somme des positions en X et en Y des pixels blanc. Par division de ces sommes par le nombre de pixels présents sur l'image, on obtient le barycentre du blanc sur celle-ci. La précision de cette position est variable en fonction de la qualité de l'image binaire : un grand nombre de parasites (ou artefacts) faussera la précision de cette méthode.\\
-						D'autre part, en comparant le nombre de pixels blanc présents sur l'image avec celui de l'étalonnage, on peut en déduire si l'objet a été approché ou éloigné. En fonction de cela, on peut affecter l'état du curseur, actif ou non. C'est une manière de proposer une détection d'action.
+						D'autre part, en comparant le nombre de pixels blanc présents sur l'image avec celui de l'étalonnage, on peut en déduire si l'objet a été approché ou éloigné. En fonction de cela, on peut affecter l'état du curseur, actif ou non. C'est une manière de proposer une détection d'action intuitive.
 						\paragraph{blobFounding} \paragraph{}
 						Le fonctionnement de cette fonction est assez similaire à celui de \textbf{setNewCoord} mais permet une détection beaucoup plus précise. On part ici aussi de l'image binaire engendrée par \textbf{Binarisation}, mais au lieu de calculer le barycentre de l'image, on va d'abord effectuer une  \textbf{recherche de composantes connexes} sur l'image. Une telle forme sur l'image binaire aura l'allure d'une tâche blanche, le but étant d'\textbf{isoler} chacune de ces "tâches" de manière à pouvoir déterminer laquelle représente notre objet. Ensuite, on calcule le barycentre de cet objet et on obtient alors la nouvelle position de notre curseur. D'autre part, on compare l'aire de l'objet avec son aire au "repos" (son aire à l'étalonnage). Si celle-ci est suffisamment augmentée, on en déduit que l'objet a été approché, et par la que curseur est à l'\textbf{état actif}\\
 						L'avantage de cette fonction par rapport à la précédente est qu'elle permet d'\textbf{éliminer} les parasites n'ayant pas été effacés par la fermeture effectuée sur l'image binaire.
@@ -367,8 +368,8 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Interface de dessin}
 			\end{figure}
 			
-			On peut voir sur la partie haute un menu tel qu'on en trouve dans tout type d'applications bureautique. Ce menu et divisé en deux catégories au nommage conventionnel (Fichier, Option). \\
-			Dans ce menu, les actions sont également familière pour l'utilisateur : Enregistrer, Quiter, ... \\
+			On peut voir sur la partie haute un menu tel qu'on en trouve dans tout type d'applications bureautiques. Ce menu est divisé en deux catégories au nommage conventionnel (Fichier, Option). \\
+			Dans ce menu, les actions sont également familières pour l'utilisateur : Enregistrer, Quiter, ... \\
 			Toujours dans cet esprit d'intuitivité, nous avons assigné des raccourcis usuels à chacune de ces actions (Ctrl+S pour la sauvegarde, Ctrl+Q pour quitter, etc...)
 			
 			\subsubsection{Gestuelle}
@@ -377,11 +378,11 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				Le fait de ne pas proposer toutes les fonctionnalités depuis cette interface est un choix voulu. En effet, on imagine qu'il serait dommage que d'un seul geste rapide, l'utilisateur efface malencontreusement l'intégralité de son dessin. 
 		\subsection{Fonctionnalités}
 			\subsubsection{Actions}
-				Pour augmenter l'utilisabilité du logiciel, nous avons décidé de développer différentes actions permettant à l'utilisateur de directement intéragir avec son application. \\
+				Pour augmenter l'utilisabilité du logiciel, nous avons décidé de développer différentes actions permettant à l'utilisateur de directement interagir avec son application. \\
 				\begin{itemize}
-					\item \textbf{Clic :} Dès le début du projet, nous avons fait le choix de proposer le clic à l'utilisateur. L'idée est ici de mettre à disposition deux mode à l'utilisateur. Le \textbf{mode dessin}, activé quand l'utilisateur approche l'objet de la camera, fera que chaque mouvement d'objet dessinera à l'écran et le \textbf{mode main levée}, activé quand l'utilisateur éloigne l'objet de l'écran fera que les mouvements ne dessinent plus sur le tableau. Cependant, l'utilisateur verra, grâce à un curseur, la position de son objet sur le tableau. Grâce à ces deux modes, l'utilisateur pourra dessiner sur le tableau, puis arêter quand il veut ce dessin pour aller sélectionner un bouton sur l'interface gestuelle.
+					\item \textbf{Clic :} Dès le début du projet, nous avons fait le choix de proposer le clic à l'utilisateur. L'idée est ici de mettre à disposition deux modes à l'utilisateur. Le \textbf{mode dessin}, activé quand l'utilisateur approche l'objet de la camera, fera que chaque mouvement d'objet dessinera à l'écran. Le \textbf{mode main levée}, activé quand l'utilisateur éloigne l'objet de l'écran, fera que les mouvements ne dessinent plus sur le tableau. Cependant, l'utilisateur verra, grâce à un curseur, la position de son objet sur le tableau. Grâce à ces deux modes, l'utilisateur pourra dessiner sur le tableau, puis arêter quand il le souhaite ce dessin pour aller sélectionner un bouton sur l'interface gestuelle.
 					\item \textbf{Sauvegarde : } Le but principal était de permettre de dessiner sur un tableau. Il nous fallait ensuite rendre ce dessin exploitable. Nous avons donc décidé de developper une action qui permettrait à l'utilisateur de sauvegarder l'état du tableau sous forme d'image pour ensuite l'exploiter à l'aide d'un autre logiciel, ou autre.
-					\item \textbf{Plein écran : } Afin que l'utilisateur puisse plus facilement dessiner, nous avons égelement développé une action qui met le dessin en plein écran, faisant disparaitre l'affichage de la webcam. Ce plein écran agrandit le tableau blanc et met à l'échelle le dessin. De ce fait, tout apparait plus gros aux yeux de l'utilisateur. Il peut égelement revenir en mode normal quand il le souhaite.
+					\item \textbf{Plein écran : } Afin que l'utilisateur puisse plus facilement dessiner, nous avons également développé une option pour mettre le dessin en plein écran, faisant disparaitre l'affichage de la webcam. Ce plein écran agrandit le tableau blanc et met à l'échelle le dessin. De ce fait, tout apparait plus gros aux yeux de l'utilisateur. Il peut également revenir en mode normal quand il le souhaite.
 					
 					\item \textbf{Nettoyage du tableau :} Nous nous sommes dit que l'utiisateur pourrait avoir envie de nettoyer complètement le tableau pour recommencer le dessin à zéro à n'importe quel moment. Nous avons donc ajouté cette action.
 				\end{itemize}
@@ -392,18 +393,18 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\begin{itemize}
 					\item \textbf{Couleur :} Pour enrichir son dessin, l'utilisateur doit avoir le choix de la couleur de son pinceau. Pour cela, nous avons pensé à deux fonctionnalités. La première, disponible depuis le menu principal, permet à l'utilisateur de choisir une couleur dans une \textbf{palette de couleur} pour choisir précisemment la couleur avec laquelle il va dessiner. La seconde, disponible par l'interface gestuelle, permet à l'utilisateur de selectionner une couleur parmit \textbf{quelques couleurs} prédéfinies. 
 					\item \textbf{Taille du pinceau :} L'utilisateur doit également pouvoir modifier la taille de son pinceau pour dessiner des traits plus ou moins gros. Le choix de cette taille est faisable directement depuis l'interface gestuelle par deux boutons "+" et "-" qui respectivement augmentent la taille du pinceau, et la diminuent.
-					\item \textbf{Gomme :} Enfin, il fallait donner la possibilité de gommer un partie du dessin. Un bouton gomme est donc disponible directement dans l'interface gestuelle, permettant à l'utilisateur de gommer une partie plus ou moins épaisse du dessin. La taille de la gomme peut être modifié depuis l'outils précédent.
+					\item \textbf{Gomme :} Enfin, il fallait donner la possibilité de gommer une partie du dessin. Un bouton gomme est donc disponible directement dans l'interface gestuelle, permettant à l'utilisateur de gommer une partie plus ou moins épaisse du dessin. La taille de la gomme peut être modifiée depuis l'outil précédent.
 				\end{itemize} \ \\
 				
-				L'ensemble de ces outils permettent d'enrichir le dessin de l'utilisateur grâce à des pinceaux plus ou moins gros et de couleurs différentes. \\
+				L'ensemble de ces outils permet d'enrichir le dessin de l'utilisateur grâce à des pinceaux plus ou moins gros et de couleurs différentes. \\
 				Ainsi, l'utilisation des outils et des actions, donne un certain confort à l'utilisateur lui permettant de faire un dessin riche, de manière précise, et de l'exploiter par la suite.
 		\subsection{Réseau}
-			Pour faire fonctionner notre application en réseau, il nous fallait mettre en place une architecture et un protocole les plus robuste possible :
+			Pour faire fonctionner notre application en réseau, il nous fallait mettre en place une architecture et un protocole les plus robustes possible :
 			\subsubsection{Protocole}
 				Le client et le serveur doivent échanger peu de données pour une meilleure rapidité, c'est pourquoi nous avons décidé de faire transiter seulement deux types de données : 
 				\begin{itemize}
-					\item \textbf{QPixmap : } Cette classe est une classe de Qt. C'est le coeur d'un widget graphique qui permet d'afficher un dessin. Evidemment, cette classe représente pour nous le dessin de l'utilisateur. Cet objet transite sur le réseau lorsqu'un nouveau client arrive sur le serveur, le serveur lui envoie le dessin dans son état actuel.
-					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transister uniquement des chaines de caractère pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau, et renvoit cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter, et mets à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaînes de caractères.
+					\item \textbf{QPixmap : } Cette classe est une classe de Qt. C'est le coeur d'un widget graphique qui permet d'afficher un dessin. Évidemment, cette classe représente pour nous le dessin de l'utilisateur. Cet objet transite sur le réseau lorsqu'un nouveau client arrive sur le serveur, le serveur lui envoie le dessin dans son état actuel.
+					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transiter uniquement des chaines de caractères pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau, et renvoie cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter, et met à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaînes de caractères.
 					
 				\paragraph{Exemple de paquet}
 				
@@ -411,56 +412,56 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				$$$$ \\ \textit{\Large{"order:line:100:100:200:200:00FF00:10"}}
 				\end{center}
 				$$$$ \\
-				Cette chaine de caractère est un exemple type de paquet qui est envoyé entre un client et le serveur. \\
+				Cette chaine de caractères est un exemple type de paquet qui est envoyé entre un client et le serveur. \\
 				Elle est composée des éléments suivants : \\
 				\begin{itemize}
-					\item \textbf{order} Cet élément indique au serveur (ou au client selon qui envoit) qu'il s'agit d'un ordre de dessin. \\
+					\item \textbf{order} Cet élément indique au serveur (ou au client, selon qui envoie) qu'il s'agit d'un ordre de dessin. \\
 					\item \textbf{line} Cet élément indique que l'élément à dessiner est une ligne. \\
 					\item \textbf{100:100} Ce couple indique les coordonnées du premier point de la ligne. \\
 					\item \textbf{200:200} Celui-ci indique les coordonnées du second point de la ligne. \\
 					\item \textbf{00FF00} Cette chaine représente la couleur à utiliser pour cette ligne, en notation hexadécimale. \\
-					\item \textbf{10} Enfin, cette valeur indique la taille du pinceaux à utiliser pour dessiner la ligne. \\
+					\item \textbf{10} Enfin, cette valeur indique la taille du pinceau à utiliser pour dessiner la ligne. \\
 				\end{itemize}
-				Le schéma reste le même quelque soit le message envoyé. Par exemple pour un dessin de point, on aurait "order:point:150:150:00FF44:15". \\
+				Le schéma reste le même quel que soit le message envoyé. Par exemple pour un dessin de points, on aurait "order:point:150:150:00FF44:15". \\
 				L'acteur qui recevra ce paquet dessinera simplement une ligne de couleur "00FF00" de taille "10" du point "x(100,100)" au point "y(200,200)". \\
 				Du fait de l'envoi de chaînes de caractères ainsi découpées, notre protocole reste très modulable, on peut facilement ajouter un élément à dessiner, ou ajouter un paramètre au pinceau. \\
-				Il y a également d'autres possibilités de messages échangés qui sont plus rarement utilisées : nous pouvons envoyer une sérialisation du tableau courant du serveur vers le client, pour ceci le premier champs du message sera \textbf{item} suivi de \textbf{pixmap} et ensuite de la sérialisation. \\
-				Nous utilisons également une autre commande lors d'une demande de vidage de scène d'un des clients, la paquet aura la forme \textit{order:flush} et n'aura pas de paramètres. \\
+				Il y a également d'autres possibilités de messages échangés qui sont plus rarement utilisés : nous pouvons envoyer une sérialisation du tableau courant du serveur vers le client, pour ceci le premier champs du message sera \textbf{item} suivi de \textbf{pixmap} et ensuite de la sérialisation. \\
+				Nous utilisons également une autre commande lors d'une demande de vidage de scène d'un des clients, la paquet aura la forme \textit{order:flush} et n'aura pas de paramètre. \\
 				
 				\end{itemize}
 			\subsubsection{Architecture}
-				La classe \textbf{Package Manager} permets de gérer les paquets échangés, elle est présente sous une architecture proche côté client et côté serveur. \\
-				De chaque côté nous utilisons des sockets avec des abstractions offertes par Qt, le systèmes de slots et signaux permets de programmer facilement différentes fonctions qui seront appelées lors d'un message arrivant, de la déconnexion du pair etc.
+				La classe \textbf{Package Manager} permet de gérer les paquets échangés. Elle est présente sous une architecture similaire côté client et côté serveur. \\
+				De chaque côté nous utilisons des sockets avec des abstractions offertes par Qt. Le système de slots et signaux permet de programmer facilement différentes fonctions qui seront appelées lors d'un message arrivant, de la déconnexion du pair etc.
 				Ces fonctions sont donc appellées lors d'un message entrant, ensuite elle effectue un premier découpage pour voir la première partie du message (un ordre ou un objet). \\ Ensuite le PackageManager est appellé de manière statique avec les objets dont il a besoin en paramètre selon l'ordre : par exemple le tableau si c'est un ordre de dessin. \\
-				Pour résumer l'architecture gère les connexions, et déconnexion du pair, la connexion effective, ainsi que la réception de message. \\
+				Pour résumer l'architecture gère les connexions et déconnexions du pair, la connexion effective, ainsi que la réception de messages. \\
 				
 		\subsection{Technique}
 			\subsubsection{Accès au matériel}
-				Pour mener à bien ce projet, il nous fallait récupérer les images depuis la webcam, ou caméra. Etant donné le fait que notre librairie de suivi utilisait déjà la librairie openCV, nous l'avons encore utilisé pour accéder au matériel. \\
+				Pour mener à bien ce projet, il nous fallait récupérer les images depuis la webcam, ou caméra. Etant donné le fait que notre librairie de suivi utilisait déjà la librairie openCV, nous l'avons encore utilisée pour accéder au matériel. \\
 				Nous avons créé une classe dédiée à la gestion du matériel : \textit{WebcamManager}. Cette classe propose des fonctions basiques pour accéder aux images : \\
 				\begin{itemize}
 					\item getNumberOfWebcams : Retourne le nombre de webcams disponibles sur le système.\\
 					\item getImageInit(int) : Retourne l'image actuelle pour la webcam donnée.\\
 					\item setWebcam(int) : Définit la webcam à utiliser.\\
-					\item runWebcam() : Ouvre la webcam précédemment sélectionée.\\
+					\item runWebcam() : Ouvre la webcam précédemment sélectionnée.\\
 					\item getImage() : Retourne l'image actuelle de la webcam précédemment lancée.\\
 					\item stopWebcam() : Referme la webcam actuellement utilisée.\\
 				\end{itemize}
 				Cet ordre est présenté en ordre chronologique d'utilisation. On demande le nombre de webcams pour les proposer à l'utilisateur, une fois sélectionnée, on récupère l'image courant pour l'initialisation. \\
 				Une fois l'étalonnage terminé, on définit la webcam choisie et on la démarre. \\
-				On peut alors appeller en boucle getImage pour récupérer la nouvelle image. Une fois l'utilisation terminée, on peut stopper la webcam utilisée. \\
+				On peut alors appeler en boucle getImage pour récupérer la nouvelle image. Une fois l'utilisation terminée, on peut stopper la webcam utilisée. \\
 				$$$$ \\
 				\paragraph{Problème de format}
 				\ \\ \\
 				La classe WebcamManager utilise OpenCV pour lire les images depuis la webcam. Cette librairie embarque son propre format d'image, les IplImage. \\
 				Notre application gère l'affichage de cette image dans l'interface graphique avec Qt, qui utilise aussi son propre format d'image, le QImage. \\
-				Après recherches sur internet, nous avons trouvé une fonction toute faite qui nous a permit de convertir une IplImage en QImage : "iplToQimage" (Disponible dans le code).
+				Après recherches sur internet, nous avons trouvé une fonction toute faite qui nous a permi de convertir une IplImage en QImage : "iplToQimage" (Disponible dans le code).
 				
 				
 			\subsubsection{Création de widgets}
 
 	\chapter{Résultats}
-		Dans cette section nous allons présenter le résultat tangible de ce projet, en mettant en lumière l'utilisation de la bibiothèque de suivi au travers de l'application de dessin.
+		Dans cette section nous allons présenter le résultat tangible de ce projet, en mettant en lumière l'utilisation de la bibliothèque de suivi au travers de l'application de dessin.
 			
 		
 		\section{Client}
@@ -484,10 +485,10 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 					\item Suivi par couleur + composantes connexes
 				\end{itemize}
 				\paragraph{}
-				Au niveau de la bibliothèque de suivi, ces listes servent à définir la sources des images servant au track, et à choisir le drapeau pour la fonction calibration.
+				Au niveau de la bibliothèque de suivi, ces listes servent à définir la sources des images servant au track, et à choisir le drapeau pour la fonction \textit{calibration}.
 				\newpage
 				\paragraph{}
-				L'écran suivant permet quand à lui de sélectionner sur le retour image de la webcam l'objet à suivre, le curseur.\\
+				L'écran suivant permet quant à lui de sélectionner sur le retour image de la webcam l'objet à suivre, ou curseur.\\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.35]{../images/Capture1.png}\\
@@ -495,11 +496,11 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Sélection du curseur}
 				\end{figure}
 				\paragraph{}
-				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour du dit curseur.
-				Cet écran sert à récuperer les coordonnées de la hit box nécessaire à l'isolement de l'objet pour le suivi par comparaison de modèle ou à l'extraction de la couleur et de l'aire de l'objet pour les suivis par couleur.
+				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour dudit curseur.
+				Cet écran sert à récupérer les coordonnées de la hit box nécessaire à l'isolement de l'objet pour le suivi par comparaison de modèle ou à l'extraction de la couleur et de l'aire de l'objet pour les suivis par couleur.
 				\newpage
 				\paragraph{}
-				Grâce à la précedente sélection, on affiche le masque binaire permettant de vérifier que l'objet à bien été reconnu. Les zones blanches sur l'image représente les parties reconnu par l'application, le but étant alors d'avoir une zone blanche sur le curseur.
+				Grâce à la précédente sélection, on affiche le masque binaire permettant de vérifier que l'objet a bien été reconnu. Les zones blanches sur l'image représentent les parties reconnues par l'application, le but étant alors d'avoir une zone blanche sur le curseur.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.35]{../images/Capture2.png}\\
@@ -507,7 +508,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Réglage du seuil}
 				\end{figure}
 				\paragraph{}
-				La règlette permet de d'affiner le masque binaire en augmentant ou diminuant un seuil de tolérance sur la reconnaissance de couleur.
+				La règlette permet d'affiner le masque binaire en augmentant ou diminuant le seuil de tolérance pour la reconnaissance de couleur.
 				\paragraph{}
 				Dans le cas du suivi par modèle, on affiche simplement le modèle qui sera utilisé pour le suivi.
 				\begin{figure}[!h]
@@ -531,8 +532,8 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 			\subsection{Dessin}
 			L'interface de dessin est conçue pour être très simple et intuitive : l'écran à gauche représente l'état courant du dessin (le tableau donc), et à droite l'utilisateur peut voir un aperçu du flux vidéo en temps réel. \\
 			Le dessin est donc relativement facile et intuitif, on voit directement l'effet d'un mouvement de l'objet suivi. \\
-			Le menu en haut permets quant à lui de sélectionner différentes actions à la souris, tandis qu'une interface gestuelle permets d'effectuer les actions liées au dessin sans utiliser la souris. \\
-			L'interface gestuelle permets de choisir la gomme, les trois couleurs rouge, vert et bleu. Elle permets également de diminuer ou de grossir la taille du pinceau, et enfin offre un aperçu de la couleur courante. \\
+			Le menu en haut permet quant à lui de sélectionner différentes actions à la souris, tandis qu'une interface gestuelle permet d'effectuer les actions liées au dessin sans utiliser la souris. \\
+			L'interface gestuelle permet de choisir la gomme et les couleurs rouge, vert, bleu et noire. Elle permet également de diminuer ou de grossir la taille du pinceau, et enfin offre un aperçu de la couleur courante. \\
 			Cette interface ne contient que des fonctionnalités très basiques pour des raisons exprimées précédemment. \\
 				\begin{figure}[!h]
 						\centering
@@ -541,7 +542,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Interface de dessin}
 				\end{figure}
 				\newpage
-				Le sélecteur de couleur permets de choisir très précisément la couleur voulue. \\
+				Le sélecteur de couleur permet de choisir très précisément la couleur voulue. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/colorpicker.png}\\
@@ -557,7 +558,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Menu}
 				\end{figure}
 				
-				La fenêtre d'exportation permets de sauvegarder à l'endroit voulue l'image provenant du tableau, me format de base utilisé est le PNG, le chemin d'enregistrement du fichier est par défaut dans le répertoire home/ sous LINUX. \\
+				La fenêtre d'exportation permet de sauvegarder à l'endroit voulue l'image provenant du tableau, le format de base utilisé est le PNG, le chemin d'enregistrement du fichier est par défaut dans le répertoire home/ sous LINUX. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/export.png}\\
@@ -567,25 +568,25 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\newpage
 		\section{serveur}
 		Le serveur ne possède pas d'interface graphique, les résultats présentés seront donc essentiellement textuels. \\
-		Son fonctionnement est simple, il se charge de stocker les clients, et de recevoir et traiter leur ordres.\\
+		Son fonctionnement est simple, il se charge de stocker les clients, et de recevoir et traiter leurs ordres.\\
 		En pratique cela est fait grâce à une classe \textbf{PackageManager} qui se charge de recevoir et découper les paquets des clients. Une fois le paquet découpé il est traité selon le schéma présenté plus haut. \\
-		Le serveur a donc essentiellement un but de synchronisation : il reçoit les paquets, s'assure que chaque client possède bien le même dessin, et partage les points dessinés avec tous les clients (y compris les nouveaux arrivants qui récupèrent toute le tableau directement). \\
+		Le serveur a donc essentiellement un but de synchronisation : il reçoit les paquets, s'assure que chaque client possède bien le même dessin, et partage les points dessinés avec tous les clients (y compris les nouveaux arrivants qui récupèrent directement le tableau). \\
 	
 	\chapter{Conclusion}
 		\section{Difficultés rencontrées}
-		Nous avons rencontrés des difficultés de plusieurs natures, pour commencer c'était un projet plutôt long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
+		Nous avons rencontré des difficultés de plusieurs natures : pour commencer c'était un projet plutôt long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
 		De plus une grande partie des difficultés réside dans des problèmes techniques (de conception, ou de programmation). \\
 		
 		\paragraph{Synchronisation}
-		Pour effectuer ce travail, nous devions nous retrouver régulièrement pour être parfaitement à jour des évolutions du projet, et pour se refixer des objectifs, pour savoir ou aller, et de plus pour avoir de la motivation et des buts concrets et atteignables. \\
+		Pour effectuer ce travail, nous devions nous retrouver régulièrement pour être parfaitement au courant des évolutions du projet, pour se fixer de nouveaux objectifs, pour savoir où aller ou encore pour définir des buts concrets et atteignables. \\
 		Nous avons aussi mis en place plusieurs outils techniques pour nous permettre de mettre en commun tout le code et les documents : nous avons utilisé un gestionnaire de version, ainsi que des outils d'éditions collaborative. \\
-		Le fait d'avoir un groupe qui a déjà travaillé ensemble plusieurs fois sur des projets précédents nous a aussi aidé à etre rapidement efficace et à savoir quoi faire, c'est donc une difficulté que nous avons relativement bien surmonté. \\
+		Le fait d'avoir un groupe qui a déjà travaillé ensemble plusieurs fois sur des projets précédents nous a aussi aidé à etre rapidement efficace et à savoir quoi faire, c'est donc une difficulté que nous avons relativement bien surmontée. \\
 		
 		\paragraph{Technique}
-		Nous avons également du nous former en parallèle au traitement de l'image par exemple, nous avons trouvé plusieurs documents qui nous présentaient les grands principes avec différentes méthodes pour suivre des objets etc. Pour la partie bibliothèque il y avait beaucoup de formation, mais le TER coincidait avec une UE traitement de l'image pour les IMAGINA, ce qui a aussi aidé. \\
-		Une autre difficulté résidait dans la conception globale, pour avoir une architecture solide et avoir une application aboutie nous avons passé du temps à penser le projet pour pouvoir avancer vite par la suite. \\ C'est une partie où nous nous en sommes plûtot bien sorti, malgré le module réseau qui souffre encore de lenteurs et qui devrait donc être optimisé. \\
+		Nous avons également du nous former en parallèle au traitement de l'image par exemple. Nous avons trouvé plusieurs documents qui nous présentaient les grands principes avec différentes méthodes pour suivre des objets etc. Pour la partie bibliothèque il y avait beaucoup de formation, mais le TER coïncidait avec une UE traitement de l'image pour les IMAGINA, ce qui a aussi aidé. \\
+		Une autre difficulté résidait dans la conception globale, pour avoir une architecture solide et avoir une application aboutie nous avons passé du temps à penser le projet pour pouvoir avancer vite par la suite. \\ C'est une partie où nous nous en sommes plûtot bien sortis, malgré le module réseau qui souffre encore de lenteurs et qui devrait donc être optimisé. \\
 		
-		Pour des problèmes plus concrets, nous avons également eu des difficultés liés à la gestion de la mémoire, la librairie OpenCV fournit des fonctions à allocations implicite, avec une gestion de la mémoire très particulière et une documentation assez légère. Nous nous sommes donc heurtés dans plusieurs phases du projet à repenser localement l'architecture pour éviter d'avoir trop de création d'objet et d'image qui n'étaient pas libérées. \\
+		Pour des problèmes plus concrets, nous avons également eu des difficultés liées à la gestion de la mémoire : la librairie OpenCV fournit des fonctions à allocations implicites, avec une gestion de la mémoire très particulière et une documentation assez légère. Nous nous sommes donc heurtés dans plusieurs phases du projet à repenser localement l'architecture pour éviter d'avoir trop de création d'objet et d'image qui n'étaient pas libérées. \\
 		
 		\section{Perspectives}
 		Les persepctives peuvent se découper en deux parties qui seraient l'amélioration de l'existant et des fonctionnalités que nous n'avons pas pu faire, ou même auxquelles nous n'avions pas pensé avant un stade avancé du projet. \\
@@ -593,12 +594,12 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		\paragraph{Optimisations}
 		Pour la partie bibliothèque il faudrait implémenter la détection d'action lors d'un suivi par forme. \\
 		De manière générale il faudrait aussi réduire encore la dépendance vis à vis de l'environnement. \\
-		Côté application le principal problème réside dans les lenteurs du mode réseau, une solution serait peut être d'échanger moins de points, ou encore de faire des systèmes de mémoire tampons pour avoir un nombre d'envoi plus réduit. \\
+		Côté application le principal problème réside dans les lenteurs du mode réseau, une solution serait peut être d'échanger moins de points, ou encore de faire des systèmes de mémoires tampons pour avoir un nombre d'envoi plus réduit. \\
 		
 		Pour le projet global, les performances sont assez bonnes, mais nous pourrions aussi essayer de les améliorer encore pour plus de rapidité. \\ 
 		
 		\paragraph{Nouvelles fonctionnalités}
-		Une fonctionnalité intéressante serait de suivre plusieurs objets en même temps, pour dessiner avec plusieurs curseurs et également d'avoir d'autres actions détectées. Lors de la soutenance un membre du jury parlait d'un système permettant de zommer avec deux curseurs, à la manière du zoom sur les téléphones et tablettes avec deux doigts. \\
+		Une fonctionnalité intéressante serait de suivre plusieurs objets en même temps, pour dessiner avec plusieurs curseurs et également d'avoir d'autres actions détectées. Lors de la soutenance un membre du jury parlait d'un système permettant de zoomer avec deux curseurs, à la manière du zoom sur les téléphones et tablettes avec deux doigts. \\
 Ces deux fonctionnalités sont intéressantes et pourraient être ajoutées sans changements de la bibliothèque. \\		
 		\section{Conclusion}
 	
