@@ -210,15 +210,16 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 
 			\newpage
 			\subsection{Diagrammes de classes}
-				La bibliothèque fonctionne grâce à la manipulation d'un curseur qui correspondant en fait au curseur physique réel de l'utilisateur.\\
-				Le curseur est représenté en mémoire sous la forme d'une strucure de données \textbf{\textit{Cursor}}. On utilise donc des informations telles que la taille de ce surseur, sa position ou encore sa couleur.\\
-				Cette structure de données est engendrée par la fonction \textit{calibration} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{track}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. \\
+				La bibliothèque fonctionne grâce à la manipulation d'un curseur qui correspond en fait au curseur, ou objet, physique manipulé par l'utilisateur.
+				Le curseur est représenté en mémoire sous la forme d'une strucure de données \textbf{\textit{Cursor}}. On utilise donc des informations telles que la taille de ce curseur, sa position ou encore sa couleur.\\
+				Cette structure de données est engendrée par la fonction \textit{calibration} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{track}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. Cursor sert aussi à intéragir avec les suivis, elle permet donc de régler certain attributs comme des seuils de tolérance par exemple. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.8]{../images/libtrack-uml.png}\\
-						\caption{Architrecture de la bibliothèque}
-						\label{Architrecture de la bibliothèque}
+						\caption{Architecture de la bibliothèque}
+						\label{Architecture de la bibliothèque}
 				\end{figure}
+				
 
 				La bibliothèque dépend de deux bibliothèques externes:
 				\begin{itemize}
