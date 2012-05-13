@@ -410,6 +410,27 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				package manager
 		\subsection{Technique}
 			\subsubsection{Accès au matériel}
+				Pour mener à bien ce projet, il nous fallait récupérer les images depuis la webcam, ou caméra. Etant donné le fait que notre librairie de suivi utilisait déjà la librairie openCV, nous l'avons encore utilisé pour accéder au matériel. \\
+				Nous avons créé une classe dédiée à la gestion du matériel : \textit{WebcamManager}. Cette classe propose des fonctions basiques pour accéder aux images : \\
+				\begin{itemize}
+					\item getNumberOfWebcams : Retourne le nombre de webcams disponibles sur le système.\\
+					\item getImageInit(int) : Retourne l'image actuelle pour la webcam donnée.\\
+					\item setWebcam(int) : Définit la webcam à utiliser.\\
+					\item runWebcam() : Ouvre la webcam précédemment sélectionée.\\
+					\item getImage() : Retourne l'image actuelle de la webcam précédemment lancée.\\
+					\item stopWebcam() : Referme la webcam actuellement utilisée.\\
+				\end{itemize}
+				Cet ordre est présenté en ordre chronologique d'utilisation. On demande le nombre de webcams pour les proposer à l'utilisateur, une fois sélectionnée, on récupère l'image courant pour l'initialisation. \\
+				Une fois l'étalonnage terminé, on définit la webcam choisie et on la démarre. \\
+				On peut alors appeller en boucle getImage pour récupérer la nouvelle image. Une fois l'utilisation terminée, on peut stopper la webcam utilisée. \\
+				$$$$ \\
+				\paragraph{Problème de format}
+				\ \\ \\
+				La classe WebcamManager utilise OpenCV pour lire les images depuis la webcam. Cette librairie embarque son propore format d'image, les IplImage. \\
+				Notre application gère l'affichage de cette image dans l'interface graphique avec Qt, qui utilise aussi son propre format d'image, le QImage. \\
+				Après recherches sur internet, nous avons trouvé une fonction toute faite qui nous a permit de transformer une IplImage en QImage : "iplToQimage" (Disponible dans le code).
+				
+				
 			\subsubsection{Création de widgets}
 
 	\chapter{Résultats}
