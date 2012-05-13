@@ -378,8 +378,34 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				L'ensemble de ces outils permettent d'enrichir le dessin de l'utilisateur grâce à des pinceaux plus ou moins gros et de couleurs différentes. \\
 				Ainsi, l'utilisation des outils et des actions, donne un certain confort à l'utilisateur lui permettant de faire un dessin riche, de manière précise, et de l'exploiter par la suite.
 		\subsection{Réseau}
+			Pour faire fonctionner notre application en réseau, il nous fallait mettre en place une architecture et un protocole les plus robuste possible :
 			\subsubsection{Protocole}
-				explication du protocole
+				Le client et le serveyr doivent échanger peu de données pour une meilleure rapidité, c'est pourquoi nous avons décidé de faire transiter seulement deux types de données : 
+				\begin{itemize}
+					\item \textbf{QGraphicsScene : } Cette classe est une classe de Qt. C'est un widget graphique qui permet d'afficher un dessin. Evidemment, cette classe représente pour nous le dessin de l'utilisateur. Cet objet transite sur le réseau lorsqu'un nouveau client arrive sur le serveur, le serveur lui envois le dessin dans son état actuel.
+					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transister uniquement des chaines de caractère pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau, et renvoit cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter, et mets à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaine de caractère.
+					
+				\paragraph{Exemple de paquet}
+				
+				\begin{center}
+				$$$$ \\ \textit{\Large{"order:line:100:100:200:200:00FF00:10"}}
+				\end{center}
+				$$$$ \\
+				Cette chaine de caractère est un exemple type de paquet qui est envoyé entre un client et le serveur. \\
+				Elle est composée des éléments suivants : \\
+				\begin{itemize}
+					\item \textbf{order} Cet élément indique au serveur (ou au client selon qui envoit) qu'il s'agit d'un ordre de dessin. \\
+					\item \textbf{line} Cet élément indique que l'élément à dessiner est une ligne. \\
+					\item \textbf{100:100} Ce couple indique les coordonnées du premier point de la ligne. \\
+					\item \textbf{200:200} Celui-ci indique les coordonnées du second point de la ligne. \\
+					\item \textbf{00FF00} Cette chaine représente la couleur à utiliser pour cette ligne, en notation hexadécimale. \\
+					\item \textbf{10} Enfin, cette valeur indique la taille du pinceaux à utiliser pour dessiner la ligne. \\
+				\end{itemize}
+				Le schéma reste le même quelque soit le message envoyé. Par exemple pour un dessin de point, on aurait "order:point:150:150:00FF44:15". \\
+				L'acteur qui recevra ce paquet dessinera simplement une ligne de couleur "00FF00" de taille "10" du point "x(100,100)" au point "y(200,200)". \\
+				Du fait de l'envois de chaine de caractères ainsi découpées, notre protocole reste très modulable, on peut facilement ajouter un élément à dessiner, ou ajouter un paramètre au pinceau.
+				
+				\end{itemize}
 			\subsubsection{Architecture}
 				package manager
 		\subsection{Technique}
