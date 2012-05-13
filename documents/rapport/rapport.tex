@@ -357,9 +357,26 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				Le fait de ne pas proposer toutes les fonctionnalités depuis cette interface est un choix voulu. En effet, on imagine qu'il serait dommage que d'un seul geste rapide, l'utilisateur efface malencontreusement l'intégralité de son dessin. 
 		\subsection{Fonctionnalités}
 			\subsubsection{Actions}
-				Les actions : fullscreen, sauvegarde etc
+				Pour augmenter l'utilisabilité du logiciel, nous avons décidé de développer différentes actions permettant à l'utilisateur de directement intéragir avec son application. \\
+				\begin{itemize}
+					\item \textbf{Clic :} Dès le début du projet, nous avons fait le choix de proposer le clic à l'utilisateur. L'idée est ici de mettre à disposition deux mode à l'utilisateur. Le \textbf{mode dessin}, activé quand l'utilisateur approche l'objet de la camera, fera que chaque mouvement d'objet dessinera à l'écran et le \textbf{mode main levée}, activé quand l'utilisateur éloigne l'objet de l'écran fera que les mouvements ne dessinent plus sur le tableau. Cependant, l'utilisateur verra, grâce à un curseur, la position de son objet sur le tableau. Grâce à ces deux modes, l'utilisateur pourra dessiner sur le tableau, puis arêter quand il veut ce dessin pour aller sélectionner un bouton sur l'interface gestuelle.
+					\item \textbf{Sauvegarde : } Le but principal était de permettre de dessiner sur un tableau. Il nous fallait ensuite rendre ce dessin exploitable. Nous avons donc décidé de developper une action qui permettrait à l'utilisateur de sauvegarder l'état du tableau sous forme d'image pour ensuite l'exploiter à l'aide d'un autre logiciel, ou autre.
+					\item \textbf{Plein écran : } Afin que l'utilisateur puisse plus facilement dessiner, nous avons égelement développé une action qui met le dessin en plein écran, faisant disparaitre l'affichage de la webcam. Ce plein écran agrandit le tableau blanc et met à l'échelle le dessin. De ce fait, tout apparait plus gros aux yeux de l'utilisateur. Il peut égelement revenir en mode normal quand il le souhaite.
+					
+					\item \textbf{Nettoyage du tableau :} Nous nous sommes dit que l'utiisateur pourrait avoir envie de nettoyer complètement le tableau pour recommencer le dessin à zéro à n'importe quel moment. Nous avons donc ajouté cette action.
+				\end{itemize}
+				
+				\ \\Ces trois actions sont disponibles dans le menu principal de l'application. De plus, un raccourci clavier a été assigné à chacune d'elles. \\
 			\subsubsection{Outils}
-				taille du pinceau couleur gomme
+				En plus des actions précédemment citées, nous avons développé differents outils pour l'utilisateur : \\
+				\begin{itemize}
+					\item \textbf{Couleur :} Pour enrichir son dessin, l'utilisateur doit avoir le choix de la couleur de son pinceau. Pour cela, nous avons pensé à deux fonctionnalités. La première, disponible depuis le menu principal, permet à l'utilisateur de choisir une couleur dans une \textbf{palette de couleur} pour choisir précisemment la couleur avec laquelle il va dessiner. La seconde, disponible par l'interface gestuelle, permet à l'utilisateur de selectionner une couleur parmit \textbf{quelques couleurs} prédéfinies. 
+					\item \textbf{Taille du pinceau :} L'utilisateur doit également pouvoir modifier la taille de son pinceau pour dessiner des traits plus ou moins gros. Le choix de cette taille est faisable directement depuis l'interface gestuelle par deux boutons "+" et "-" qui respectivement augmentent la taille du pinceau, et la diminuent.
+					\item \textbf{Gomme :} Enfin, il fallait donner la possibilité de gommer un partie du dessin. Un bouton gomme est donc disponible directement dans l'interface gestuelle, permettant à l'utilisateur de gommer une partie plus ou moins épaisse du dessin. La taille de la gomme peut être modifié depuis l'outils précédent.
+				\end{itemize} \ \\
+				
+				L'ensemble de ces outils permettent d'enrichir le dessin de l'utilisateur grâce à des pinceaux plus ou moins gros et de couleurs différentes. \\
+				Ainsi, l'utilisation des outils et des actions, donne un certain confort à l'utilisateur lui permettant de faire un dessin riche, de manière précise, et de l'exploiter par la suite.
 		\subsection{Réseau}
 			\subsubsection{Protocole}
 				explication du protocole
