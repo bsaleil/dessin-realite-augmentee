@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{color}
+\usepackage{pdfpages}
+
 \definecolor{orange}{rgb}{0.8, 0.4, 0.1}
 \definecolor{vert}{rgb}{0.27, 0.57, 0.13}
 \definecolor{marron}{rgb}{0.6, 0.2, 0.13}
@@ -608,5 +610,6 @@ Ces deux fonctionnalités sont intéressantes et pourraient être ajoutées sans
 	\part{Annexes}
 	\appendix
 		\chapter{Documentation de la bibliothèque}
+		\includepdf[pages = {1-15}]{../code-doc/refman.pdf}
 		%\includegraphics{../code-doc/refman.pdf}
 \end{document}
