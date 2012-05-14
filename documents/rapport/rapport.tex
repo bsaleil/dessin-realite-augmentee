@@ -117,11 +117,13 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 
 			\newpage
 			\subsection{Diagramme de Gantt}
-			paragraph{}
-			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un \textbf{cahier des charges} pour définir ce que nous voulions faire et de quelle manière. \\
+			\paragraph{}
+			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un \textbf{cahier des charges} pour définir ce que nous voulions faire et de quelle manière.
+			\paragraph{}
 			Après ceci, nous avons commencé à effectuer des recherches du côté bibliothèque et application, pour savoir quels outils et techniques utiliser pour arriver à nos objectifs. 
-		  Nous avons réservé plusieurs semaines pour effectuer des recherches et perfectionner notre idée du projet. Nous avons donc lu des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'\textbf{analyse} et de conception sert aussi à penser l'application en imaginant des cas d'utilisations (use cases) et en réalisant le diagramme de classes. \\
-			
+		  Nous avons réservé plusieurs semaines pour effectuer des recherches et perfectionner notre idée du projet. Nous avons donc lu des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'\textbf{analyse} et de conception sert aussi à penser l'application en imaginant des cas d'utilisations (use cases) et en réalisant le diagramme de classes.
+
+			\paragraph{}
 			Par la suite, la majeure partie du temps est réservée au \textbf{développement} en lui même, en prenant en compte la date de présentation du projet pour avoir une réalisation complète. \\  
 			Bien entendu ces temps de développement s'accompagnent de réunions avec tout le groupe de projet ainsi que de travail pour lier nos deux sous-parties et les tester ensemble. \\
 			Des documents comme le rapport ou la documentation furent produit au fur et à mesure du projet, pour rester en adéquation avec le travail accompli. Voici le rétroplanning qui illustre le déroulement chronologique du projet : \\
@@ -133,8 +135,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 				\end{figure}
 		\newpage
 		\section{Outils utilisés}
-		Durant la période de recherche et au cours du projet nous avons utilisé différent outils pour nous aider dans la réalisation. Nous les présentons dans cette section. \\
-		
+		Durant la période de recherche et au cours du projet nous avons utilisé différent outils pour nous aider dans la réalisation. Nous les présentons dans cette section. 
 			\subsubsection{Outils collaboratifs}
 			\paragraph{}
 			\includegraphics[scale=1]{../logos/subversion-logo.png} 
@@ -189,36 +190,38 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 						\caption{Diagramme de séquence local}
 						\label{Diagramme de séquence local}
 				\end{figure}
+				\paragraph{}
 				On peut voir sur ce diagramme que le fonctionnement en local est assez basique. Dans un premier temps, l'utilisateur \textbf{étalonne} l'objet avec lequel il veut dessiner. Ensuite, lorsque l'utilisateur déplace l'objet en question, l'application \textbf{détecte} ce déplacement, et \textbf{dessine} à la nouvelle position de l'objet. Ce schéma de détection-dessin est répété jusqu'à fermeture de l'application. \\
 				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet.
 
 				\newpage
 				\subsubsection{Fonctionnement en réseau}
+				En réseau, l'utilisation suit le même schéma, mais un autre acteur entre en jeu, le \textbf{serveur}.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.62]{../images/sequence_reseau.png}\\
 						\caption{Diagramme de séquence réseau}
 						\label{Diagramme de séquence réseau}
 				\end{figure}
-				En réseau, l'utilisation suit le même schéma, mais un autre acteur entre en jeu, le \textbf{serveur}. \\
-				Comme pour une utilisation locale, l'utilisateur comment par \textbf{étalonner} l'objet à suivre. Puis, la connexion s'effectue auprès du serveur, qui va renvoyer le dessin courant au nouveau client. Une fois en possession du dessin, le client le stocke et peut rentrer dans la boucle de détection-dessin : \\
+				\paragraph{}
+				Comme pour une utilisation locale, l'utilisateur commence par \textbf{étalonner} l'objet à suivre. Puis, la connexion s'effectue auprès du serveur, qui va renvoyer le dessin courant au nouveau client. Une fois en possession du dessin, le client le stocke et peut rentrer dans la boucle de détection-dessin.
+				\paragraph{}
 				Comme en local, l'application va \textbf{détecter} le mouvement de l'objet suivi. La nouvelle position est envoyée au serveur qui va dessiner sur son propre tableau, puis renvoyer à tous les clients l'ordre de \textbf{dessiner} à cette même position. Chaque client verra donc ce que les autres clients dessinent. \\
 				Ainsi, l'utilisateur verra se dessiner chacun des mouvements qu'il effectue avec son objet, mais également ceux de tous les autres clients.
-				\\ $$$$ \\
+				\paragraph{}
 				On peut donc voir que pour l'utilisateur, le fonctionnement est identique qu'il dessine seul ou avec d'autres personnes :
 				\begin{itemize}
 					\item Il étalonne l'objet
 					\item Il déplace l'objet
 					\item l'objet dessine sur le tableau
 				\end{itemize}
-				
 				Cependant, dans la pratique, le fonctionnement n'est pas le même. En réseau, chaque mouvement passe par le serveur qui se charge de faire le lien avec tous les clients de l'application.
 
 			\newpage
 			\subsection{Diagrammes de classes}
 				La bibliothèque fonctionne grâce à la manipulation d'un curseur qui correspond en fait au curseur, ou objet, physique manipulé par l'utilisateur.
 				Le curseur est représenté en mémoire sous la forme d'une strucure de données \textbf{\textit{Cursor}}. On utilise donc des informations telles que la taille de ce curseur, sa position ou encore sa couleur.\\
-				Cette structure de données est engendrée par la fonction \textit{\textbf{calibration}} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{\textbf{track}}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. Cursor sert aussi à intéragir avec les suivis, elle permet donc de régler certain attributs comme des seuils de tolérance par exemple. \\
+				Cette structure de données est engendrée par la fonction \textit{\textbf{calibration}} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{\textbf{track}}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. \textit{Cursor} sert aussi à intéragir avec les suivis, elle permet donc de régler certain attributs comme des seuils de tolérance par exemple. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.8]{../images/libtrack-uml.png}\\
@@ -229,7 +232,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 
 				La bibliothèque dépend de deux bibliothèques externes:
 				\begin{itemize}
-					\item OpenCV, Spécialisée dans le traitement des images
+					\item OpenCV, spécialisée dans le traitement des images
 					\item CvBlob, bibliothèque issue d'OpenCV utlisée pour la recherche d'objet dans des images binaires
 				\end{itemize}
 
@@ -239,36 +242,36 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.6]{../uml/classes.png}\\
-						\caption{Diagramme de classe de l'application}
-						\label{Diagramme de classe de l'application}
+						\caption{Pseudo-Diagramme de classe de l'application}
+						\label{Pseudo-Diagramme de classe de l'application}
 				\end{figure}
 				
 				On peut identifier quatre modules principaux : \\
 				\begin{itemize}
-					\item \textbf{Le module d'étalonnage} (Calibration et ViewCalibration). Ce module sert à tout ce qui touche à l'étalonnage de l'objet. Une fois qu'il est effectué, le module va appeler le module \textit{client} pour lui signaler que l'étalonnage est fait, et lui envoyer les informations qui correspondent (objet à suivre, type de suivi, dessin en local ou réseau, etc...)
-					\item \textbf{Le module client} (Client). Ce module est le coeur de l'application, il a principalement deux rôles. Il va dans un premier temps construire toute l'interface graphique (tout ce qui est visuel) qui sera présentée à l'utilisateur. Ensuite, c'est ce module qui va assurer la communication entre tous les modules. Il est le seul intermédiaire entre les différents modules locaux.
-					\item \textbf{Le module de dessin} (DrawingBoard, LocalDrawingBoard et NetworkDrawingBoard). Ce module a également deux rôles. Il va s'occuper de toute la partie dessin (Stocke la couleur et taille du pinceau, dessine les points, lignes, etc...). Aussi, pour une utilisation en réseau, c'est lui qui va se charger de communiquer avec l'application serveur.
-					\item \textbf{Le module serveur} (Server, ServerGraphics). C'est ce module qui met en relation les différents client, et qui synchronise le dessin. Il reçoit les ordres de dessin, les stocke, et les renvoie à tous les autres clients.
+					\item \textbf{Le module d'étalonnage} (Calibration et ViewCalibration). Ce module sert à tout ce qui touche à l'étalonnage de l'objet. Une fois qu'il est effectué, le module va appeler le module \textit{client} pour lui signaler que l'étalonnage est fait, et lui envoyer les informations qui correspondent (objet à suivre, type de suivi, dessin en local ou réseau, etc.)
+					\item \textbf{Le module client} (Client). Ce module qui est le coeur de l'application possède deux rôles principaux. Il va dans un premier temps construire toute l'interface graphique (tout ce qui est visuel) qui sera présentée à l'utilisateur. C'est aussi lui qui va assurer la communication entre tous les autres modules locaux dont il est le seul intermédiaire.
+					\item \textbf{Le module de dessin} (DrawingBoard, LocalDrawingBoard et NetworkDrawingBoard). Ce module a également deux rôles. Il va s'occuper de toute la partie dessin (stocke la couleur et taille du pinceau, dessine les points, lignes, etc.). Aussi, pour une utilisation en réseau, c'est lui qui va se charger de communiquer avec l'application serveur.
+					\item \textbf{Le module serveur} (Server, ServerGraphics). C'est ce module qui met en relation les différents client et qui synchronise le dessin. Il reçoit les ordres de dessin, les stocke et les renvoie à tous les autres clients.
 				\end{itemize}
 				\ \\
-				La classe \textbf{WebcamManager} est la seule classe qui va communiquer avec le \textbf{matériel} (ici les webcams). Lorsque l'on veut une nouvelle image de la webcam, le module client va demander à WebcamManager la nouvelle image, et l'envoyer au module qui en a besoin. \\
-				La classe \textbf{WidgetWebcam}, elle, est la seule classe qui va communiquer avec la \textbf{bibliothèque de suivi}. \\
+				La classe \textbf{WebcamManager} est la seule classe qui va communiquer avec le \textbf{matériel} (ici les webcams). Lorsque l'on veut une nouvelle image de la webcam, le module client va demander à WebcamManager la nouvelle image et l'envoyer au module qui en a besoin. \\
+				La classe \textbf{WidgetWebcam} est la seule classe qui va communiquer avec la \textbf{bibliothèque de suivi}. \\
 				Les classes QGraphicsScene et Etat représentent respectivement le dessin et l'état actuel du pinceau. \\
 				Les classes PackageManager* servent à assembler et désassembler les paquets qui transitent sur le réseau.
 				\newpage
 				\paragraph{Scénario :} \ \\
 				Afin d'illustrer la modularité de notre application, on pourrait imaginer le scénario suivant :
 				\begin{itemize}
-					\item L'étalonnage s'effectue. Une fois terminé, le module d'étalonnage va prévenir le client, et lui donner les informations.
+					\item L'étalonnage s'effectue. Une fois terminé, le module d'étalonnage va prévenir le client et lui donner les informations.
 					\item Chaque X millisecondes, le client va interroger WebcamManager pour obtenir une nouvelle image.
 					\item Le client va envoyer cette image à WidgetWebcam pour obtenir la nouvelle position. (Grâce à la bibliothèque de suivi)
-					\item Le client va maintenant envoyer cette position à DrawingBoard qui va dessiner le nouveau point en fonction de la couleur la taille, etc...
+					\item Le client va maintenant envoyer cette position à DrawingBoard qui va dessiner le nouveau point en fonction de la couleur la taille, etc.
 				\end{itemize}
 				On voit ici que chaque module rempli bien son rôle et assure le bon fonctionnement général de l'application.
 				
 				$$$$ \\
-				Une fois cette phase de réflexion terminée, toute l'architecture de la bibliothèque, et de l'application était pensée et écrite. \\
-				Nous pouvions alors débuter la phase de réalisation, programmer et imbriquer les différents modules, et s'attaquer aux problèmes plus techniques.
+				Une fois cette phase de réflexion terminée, toute l'architecture de la bibliothèque et de l'application était pensée et écrite. \\
+				Nous pouvions alors débuter la phase de réalisation, programmer et imbriquer les différents modules et  nous attaquer aux problèmes plus techniques.
 
 				
 	
@@ -283,7 +286,7 @@ Avant de commencer l'application, nous avons décidé de passer un long moment s
 				\paragraph{} Notre biliothèque dispose de diverses méthodes de suivi pour \textbf{enrichir} l'offre disponible pour l'utilisateur. C'était évidemment aussi pour nous le moyen d'\textbf{étudier} différentes méthodes et de pouvoir les \textbf{comparer}. Il faut cependant ici faire la distinction entre le point de vue de l'utilisateur et celui du développeur. En effet, si certaines méthodes peuvent apparaitre différentes par leur utilisation ou l'expérience qu'elles procurent, elles peuvent être très proches techniquement.
 				\paragraph{}Ainsi, notre bibliothèque propose actuellement trois types de suivi différents : par couleur simple, par composantes connexes ou par modèle. Mais d'un point de vue technique et réalisation, nous pouvons regrouper les deux premières car s'appuyant toutes deux sur une recherche par couleur, comme nous le verrons en abordant leur fonctionnement.\\
 				\begin{itemize}
-\item {\textcolor{marron}{par modèle} : } Ici, c'est la forme de l'objet qui est utilisée. On recherche une correspondance forte entre un pattern de l'objet recherché, et une éventuelle zone solution dans l'image. \\
+\item {\textcolor{marron}{par modèle} : } Ici, c'est la forme de l'objet qui est utilisée. On recherche une correspondance forte entre un pattern de l'objet recherchéet une éventuelle zone solution dans l'image. \\
 \item {\textcolor{vert}{par couleur} : } On s'intéresse ici aux valeurs des couleurs (des pixels) de l'objet plutôt qu'à leur disposition spatiale. Des méthodes d'échantillonage et de seuillage permettent de proposer un résultat plus fin et plus souple qu'une moyenne de couleur seule. Cette dernière ne peut en effet supporter des variations de teinte fortes au sein de l'objet.
 				\end{itemize}
 							
@@ -378,8 +381,8 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 			\end{figure}
 			
 			On peut voir sur la partie haute un menu tel qu'on en trouve dans tout type d'applications bureautiques. Ce menu est divisé en deux catégories au nommage conventionnel (Fichier, Option). \\
-			Dans ce menu, les actions sont également familières pour l'utilisateur : Enregistrer, Quiter, ... \\
-			Toujours dans cet esprit d'intuitivité, nous avons assigné des raccourcis usuels à chacune de ces actions (Ctrl+S pour la sauvegarde, Ctrl+Q pour quitter, etc...)
+			Dans ce menu, les actions sont également familières pour l'utilisateur : Enregistrer, Quiter. \\
+			Toujours dans cet esprit d'intuitivité, nous avons assigné des raccourcis usuels à chacune de ces actions (Ctrl+S pour la sauvegarde, Ctrl+Q pour quitter, etc.)
 			
 			\subsubsection{Gestuelle}
 				L'utilisateur qui est en train de dessiner n'a pas forcément envie de reprendre la souris pour pouvoir changer la couleur ou la taille de son pinceau. Nous avons donc imaginé une interface, toujours naturelle, qui permettrait à l'utilisateur de pouvoir agir sur son dessin directement par ses gestes. \\
@@ -393,7 +396,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 					\item \textbf{Sauvegarde : } Le but principal était de permettre de dessiner sur un tableau. Il nous fallait ensuite rendre ce dessin exploitable. Nous avons donc décidé de developper une action qui permettrait à l'utilisateur de sauvegarder l'état du tableau sous forme d'image pour ensuite l'exploiter à l'aide d'un autre logiciel, ou autre.
 					\item \textbf{Plein écran : } Afin que l'utilisateur puisse plus facilement dessiner, nous avons également développé une option pour mettre le dessin en plein écran, faisant disparaitre l'affichage de la webcam. Ce plein écran agrandit le tableau blanc et met à l'échelle le dessin. De ce fait, tout apparait plus gros aux yeux de l'utilisateur. Il peut également revenir en mode normal quand il le souhaite.
 					
-					\item \textbf{Nettoyage du tableau :} Nous nous sommes dit que l'utiisateur pourrait avoir envie de nettoyer complètement le tableau pour recommencer le dessin à zéro à n'importe quel moment. Nous avons donc ajouté cette action.
+					\item \textbf{Nettoyage du tableau :} Nous nous sommes dit que l'utilisateur pourrait avoir envie de nettoyer complètement le tableau pour recommencer le dessin à zéro à n'importe quel moment. Nous avons donc ajouté cette action.
 				\end{itemize}
 				
 				\ \\Ces trois actions sont disponibles dans le menu principal de l'application. De plus, un raccourci clavier a été assigné à chacune d'elles. \\
@@ -401,19 +404,19 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				En plus des actions précédemment citées, nous avons développé differents outils pour l'utilisateur : \\
 				\begin{itemize}
 					\item \textbf{Couleur :} Pour enrichir son dessin, l'utilisateur doit avoir le choix de la couleur de son pinceau. Pour cela, nous avons pensé à deux fonctionnalités. La première, disponible depuis le menu principal, permet à l'utilisateur de choisir une couleur dans une \textbf{palette de couleur} pour choisir précisemment la couleur avec laquelle il va dessiner. La seconde, disponible par l'interface gestuelle, permet à l'utilisateur de selectionner une couleur parmit \textbf{quelques couleurs} prédéfinies. 
-					\item \textbf{Taille du pinceau :} L'utilisateur doit également pouvoir modifier la taille de son pinceau pour dessiner des traits plus ou moins gros. Le choix de cette taille est faisable directement depuis l'interface gestuelle par deux boutons "+" et "-" qui respectivement augmentent la taille du pinceau, et la diminuent.
+					\item \textbf{Taille du pinceau :} L'utilisateur doit également pouvoir modifier la taille de son pinceau pour dessiner des traits plus ou moins gros. Le choix de cette taille est faisable directement depuis l'interface gestuelle par deux boutons "+" et "-" qui respectivement augmentent la taille du pinceau et la diminuent.
 					\item \textbf{Gomme :} Enfin, il fallait donner la possibilité de gommer une partie du dessin. Un bouton gomme est donc disponible directement dans l'interface gestuelle, permettant à l'utilisateur de gommer une partie plus ou moins épaisse du dessin. La taille de la gomme peut être modifiée depuis l'outil précédent.
 				\end{itemize} \ \\
 				
 				L'ensemble de ces outils permet d'enrichir le dessin de l'utilisateur grâce à des pinceaux plus ou moins gros et de couleurs différentes. \\
-				Ainsi, l'utilisation des outils et des actions, donne un certain confort à l'utilisateur lui permettant de faire un dessin riche, de manière précise, et de l'exploiter par la suite.
+				Ainsi, l'utilisation des outils et des actions, donne un certain confort à l'utilisateur lui permettant de faire un dessin riche, de manière précise et de l'exploiter par la suite.
 		\subsection{Réseau}
 			Pour faire fonctionner notre application en réseau, il nous fallait mettre en place une architecture et un protocole les plus robustes possible :
 			\subsubsection{Protocole}
 				Le client et le serveur doivent échanger peu de données pour une meilleure rapidité, c'est pourquoi nous avons décidé de faire transiter seulement deux types de données : 
 				\begin{itemize}
 					\item \textbf{QPixmap : } Cette classe est une classe de Qt. C'est le coeur d'un widget graphique qui permet d'afficher un dessin. Évidemment, cette classe représente pour nous le dessin de l'utilisateur. Cet objet transite sur le réseau lorsqu'un nouveau client arrive sur le serveur, le serveur lui envoie le dessin dans son état actuel.
-					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transiter uniquement des chaines de caractères pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau, et renvoie cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter, et met à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaînes de caractères.
+					\item \textbf{Chaine de caractère : } Pour des raisons de rapidité, nous avons choisi de faire transiter uniquement des chaines de caractères pour représenter un ordre. Lorsqu'un client effectue un mouvement, un ordre de dessin est envoyé au serveur. Le serveur recoit cet ordre, le dessine sur son tableau et renvoie cet ordre à tous les autres clients connectés. De cette manière, le serveur stocke un dessin à jour pour l'envoyer à tout client qui va se connecter et met à jour les tableaux des clients à distance uniquement grâce à des ordres sous forme de chaînes de caractères.
 					
 				\paragraph{Exemple de paquet}
 				
@@ -664,6 +667,4 @@ Ces deux fonctionnalités sont intéressantes et pourraient être ajoutées sans
 	\appendix
 		\chapter{Documentation de la bibliothèque}
 		\includepdf[pages = {1-15}]{../code-doc/refman.pdf}
-		\chapter{Plaquette de présentation du projet}
-		\includepdf[pages = {1-4}]{schema.pdf}
 \end{document}
