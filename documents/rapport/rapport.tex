@@ -47,15 +47,17 @@
 	%TODO : grossir, centrer sur la page
 	\section*{Remerciements}
 	\addcontentsline{toc}{section}{Remerciements}
-	
+	\paragraph{}
 	Nous tenons à remercier tout particulièrement M. William Puech (enseignant chercheur au LIRMM à l'université Montpellier 2, responsable de la formation du Master informatique IMAGINA) sans qui ce projet n'aurait pas pu se faire, pour avoir accepté de nous encadrer, pour son aide et son implication.\\
 	Nous souhaitons aussi remercier M. Benoit Lange (doctorant au LIRMM) pour ses conseils et sa présence au cours de ce projet. \\
 	\part{Rapport de projet}
 	\newpage
 	\chapter{Introduction}
-		\section{Présentation}		
-		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amenés à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.\\
+		\section{Présentation}
+		\paragraph{}
+		Les cinq dernières années ont marqué un grand renouveau dans les interfaces entre hommes et terminaux (écrans tactiles, contrôles vocaux, détection de mouvements). Cet état de faits nous a amenés à penser une application mettant en scène l'une de ces nouvelles façons d'interagir.
 
+		 \paragraph{}
 		 L'objectif du projet issu de cette réflexion est donc de créer un \textbf{tableau virtuel}, avec lequel une ou plusieurs personnes peuvent interagir en réalisant directement des gestes comme sur une toile réelle, par \textbf{reconnaissance des mouvements} detectés par une \textbf{webcam}. \\
 		\begin{figure}[!h]
 			\centering
@@ -66,17 +68,17 @@
 	\newpage
 		\section{Contexte}
 		% TODO
+		\paragraph{}
 		Ce projet est réalisé dans le cadre des TER (Travaux d'Étude et de Recherche) de 1ère année de Master informatique à L'Université Montpellier 2. \\
-		Le TER est un projet qui se déroule sur un semestre, généralement choisi par les étudiants parmi une liste de projets qui leurs sont proposés. \\Ce genre de projet apporte beaucoup aux étudiants. Il leur permet d'une part de travailler une longue période sur un seul et même sujet afin d'obtenir quelque chose de complet, d'abouti. \\D'autre part, le TER (comme son nom l'indique) apporte une bonne expérience dans le domaine de la recherche. En effet, un travail préalable doit être effectué sur l'existant (Est-ce que d'autres projets de ce genre existent? Si oui qu'ont-ils de différent?, etc.), mais également sur la faisabilité (Est-ce possible à faire? Quels algorithmes existent pour répondre à tel ou tel besoin?, etc.). \\
-		$$$$ \\
-		La particularité de ce projet réside dans le fait que nous l'avons nous-même proposé à un enseignant-chercheur.\\
-		Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
+		Le TER est un projet qui se déroule sur un semestre, généralement choisi par les étudiants parmi une liste de projets qui leurs sont proposés. \\Ce genre de projet apporte beaucoup aux étudiants. Il leur permet d'une part de travailler une longue période sur un seul et même sujet afin d'obtenir quelque chose de complet, d'abouti. \\D'autre part, le TER (comme son nom l'indique) apporte une bonne expérience dans le domaine de la recherche. En effet, un travail préalable doit être effectué sur l'existant (Est-ce que d'autres projets de ce genre existent? Si oui qu'ont-ils de différent?, etc.), mais également sur la faisabilité (Est-ce possible à faire? Quels algorithmes existent pour répondre à tel ou tel besoin?, etc.).
+		\paragraph{}
+		La particularité de ce projet réside dans le fait que nous l'avons nous-même proposé à un enseignant-chercheur. Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui a donc eu le temps de murîr et d'être au niveau d'un TER.
 			\item Deuxièmement, notre groupe vient de deux formations distinctes : \textbf{AIGLE}, formation orientée génie logiciel ; et \textbf{IMAGINA}, spécialisée dans le jeu vidéo et l'image. Ce projet représentait une manière opportune de lier ces deux spécialités.
 			\item Enfin, ce projet était pour nous une bonne occasion de réaliser une application fonctionnelle et distribuable, et par conséquent nous permettre d'explorer une autre facette du développement d'applications : la mise en production.
-
 		\end{itemize}	
+
 	\chapter{Analyse et conception}
 		\section{Étude de l'existant et faisabilité}
 		\subsubsection{Faisabilité}
@@ -101,24 +103,26 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 		\newpage
 		\section{Gestion du projet}
 			\subsection{Choix stratégiques}
-			Lors de ce projet, nous avons distingué deux parties majeures.
-			La première est une bibliothèque de suivi d'objets. La seconde, une application qui utilise cette bibliothèque pour réaliser un logiciel de dessin interactif. \\
-			Ce choix présente plusieurs intérêts : \\
-			\begin{itemize}
-				\item{Premièrement, ce découpage permet de bien différencier les tâches. Le développement de la bibliothèque requiert des connaissances en traitement d'images pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc. Ceci correspond parfaitement à la formation de deux membres du groupe(formation IMAGINA à l'UM2). 
-				Le développement de l'application requiert quant à lui des connaissances en génie logiciel, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. 
-				Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE à l'UM2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.} \\
-				\item{Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets à la fois complètement indépendants et complémentaires. En effet, la bibliothèque développée offre des fonctionnalités de suivi utilisables par n'importe quelle application.\\
-				L'application se charge d'utiliser les fonctionnalités de traitement d'images de la bibliothèque en ajoutant une interface graphique, une couche réseau, une connexion aux webcams ou encore la récupération des images.
-				La bibliothèque et l'application sont donc deux projets développés en parallèle et très modulaires. Notre application peut très bien utiliser une autre bibliothèque de traitement d'images, et la bibliothèque peut très bien être utilisée par d'autres applications qui offriraient des fonctionnalités totalement différentes de la nôtre.}
-			\end{itemize}
+			\paragraph{}
+			Lors de ce projet, nous avons distingué deux parties majeures. La première est une bibliothèque de suivi d'objets. La seconde, une application qui utilise cette bibliothèque pour réaliser un logiciel de dessin interactif. \\
+			Ce choix présente plusieurs intérêts :
+			\paragraph{}
+			Premièrement, ce découpage permet de bien différencier les tâches. Le développement de la bibliothèque requiert des connaissances en \textbf{traitement d'images} pour tracer des couleurs/objets, appliquer des filtres, manipuler les images, etc. Ceci correspond parfaitement à la formation de deux membres du groupe(formation IMAGINA à l'UM2). 
+			Le développement de l'application requiert quant à lui des connaissances en \textbf{génie logiciel}, pour l'architecture de l'application, en IHM, pour la réalisation de l'interface (logicielle et gestuelle), ou encore en réseau pour la mise en place de l'architecture client/serveur. 
+			Ces différents points correspondent également parfaitement à la formation des deux autres membres du groupe. (Formation AIGLE à l'UM2). Ainsi, les tâches peuvent bien se répartir en fonction des connaissances et spécialités de chacun.
+				\paragraph{}
+				Deuxièmement, l'intérêt de ce découpage est d'avoir deux projets à la fois complètement indépendants et complémentaires. En effet, la \textbf{bibliothèque} développée offre des fonctionnalités de suivi utilisables par n'importe quelle application.\\
+				L'\textbf{application} se charge d'utiliser les fonctionnalités de traitement d'images de la bibliothèque en ajoutant une interface graphique, une couche réseau, une connexion aux webcams ou encore la récupération des images.
+				La bibliothèque et l'application sont donc deux projets développés en \textbf{parallèle} et très modulaires. Notre application peut très bien utiliser une autre bibliothèque de traitement d'images, et la bibliothèque peut très bien être utilisée par d'autres applications qui offriraient des fonctionnalités totalement différentes de la nôtre.
+
 			\newpage
 			\subsection{Diagramme de Gantt}
-			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un cahier des charges pour définir ce que nous voulions faire et de quelle manière. \\
+			paragraph{}
+			Étant donné que nous avons proposé notre propre sujet, la première étape a été de rédiger un \textbf{cahier des charges} pour définir ce que nous voulions faire et de quelle manière. \\
 			Après ceci, nous avons commencé à effectuer des recherches du côté bibliothèque et application, pour savoir quels outils et techniques utiliser pour arriver à nos objectifs. 
-		  Nous avons réservé plusieurs semaines pour effectuer des recherches et perfectionner notre idée du projet. Nous avons donc lu des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'analyse et de conception sert aussi à penser l'application en imaginant des cas d'utilisations (use cases) et en réalisant le diagramme de classes. \\
+		  Nous avons réservé plusieurs semaines pour effectuer des recherches et perfectionner notre idée du projet. Nous avons donc lu des articles de recherches sur des thématiques proches, effectuer des essais d'outils etc. Cette période d'\textbf{analyse} et de conception sert aussi à penser l'application en imaginant des cas d'utilisations (use cases) et en réalisant le diagramme de classes. \\
 			
-			Par la suite, la majeure partie du temps est réservée au développement en lui même, en prenant en compte la date de présentation du projet pour avoir une réalisation complète. \\  
+			Par la suite, la majeure partie du temps est réservée au \textbf{développement} en lui même, en prenant en compte la date de présentation du projet pour avoir une réalisation complète. \\  
 			Bien entendu ces temps de développement s'accompagnent de réunions avec tout le groupe de projet ainsi que de travail pour lier nos deux sous-parties et les tester ensemble. \\
 			Des documents comme le rapport ou la documentation furent produit au fur et à mesure du projet, pour rester en adéquation avec le travail accompli. Voici le rétroplanning qui illustre le déroulement chronologique du projet : \\
 				\begin{figure}[!h]
@@ -214,7 +218,7 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 			\subsection{Diagrammes de classes}
 				La bibliothèque fonctionne grâce à la manipulation d'un curseur qui correspond en fait au curseur, ou objet, physique manipulé par l'utilisateur.
 				Le curseur est représenté en mémoire sous la forme d'une strucure de données \textbf{\textit{Cursor}}. On utilise donc des informations telles que la taille de ce curseur, sa position ou encore sa couleur.\\
-				Cette structure de données est engendrée par la fonction \textit{calibration} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{track}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. Cursor sert aussi à intéragir avec les suivis, elle permet donc de régler certain attributs comme des seuils de tolérance par exemple. \\
+				Cette structure de données est engendrée par la fonction \textit{\textbf{calibration}} de la bibliothèque. Elle est ensuite utilisée par la fonction \textit{\textbf{track}}, qui permet la mise à jour des informations relatives au curseur par rapport à une image. Cursor sert aussi à intéragir avec les suivis, elle permet donc de régler certain attributs comme des seuils de tolérance par exemple. \\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.8]{../images/libtrack-uml.png}\\
@@ -342,7 +346,7 @@ Ensuite, on parcourt une nouvelle fois la sous-image en faisant la \textbf{moyen
 						\paragraph{Binarisation} \paragraph{}
 							Une fois cette couleur, que nous appellerons couleur étalon, extraite, nous pouvons l'utiliser pour créer l'\textbf{image binaire} nécessaire au suivi par couleur. Cette image est une image en noir et blanc, où le blanc représente les points retenus par les fonctions précédentes. Ces zones blanches nous permettrons ensuite de calculer la position de notre objet, par l'utilisation de méthodes interprétant ce type d'images.\\
 							Le principe de cette fonction est donc assez simple. On construit d'abord une nouvelle image de la même taille que l'image source. Puis, pour chaque pixel, si sa couleur originale est assez proche de la couleur étalon, on le passe à blanc, sinon en noir. La notion de "assez proche de la couleur" est parametrée par une variable de tolérance, \textit{threshold}, pouvant être réglée par le biais de la structure \textbf{\textit{Cursor}}.\\
-							Enfin, avant de retourner cette nouvelle image binaire, on lui applique une série de \textbf{fermetures}. Le principe de la fermeture est d'appliquer une \textbf{\textcolor{blue}{érosion}} puis une \textbf{\textcolor{red}{dilatation}} des formes blanches obtenues. L'intérêt de cette action est d'éliminer les éventuels pixels blanc solitaires sur l'image, de manière à diminuer au maximum les parasites sur l'image qui viendraient fausser les opérations à venir.
+							Enfin, avant de retourner cette nouvelle image binaire, on lui applique une série de \textbf{fermetures}. Le principe de la fermeture est d'appliquer une \textbf{\textcolor{vert}{érosion}} puis une \textbf{\textcolor{red}{dilatation}} des formes blanches obtenues. L'intérêt de cette action est d'éliminer les éventuels pixels blanc solitaires sur l'image, de manière à diminuer au maximum les parasites sur l'image qui viendraient fausser les opérations à venir.
 					\newpage
 					\subsubsection{\textcolor{orange}{Fonctions de suivi}}
 						\paragraph{setNewCoord} \paragraph{}
@@ -576,7 +580,13 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		Son fonctionnement est simple, il se charge de stocker les clients, et de recevoir et traiter leurs ordres.\\
 		En pratique cela est fait grâce à une classe \textbf{PackageManager} qui se charge de recevoir et découper les paquets des clients. Une fois le paquet découpé il est traité selon le schéma présenté plus haut. \\
 		Le serveur a donc essentiellement un but de synchronisation : il reçoit les paquets, s'assure que chaque client possède bien le même dessin, et partage les points dessinés avec tous les clients (y compris les nouveaux arrivants qui récupèrent directement le tableau). \\
-	
+		\begin{figure}[!h]
+						\centering
+						\includegraphics[scale=0.6]{../images/captureServer.jpg}\\
+						\caption{Interface terminal du Serveur}
+						\label{Interface terminal du Serveur}
+				\end{figure}
+		\newpage
 		\section{Comparatif des méthodes de suivi}
 		Cette partie va nous permettre de comparer les différentes méthodes de suivi implantées dans notre bibliothèque. Nous verrons en effet que celles-ci ne se valent pas toutes, et qu'il peut être préférable de choisir l'une ou l'autre en fonction du contexte.
 				        \begin{figure}[h]
