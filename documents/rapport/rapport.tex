@@ -148,6 +148,11 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 			\paragraph{} Bien sûr ces outils ne sont pas suffisants, nous avons donc fait des réunions régulières pour organiser le travail et décider des orientations du projet. Par ailleurs, nous avons beaucoup échangé pour que tout le monde soit toujours au courant des différentes informations importantes.
 			
 			\subsubsection{Outils techniques}
+			\paragraph{} Nous avons utilisé le système d'exploitation LINUX tout au long du projet, pour des raisons idéologiques d'une part et d'autre part pour les nombreux outils de développements qu'il offre. Le projet étant réalisé avec des librairies existantes sous plusieurs autres systèmes, en théorie la portabilité de l'application n'est pas bornée à LINUX.
+			
+			\paragraph{} Par ailleurs, nous avons utilisés divers logiciels tels que Dia et Umbrello pour faire respectivement les diagrammes de séquences, et les diagrammes de classes et les cas d'utilisations. \\
+			Nous avons aussi utilisé qmake pour générer les makefile et le compilateur g++ pour tout le projet, nous n'avons pas utilisé d'IDE mais parfois valgrind ou gdb pour déboguer. \\
+			Quelques schémas ont été réalisés avec LibreOffice et Gimp. \\
 			\subsubsection{Langages :}
 			\paragraph{} Langage C pour la bibliothèque : ce langage est bien adapté à la réalisation d'une bibliothèque car il permet l'écriture de fonctions. Par ailleurs c'est un langage bien adapté au domaine du traitement de l'image car il est de bas niveau, et très rapide. De plus, nous avons utilisé des bibliothèques (OpenCV par exemple) qui ont été écrites initialement en C.
 			\paragraph{} Langage C++ pour l'application : c'est un langage objet ce qui nous aidait pour la conception. Il est également très rapide et c'est un langage avec lequel nous sommes à l'aise et avons de l'expérience, ce qui nous évitait de devoir apprendre un nouveau langange, et par là de perdre un temps précieux.\\
@@ -635,34 +640,75 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		Au cours de ce projet, nous avons rencontré des difficultés de plusieurs natures. Tout d'abord c'était un projet relativement long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
 		De plus une grande partie des difficultés réside dans des problèmes techniques (de conception, ou de programmation). \\
 		
-		\paragraph{Synchronisation}
+		\paragraph{Synchronisation \\}
 		Pour effectuer ce travail, nous devions nous retrouver régulièrement pour être parfaitement au courant des évolutions du projet, pour se fixer de nouveaux objectifs, pour savoir où aller ou encore pour définir des buts concrets et atteignables. \\
 		Nous avons aussi mis en place plusieurs outils techniques pour nous permettre de mettre en commun tout le code et les documents : nous avons utilisé un gestionnaire de version, ainsi que des outils d'éditions collaborative. \\
 		Le fait d'avoir un groupe qui a déjà travaillé ensemble plusieurs fois sur des projets précédents nous a aussi aidé à etre rapidement efficace et à savoir quoi faire, c'est donc une difficulté que nous avons relativement bien surmontée. \\
 		
-		\paragraph{Technique}
+		\paragraph{Technique \\}
 		Nous avons également du nous former en parallèle au traitement de l'image par exemple. Nous avons trouvé plusieurs documents qui nous présentaient les grands principes avec différentes méthodes pour suivre des objets etc. Pour la partie bibliothèque il y avait beaucoup de formation, mais le TER coïncidait avec une UE traitement de l'image pour les IMAGINA, ce qui a aussi aidé. \\
 		Une autre difficulté résidait dans la conception globale, pour avoir une architecture solide et avoir une application aboutie nous avons passé du temps à penser le projet pour pouvoir avancer vite par la suite. \\ C'est une partie où nous nous en sommes plûtot bien sortis, malgré le module réseau qui souffre encore de lenteurs et qui devrait donc être optimisé. \\
 		
 		Pour des problèmes plus concrets, nous avons également eu des difficultés liées à la gestion de la mémoire : la librairie OpenCV fournit des fonctions à allocations implicites, avec une gestion de la mémoire très particulière et une documentation assez légère. Nous nous sommes donc heurtés dans plusieurs phases du projet à repenser localement l'architecture pour éviter d'avoir trop de création d'objet et d'image qui n'étaient pas libérées. \\
 		\newpage
 
-		\section{Perspectives}
+		\section{Perspectives \\}
 		Les perspectives peuvent se découper en deux parties qui seraient l'amélioration de l'existant et des fonctionnalités que nous n'avons pas pu faire, ou même auxquelles nous n'avions pas pensé avant un stade avancé du projet. \\
 		
-		\paragraph{Optimisations}
+		\paragraph{Optimisations \\}
 		Pour la partie bibliothèque il faudrait implémenter la détection d'action lors d'un suivi par forme. \\
 		De manière générale il faudrait aussi réduire encore la dépendance vis à vis de l'environnement. \\
 		Côté application le principal problème réside dans les lenteurs du mode réseau, une solution serait peut être d'échanger moins de points, ou encore de faire des systèmes de mémoires tampons pour avoir un nombre d'envoi plus réduit. \\
 		
 		Pour le projet global, les performances sont assez bonnes, mais nous pourrions aussi essayer de les améliorer encore pour plus de rapidité. \\ 
 		
-		\paragraph{Nouvelles fonctionnalités}
+		\paragraph{Nouvelles fonctionnalités \\}
 		Une fonctionnalité intéressante serait de suivre plusieurs objets en même temps, pour dessiner avec plusieurs curseurs et également d'avoir d'autres actions détectées. Lors de la soutenance un membre du jury parlait d'un système permettant de zoomer avec deux curseurs, à la manière du zoom sur les téléphones et tablettes avec deux doigts. \\
-Ces deux fonctionnalités sont intéressantes et pourraient être ajoutées sans changements de la bibliothèque. \\		
+Ces deux fonctionnalités sont intéressantes et pourraient être ajoutées sans changements de la bibliothèque. \\	
+		
 		\section{Conclusion}
+		Ce TER a donc permis de faire un travail de recherche et d'analyse qui a abouti à un résultat concret pour un projet qui a encore des perspectives d'évolutions.
+		Cela a donc été une expérience très enrichissante qui nous a permit de mener un projet de A à Z ce qui a inclu sa proposition, la rédaction du cahier des charges, l'analyse et le développement sans oublier la mise en production. \\
+		Tout ceci était relativement nouveau pour nous tous, ce projet est donc une réussite avec de nombreux objectifs initiaux qui ont été atteints, nous avons également réussi à gérer notre groupe de projet de manière à répartir correctement le travail en fonctionnant en deux sous-équipes. \\ 
 	
 	\chapter{Références}
+	
+	\paragraph{Documents de recherches :}
+	ces divers documents nous ont servi dans la partie d'analyse et de réflexion du projet ce qui a permis de savoir où aller, et donc de développer plus efficacement dans un second temps. \\
+	Ces documents ont surtout permis de comprendre le domaine du traitement de l'image avec ce que cela implique, ainsi que des applications possibles. Plus généralement ils nous permettaient de découvrir le monde de la recherche en lisant des articles spécifiques et/ou des thèses. \\
+		\begin{itemize}
+			\item \it{Real-time viewpoint-invariant hand localization with cluttered backgrounds} \\
+			Enver Sangineto, Marco Cupelli.
+			\begin{verbatim}
+			http://www.sciencedirect.com/science/article/pii/S026288561100120X
+			\end{verbatim}
+			\item \it{Vision par ordinateur pour l’interaction homme-machine fortement couplée}\\
+			Thèse de françois Bérard sur un sujet proche avec beaucoup d'informations
+			\begin{verbatim}
+			http://hal.inria.fr/docs/00/04/61/56/PDF/tel-00004804.pdf
+			\end{verbatim}
+			\item \it{Defining Search Areas to Localize Limbs in Body Motion Analysis} \\
+			Thomas Foures, Philippe Joly.
+			\item \it{Indexation de la vidéo par le costume.}\\ 
+			Thèse de doctorat, Université Paul Sabatier Toulouse, Gaël Jaffré.
+			\begin{verbatim}
+			http://www.irit.fr/recherches/SAMOVA/pageautomatic-character-labelling-in-videos.html
+			\end{verbatim}
+		\end{itemize}
+			
+		\paragraph{Documents de programmation :}
+		ces documents ont servis de référence pour développer avec OpenCV, ainsi que d'apprendre des concepts non spécifiques à une librairie dans le domaine du traitement de l'image. \\
+			\begin{itemize}
+			\item \it{Vision par ordinateur : Outils fondamentaux} \\
+			Radu HORAUD (CNRS) et Olivier MONGA (INRIA)
+			\begin{verbatim}
+			http://hal.archives-ouvertes.fr/docs/00/59/00/49/PDF/VO-HoraudMonga.pdf
+			\end{verbatim}
+			\item Learning Open CV \\
+			 Gary Bradski et Adrian Kaehler
+			\item Open Cv 2 Computer Vision Application Programming Cookbook\\
+			Robert Laganière
+			\end{itemize}
 	
 	\part{Annexes}
 	\appendix
