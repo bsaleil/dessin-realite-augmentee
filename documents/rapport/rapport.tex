@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage{color}
 \usepackage{pdfpages}
+\usepackage{slashbox}
 
 \definecolor{orange}{rgb}{0.8, 0.4, 0.1}
 \definecolor{vert}{rgb}{0.27, 0.57, 0.13}
@@ -68,7 +69,7 @@
 		Ce projet est réalisé dans le cadre des TER (Travaux d'Étude et de Recherche) de 1ère année de Master informatique à L'Université Montpellier 2. \\
 		Le TER est un projet qui se déroule sur un semestre, généralement choisi par les étudiants parmi une liste de projets qui leurs sont proposés. \\Ce genre de projet apporte beaucoup aux étudiants. Il leur permet d'une part de travailler une longue période sur un seul et même sujet afin d'obtenir quelque chose de complet, d'abouti. \\D'autre part, le TER (comme son nom l'indique) apporte une bonne expérience dans le domaine de la recherche. En effet, un travail préalable doit être effectué sur l'existant (Est-ce que d'autres projets de ce genre existent? Si oui qu'ont-ils de différent?, etc.), mais également sur la faisabilité (Est-ce possible à faire? Quels algorithmes existent pour répondre à tel ou tel besoin?, etc.). \\
 		$$$$ \\
-		La particularité de ce projet réside dans le fait que l'avons nous-même proposé à un enseignant-chercheur.\\
+		La particularité de ce projet réside dans le fait que nous l'avons nous-même proposé à un enseignant-chercheur.\\
 		Nous avons décidé de proposer ce sujet pour diverses raisons, dont voici les pricipales:
 		\begin{itemize}
 			\item Tout d'abord, c'est un projet que nous avions en tête depuis plus d'un an, qui a donc eu le temps de murîr et d'être au niveau d'un TER.
@@ -470,7 +471,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		
 		\section{Client}
 			Comme dit précedemment, l'application est composée de deux grandes parties, l'\textbf{étalonnage} et le \textbf{dessin}.
-			\subsection{Etalonnage}
+			\subsection{Étalonnage}
 				L'étalonnage est la première étape dans l'utilisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette partie est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
 				\newpage
 				\paragraph{}
@@ -570,15 +571,43 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Export}
 				\end{figure}
 				\newpage
-		\section{serveur}
+		\section{Serveur} %\TODO
 		Le serveur ne possède pas d'interface graphique, les résultats présentés seront donc essentiellement textuels. \\
 		Son fonctionnement est simple, il se charge de stocker les clients, et de recevoir et traiter leurs ordres.\\
 		En pratique cela est fait grâce à une classe \textbf{PackageManager} qui se charge de recevoir et découper les paquets des clients. Une fois le paquet découpé il est traité selon le schéma présenté plus haut. \\
 		Le serveur a donc essentiellement un but de synchronisation : il reçoit les paquets, s'assure que chaque client possède bien le même dessin, et partage les points dessinés avec tous les clients (y compris les nouveaux arrivants qui récupèrent directement le tableau). \\
 	
+		\section{Comparatif des méthodes de suivi}
+		Cette partie va nous permettre de comparer les différentes méthodes de suivi implantées dans notre bibliothèque. Nous verrons en effet que celles-ci ne se valent pas toutes, et qu'il peut être préférable de choisir l'une ou l'autre en fonction du contexte.
+				        \begin{figure}[h]
+				\Large{
+				\begin{center}
+				\begin{tabular}{|l|c|c|c|}
+				\hline
+				\backslashbox{Caractéristique}{Méthode}& Modèle  &C. connexes& Barycentre  \\
+				\hline
+				Vitesse & -& + & ++ \\
+				\hline
+				Précision &++&++&+\\
+				\hline
+				Linéarité du suivi&-&+&+\\
+				\hline
+				Variété curseur &++&+&++\\
+				\hline
+				Souplesse, adaptation & - - & + &+\\
+				\hline
+				Sensibilité environnement &++&-&- -\\
+				\hline
+				Action &Non & Oui & Oui \\
+				\hline
+				\end{tabular}
+				\end{center}
+				\caption{Comparatif des différentes solutions de suivi}
+				\label{tableau comparatif}}
+				\end{figure}
 	\chapter{Conclusion}
 		\section{Difficultés rencontrées}
-		Nous avons rencontré des difficultés de plusieurs natures : pour commencer c'était un projet plutôt long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
+		Au cours de ce projet, nous avons rencontré des difficultés de plusieurs natures. Tout d'abord c'était un projet relativement long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
 		De plus une grande partie des difficultés réside dans des problèmes techniques (de conception, ou de programmation). \\
 		
 		\paragraph{Synchronisation}
