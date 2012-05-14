@@ -474,7 +474,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				L'étalonnage est la première étape dans l'utilisation du logiciel, cette section est étroitement liée à la fonction \textbf{calibration} de la bibliothèque. Cette partie est composée de quatre interfaces, ou étapes, permettant l'\textbf{initialisation} d'un suivi d'objet. Chacune de ces étapes aura pour but d'obtenir les paramètres de la fonction calibration, mais aussi de permettre à l'utilisateur d'agir sur des attributs de réglage du suivi.
 				\newpage
 				\paragraph{}
-				Le premier écran de l'application est l'interface de sélection de webcam et de méthode de suivi.\\
+				Le premier écran de l'application est l'interface de sélection de \textbf{webcam} et de \textbf{méthode de suivi}.\\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.35]{../images/Capture6.png}\\
@@ -482,17 +482,17 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Choix webcam/type track}
 				\end{figure}
 				\paragraph{}
-				La première liste déroulante permet le choix de la webcam à utiliser pour la capture, la seconde la sélection de la méthode de track à parmi utiliser :
+				La première liste déroulante permet le choix de la webcam à utiliser pour la capture, la seconde la sélection de la méthode de track parmi :
 				\begin{itemize}
 					\item Suivi par modèle
-					\item Suivi par couleur
-					\item Suivi par couleur + composantes connexes
+					\item Suivi par couleur, barycentre simple
+					\item Suivi par couleur, composantes connexes
 				\end{itemize}
 				\paragraph{}
 				Au niveau de la bibliothèque de suivi, ces listes servent à définir la sources des images servant au track, et à choisir le drapeau pour la fonction \textit{calibration}.
 				\newpage
 				\paragraph{}
-				L'écran suivant permet quant à lui de sélectionner sur le retour image de la webcam l'objet à suivre, ou curseur.\\
+				L'écran suivant permet quant à lui de sélectionner sur le retour image de la webcam l'objet à suivre, ou \textbf{curseur}.\\
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.35]{../images/Capture1.png}\\
@@ -500,11 +500,11 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Sélection du curseur}
 				\end{figure}
 				\paragraph{}
-				Il suffit pour cela, par clics sur l'image, de créer une boîte englobante autour dudit curseur.
-				Cet écran sert à récupérer les coordonnées de la hit box nécessaire à l'isolement de l'objet pour le suivi par comparaison de modèle ou à l'extraction de la couleur et de l'aire de l'objet pour les suivis par couleur.
+				Il suffit pour cela, par clics sur l'image, de créer une \textbf{boîte englobante}, ou hitbox, autour dudit curseur.
+				Cet écran sert à récupérer les coordonnées de la hitbox nécessaire à l'\textbf{isolement} de l'objet pour le suivi par comparaison de modèle, ou à l'\textbf{extraction} de la couleur et de l'aire de l'objet pour les suivis par couleur.
 				\newpage
 				\paragraph{}
-				Grâce à la précédente sélection, on affiche le masque binaire permettant de vérifier que l'objet a bien été reconnu. Les zones blanches sur l'image représentent les parties reconnues par l'application, le but étant alors d'avoir une zone blanche sur le curseur.
+				Grâce à la précédente sélection, on affiche le \textbf{masque binaire} permettant de vérifier que l'objet a bien été reconnu. Les zones blanches sur l'image représentent les parties reconnues par l'application, le but étant alors d'avoir une zone blanche cohérente sur le curseur.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.35]{../images/Capture2.png}\\
@@ -512,7 +512,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Réglage du seuil}
 				\end{figure}
 				\paragraph{}
-				La règlette permet d'affiner le masque binaire en augmentant ou diminuant le seuil de tolérance pour la reconnaissance de couleur.
+				La règlette permet d'affiner le masque binaire en augmentant ou diminuant le \textbf{seuil de tolérance} pour la reconnaissance de couleur.
 				\paragraph{}
 				Dans le cas du suivi par modèle, on affiche simplement le modèle qui sera utilisé pour le suivi.
 				\begin{figure}[!h]
@@ -523,7 +523,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\end{figure}
 				\newpage
 				\paragraph{}
-				Enfin, le dernier écran de l'étalonnage permet de décider si la session de dessin est à un seul utilisateur (en local) ou à plusieurs via le mode réseau.
+				Enfin, le dernier écran de l'étalonnage permet de décider si la session de dessin est à un seul utilisateur, en \textbf{local}, ou à plusieurs via le \textbf{mode réseau}.
 				\begin{figure}[!h]
 						\centering
 						\includegraphics[scale=0.4]{../images/capture_choix.png}\\
