@@ -594,7 +594,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\begin{center}
 				\begin{tabular}{|l|c|c|c|}
 				\hline
-				\backslashbox{Caractéristique}{Méthode}& Modèle  &C. connexes& Barycentre  \\
+				\backslashbox{Caractéristique}{\quad Méthode}& Modèle  &Couleur : CC & Couleur : Simple  \\
 				\hline
 				Vitesse & -& + & ++ \\
 				\hline
@@ -615,6 +615,18 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 				\caption{Comparatif des différentes solutions de suivi}
 				\label{tableau comparatif}}
 				\end{figure}
+				
+			Les deux premières caractéristiques qu'il est intéressant de comparer sont la vitesse et la précision du suivi. En effet, ce vont être les deux spécifités que va rechercher l'utilisateur de la bibliothèque. Dans les trois méthodes présentées, on remarque une tendance assez intuitve, qui est qu'une méthode plus précise a tendance à être plus lente, de part des calculs plus complexes.
+			\paragraph{}
+			La linéarité du suivi indique la résistance d'une méthode aux pertes ponctuelles du curseur. C'est un peu le pendant de la précision d'une méthode : à vouloir être trop restrictif dans la détection du curseur, il y a le risque de ne pas le détecter même lorsqu'il est présent sur l'image.
+			\paragraph{}
+			La variété du curseur représente l'éventail des possibilités qu'a l'utilisateur quant au choix de l'objet qu'il souhaite suivre. Comme nous avons pu le signaler, le track par modèle permet le suivi de tout type d'objet quand les tracks par couleurs peuvent être limités dans l'utilisation d'objet fortement multicolores.
+			\paragraph{}
+			La souplesse permet d'évaluer la robustesse du suivi d'un objet si celui-ci est modifié durant le suivi. Cette modification, qui peut être du à un problème d'éclairage ou plus simplement à une rotation de l'objet par exemple, impacte fortement sur l'efficacité du suivi par modèle. On pourrait palier à ce problème en mettant en place un suivi avec apprentissage, qui pourrait prendre en compte les modifications progressives du curseur afin de perfectionner son efficacité.
+			\paragraph{}
+			La sensibilité à l'environnement est un point important à prendre en compte. En effet, lors de l'utilisation d'un suivi par couleur, il faut faire attention à ne pas suivre un objet dont la couleur serait identique au fond. De ce point de vue, le suivi par modèle impose une efficacité parfaite en étant capable de détecter un objet sur un fond d'une couleur presque similaire avec une forte précision.
+			\paragraph{}
+			La présence d'action indique si nous avons réussi à mettre en place une détection d'action, comme en utilisant la taille de l'objet dans les suivis par couleur.
 	\chapter{Conclusion}
 		\section{Difficultés rencontrées}
 		Au cours de ce projet, nous avons rencontré des difficultés de plusieurs natures. Tout d'abord c'était un projet relativement long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
@@ -632,7 +644,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		Pour des problèmes plus concrets, nous avons également eu des difficultés liées à la gestion de la mémoire : la librairie OpenCV fournit des fonctions à allocations implicites, avec une gestion de la mémoire très particulière et une documentation assez légère. Nous nous sommes donc heurtés dans plusieurs phases du projet à repenser localement l'architecture pour éviter d'avoir trop de création d'objet et d'image qui n'étaient pas libérées. \\
 		
 		\section{Perspectives}
-		Les persepctives peuvent se découper en deux parties qui seraient l'amélioration de l'existant et des fonctionnalités que nous n'avons pas pu faire, ou même auxquelles nous n'avions pas pensé avant un stade avancé du projet. \\
+		Les perspectives peuvent se découper en deux parties qui seraient l'amélioration de l'existant et des fonctionnalités que nous n'avons pas pu faire, ou même auxquelles nous n'avions pas pensé avant un stade avancé du projet. \\
 		
 		\paragraph{Optimisations}
 		Pour la partie bibliothèque il faudrait implémenter la détection d'action lors d'un suivi par forme. \\
