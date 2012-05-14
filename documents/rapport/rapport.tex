@@ -82,7 +82,6 @@
 	\chapter{Analyse et conception}
 		\section{Étude de l'existant et faisabilité}
 		\subsubsection{Faisabilité}
-		% TODO : expliquer si ça nous parait possible 
 		Notre groupe ayant lui-même proposé ce sujet, celui-ci s'accorde parfaitement à nos formations et spécialités. Le choix de ce sujet a donc été réalisé en fonction de nos expériences, savoir-faire et affinités.\\
 Ce projet s'inscrivant dans le cadre d'un TER de notre formation, l'étude de la faisabilité n'inclue pas certains critères comme l'étude de marché, le contexte économique ou le besoin réel. 
 Nous nous sommes notamment concentrés sur les compétences techniques et de gestion. Pour les parties financement et analyse des coûts, il va sans dire que nous ne disposions d'aucun financement et n'avons donc utilisé que des outils gratuits. \\
@@ -90,7 +89,6 @@ Nous nous sommes notamment concentrés sur les compétences techniques et de ges
 		\subsubsection{Existant}
 		La vision par ordinateur et particulièrement le suivi d'objets, sont des domaines connus et pour lesquels il existe de nombreux travaux. Nous pouvons nous inspirer de certains de ces travaux afin de proposer des fonctionnalités plus pertinentes, éviter certains écueuils ou plus directement utiliser des outils existants comme la bibliothèque OpenCV.\\
 			\begin{itemize}
-				% TODO : détailler un peu plus l'existant
 				\item Exemples dans le jeux vidéo : Kinect, Eye-toy, CamSpace (techniques pour l'IHM, par exemple, mouvements continus ou immobilité sur une zone).
 				\item Exemples issus de thèses et de projets de recherche (techniques de programmation).
 			\end{itemize}
@@ -583,17 +581,18 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 						\label{Export}
 				\end{figure}
 				\newpage
-		\section{Serveur} %\TODO
+		\section{Serveur}
 		Le serveur ne possède pas d'interface graphique, les résultats présentés seront donc essentiellement textuels. \\
 		Son fonctionnement est simple, il se charge de stocker les clients, et de recevoir et traiter leurs ordres.\\
 		En pratique cela est fait grâce à une classe \textbf{PackageManager} qui se charge de recevoir et découper les paquets des clients. Une fois le paquet découpé il est traité selon le schéma présenté plus haut. \\
 		Le serveur a donc essentiellement un but de synchronisation : il reçoit les paquets, s'assure que chaque client possède bien le même dessin, et partage les points dessinés avec tous les clients (y compris les nouveaux arrivants qui récupèrent directement le tableau). \\
 		\begin{figure}[!h]
-						\centering
-						\includegraphics[scale=0.6]{../images/captureServer.jpg}\\
-						\caption{Interface terminal du Serveur}
-						\label{Interface terminal du Serveur}
-				\end{figure}
+			\centering
+			\includegraphics[scale=0.6]{../images/captureServer.jpg}\\
+			\caption{Interface terminal du Serveur}
+			\label{Interface terminal du Serveur}
+		\end{figure}
+		
 		\newpage
 		\section{Comparatif des méthodes de suivi}
 		Cette partie va nous permettre de comparer les différentes méthodes de suivi implantées dans notre bibliothèque. Nous verrons en effet que celles-ci ne se valent pas toutes, et qu'il peut être préférable de choisir l'une ou l'autre en fonction du contexte.
@@ -635,6 +634,18 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 			La sensibilité à l'environnement est un point important à prendre en compte. En effet, lors de l'utilisation d'un suivi par couleur, il faut faire attention à ne pas suivre un objet dont la couleur serait identique au fond. De ce point de vue, le suivi par modèle impose une efficacité parfaite en étant capable de détecter un objet sur un fond d'une couleur presque similaire avec une forte précision.
 			\paragraph{}
 			La présence d'action indique si nous avons réussi à mettre en place une détection d'action, comme en utilisant la taille de l'objet dans les suivis par couleur.
+		
+		\newpage
+		\section{Mise en production}
+		La mise en production est quelque chose qui est souvent oublié par manque de temps, ou manque d'expériences, nous voulions dans le cadre du TER avoir un projet qui soit réellement abouti. \\
+		
+		\paragraph{Programmation et documentation\\} La première étape était de bien penser l'application, pour produire du code de qualité tout au long du projet, et ainsi d'avoir une bibliothèque réutilisable et un code compréhensible et extensible dans l'application. \\
+		La bibliothèque est également entièrement documentée (cf annexe) à l'aide de docxygen, les fonctions sont donc compréhensibles et il est indiqué clairement les entrées et les sorties. \\
+		
+		\paragraph{Traduction \\} L'application est également traduite à l'aide d'un module dédié de Qt, selon la langue de la machine l'application est en français, ou en anglais pour toutes les autres langues. \\
+		
+		\paragraph{Packaging \\} Nous avons créé un .deb pour l'application, qui utilise le gestionnaire de paquets de Debian, les dépendances sont donc gérées et l'application est facilement installable sur les systèmes LINUX basés sur Debian. \\
+		
 	\chapter{Conclusion}
 		\section{Difficultés rencontrées}
 		Au cours de ce projet, nous avons rencontré des difficultés de plusieurs natures. Tout d'abord c'était un projet relativement long et compliqué par rapport à notre expérience, nous avons donc du nous préparer sur la gestion de ce projet. \\
@@ -652,7 +663,7 @@ Un module réseau est aussi prévu pour une utilisation concurrente et synchroni
 		Pour des problèmes plus concrets, nous avons également eu des difficultés liées à la gestion de la mémoire : la librairie OpenCV fournit des fonctions à allocations implicites, avec une gestion de la mémoire très particulière et une documentation assez légère. Nous nous sommes donc heurtés dans plusieurs phases du projet à repenser localement l'architecture pour éviter d'avoir trop de création d'objet et d'image qui n'étaient pas libérées. \\
 		\newpage
 
-		\section{Perspectives \\}
+		\section{Perspectives}
 		Les perspectives peuvent se découper en deux parties qui seraient l'amélioration de l'existant et des fonctionnalités que nous n'avons pas pu faire, ou même auxquelles nous n'avions pas pensé avant un stade avancé du projet. \\
 		
 		\paragraph{Optimisations \\}
